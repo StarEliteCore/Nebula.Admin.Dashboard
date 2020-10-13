@@ -1,4 +1,4 @@
-import { IEntity } from '../baseentity/IEntity';
+import { IEntity } from '@/shared/baseentity/IEntity';
 
 export interface IMenu extends IEntity<string> {
     /**

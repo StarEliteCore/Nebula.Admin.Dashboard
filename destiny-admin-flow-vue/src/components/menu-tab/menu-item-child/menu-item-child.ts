@@ -1,4 +1,4 @@
-import { IMenuRouter } from '@/domain/entity/menu/MenuRouterDto';
+import { IMenuRouter } from '@/domain/entity/menudto/MenuRouterDto';
 import { Component, Vue, Prop } from "vue-property-decorator";
 @Component({
   name: "MenuItemChild"

@@ -1,5 +1,5 @@
-import { MenuEnum } from '@/domain/entity/menu/MenuDto';
-import { IMenuRouter } from '@/domain/entity/menu/MenuRouterDto';
+import { MenuEnum } from '@/domain/entity/menudto/MenuDto';
+import { IMenuRouter } from '@/domain/entity/menudto/MenuRouterDto';
 import { Guid } from 'guid-typescript';
 export const MenuList: IMenuRouter[] = [
     {
@@ -19,7 +19,7 @@ export const MenuList: IMenuRouter[] = [
                 id: "da92480a-5914-a8bc-110b-aedb0457ce6d",
                 sort: -1,
                 type: MenuEnum.Menu,
-                path: "/system",
+                path: "/home-page",
                 redirect: "",
                 componentName: "",
                 component: "",
@@ -30,7 +30,7 @@ export const MenuList: IMenuRouter[] = [
                 children: [],
             },
             {
-                id: "da92480a-5914-a8bc-110b-aedb0457ce6d",
+                id: "da92480a-5914-a8bc-110b-aedb0457ce6c",
                 sort: -1,
                 type: MenuEnum.Menu,
                 path: "/system",
@@ -46,7 +46,7 @@ export const MenuList: IMenuRouter[] = [
                         id: Guid.create().toString(),
                         sort: -1,
                         type: MenuEnum.Menu,
-                        path: "/system",
+                        path: "/system/user",
                         redirect: "",
                         componentName: "",
                         component: "",

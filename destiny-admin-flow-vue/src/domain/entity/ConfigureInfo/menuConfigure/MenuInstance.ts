@@ -1,6 +1,6 @@
-import { IMenuRouter } from '@/domain/entity/menu/MenuRouterDto';
-import * as MenuConfigureEnum from "../../menu/enums/MenuconfigEnum"
-import { IMenuConfigureInfo, MenuConfigureInfo } from '../../menu/MenuConfigureInfo';
+import { IMenuRouter } from '@/domain/entity/menudto/MenuRouterDto';
+import * as MenuConfigureEnum from "../../menudto/enums/MenuconfigEnum"
+import { IMenuConfigureInfo, MenuConfigureInfo } from '../../menudto/MenuConfigureInfo';
 
 
 /**

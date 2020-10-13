@@ -1,5 +1,6 @@
 <template>
   <Layout id="main-app-layout" class="layout">
+    <!-- <router-view class="component child-demo" v-show="$route.name" /> -->
     <Sider hide-trigger class="main-app-layout__sider">
       
       <system-title></system-title>
@@ -15,8 +16,8 @@
     <Layout class="main-app-layout--right">
       <layout-header class="main-app-layout__header"></layout-header>
       <Content class="main-app-layout__content">
-        <!-- 主应用渲染区，用于挂载主应用路由触发的组件 -->
-        <router-view class="component child-demo" v-show="$route.name" />
+        <router-view></router-view>
+        <!-- <router-view class="component child-demo" v-show="$route.name" /> -->
       </Content>
     </Layout>
   </Layout>
