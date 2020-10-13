@@ -1,0 +1,18 @@
+$normalBgc: #2d2e41;
+$selectBgc: #386be1;
+.ivu-layout {
+  .ivu-layout-sider {
+    background-color: $normalBgc;
+    box-shadow: 0px 1px 2px 0px $normalBgc;
+  }
+  .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active,
+  .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active:hover,
+  .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu),
+  .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu) {
+    background-color: $selectBgc !important;
+    color: #fff;
+  }
+  .ivu-table-wrapper {
+    width: 100%;
+  }
+}

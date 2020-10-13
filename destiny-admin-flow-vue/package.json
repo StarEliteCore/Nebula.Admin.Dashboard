@@ -9,6 +9,12 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "guid-typescript": "^1.0.9",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^10.0.3",
+    "save": "^2.4.0",
+    "scss-loader": "^0.0.1",
+    "view-design": "^4.4.0-rc.1",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^8.4.2",
@@ -25,7 +31,7 @@
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/eslint-config-typescript": "^5.0.2",
-    "eslint": "^6.7.2",
+    "eslint": "^7.11.0",
     "eslint-plugin-vue": "^6.2.2",
     "lint-staged": "^9.5.0",
     "typescript": "~3.9.3",
@@ -39,7 +45,7 @@
     "extends": [
       "plugin:vue/essential",
       "eslint:recommended",
-      "@vue/typescript/recommended"
+      "@vue/typescript"
     ],
     "parserOptions": {
       "ecmaVersion": 2020

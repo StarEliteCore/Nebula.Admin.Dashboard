@@ -1,0 +1,23 @@
+#main-app-layout {
+    height: 100%;
+    .main-app-layout--right {
+      overflow: hidden;
+    }
+    .main-app-layout__header {
+      color: rgba($color: #ffffff, $alpha: 1);
+    }
+    .main-app-layout__content {
+      padding: 20px;
+      color: rgba($color: #000000, $alpha: 1);
+      position: relative;
+      overflow: auto;
+    }
+    .main-app-layout__sider {
+      color: rgba($color: #ffffff, $alpha: 1);
+    }
+  
+    .child-demo {
+      height: 100%;
+    }
+  }
+  

@@ -1,0 +1,25 @@
+.search-botton {
+  float: right;
+  .search-left {
+    margin-right: 10px;
+  }
+}
+
+.table-button {
+  min-width: 50px;
+  margin-right: 5px;
+}
+
+.result-model {
+  margin-top: 28px;
+  padding: 10px;
+  min-height: 50px;
+  border-radius: 2px;
+  border: 1px solid rgb(212, 210, 210);
+}
+.operate-link {
+  color: #57a3f3;
+}
+.component-search {
+  position: relative;
+}
