@@ -1,0 +1,19 @@
+.page-component {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+    .page--jump__left {
+      margin-right: 10px;
+    }
+    .page--jump__right {
+      margin-left: 10px;
+    }
+    .page-component_content{
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+  

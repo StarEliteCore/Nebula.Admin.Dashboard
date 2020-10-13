@@ -1,5 +1,5 @@
 import { IPageRequest } from '@/shared/request';
-import { IServerPageReturn } from '@/domain/response';
+import { IServerPageReturn } from '@/shared/response';
 
 /**
  * 菜单服务层接口定义

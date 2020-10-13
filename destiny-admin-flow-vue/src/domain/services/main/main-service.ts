@@ -3,6 +3,7 @@ import { IocTypes } from '@/shared/diconfig/ioc-types';
 import { injectable, inject } from "inversify";
 import "reflect-metadata";
 import { IMenuService } from '../menuserveice/IMenuService';
+@injectable()
 export class MainService
 {
     private _menuserverceApi:IMenuService

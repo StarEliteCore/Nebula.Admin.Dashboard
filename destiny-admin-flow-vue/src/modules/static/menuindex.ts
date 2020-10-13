@@ -1,6 +1,7 @@
-import { MenuEnum } from '@/domain/entity/menudto/MenuDto';
-import { IMenuRouter } from '@/domain/entity/menudto/MenuRouterDto';
 import { Guid } from 'guid-typescript';
+import { IMenuRouter } from '@/domain/entity/menudto/MenuRouterDto';
+import { MenuEnum } from '@/domain/entity/menudto/MenuDto';
+
 export const MenuList: IMenuRouter[] = [
     {
         id: Guid.EMPTY,
