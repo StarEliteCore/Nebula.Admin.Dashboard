@@ -1,7 +1,25 @@
 export const constansRoute = [
     {
         path: "/",
-        redirect: "/home-page"
+        redirect: "/login"
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: () => import("@/views/login-page/login-page.vue"),
+
+    },
+    {
+        path: '/callback',
+        name: 'callback',
+        component: () => import("@/views/login-page/login-page.vue"),
+
+    },
+    {
+        path: '/logout',
+        name: 'logout',
+        component: () => import("@/views/login-page/login-page.vue"),
+
     },
     {
         path: '/home-page',
