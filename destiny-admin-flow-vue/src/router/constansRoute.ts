@@ -36,6 +36,11 @@ export const constansRoute = [
                 path: '/system/user',
                 name: '用户管理',
                 component: () => import("@/views/system/user-managerment/user-managerment.vue"),
+            },
+            {
+                path: '/system/codegenerator',
+                name: '代码生成器管理',
+                component: () => import("@/views/system/code-generator-managerment/code-generator.vue"),
             }
         ]
     }
