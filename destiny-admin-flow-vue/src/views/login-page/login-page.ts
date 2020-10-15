@@ -1,9 +1,11 @@
 import { Component, Vue, Watch } from "vue-property-decorator";
-import Oidc from "oidc-client"
+
 import LoginConfig from "@/shared/config/loginconfig"
-import { MenuModule } from '@/store/modules/menumodule';
 import { MenuList } from '@/modules/static/menuindex';
+import { MenuModule } from '@/store/modules/menumodule';
+import Oidc from "oidc-client"
 import { TokenModule } from '@/store/modules/tokenmodule';
+
 console.log(LoginConfig)
 
 const oidcmgr = new Oidc.UserManager(LoginConfig)
@@ -24,7 +26,6 @@ export default class Login extends Vue {
         let name: string = _name ? _name : "";
         switch (name) {
             case "login":
-                debugger
                 this.loginFunc();
                 break;
             case "callback":
@@ -51,6 +52,7 @@ export default class Login extends Vue {
                 // res.profile.name 用户名
                 // res.profile.sub 密码
                 if (res.access_token) {
+                    debugger
                     TokenModule.SetToken(res.access_token);
                     // ...  信息处理
                     // 跳转路由

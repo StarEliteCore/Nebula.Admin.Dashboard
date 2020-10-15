@@ -1,15 +1,17 @@
+import * as CookieInfo from "@/shared/cookie/Cookies"
+
+import {
+    Action,
+    Module,
+    Mutation,
+    VuexModule,
+    getModule
+} from "vuex-module-decorators";
+
 import { IMenuRouter } from '@/domain/entity/menudto/MenuRouterDto';
 import defaultConsts from '@/shared/config/terminalconst';
 import store from "@/store"
-import * as CookieInfo from "@/shared/cookie/Cookies" 
 
-import {
-    VuexModule,
-    Module,
-    Mutation,
-    Action,
-    getModule
-  } from "vuex-module-decorators";
 export interface ITokenRouerStore
 {
     token:string 
@@ -28,6 +30,7 @@ class TokenRouerStore extends VuexModule implements ITokenRouerStore{
     @Mutation
     private SET_TOKEN(_token:string)
     {
+        debugger
         CookieInfo.setcookie(defaultConsts.cookiename,_token);
     }
     /**
