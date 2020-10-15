@@ -53,7 +53,19 @@
     "parserOptions": {
       "ecmaVersion": 2020
     },
-    "rules": {}
+    "rules": {
+      "no-debugger": "off",
+      "max-len": "off",
+      "no-extra-boolean-cast": 0,
+      "no-useless-escape": "off",
+      "vue/no-parsing-error": [
+        2,
+        {
+          "x-invalid-end-tag": false
+        }
+      ],
+      "vue/html-self-closing": "off"
+    }
   },
   "browserslist": [
     "> 1%",

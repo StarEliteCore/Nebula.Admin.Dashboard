@@ -4,6 +4,7 @@ import { IocTypes } from '@/shared/diconfig/ioc-types';
 import { MainService } from './main-service';
 import request from "@/utils/request"
 import { IMenuService } from '../menuserveice/IMenuService';
+import { IUserService } from "../userservice/IUserService";
 
 export class MainManager {
     //#region  单例
@@ -19,8 +20,11 @@ export class MainManager {
     }
     private services: MainService;
 
-    public get MenuService():IMenuService{
-        return this.services.MenuServiceApi
+    public get MenuService(): IMenuService {
+        return this.services.MenuServiceApi;
+    }
+    public get UserService(): IUserService {
+        return this.services.UserServiceApi;
     }
     constructor() {
         this.services = container.get<MainService>(IocTypes.MainService);

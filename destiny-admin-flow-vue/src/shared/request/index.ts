@@ -1,5 +1,5 @@
 import * as QueryEnum from "@/shared/request/query.enum";
-import { ESort } from '@/shared/request/query.enum';
+import { EFilterConnect, ESort } from '@/shared/request/query.enum';
 
 /**
  * 查询参数
@@ -97,4 +97,22 @@ export interface IQueryFilter {
     guid: string;
     fileType: string;
   }
-  
+
+  export class QueryFilter implements IQueryFilter {
+    /**
+     * 查询条件and或者Or
+     */
+    filterConnect: EFilterConnect = EFilterConnect.And;
+    /**
+     * 查询条件列表
+     */
+    filters: Array<IFilterCondition> = new Array<IFilterCondition>();
+  }
+
+
+  export class PageRequest implements IPageRequest {
+    pageIndex: number = 1;
+    pageRow: number = 10;
+    orderConditions: IOrderCondition[] = [];
+    queryFilter: IQueryFilter = new QueryFilter();
+  } 

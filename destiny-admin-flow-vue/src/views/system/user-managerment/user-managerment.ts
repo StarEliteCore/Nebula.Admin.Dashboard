@@ -1,7 +1,7 @@
 import { Component, Emit, Mixins, Ref } from "vue-property-decorator";
 import { EFilterConnect, EFilterOprator } from '@/shared/request/query.enum';
 
-import { IPageRequest } from '@/shared/request';
+import * as  PageQuery   from '@/shared/request';
 import { MainManager } from '@/domain/services/main/main-manager';
 import PageMixins from "@/shared/mixins/page.mixins";
 
@@ -11,22 +11,11 @@ import PageMixins from "@/shared/mixins/page.mixins";
 })
 
 export default class UserManagerment extends Mixins(PageMixins) {
-
-    private _page:IPageRequest={
-        pageIndex:1,
-        pageRow:10,
-        orderConditions:[],
-        queryFilter:{
-            filterConnect:EFilterConnect.And,
-            filters:[]
-        }
-    }
-
+    private queryfileter:PageQuery.IPageRequest = new PageQuery.PageRequest();
     private created()
     {
-
-        // console.log(this.PageInfo)
-        MainManager.Instance().MenuService.getMenuTable(this._page)
+        console.log(this.queryfileter)
+        MainManager.Instance().UserService.getUserPage(this.queryfileter)
         console.log(11)
     }
     

@@ -20,7 +20,6 @@ export default class LayoutComponent extends Vue {
     private created()
     {
         this.menus.menuItemList = MenuList;
-        console.log(this.menus)
     }
     get menuShow() {
         return (
