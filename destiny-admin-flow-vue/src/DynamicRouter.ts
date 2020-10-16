@@ -1,9 +1,11 @@
-import router from "@/router/index";
-import { MenuList } from './modules/static/menuindex';
 import { Login, loginCallbackFunc } from './oidc-login/IdentityServerLogin';
+
+import EmptyView from "@/views/layout-emprty/layout-emprty.vue";
+import { MenuList } from './modules/static/menuindex';
 import { MenuModule } from './store/modules/menumodule';
 import { TokenModule } from './store/modules/tokenmodule';
-import EmptyView from "@/views/layout-emprty/layout-emprty.vue";
+import router from "@/router/index";
+
 const _import = require("./router/import/_import_" + process.env.NODE_ENV);
 
 console.log(process.env.NODE_ENV)
