@@ -25,22 +25,3 @@ export default router;
 router.afterEach((to: any) => {
   document.title = "DestinyFlow";
 });
-
-
-
-// router.beforeEach(async (to, from, next) => {
-//   // document.title = getPageTitle(to.meta.title)
-//   // const token = getToken()
-//     if (to.path === '/login'){
-//       if(to.path === "/callback")
-//       {
-//         next();
-//       }
-//       else{
-
-//       }
-//     } 
-//     else {
-//         next()
-//     }
-// })

@@ -1,6 +1,8 @@
+import { MenuEnum } from '@/domain/entity/menudto/MenuDto';
 import { IMenuRouter } from '@/domain/entity/menudto/MenuRouterDto';
 import defaultConsts from '@/shared/config/terminalconst';
 import store from "@/store"
+import { Guid } from 'guid-typescript';
 import {
     VuexModule,
     Module,
@@ -19,6 +21,7 @@ export interface IMenuRouerStore
 @Module({dynamic:true,store,name:"menu"})
 class MenuRouerStore extends VuexModule implements IMenuRouerStore{
     menus: string=localStorage.getItem(defaultConsts.menu)||"";
+    
     /**
      * 
      * @param _menus 属性
@@ -26,6 +29,8 @@ class MenuRouerStore extends VuexModule implements IMenuRouerStore{
     @Mutation
     private SET_MENUS(_menus:Array<IMenuRouter>)
     {
+        // _menus.unshift(this.defaulthomepage);
+        // console.log(_menus)
         let _menuString=JSON.stringify(_menus);
         localStorage.setItem(defaultConsts.menu,_menuString)
     }

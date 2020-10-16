@@ -6,6 +6,7 @@ import { IMenuInstance, MenuInstance } from '@/domain/entity/ConfigureInfo/menuC
 import { IMenuRouter } from '@/domain/entity/menudto/MenuRouterDto';
 import { Guid } from 'guid-typescript';
 import SystemTitle from "./layout-left-title/layout-left-title.vue"
+import { MenuEnum } from '@/domain/entity/menudto/MenuDto';
 @Component({
     name: "LayoutComponent",
     components: {
@@ -17,9 +18,26 @@ export default class LayoutComponent extends Vue {
     private menus: IMenuInstance = new MenuInstance();
     private openNameArr: string[] = [];
     private linearMenuList: IMenuRouter[] = [];
+    private defaulthomepage:IMenuRouter = {
+            id: "da92480a-5914-a8bc-110b-aedb0457ce6d",
+            sort: -1,
+            type: MenuEnum.Menu,
+            path: "/home-page",
+            redirect: "",
+            componentName: "",
+            component: "",
+            icon: "",
+            parentId: Guid.EMPTY,
+            parentNumber: "",
+            name: "主页",
+            children: [],
+    }
+
+
     private created()
     {
-        this.menus.menuItemList = MenuList;
+        this.menus.menuItemList = MenuList.children;
+        this.menus.menuItemList.unshift(this.defaulthomepage);
     }
     get menuShow() {
         return (

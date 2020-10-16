@@ -1,10 +1,11 @@
+import * as  PageQuery from '@/shared/request';
+
 import { Component, Emit, Mixins, Ref } from "vue-property-decorator";
 import { EFilterConnect, EFilterOprator } from '@/shared/request/query.enum';
 
-import * as  PageQuery from '@/shared/request';
+import DeleteMixins from "@/shared/mixins/delete-dialog.mixins";
 import { MainManager } from '@/domain/services/main/main-manager';
 import PageMixins from "@/shared/mixins/page.mixins";
-import DeleteMixins from "@/shared/mixins/delete-dialog.mixins";
 
 @Component({
     name: "UserManagerment"
@@ -26,9 +27,9 @@ export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
     }
     private mounted()
     {
-        this.DeleteInfo.Show("删除", "王爸爸", () => {
-                this.deleteItemById(";");
-            });
+        // this.DeleteInfo.Show("删除", "王爸爸", () => {
+        //         this.deleteItemById(";");
+        //     });
     }
     /**
      * @description 根据id删除

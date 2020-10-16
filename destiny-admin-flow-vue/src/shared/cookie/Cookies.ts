@@ -5,8 +5,6 @@ import Cookies from "js-cookie";
  * @param _key 根据键
  */
 export const getcookie =(_key:string) =>{
-console.log(Cookies.get(_key))
-debugger
 return Cookies.get(_key);
 }
 /**

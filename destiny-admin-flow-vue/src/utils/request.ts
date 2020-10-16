@@ -9,7 +9,7 @@ service.interceptors.request.use(
     config => {
         // Add Authorization header to every request, you can add other custom headers here
     if (TokenModule.token) {
-        debugger
+        console.log(TokenModule.token)
       config.headers["Authorization"] = `Bearer ${TokenModule.token}`;
     }
     return config;
@@ -18,7 +18,6 @@ service.interceptors.request.use(
         return Promise.reject(error);
     }
 );
-
 service.interceptors.response.use(
     response=>{
         if(response.status==200)
