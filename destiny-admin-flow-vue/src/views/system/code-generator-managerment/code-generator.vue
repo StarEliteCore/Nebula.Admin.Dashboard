@@ -78,17 +78,18 @@
       <Row style="padding: 5px">
         <Card :bordered="true" :dis-hover="true">
           <p slot="title">实体信息</p>
-          <Button type="primary" long slot="extra" icon="md-add">添加</Button>
+          <Button type="primary" long slot="extra" @click="AddRow" icon="md-add">添加</Button>
           <Table
             border
             stripe
             max-height="500"
             :columns="columns"
-            :data="PropertyArr">
-                    <template slot-scope="{ row }" slot="Name">
-                        <Input v-model="row.propertyName" />         
-              </template>
-                  </Table>
+            :data="PropertyArr"
+          >
+              <template slot-scope="{ row }" slot="Name">
+                   <Input v-model="row.propertyName" />         
+            </template>
+              </Table>
 
           <!-- <table
             style="
