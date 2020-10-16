@@ -32,16 +32,17 @@ export const constansRoute = [
         name: 'logout',
         component: () => import("@/views/login-page/login-page.vue"),
 
-    },
+    }
+    //,
     /**
      * 默认主页
      */
-    {
-        path: '/home-page',
-        name: '主页',
-        component: () => import("@/views/home-page/home-page.vue"),
+    // {
+    //     path: '/home-page',
+    //     name: '主页',
+    //     component: () => import("@/views/home-page/home-page.vue"),
 
-    }
+    // }
     // ,
     // {
     //     path: '/system',

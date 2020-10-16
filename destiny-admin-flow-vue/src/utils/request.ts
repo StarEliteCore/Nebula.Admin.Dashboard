@@ -1,7 +1,8 @@
+import { Login } from '@/oidc-login/IdentityServerLogin';
+import NoticeUtils from '@/shared/Noticemessage/NoticeUtils';
 import { TokenModule } from '@/store/modules/tokenmodule';
 import axios from "axios"
 
-console.log(process.env.VUE_APP_BASE_API)
 const service = axios.create({
     baseURL: process.env.VUE_APP_BASE_API // url = base url + request url
 });
@@ -9,7 +10,6 @@ service.interceptors.request.use(
     config => {
         // Add Authorization header to every request, you can add other custom headers here
     if (TokenModule.token) {
-        console.log(TokenModule.token)
       config.headers["Authorization"] = `Bearer ${TokenModule.token}`;
     }
     return config;
@@ -27,6 +27,21 @@ service.interceptors.response.use(
     },
     error => {
         const response = error.response;
+        switch (response.status) {
+            case 500:
+            //   NoticeUtils.Inst().Error("服务器错误", response.data.msg);
+              break;
+            case 401:
+                // NoticeUtils.Inst().Warning("未登录","12312131313");
+                debugger
+                TokenModule.ResetToken();
+                Login();
+              break;
+            case 403:
+
+            //   NoticeUtils.Inst().Error("权限不足", response.data.msg);
+              break;
+          }
         return Promise.reject(error);
     }
 )

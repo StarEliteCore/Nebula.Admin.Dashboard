@@ -13,10 +13,13 @@ export const Login=()=>{
  * IdentityServer4登录完成之后回调事件
  */
 export const loginCallbackFunc=()=>{
+    debugger
     oidcmgr.signinRedirectCallback().then((res: Oidc.User) => {
         // res.profile.name 用户名
         // res.profile.sub 密码
+        debugger
         if (res.access_token) {
+            debugger
             TokenModule.SetToken(res.access_token);
         }
     })

@@ -16,5 +16,8 @@ export const setcookie = (key: string,value :string) =>{
   Cookies.set(key, value);
 }
 
+export const removecookie=(key:string)=>{
+  Cookies.remove(key);
+}
 
 

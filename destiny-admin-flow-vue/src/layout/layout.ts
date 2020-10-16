@@ -37,7 +37,7 @@ export default class LayoutComponent extends Vue {
     private created()
     {
         this.menus.menuItemList = MenuList.children;
-        this.menus.menuItemList.unshift(this.defaulthomepage);
+        // this.menus.menuItemList.unshift(this.defaulthomepage);
     }
     get menuShow() {
         return (

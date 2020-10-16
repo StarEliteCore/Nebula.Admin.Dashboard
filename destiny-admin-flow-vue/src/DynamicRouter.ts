@@ -34,10 +34,14 @@ router.beforeEach(async (to: any, from, next) => {
                 if (!MenuModule.menus) {
                     MenuModule.SetMenus(MenuList.children);
                     if (MenuModule.menus) {
-                        var routerarr = JSON.parse(MenuModule.menus);
+                        const routerarr = JSON.parse(MenuModule.menus);
                         if (routerarr) {
                             getRouter = routerarr;
                         }
+                    }
+                    else {
+                        const arr = JSON.parse((JSON.stringify(MenuList.children)));
+                        getRouter = arr;
                     }
                     routeGo(to, from, next);
                 }
@@ -62,7 +66,7 @@ router.beforeEach(async (to: any, from, next) => {
          * 判断是否是回调回来的页面
          */
         if (to.path === "/callback") {
-            loginCallbackFunc();
+            // loginCallbackFunc();
             next();
         }
         else {
@@ -123,9 +127,7 @@ function filterAsyncRouter(asyncRouterMap: Route[]) {
             route.children = filterAsyncRouter(route.children);
         }
         else {
-            // console.log(route)
             route.component = _import(route.component);
-            // console.log(route)
         }
         return true;
     });
