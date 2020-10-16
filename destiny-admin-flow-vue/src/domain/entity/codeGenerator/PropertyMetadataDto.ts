@@ -2,7 +2,7 @@
  * 属性元数据
  */
 
- export interface PropertyMetadataDto
+ export interface IPropertyMetadataDto
  {
 
     /**

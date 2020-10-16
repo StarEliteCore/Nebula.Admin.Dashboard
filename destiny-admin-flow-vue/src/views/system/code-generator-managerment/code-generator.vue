@@ -4,47 +4,74 @@
       <Row style="padding: 5px">
         <Card :bordered="true" :dis-hover="true">
           <p slot="title">实体信息</p>
+          <Row>
+            <Col span="12">
+              <FormItem label="实体名：">
+                <Input />
+              </FormItem>
+            </Col>
+            <Col span="12">
+              <FormItem label="显示名：">
+                <Input />
+              </FormItem>
+            </Col>
+          </Row>
+          <Row>
+            <Col span="12">
+              <FormItem label="是否生成Dto：">
+                <i-switch size="large">
+                  <span slot="open">是</span>
+                  <span slot="close">否</span>
+                </i-switch>
+              </FormItem>
+            </Col>
+            <Col span="12">
+              <FormItem label="是否自动映射Dto：">
+                <i-switch size="large">
+                  <span slot="open">是</span>
+                  <span slot="close">否</span>
+                </i-switch>
+              </FormItem>
+            </Col>
+          </Row>
+          <Row>
+            <Col span="12">
+              <FormItem label="是否创建：">
+                <i-switch size="large">
+                  <span slot="open">是</span>
+                  <span slot="close">否</span>
+                </i-switch>
+              </FormItem>
+            </Col>
+            <Col span="12">
+              <FormItem label="是否修改：">
+                <i-switch size="large">
+                  <span slot="open">是</span>
+                  <span slot="close">否</span>
+                </i-switch>
+              </FormItem>
+            </Col>
+          </Row>
 
-          <FormItem label="实体名：" prop="name">
-            <Input style="width: 100%" />
-          </FormItem>
-          <FormItem label="显示名：" prop="name">
-            <Input style="width: 100%" />
-          </FormItem>
-
-          <FormItem label="是否生成Dto：" prop="name">
-            <i-switch size="large">
-              <span slot="open">是</span>
-              <span slot="close">否</span>
-            </i-switch>
-          </FormItem>
-          <FormItem label="是否自动映射Dto：" prop="name">
-            <i-switch size="large">
-              <span slot="open">是</span>
-              <span slot="close">否</span>
-            </i-switch>
-          </FormItem>
-          <FormItem label="是否创建：" prop="name">
-            <i-switch size="large">
-              <span slot="open">是</span>
-              <span slot="close">否</span>
-            </i-switch>
-          </FormItem>
-          <FormItem label="是否修改：" prop="name">
-            <i-switch size="large">
-              <span slot="open">是</span>
-              <span slot="close">否</span>
-            </i-switch>
-          </FormItem>
-          <FormItem label="是否软删除：" prop="name">
-            <i-switch size="large">
-              <span slot="open">是</span>
-              <span slot="close">否</span>
-            </i-switch>
-          </FormItem>
-          <FormItem label="审核用户键类型：" prop="name">
-            <Input />
-          </FormItem>
+          <Row>
+            <Col span="12">
+              <FormItem label="是否软删除：">
+                <i-switch size="large">
+                  <span slot="open">是</span>
+                  <span slot="close">否</span>
+                </i-switch>
+              </FormItem>
+            </Col>
+            <Col span="12">
+              <FormItem label="审核用户键类型：">
+                <!-- <Select style="width: 260px">
+                  <Option :value="Guid">Guid</Option>
+                  <Option :value="string">String</Option>
+                  <Option :value="int">Int</Option>
+                </Select> -->
+              </FormItem>
+            </Col>
+          </Row>
         </Card>
       </Row>
 
@@ -52,8 +79,18 @@
         <Card :bordered="true" :dis-hover="true">
           <p slot="title">实体信息</p>
           <Button type="primary" long slot="extra" icon="md-add">添加</Button>
+          <Table
+            border
+            stripe
+            max-height="500"
+            :columns="columns"
+            :data="PropertyArr">
+                    <template slot-scope="{ row }" slot="Name">
+                        <Input v-model="row.propertyName" />         
+              </template>
+                  </Table>
 
-          <table
+          <!-- <table
             style="
               border-spacing: 0;
               border-collapse: collaps;
@@ -109,7 +146,7 @@
                 </td>
               </tr>
             </tbody>
-          </table>
+          </table> -->
         </Card>
       </Row>
     </Card>
