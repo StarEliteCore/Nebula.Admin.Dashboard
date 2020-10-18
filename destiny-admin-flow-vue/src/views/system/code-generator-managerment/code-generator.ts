@@ -4,6 +4,8 @@ import { Component, Emit, Mixins, Ref } from "vue-property-decorator";
 import { EFilterConnect, EFilterOprator } from "@/shared/request/query.enum";
 
 import { AjaxResult } from "@/shared/response";
+import { IEntityMetadataDto } from "@/domain/entity/codeGenerator/EntityMetadataDto";
+import { IProjectMetadataDto } from "@/domain/entity/codeGenerator/ProjectMetadataDto";
 import { IPropertyMetadataDto } from "@/domain/entity/codeGenerator/PropertyMetadataDto";
 import { ITableColumn } from "@/shared/table/ITable";
 import { MainManager } from "@/domain/services/main/main-manager";
@@ -14,16 +16,54 @@ import PageMixins from "@/shared/mixins/page.mixins";
 })
 export default class CodeGeneratorManagerment extends Mixins(PageMixins) {
   private queryfileter: PageQuery.IPageRequest = new PageQuery.PageRequest();
-  private default: IPropertyMetadataDto = {
+  private formItem: IPropertyMetadataDto = {
     isPrimaryKey: false,
     propertyName: "",
     displayName: "",
     isNullable: false,
     defaultValue: "",
-    cSharpType: "",
+    cSharpType: "Guid",
     isInputDto: false,
     isOutputDto: false,
     isPageDto: false,
+    aggregateType: "",
+  };
+
+
+
+  private entityFormItem: IEntityMetadataDto = {
+    entityName: "",
+    displayName: "",
+    primaryKeyType: "",
+    primaryKeyName: "",
+    isGeneratorDto: false,
+    isAutoMap: false,
+    isCreation: false,
+    isModification: false,
+    isSoftDelete: false,
+    auditedUserKeyType: "",
+    properties:[]
+  };
+
+  private entityRuleValidate: any = {
+    entityName: [
+      { required: true, message: "请输入实体名!!!", trigger: "blur" },
+    ],
+    displayName: [
+      { required: true, message: "请输入显示名!!!", trigger: "blur" },
+    ],
+    primaryKeyType: [
+      { required: true, message: "请选择主键类型!!!", trigger: "blur" },
+    ],
+  };
+
+  private projectRuleValidate: any = {
+    namespace: [
+      { required: true, message: "请输入命名空间!!!", trigger: "blur" },
+    ],
+    saveFilePath: [
+      { required: true, message: "请输入保存文件路径!!!", trigger: "blur" },
+    ],
   };
 
   private columns: ITableColumn[] = [
@@ -35,104 +75,181 @@ export default class CodeGeneratorManagerment extends Mixins(PageMixins) {
     },
     {
       title: "属性名",
-      slot: "PropertyName",
+      key: "propertyName",
       align: "center",
     },
     {
       title: "显示名",
-      slot: "DisplayName",
+      key: "displayName",
       align: "center",
     },
     {
       title: "是否可空",
-      slot: "IsNullable",
+      key: "isNullable",
+      slot: "isNullable",
       align: "center",
     },
     {
       title: "C#类型",
-      slot: "CSharpType",
+      key: "cSharpType",
       align: "center",
     },
     {
       title: "是否生成输入DTO",
-      slot: "IsInputDto",
+      key: "isInputDto",
       align: "center",
+      slot: "isInputDto",
     },
     {
       title: "是否生成输出DTO",
-      slot: "IsOutputDto",
+      key: "isOutputDto",
       align: "center",
+      slot: "isOutputDto",
     },
     {
       title: "是否生成分页DTO",
-      slot: "IsPageDto",
+      key: "isPageDto",
+      align: "center",
+      slot: "isPageDto",
+    },
+    {
+      title: "复杂类型",
+      key: "aggregateType",
+      align: "center",
+    },
+    {
+      title: "操作",
+      slot: "op",
       align: "center",
     },
   ];
 
-  private PropertyArr: IPropertyMetadataDto[] = [];
-  private cSharpTypeList: ITableColumn[] = [
-    {
-      title: "是否生成分页DTO",
-      slot: "IsPageDto",
-      align: "center",
-    },
-  ];
+  private PropertyArr: any = [];
+  private IsAddPropertyModal: boolean = false;
+  private cSharpTypeList: any = [];
+
+  private ruleValidate: any = {
+    propertyName: [
+      { required: true, message: "请输入属性名!!!", trigger: "blur" },
+    ],
+    displayName: [
+      { required: true, message: "请输入显示名!!!", trigger: "blur" },
+    ],
+    cSharpType: [
+      { required: true, message: "请选择C#类型!!!", trigger: "blur" },
+    ],
+  };
+
+  
+  private projectFormItem: IProjectMetadataDto = {
+    namespace: "",
+    saveFilePath: "",
+    entityMetadata:this.entityFormItem
+  };
+
   private created() {
     let $this = this;
     MainManager.Instance()
       .CodeGeneratorService.GetCSharpTypeToSelectItem()
       .then((result: AjaxResult) => {
         if (result.success) {
-          //  $this.cSharpTypeList=result.data;
+          $this.cSharpTypeList = result.data;
           console.log($this.cSharpTypeList);
         }
       });
-    this.PropertyArr.push(this.default);
   }
-  AddRow() {
-    this.PropertyArr.push({
+  AddProperty() {
+    this.IsAddPropertyModal = true;
+    this.formItem = {
       isPrimaryKey: false,
       propertyName: "",
       displayName: "",
       isNullable: false,
       defaultValue: "",
-      cSharpType: "",
+      cSharpType: "Guid",
       isInputDto: false,
       isOutputDto: false,
       isPageDto: false,
+      aggregateType: "",
+    };
+    // this.PropertyArr.push({
+    //   isPrimaryKey: false,
+    //   propertyName: "",
+    //   displayName: "",
+    //   isNullable: false,
+    //   defaultValue: "",
+    //   cSharpType: "",
+    //   isInputDto: false,
+    //   isOutputDto: false,
+    //   isPageDto: false,
+    // });
+  }
+
+  private remove(_row: IPropertyMetadataDto, _index: number) {
+    this.PropertyArr.splice(_index, 1);
+  }
+
+  private cancel() {
+    this.IsAddPropertyModal = false;
+    (this.$refs["formItem"] as any).resetFields();
+  }
+
+  private ok() {
+    (this.$refs["formItem"] as any).validate(async (valid: any) => {
+      if (valid) {
+        let formItemData = this.formItem;
+        let data = {
+          isPrimaryKey: false,
+          propertyName: formItemData.propertyName,
+          displayName: formItemData.displayName,
+          isNullable: formItemData.isNullable,
+          defaultValue: "",
+          cSharpType: formItemData.cSharpType,
+          isInputDto: formItemData.isInputDto,
+          isOutputDto: formItemData.isOutputDto,
+          isPageDto: formItemData.isPageDto,
+          aggregateType: formItemData.aggregateType,
+        };
+        this.PropertyArr.push(data);
+        this.IsAddPropertyModal = false;
+      } else {
+        this.IsAddPropertyModal = true;
+      }
     });
   }
 
-  private updatePropertyName(_row: IPropertyMetadataDto, _index: number) {
-    this.PropertyArr[_index].propertyName = _row.propertyName;
-  }
+  private save() {
+    let isEntityValid = false;
+    let $this = this;
 
-  private updateDisplayName(_row: IPropertyMetadataDto, _index: number) {
-    this.PropertyArr[_index].displayName = _row.displayName;
-  }
+    (this.$refs["entityFormItem"] as any).validate(async (valid: any) => {
+      if (valid) {
+        isEntityValid = true;
+      }
+    });
+    (this.$refs["projectFormItem"] as any).validate(async (valid: any) => {
+      if (valid&&isEntityValid) {
+        let projectItem: IProjectMetadataDto = Object.assign(
+          $this.projectFormItem
+        );
+        let entityItem: IEntityMetadataDto = Object.assign(
+          $this.entityFormItem
+        );
 
-  private updateIsNullable(_row: IPropertyMetadataDto, _index: number) {
-    this.PropertyArr[_index].isNullable = _row.isNullable;
-  }
+      
+        let propertyItem: IPropertyMetadataDto[] = $this.PropertyArr as IPropertyMetadataDto[];
+        entityItem.properties=propertyItem;
 
-  private updateDefaultValue(_row: IPropertyMetadataDto, _index: number) {
-    this.PropertyArr[_index].defaultValue = _row.defaultValue;
-  }
-
-  private updateCSharpType(_row: IPropertyMetadataDto, _index: number) {
-    this.PropertyArr[_index].cSharpType = _row.cSharpType;
-  }
-
-  private updateIsInputDto(_row: IPropertyMetadataDto, _index: number) {
-    this.PropertyArr[_index].isInputDto = _row.isInputDto;
-  }
-
-  private updateIsOutputDto(_row: IPropertyMetadataDto, _index: number) {
-    this.PropertyArr[_index].isOutputDto = _row.isOutputDto;
-  }
-
-  private updateIsPageDto(_row: IPropertyMetadataDto, _index: number) {
-    this.PropertyArr[_index].isPageDto = _row.isPageDto;
+        MainManager.Instance().CodeGeneratorService.generateCode(projectItem).then((result: AjaxResult) => {
+          if (result.success) {
+            console.log("代码生成成功！！");
+            $this.$Message.success("代码生成成功！！");
+          }
+        });
+    
+      } else {
+        console.log("23");
+      }
+    });
   }
 }

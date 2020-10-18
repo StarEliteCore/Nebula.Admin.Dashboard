@@ -9,4 +9,7 @@ export const UserApi = {
 
     //得到C#类型转成下拉项
     GetCSharpTypeToSelectItem: "api/CodeGenerator/GetCSharpTypeToSelectItem",
+    
+    //生成代码
+    GenerateCode: "api/CodeGenerator/GenerateCode",
   }

@@ -1,7 +1,9 @@
+import { IPropertyMetadataDto } from './PropertyMetadataDto';
+
 /**
  * 实体元数据
  */
-export interface EntityMetadataDto{
+export interface IEntityMetadataDto{
   
     /**
      * 实体名
@@ -51,10 +53,10 @@ export interface EntityMetadataDto{
      /**
      * 审核用户键类型
      */
-    auditedUserKeyType:boolean,
+    auditedUserKeyType:string,
 
     /**
      * 属性集合
      */
-    propertyMetadataDto:[]
+    properties:IPropertyMetadataDto[]
 }

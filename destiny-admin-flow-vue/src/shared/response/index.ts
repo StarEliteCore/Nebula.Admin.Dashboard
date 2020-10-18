@@ -13,7 +13,7 @@ export interface IServerPageReturn<T> extends IServerReturn<T> {
 
  
     data: any;
-    success: boolean|false;
+    success: boolean|true;
     message: string|"";
     
   }
