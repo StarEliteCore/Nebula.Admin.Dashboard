@@ -79,17 +79,52 @@
         <Card :bordered="true" :dis-hover="true">
           <p slot="title">实体信息</p>
           <Button type="primary" long slot="extra" @click="AddRow" icon="md-add">添加</Button>
-          <Table
-            border
-            stripe
-            max-height="500"
-            :columns="columns"
-            :data="PropertyArr"
-          >
-              <template slot-scope="{ row }" slot="Name">
-                   <Input v-model="row.propertyName" />         
+          <Table border stripe max-height="500" :columns="columns" :data="PropertyArr">
+             <template slot-scope="{ row, index }" slot="PropertyName">
+                   <Input v-model="row.propertyName" @on-change="updatePropertyName(row, index)"/>       
             </template>
-              </Table>
+             <template slot-scope="{ row, index }" slot="DisplayName">
+                   <Input v-model="row.displayName" @on-change="updateDisplayName(row, index)" />     
+            </template>
+            <template slot-scope="{ row, index }" slot="IsNullable">
+                 <i-switch v-model="row.isNullable" @on-change="updateIsNullable(row, index)">
+                  <span slot="open">是</span>
+                  <span slot="close">否</span>
+                </i-switch>
+            </template>
+            <template slot-scope="{ row, index }" slot="CSharpType">
+
+            <Select v-model="row.cSharpType"  @on-change="updateCSharpType(row, index)>
+                 <i-option v-for="item in cSharpTypeList" :value="item.title" :key="item.title">{{ item.title }}</i-option>
+            </Select>
+    
+              
+
+             
+
+            </template>
+            <template slot-scope="{ row, index }" slot="IsInputDto">
+                <i-switch v-model="row.isInputDto" @on-change="updateIsInputDto(row, index)">
+                  <span slot="open">是</span>
+                  <span slot="close">否</span>
+                </i-switch>
+                 
+            </template>
+             <template slot-scope="{ row, index }" slot="IsOutputDto">
+
+                <i-switch v-model="row.isOutputDto" @on-change="updateIsOutputDto(row, index)">
+                  <span slot="open">是</span>
+                  <span slot="close">否</span>
+                </i-switch>
+                
+            </template>
+            <template slot-scope="{ row, index }" slot="IsPageDto">
+               <i-switch v-model="row.isPageDto" @on-change="updateIsPageDto(row, index)">
+                  <span slot="open">是</span>
+                  <span slot="close">否</span>
+                </i-switch>
+            </template>
+          </Table>
 
           <!-- <table
             style="

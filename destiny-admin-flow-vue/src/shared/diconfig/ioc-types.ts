@@ -1,5 +1,6 @@
 export const IocTypes={
     MainService:Symbol("MainService"),
     MenuService:Symbol("MenuService"),
-    UserService:Symbol("UserService")
+    UserService:Symbol("UserService"),
+    CodeGeneratorService:Symbol("CodeGeneratorService")
 }

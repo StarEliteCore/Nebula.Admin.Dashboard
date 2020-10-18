@@ -1,10 +1,12 @@
 import DataRequest, { IDataRequest } from '@/shared/data-request';
-import container from "@/shared/diconfig/inversify.config"
-import { IocTypes } from '@/shared/diconfig/ioc-types';
-import { MainService } from './main-service';
-import request from "@/utils/request"
+
+import { ICodeGeneratorService } from '../codeGeneratorServeice/ICodeGeneratorService';
 import { IMenuService } from '../menuserveice/IMenuService';
 import { IUserService } from "../userservice/IUserService";
+import { IocTypes } from '@/shared/diconfig/ioc-types';
+import { MainService } from './main-service';
+import container from "@/shared/diconfig/inversify.config"
+import request from "@/utils/request"
 
 export class MainManager {
     //#region  单例
@@ -25,6 +27,10 @@ export class MainManager {
     }
     public get UserService(): IUserService {
         return this.services.UserServiceApi;
+    }
+
+    public get CodeGeneratorService(): ICodeGeneratorService {
+        return this.services.CodeGeneratorService;
     }
     constructor() {
         this.services = container.get<MainService>(IocTypes.MainService);
