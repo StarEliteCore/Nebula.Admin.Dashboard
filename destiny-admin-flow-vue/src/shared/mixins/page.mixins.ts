@@ -16,6 +16,4 @@ export default class PageMixins extends Vue {
   private operate = EOperate;
   @Ref("PageInfo")
   protected PageInfo!: PageInfo;
-//   @Ref("DeleteInfo")
-//   protected DeleteInfo!: DeleteInfo;
 }

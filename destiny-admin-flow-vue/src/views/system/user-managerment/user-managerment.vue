@@ -1,6 +1,20 @@
 <template>
   <div>
-    测试asd asd asd asd as dasd as
+    <Row>
+      <Button type="primary">Primary</Button>
+      <Button type="warning">Warning</Button>
+      <Button type="error">Error</Button>
+    </Row>
+    <Row>
+      <Table
+        :columns="columns"
+        :data="userTable"
+        border
+        stripe
+        :loading="loading"
+      >
+      </Table>
+    </Row>
     <page-component ref="PageInfo" class="page"></page-component>
     <delete-dialog ref="DeleteInfo"></delete-dialog>
   </div>
