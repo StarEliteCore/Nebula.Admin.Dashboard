@@ -68,7 +68,8 @@
           "x-invalid-end-tag": false
         }
       ],
-      "vue/html-self-closing": "off"
+      "vue/html-self-closing": "off",
+      "no-irregular-whitespace": "off"
     }
   },
   "browserslist": [
