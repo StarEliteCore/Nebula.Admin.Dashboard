@@ -138,6 +138,7 @@ export default class CodeGeneratorManagerment extends Mixins(PageMixins) {
     cSharpType: [
       { required: true, message: "请选择C#类型!!!", trigger: "blur" },
     ],
+  
   };
 
   
@@ -242,13 +243,13 @@ export default class CodeGeneratorManagerment extends Mixins(PageMixins) {
 
         MainManager.Instance().CodeGeneratorService.generateCode(projectItem).then((result: AjaxResult) => {
           if (result.success) {
-            console.log("代码生成成功！！");
+           
             $this.$Message.success("代码生成成功！！");
           }
         });
     
       } else {
-        console.log("23");
+        $this.$Message.success("代码生成失败！！");
       }
     });
   }
