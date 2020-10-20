@@ -4,13 +4,19 @@ import { Component, Emit, Mixins, Ref } from "vue-property-decorator";
 import { EFilterConnect, EFilterOprator } from "@/shared/request/query.enum";
 
 import DeleteMixins from "@/shared/mixins/delete-dialog.mixins";
+import { EOperate } from '@/shared/eoperate';
 import { ITableColumn } from '@/shared/table/ITable';
 import { IUserTableDto } from '@/domain/entity/userdto/userDto';
 import { MainManager } from "@/domain/services/main/main-manager";
 import PageMixins from "@/shared/mixins/page.mixins";
+import UserOperate from "@/views/system/user-managerment/user-operate/user-operate.vue"
+import UserOperateInfo from "@/views/system/user-managerment/user-operate/user-operate"
 
 @Component({
   name: "UserManagerment",
+  components:{
+    UserOperate
+  }
 })
 export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
   private queryfileter: PageQuery.IPageRequest = new PageQuery.PageRequest();
@@ -72,10 +78,17 @@ export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
   private created() {
     this.getTableData();
   }
-  private mounted() {
-    // this.DeleteInfo.Show("删除", "王爸爸", () => {
-    //         this.deleteItemById(";");
-    //     });
+  @Ref("UserOperateInfo")
+  private UserOperateInfo!: UserOperateInfo;
+  /**
+   * 
+   * @param _type 操作方法
+   * @param _rowId 
+   */
+  private operateItem(_type: EOperate, _rowId?: string) {
+    this.UserOperateInfo.Show(_type,(res: boolean) => {
+      console.log(2222222222222222222222)
+    },_rowId)
   }
   private async getTableData() {
     await MainManager.Instance().UserService.getUserPage(
