@@ -2,7 +2,7 @@
 <template>
   <div>
     <Modal class="delete-dialog" v-model="IsShow" :title="title">
-      <div>确定要删除{{ info }}?</div>
+      <div>确定要删除【{{ info }}】?</div>
       <div slot="footer">
         <Button @click="OnHandleCancel">取消</Button>
         <Button type="error" @click="OnHandleCommit">删除</Button>
