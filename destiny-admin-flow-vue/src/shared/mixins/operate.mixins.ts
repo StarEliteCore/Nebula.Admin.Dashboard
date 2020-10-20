@@ -1,7 +1,7 @@
 import { Component, Ref, Vue } from "vue-property-decorator";
 
 import { EOperate } from '../eoperate';
-import { IServerReturn } from '../response';
+import { IAjaxResult, IServerReturn } from '../response';
 
 @Component({
     name:"OperateMixins"
@@ -41,9 +41,15 @@ export default class OperateMixins extends Vue{
          * 取消顯示
          */
         this.IsShow=false;
-        (this.$refs.form as any).resetFields();
+        // (this.$refs.form as any).resetFields();
     }
     protected callback(res:IServerReturn<boolean>){
+        this.CB(res.success);
+        res.success?this.$Message.success(res.message):this.$Message.error(res.message);
+        this.IsShow=false;
+        (this.$refs.form as any).resetFields();
+    }
+    protected ajaxcallback(res:IAjaxResult){
         this.CB(res.success);
         res.success?this.$Message.success(res.message):this.$Message.error(res.message);
         this.IsShow=false;
