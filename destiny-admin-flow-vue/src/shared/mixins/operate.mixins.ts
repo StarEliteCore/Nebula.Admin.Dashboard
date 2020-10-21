@@ -42,7 +42,7 @@ export default class OperateMixins extends Vue {
      * 取消顯示
      */
     this.IsShow = false;
-    // (this.$refs.form as any).resetFields();
+    (this.$refs.form as any).resetFields();
   }
   protected callback(res: IServerReturn<boolean>) {
     this.CB(res.success);
