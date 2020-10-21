@@ -70,6 +70,20 @@ export const MenuList: IMenuRouter =
                     parentNumber: "",
                     name: "代码生成器管理",
                     children: [],
+                },
+                {
+                    id: Guid.create().toString(),
+                    sort: -1,
+                    type: MenuEnum.Menu,
+                    path: "/system/menu",
+                    redirect: "",
+                    componentName: "",
+                    component: "system/menu-managerment/menu-managerment",
+                    icon: "",
+                    parentId: "da92480a-5914-a8bc-110b-aedb0457ce6d",
+                    parentNumber: "",
+                    name: "菜单管理",
+                    children: [],
                 }
             ],
         }

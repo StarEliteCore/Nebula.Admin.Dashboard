@@ -16,7 +16,7 @@
     <Layout class="main-app-layout--right">
       <layout-header class="main-app-layout__header"></layout-header>
       <Content class="main-app-layout__content">
-        <router-view></router-view>
+        <router-view class="admin-layout_content"></router-view>
         <!-- <router-view class="component child-demo" v-show="$route.name" /> -->
       </Content>
     </Layout>
@@ -33,5 +33,8 @@
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+.admin-layout_content{
+  height: 100%;
 }
 </style>
