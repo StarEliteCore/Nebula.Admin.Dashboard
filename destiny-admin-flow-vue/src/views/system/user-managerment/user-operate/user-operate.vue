@@ -14,13 +14,12 @@
         <FormItem label="用户昵称：" prop="nickName">
           <Input v-model="userInput.nickName" />
         </FormItem>
-        <FormItem label="密码：" prop="passwordHash">
+        <FormItem v-if="IsShowColumn" label="密码：" prop="passwordHash">
           <Input v-model="userInput.passwordHash" />
         </FormItem>
         <FormItem label="性别：" prop="sex">
           <Select v-model="userInput.sex">
-            <Option value="1">男</Option>
-            <Option value="2">女</Option>
+            <Option v-for="item in SexSelectOptions" :value="item.key" :key="item.key">{{ item.label }}</Option>
           </Select>
         </FormItem>
         <FormItem label="选择角色：" prop="roleIds">

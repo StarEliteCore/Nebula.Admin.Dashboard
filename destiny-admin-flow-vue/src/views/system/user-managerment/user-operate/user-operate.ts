@@ -1,33 +1,42 @@
 import { Component, Mixins } from "vue-property-decorator";
+import { ESex, UserInputDto } from "@/domain/entity/userdto/userDto";
 
 import { EOperate } from "@/shared/eoperate";
+import { MainManager } from "@/domain/services/main/main-manager";
 import OperateMixins from "@/shared/mixins/operate.mixins";
-import { UserInputDto } from "@/domain/entity/userdto/userDto";
-import { MainManager } from '@/domain/services/main/main-manager';
 
 @Component({
   name: "UserOperates",
 })
 export default class UserOperate extends Mixins(OperateMixins) {
   private userInput: UserInputDto = new UserInputDto();
+  private SexSelectOptions: Array<any> = [
+    { key: ESex.Man, label: "男" },
+    { key: ESex.Female, label: "女" },
+  ];
+
   private ruleValidate = {
     /**
-     * 
+     *
      */
-    userName: [{ required: true, message: '用户名不可为空', trigger: 'blur' }],
+    userName: [{ required: true, message: "用户名不可为空", trigger: "blur" }],
     /**
-     * 
+     *
      */
-    nickName: [{ required: true, message: '用户昵称不可为空', trigger: 'blur' }],
+    nickName: [
+      { required: true, message: "用户昵称不可为空", trigger: "blur" },
+    ],
     /**
      * 密码不可为空
      */
-    passwordHash: [{ required: true, message: '密码不可为空', trigger: 'blur' }],
+    passwordHash: [
+      { required: true, message: "密码不可为空", trigger: "blur" },
+    ],
     /**
      * 请选择性别
      */
-    sex: [{ required: true, message: '请选择性别', trigger: 'change' }]
-  }
+    sex: [{ required: true, message: "请选择性别", trigger: "change" }],
+  };
 
   Show(_type: EOperate, callback: (res: boolean) => void, _rowId?: string) {
     switch (_type) {
@@ -42,6 +51,7 @@ export default class UserOperate extends Mixins(OperateMixins) {
         break;
       case EOperate.update:
         this.disabled = false;
+        this.IsShowColumn = false;
         typeof _rowId !== "undefined" && this.getUserById(_rowId);
         this.title = `编辑用户`;
         break;
@@ -51,7 +61,7 @@ export default class UserOperate extends Mixins(OperateMixins) {
     this.IsShow = true;
   }
   private OnHandleCommit() {
-    debugger
+    debugger;
     (this.$refs.form as any).validate((valid: boolean) => {
       if (valid) {
         switch (this.type) {
@@ -65,25 +75,25 @@ export default class UserOperate extends Mixins(OperateMixins) {
           case EOperate.update:
             this.IsShow = false;
             break;
-          default:
-            break;
         }
       }
     });
   }
   /**
-* @description 根据id获取用户
-* @param {string} _id id
-*/
+   * @description 根据id获取用户
+   * @param {string} _id id
+   */
   private async getUserById(_id: string) {
     let res = await MainManager.Instance().UserService.getUserById(_id);
     if (res.success) {
       this.userInput = res.data;
-      console.log(this.userInput)
+      console.log(this.userInput);
     }
   }
   private async CreateUser() {
-    let res = await MainManager.Instance().UserService.createUser(this.userInput);
+    let res = await MainManager.Instance().UserService.createUser(
+      this.userInput
+    );
     this.ajaxcallback(res);
   }
 }
