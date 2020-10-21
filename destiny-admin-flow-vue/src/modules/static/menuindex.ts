@@ -50,7 +50,7 @@ export const MenuList: IMenuRouter =
                     path: "/system/user",
                     redirect: "",
                     componentName: "",
-                    component: "system/user-managerment/user-managerment",
+                    component: "identity/user-managerment/user-managerment",
                     icon: "",
                     parentId: "da92480a-5914-a8bc-110b-aedb0457ce6d",
                     parentNumber: "",

@@ -2,15 +2,15 @@ import * as PageQuery from "@/shared/request";
 
 import { Component, Emit, Mixins, Ref } from "vue-property-decorator";
 import { EFilterConnect, EFilterOprator } from "@/shared/request/query.enum";
+import { ESex, IUserTableDto } from '@/domain/entity/userdto/userDto';
 
 import DeleteMixins from "@/shared/mixins/delete-dialog.mixins";
 import { EOperate } from '@/shared/eoperate';
 import { ITableColumn } from '@/shared/table/ITable';
-import { ESex, IUserTableDto } from '@/domain/entity/userdto/userDto';
 import { MainManager } from "@/domain/services/main/main-manager";
 import PageMixins from "@/shared/mixins/page.mixins";
-import UserOperate from "@/views/system/user-managerment/user-operate/user-operate.vue"
-import UserOperateInfo from "@/views/system/user-managerment/user-operate/user-operate"
+import UserOperate from "./user-operate/user-operate.vue"
+import UserOperateInfo from "./user-operate/user-operate"
 
 @Component({
   name: "UserManagerment",
@@ -120,7 +120,6 @@ export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
     }, _rowId)
   }
   private async getTableData() {
-    this.total = 100;
     await MainManager.Instance().UserService.getUserPage(this.tranfer(this.queryfileter))
       .then(res => {
         if (res.success) {
