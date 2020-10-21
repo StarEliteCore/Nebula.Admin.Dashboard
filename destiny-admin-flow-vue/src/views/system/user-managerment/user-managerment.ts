@@ -92,11 +92,18 @@ export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
     }
   ];
   private userTable: Array<IUserTableDto> = [];
-
+  @Emit()
+  pageChange() {
+    this.getTableData();
+  }
   /**
    * 页面加载方法
    */
   private created() {
+
+    // this.PageInfo.total=100;
+  }
+  private mounted() {
     this.getTableData();
   }
   @Ref("UserOperateInfo")
@@ -113,13 +120,15 @@ export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
     }, _rowId)
   }
   private async getTableData() {
-    await MainManager.Instance().UserService.getUserPage(
-      this.queryfileter
-    ).then(res => {
-      if (res.success) {
-        this.userTable = res.itemList;
-      }
-    });
+    this.total = 100;
+    await MainManager.Instance().UserService.getUserPage(this.tranfer(this.queryfileter))
+      .then(res => {
+        if (res.success) {
+          console.log(res)
+          this.userTable = res.itemList;
+          this.total = res.total;
+        }
+      });
   }
   // private CurrentRowEvent(_row:any)
   // {
