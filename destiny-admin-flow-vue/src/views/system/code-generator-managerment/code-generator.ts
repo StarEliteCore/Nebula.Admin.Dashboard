@@ -173,17 +173,7 @@ export default class CodeGeneratorManagerment extends Mixins(PageMixins) {
       isPageDto: false,
       aggregateType: "",
     };
-    // this.PropertyArr.push({
-    //   isPrimaryKey: false,
-    //   propertyName: "",
-    //   displayName: "",
-    //   isNullable: false,
-    //   defaultValue: "",
-    //   cSharpType: "",
-    //   isInputDto: false,
-    //   isOutputDto: false,
-    //   isPageDto: false,
-    // });
+  
   }
 
   private remove(_row: IPropertyMetadataDto, _index: number) {

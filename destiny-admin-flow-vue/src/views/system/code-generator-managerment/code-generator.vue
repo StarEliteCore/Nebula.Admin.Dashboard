@@ -5,7 +5,7 @@
        <Row style="padding: 5px">
         <Card :bordered="true" :dis-hover="true">
           <p slot="title">实体信息</p>
-        <Form  :model="entityFormItem" ref="entityFormItem" :rules="entityRuleValidate" :label-width="130"  >
+        <Form  :model="entityFormItem" ref="entityFormItem" :rules="entityRuleValidate" :label-width="150"  >
           <Row> 
             <Col span="12">
               <FormItem label="实体名：" prop="entityName" >
@@ -170,7 +170,7 @@
      <Row style="padding: 5px;">
          <Card :bordered="true" :dis-hover="true">
               <p slot="title">项目信息</p>
-              <Form :model="projectFormItem"   :label-width="80" ref="projectFormItem" :rules="projectRuleValidate">
+              <Form :model="projectFormItem"   :label-width="120" ref="projectFormItem" :rules="projectRuleValidate">
                 <FormItem label="命名空间" prop="namespace">
                   <Input v-model="projectFormItem.namespace" />
                  </FormItem>
