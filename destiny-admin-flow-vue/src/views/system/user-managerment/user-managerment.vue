@@ -47,7 +47,7 @@
       </Table>
     </Row>
     <user-operate ref="UserOperateInfo"></user-operate>
-    <page-component ref="PageInfo" class="page"></page-component>
+    <page-component ref="PageInfo" class="page" :total="total" @PageChange="pageChange"></page-component>
     <delete-dialog ref="DeleteInfo"></delete-dialog>
   </div>
 </template>

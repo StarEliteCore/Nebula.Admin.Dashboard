@@ -1,4 +1,4 @@
-import { UserInputDto } from '@/domain/entity/userdto/userDto';
+import { UserInputDto, UserUpdateInputDto } from '@/domain/entity/userdto/userDto';
 import { IPageRequest } from '@/shared/request';
 import { IAjaxResult, IServerPageReturn, IServerReturn } from '@/shared/response';
 
@@ -26,4 +26,9 @@ export interface IUserService {
      * @param _id 
      */
     deleteUserById(_id: string): Promise<IAjaxResult>;
+    /**
+     * 修改用户
+     * @param _user 
+     */
+    updateUser(_user:UserUpdateInputDto): Promise<IAjaxResult>;
 }

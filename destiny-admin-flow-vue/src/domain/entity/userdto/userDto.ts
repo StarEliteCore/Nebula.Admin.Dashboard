@@ -32,7 +32,7 @@ export interface IUserTableDto extends IEntity<string>, IUserBaseDto,ICreatedTim
 }
 
 /**
- * 用戶添加/修改Dto
+ * 用戶添加
  */
 export class UserInputDto implements IEntity<string>, IDescription, IUserBaseDto, IPassWord {
     isSystem: boolean = false;
@@ -43,6 +43,18 @@ export class UserInputDto implements IEntity<string>, IDescription, IUserBaseDto
     nickName: string = "";
     roleIds: Array<string> = [];
     passwordHash: string = "";
+}
+/**
+ * 用戶修改Dto
+ */
+export class UserUpdateInputDto implements IEntity<string>, IDescription, IUserBaseDto {
+    isSystem: boolean = false;
+    sex: ESex = ESex.Man;
+    userName: string = "";
+    id: string = Guid.EMPTY;
+    description: string = "";
+    nickName: string = "";
+    roleIds: Array<string> = [];
 }
 /**
  * 性別枚舉
