@@ -12,8 +12,11 @@ export const UserApi = {
   /**
        * 删除一个用户
        */
-  DeleteUser: "api/User/DeleteAsync"
-
+  DeleteUser: "api/User/DeleteAsync",
+  /**
+     * 修改用户
+     */
+  updateUser: "api/User/UpdateAsync",
 
 };
 

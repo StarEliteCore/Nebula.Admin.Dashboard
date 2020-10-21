@@ -14,7 +14,7 @@
         <FormItem label="用户昵称：" prop="nickName">
           <Input v-model="userInput.nickName" />
         </FormItem>
-        <FormItem v-if="IsShowColumn" label="密码：" prop="passwordHash">
+        <FormItem v-if="IsShowColumn && canEdit" label="密码：" prop="passwordHash">
           <Input v-model="userInput.passwordHash" />
         </FormItem>
         <FormItem label="性别：" prop="sex">
