@@ -2,6 +2,7 @@ import DataRequest, { IDataRequest } from '@/shared/data-request';
 
 import { ICodeGeneratorService } from '../codeGeneratorServeice/ICodeGeneratorService';
 import { IMenuService } from '../menuserveice/IMenuService';
+import { IRoleService } from '../roleservice/IRoleService';
 import { IUserService } from "../userservice/IUserService";
 import { IocTypes } from '@/shared/diconfig/ioc-types';
 import { MainService } from './main-service';
@@ -32,6 +33,11 @@ export class MainManager {
     public get CodeGeneratorService(): ICodeGeneratorService {
         return this.services.CodeGeneratorService;
     }
+
+    public get RoleService(): IRoleService {
+        return this.services.RoleService;
+    }
+
     constructor() {
         this.services = container.get<MainService>(IocTypes.MainService);
     }

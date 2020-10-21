@@ -21,6 +21,8 @@ export const UserApi = {
 };
 
 
+
+
 //代码生成器API
 export const CodeGeneratorApi = {
 
@@ -29,4 +31,21 @@ export const CodeGeneratorApi = {
 
   //生成代码
   GenerateCode: "api/CodeGenerator/GenerateCode",
+}
+
+///角色API
+export const RoleApi=
+{
+    // 分页 + 条件获取角色列表
+    getRolePage: "api/Role/GetRolePageAsync",
+    /**
+     * 添加或者修改角色
+     */
+    createrOrUpdateRole: "api/Role/AddOrUpdateAsync",
+ 
+    /**
+         * 删除一个角色
+         */
+     deleteRole: "api/Role/DeleteAsync",
+
 }
