@@ -1,0 +1,39 @@
+.box {
+    display: flex;
+    height: 100%;
+    .nav {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #ddd;
+        height: 100%;
+        flex: 0 0 300px;
+        .searchTree,.btngroup {
+            margin: 5px;
+            width: 290px;
+        }
+    }
+    .body {
+        flex: 0 0 calc(100% - 500px);
+        display: flex;
+        flex-direction: column;
+        header{
+            display: flex;
+            justify-content: space-between;
+            .searchdiv{
+                flex: 0 0 280px;
+                .searchInput{
+                    width: 200px;
+                }
+                button{
+                    width: 80px;
+                }
+            }
+        }
+        article{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+    }
+}
