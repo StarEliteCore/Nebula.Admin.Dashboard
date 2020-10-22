@@ -6,21 +6,56 @@
           <Panel name="1">
             查询面板
             <p slot="content">
-              史蒂夫·乔布斯（Steve
-              Jobs），1955年2月24日生于美国加利福尼亚州旧金山，美国发明家、企业家、美国苹果公司联合创办人。
+              <Button type="primary" ghost @click="getTableData">查询</Button>
+              <Button type="primary" ghost @click="getTableData">查询</Button>
+              <Button type="primary" ghost @click="getTableData">查询</Button>
+              <Button type="primary" ghost @click="getTableData">查询</Button>
+              <Button type="primary" ghost @click="getTableData">查询</Button>
             </p>
+            <p slot="content">
+              <Button type="primary" ghost @click="getTableData">查询</Button>
+              <Button type="primary" ghost @click="getTableData">查询</Button>
+              <Button type="primary" ghost @click="getTableData">查询</Button>
+              <Button type="primary" ghost @click="getTableData">查询</Button>
+              <Button type="primary" ghost @click="getTableData">查询</Button>
+            </p>
+            <p slot="content">
+              <Button type="primary" ghost @click="getTableData">查询</Button>
+              <Button type="primary" ghost @click="getTableData">查询</Button>
+              <Button type="primary" ghost @click="getTableData">查询</Button>
+              <Button type="primary" ghost @click="getTableData">查询</Button>
+              <Button type="primary" ghost @click="getTableData">查询</Button>
+            </p>
+            <p slot="content">
+              <Button type="primary" ghost @click="getTableData">查询</Button>
+              <Button type="primary" ghost @click="getTableData">查询</Button>
+              <Button type="primary" ghost @click="getTableData">查询</Button>
+              <Button type="primary" ghost @click="getTableData">查询</Button>
+              <Button type="primary" ghost @click="getTableData">查询</Button>
+            </p>
+            
           </Panel>
         </Collapse>
       </Row>
+      <div>
       <Card dis-hover="true">
-        <div style="margin: 10px">
-          <Button type="primary" ghost @click="getTableData">查询</Button>
-          <Button type="success" @click="operateItem(operate.add)">添加</Button>
-          <Button type="warning" @click="operateItem(operate.update)"
+        <Row style="margin: 0px 0px  16px 0px; float: right">
+          <Button
+            class="operatebutton"
+            type="success"
+            @click="operateItem(operate.add)"
+            >添加</Button
+          >
+          <Button
+            class="operatebutton"
+            type="warning"
+            @click="operateItem(operate.update)"
             >修改</Button
           >
-          <Button type="error" @click="deleteItem()">删除</Button>
-        </div>
+          <Button class="operatebutton" type="error" @click="deleteItem()"
+            >删除</Button
+          >
+        </Row>
         <Table
           :columns="columns"
           :data="userTable"
@@ -60,6 +95,7 @@
           </template>
         </Table>
       </Card>
+      </div>
       <page-component
         ref="PageInfo"
         :total="total"
