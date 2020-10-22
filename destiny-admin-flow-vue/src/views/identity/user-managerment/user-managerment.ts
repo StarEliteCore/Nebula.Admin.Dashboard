@@ -92,6 +92,8 @@ export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
     }
   ];
   private userTable: Array<IUserTableDto> = [];
+  private CollapseDefault:string="1";
+
   @Emit()
   pageChange() {
     this.getTableData();

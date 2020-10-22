@@ -1,0 +1,12 @@
+.box {
+    height: 100%;
+    .body{
+        height: 100%;  
+        .ivu-collapse{
+            margin-bottom: 8px;
+        }  
+        .ivu-card-body{
+            padding: 10px !important; 
+        }
+    }
+}
