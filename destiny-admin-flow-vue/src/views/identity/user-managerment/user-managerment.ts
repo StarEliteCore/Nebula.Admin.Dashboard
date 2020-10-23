@@ -11,11 +11,15 @@ import { MainManager } from "@/domain/services/main/main-manager";
 import PageMixins from "@/shared/mixins/page.mixins";
 import UserOperate from "./user-operate/user-operate.vue"
 import UserOperateInfo from "./user-operate/user-operate"
+import UserAllocationRole from "./user-operate/allocation-role.vue"
+import UserAllocationRoleInfo from "./user-operate/allocation-role"
+
 
 @Component({
   name: "UserManagerment",
   components: {
-    UserOperate
+    UserOperate,
+    UserAllocationRole
   }
 })
 export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
@@ -92,7 +96,7 @@ export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
     }
   ];
   private userTable: Array<IUserTableDto> = [];
-  private CollapseDefault:string="1";
+  private CollapseDefault: string = "1";
 
   @Emit()
   pageChange() {
@@ -107,9 +111,12 @@ export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
   }
   private mounted() {
     this.getTableData();
+    console.log(this.UserAllocationRoleInfo);
   }
   @Ref("UserOperateInfo")
   private UserOperateInfo!: UserOperateInfo;
+  @Ref("UserAllocationRoleInfo")
+  private UserAllocationRoleInfo!: UserAllocationRoleInfo;
   /**
    * 
    * @param _type 操作方法
@@ -125,7 +132,6 @@ export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
     await MainManager.Instance().UserService.getUserPage(this.tranfer(this.queryfileter))
       .then(res => {
         if (res.success) {
-          console.log(res)
           this.userTable = res.itemList;
           this.total = res.total;
         }
@@ -154,5 +160,12 @@ export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
     let res = await MainManager.Instance().UserService.deleteUserById(_id);
     res.success ? this.$Message.success(res.message) : this.$Message.error(res.message);
     this.getTableData();
+  }
+  /**
+   * 
+   * @param _rowId 
+   */
+  private allocationRole(_rowId?: string) {
+    this.UserAllocationRoleInfo.Show()
   }
 }

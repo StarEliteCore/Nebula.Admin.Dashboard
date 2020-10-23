@@ -44,6 +44,16 @@ export default class OperateMixins extends Vue {
     this.IsShow = false;
     (this.$refs.form as any).resetFields();
   }
+  /**
+   * 没有表单验证的取消
+   */
+  protected OnHandleCancelNotform() {
+    /**
+     * 取消顯示
+     */
+    this.IsShow = false;
+  }
+
   protected callback(res: IServerReturn<boolean>) {
     this.CB(res.success);
     res.success
