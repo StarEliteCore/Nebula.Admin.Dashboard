@@ -48,7 +48,7 @@
             <Button
               icon="ios-search"
                type="primary"
-              @click="allocationRole(row.id)"
+              @click="allocationRole()"
               >分配角色</Button
             >
             <Button

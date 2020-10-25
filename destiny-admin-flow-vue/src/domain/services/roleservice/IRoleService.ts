@@ -23,4 +23,8 @@ export interface IRoleService {
      * @param _id 
      */
     deleteRoleAsync(_id: string): Promise<IAjaxResult>;
+    /**
+     * 获取所有的角色
+     */
+    getAllRoleAsync(): Promise<IAjaxResult>;
 }

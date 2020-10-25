@@ -9,11 +9,10 @@ import { EOperate } from '@/shared/eoperate';
 import { ITableColumn } from '@/shared/table/ITable';
 import { MainManager } from "@/domain/services/main/main-manager";
 import PageMixins from "@/shared/mixins/page.mixins";
-import UserOperate from "./user-operate/user-operate.vue"
-import UserOperateInfo from "./user-operate/user-operate"
 import UserAllocationRole from "./user-operate/allocation-role.vue"
 import UserAllocationRoleInfo from "./user-operate/allocation-role"
-
+import UserOperate from "./user-operate/user-operate.vue"
+import UserOperateInfo from "./user-operate/user-operate"
 
 @Component({
   name: "UserManagerment",
@@ -111,7 +110,6 @@ export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
   }
   private mounted() {
     this.getTableData();
-    console.log(this.UserAllocationRoleInfo);
   }
   @Ref("UserOperateInfo")
   private UserOperateInfo!: UserOperateInfo;

@@ -21,5 +21,8 @@ export default class  RoleService implements IRoleService
     deleteRoleAsync(_id: string): Promise<IAjaxResult> {
         return MainManager.dataRequest.deleteRequest(RoleApi.deleteRole,_id)
     }
+    getAllRoleAsync(): Promise<IAjaxResult> {
+        return MainManager.dataRequest.getRequest(RoleApi.getAllRole)
+    }
 
 }
