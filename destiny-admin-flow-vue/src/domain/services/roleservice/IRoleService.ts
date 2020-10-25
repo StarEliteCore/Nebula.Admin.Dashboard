@@ -11,7 +11,7 @@ export interface IRoleService {
      * 分页获取
      * @param _page 
      */
-    getRolePage(_page: IPageRequest): Promise<IServerPageReturn<RoleOutputPageListDto>>;
+    getRolePage(_page: IPageRequest): Promise<IServerPageReturn<any>>;
     /**
      * 添加或者更新角色
      * @param _role 
