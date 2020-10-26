@@ -5,7 +5,7 @@ import { Component, Vue } from "vue-property-decorator";
 export default class HomePage extends Vue {
   private created ()
   {
-    console.log(this.$router.options.routes)
+    // console.log(this.$router.options.routes)
     console.log("++++++++++++++++++++++++++++++++");
   }
 }

@@ -4,19 +4,23 @@ export const UserApi = {
   /**
    * 添加用户
    */
-  CreaterUser: "api/User/CreateAsync",
+  createrUser: "api/User/CreateAsync",
   /**
    * 获取一个用户
    */
-  LoadUser: "api/User/LoadAsync",
+  loadUser: "api/User/LoadAsync",
   /**
    * 删除一个用户
    */
-  DeleteUser: "api/User/DeleteAsync",
+  deleteUser: "api/User/DeleteAsync",
   /**
    * 修改用户
    */
   updateUser: "api/User/UpdateAsync",
+  /**
+   * 用戶分配角色
+   */
+  userAllocationRole:"api/User/AllocationRoleAsync",
 };
 
 //代码生成器API

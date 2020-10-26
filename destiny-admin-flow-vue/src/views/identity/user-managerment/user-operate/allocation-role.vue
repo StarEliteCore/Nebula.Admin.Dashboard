@@ -2,11 +2,9 @@
   <Modal v-model="IsShow" :title="title" :mask-closable="false">
     <Row>
       <CheckboxGroup @on-change="CheckGroupChange" v-model="checkedArray">
-        <span v-for="item in checkboxArray">
-          <Checkbox :key="item.value" :label="item.value">
+          <Checkbox :key="item.value" :label="item.value" v-for="item in checkboxArray">
             <span>{{item.text}}</span>
           </Checkbox>
-        </span>
       </CheckboxGroup>
     </Row>
     <div slot="footer">

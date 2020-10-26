@@ -23,21 +23,21 @@ import UserOperateInfo from "./user-operate/user-operate"
 })
 export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
   private queryfileter: PageQuery.IPageRequest = new PageQuery.PageRequest();
-  private CurrentRow: any = {};
+  private CurrentRow!: IUserTableDto;
   private CurrentArray: Array<IUserTableDto> = [];
   private columns: ITableColumn[] = [
-    // {
-    //   type: 'selection',
-    //   width: 60,
-    //   align: 'center'
-    // },
     {
-      type: "index",
-      title: "序号",
-      width: 70,
-      align: "center",
-      maxWidth: 30,
+      type: 'selection',
+      width: 60,
+      align: 'center'
     },
+    // {
+    //   type: "index",
+    //   title: "序号",
+    //   width: 70,
+    //   align: "center",
+    //   maxWidth: 30,
+    // },
     {
       title: "用户名",
       key: "userName",
@@ -121,10 +121,21 @@ export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
    * @param _rowId 
    */
   private operateItem(_type: EOperate, _rowId?: string) {
-    // console.log(this.CurrentRow)
-    this.UserOperateInfo.Show(_type, (res: boolean) => {
-      this.getTableData();
-    }, _rowId)
+    if (typeof this.CurrentRow === "undefined" && (_type === EOperate.update || _type === EOperate.view)) {
+      this.$Message.error("请选择要修改的用户");
+      return "";
+    }
+    if (_type === EOperate.update || _type === EOperate.view) {
+      this.UserOperateInfo.Show(_type, (res: boolean) => {
+        this.getTableData();
+      }, this.CurrentRow.id)
+    }
+    else {
+      this.UserOperateInfo.Show(_type, (res: boolean) => {
+        this.getTableData();
+      })
+    }
+
   }
   private async getTableData() {
     await MainManager.Instance().UserService.getUserPage(this.tranfer(this.queryfileter))
@@ -143,7 +154,7 @@ export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
   private CurrentRowEventArray(_selection: any, _row: any) {
     this.CurrentRow = _row;
     this.CurrentRowEventArray = _selection;
-    console.log(_row, _selection);
+    // console.log(_row, _selection);
   }
   private deleteItem(_row: IUserTableDto) {
     this.DeleteInfo.Show("删除", _row.userName, () => {
@@ -164,6 +175,13 @@ export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
    * @param _rowId 
    */
   private allocationRole(_rowId?: string) {
-    this.UserAllocationRoleInfo.Show()
+    if (typeof this.CurrentRow === "undefined") {
+      this.$Message.error("请选择要分配的用户");
+      return "";
+    }
+
+    this.UserAllocationRoleInfo.Show(this.CurrentRow.id, (res: boolean) => {
+      this.getTableData();
+    })
   }
 }
