@@ -19,7 +19,7 @@
                       <FormItem label="是否管理员：" >
                      <Select  style="width:200px" v-model="dynamicQuery.isAdmin" >
                        <Option value="true">是</Option>
-                       <Option value="fasle">否</Option>
+                       <Option value="false">否</Option>
                       </Select>
                         </FormItem>
                       </Col>
@@ -37,7 +37,7 @@
       <div>
         <Card :dis-hover="true">
           <Row style="margin: 0px 0px 16px 0px; float: right">
-            <Button class="operatebutton" type="success">添加</Button>
+            <Button class="operatebutton" type="success" @click="handleAdd()">添加</Button>
 
             <Button class="operatebutton" type="warning">修改</Button>
             <Button class="operatebutton" type="error">删除</Button>
@@ -47,7 +47,7 @@
               <Tag v-if="row.isAdmin" color="red">是</Tag>
               <Tag v-else color="blue">否</Tag>
             </template>
-            <template slot-scope="{ row }" slot="action">
+            <template  slot="action">
               <Button
                 class="table-button table-button--primary"
                 type="primary"
@@ -73,6 +73,7 @@
           </Table>
         </Card>
       </div>
+      <role-operate ref="RoleOperateInfo"></role-operate>
       <page-component
         ref="PageInfo"
         :total="total"

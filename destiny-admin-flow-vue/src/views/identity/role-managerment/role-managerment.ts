@@ -9,13 +9,18 @@ import {
 } from "@/domain/entity/role/roleDto";
 
 import DeleteMixins from "@/shared/mixins/delete-dialog.mixins";
+import { EOperate } from "@/shared/eoperate";
 import { ITableColumn } from "@/shared/table/ITable";
 import { MainManager } from "@/domain/services/main/main-manager";
 import PageMixins from "@/shared/mixins/page.mixins";
+import RoleOperate from "./role-operate/role-operate.vue";
+import RoleOperateInfo from "./role-operate/role-operate";
 
 @Component({
   name: "RoleManagerment",
-  components: {},
+  components: {
+    RoleOperate
+  },
 })
 export default class RoleManagerment extends Mixins(PageMixins, DeleteMixins) {
   private queryfileter: PageQuery.IPageRequest = new PageQuery.PageRequest();
@@ -78,6 +83,10 @@ export default class RoleManagerment extends Mixins(PageMixins, DeleteMixins) {
 
   private dynamicQuery: any = {};
 
+  @Ref("RoleOperateInfo")
+  private RoleOperateInfo!: RoleOperateInfo;
+
+  //查询
   private search() {
     let newFilters: IFilterCondition[] = [];
 
@@ -85,21 +94,21 @@ export default class RoleManagerment extends Mixins(PageMixins, DeleteMixins) {
 
     this.filters.forEach((f) => {
       let value = $this.dynamicQuery[f.field];
-      if (value != undefined&&value != "") {
+      if (value != undefined && value != "") {
         let filter: IFilterCondition = {
           field: f.field,
-          value:f.operator==EFilterOprator.Like?`%${value}%`:value,
+          value: f.operator == EFilterOprator.Like ? `%${value}%` : value,
           operator: f.operator,
         };
         newFilters.push(filter);
       }
     });
-    
-     let  filter:IQueryFilter={
-        filterConnect: EFilterConnect.And,
-        conditions:newFilters
-    }
-    this.queryfileter.filter=filter;
+
+    let filter: IQueryFilter = {
+      filterConnect: EFilterConnect.And,
+      conditions: newFilters,
+    };
+    this.queryfileter.filter = filter;
     this.getRolePageListAsync();
   }
 
@@ -124,5 +133,19 @@ export default class RoleManagerment extends Mixins(PageMixins, DeleteMixins) {
           this.total = res.total;
         }
       });
+  }
+
+  //添加
+  private async handleAdd() {
+    this.RoleOperateInfo.Show(EOperate.add, async (res: boolean) => {
+       await  this.getRolePageListAsync();
+    });
+  }
+
+  //更新
+  public async handleUpdate() {}
+
+  public async handleDelete(_id: string){
+
   }
 }
