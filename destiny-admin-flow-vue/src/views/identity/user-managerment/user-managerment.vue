@@ -45,8 +45,8 @@
               @click="operateItem(operate.add)"
               >添加</Button
             >
-            <Button
-              icon="ios-search"
+            <Button class="operatebutton"
+              icon="md-send"
                type="primary"
               @click="allocationRole()"
               >分配角色</Button
@@ -57,9 +57,9 @@
               @click="operateItem(operate.update)"
               >修改</Button
             >
-            <Button class="operatebutton" type="error" @click="deleteItem()"
+            <!-- <Button class="operatebutton" type="error" @click="deleteItem()"
               >删除</Button
-            >
+            > -->
           </Row>
           <Table
             :columns="columns"

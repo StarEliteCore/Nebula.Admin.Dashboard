@@ -1,4 +1,4 @@
-import { UserInputDto, UserUpdateInputDto } from '@/domain/entity/userdto/userDto';
+import { UserAllocationRoleInputDto, UserInputDto, UserUpdateInputDto } from '@/domain/entity/userdto/userDto';
 import { IPageRequest } from '@/shared/request';
 import { IAjaxResult, IServerPageReturn, IServerReturn } from '@/shared/response';
 
@@ -31,4 +31,9 @@ export interface IUserService {
      * @param _user 
      */
     updateUser(_user:UserUpdateInputDto): Promise<IAjaxResult>;
+    /**
+     * 用戶分配角色
+     * @param _user 
+     */
+    userAllocationRole(_user:UserAllocationRoleInputDto): Promise<IAjaxResult>;
 }

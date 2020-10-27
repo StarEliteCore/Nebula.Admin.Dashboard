@@ -62,12 +62,15 @@ export default class OperateMixins extends Vue {
     this.IsShow = false;
     (this.$refs.form as any).resetFields();
   }
-  protected ajaxcallback(res: IAjaxResult) {
+  protected ajaxcallback(res: IAjaxResult,_isresetform:boolean=false) {
     this.CB(res.success);
     res.success
       ? this.$Message.success(res.message)
       : this.$Message.error(res.message);
     this.IsShow = false;
-    (this.$refs.form as any).resetFields();
+    if(_isresetform)
+    {
+      (this.$refs.form as any).resetFields();
+    }
   }
 }
