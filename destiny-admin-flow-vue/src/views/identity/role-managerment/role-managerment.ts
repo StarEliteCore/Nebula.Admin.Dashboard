@@ -19,12 +19,17 @@ import RoleOperateInfo from "./role-operate/role-operate";
 @Component({
   name: "RoleManagerment",
   components: {
-    RoleOperate
+    RoleOperate,
   },
 })
 export default class RoleManagerment extends Mixins(PageMixins, DeleteMixins) {
   private queryfileter: PageQuery.IPageRequest = new PageQuery.PageRequest();
+  private CurrentRow!: IRoleTableDto;
   private CurrentArray: Array<IRoleTableDto> = [];
+
+  private CurrentSelectionArray: any = [];
+  private delectLoading: boolean = false;
+
   private columns: ITableColumn[] = [
     {
       type: "selection",
@@ -138,14 +143,91 @@ export default class RoleManagerment extends Mixins(PageMixins, DeleteMixins) {
   //添加
   private async handleAdd() {
     this.RoleOperateInfo.Show(EOperate.add, async (res: boolean) => {
-       await  this.getRolePageListAsync();
+      await this.getRolePageListAsync();
     });
+  }
+  private CurrentRowEventArray(_selection: any, _row: any) {
+    this.CurrentRow = _row;
+    this.CurrentSelectionArray = _selection;
+    // console.log(_row, _selection);
+  }
+
+  private CurrentRowEventCancel(_selection: any, _row: any) {
+    this.CurrentRow = _row;
+    this.CurrentSelectionArray = _selection;
   }
 
   //更新
-  public async handleUpdate() {}
+  public async handleUpdate(row?: any, _rowId?: string) {
+    if (typeof row !== "undefined" && typeof _rowId !== "undefined") {
+      this.RoleOperateInfo.Show(
+        EOperate.update,
+        async (res: boolean) => {
+          if (res) {
+            await this.getRolePageListAsync();
+          }
+        },
+        _rowId,
+        row
+      );
+    } else {
+      let selecteds: any = this.CurrentSelectionArray;
+      this.RoleOperateInfo.getSingleSeletedRow(
+        selecteds,
+        (id: string, row: any) => {
+          this.RoleOperateInfo.Show(
+            EOperate.update,
+            async (res: boolean) => {
+              if (res) {
+                await this.getRolePageListAsync();
+              }
+            },
+            id,
+            row
+          );
+        }
+      );
+    }
+  }
 
-  public async handleDelete(_id: string){
+  public handleView(row?: any) {
+    this.RoleOperateInfo.Show(EOperate.view, (res: boolean) => {}, row.id, row);
+  }
+  public async handleDelete(_id: string) {
+    this.delectLoading = true;
+    if (typeof _id !== "undefined") {
+      await MainManager.Instance()
+        .RoleService.deleteRoleAsync(_id)
+        .then(async (res) => {
+          if (res.success) {
+            await this.getRolePageListAsync();
+            this.$Message.success(res.message);
+          } else {
+            this.$Message.error(res.message);
+          }
+          this.delectLoading = false;
+        });
+    } else {
+      let selecteds: any = this.CurrentSelectionArray;
+      this.RoleOperateInfo.getSingleSeletedRow(
+        selecteds,
+        async (id: string, row: any) => {
+          await MainManager.Instance()
+            .RoleService.deleteRoleAsync(id)
+            .then(async (res) => {
+              if (res.success) {
+                await this.getRolePageListAsync();
+                this.$Message.success(res.message);
+              } else {
+                this.$Message.error(res.message);
+              }
+              this.delectLoading = false;
+            });
+        },()=> {
+          this.delectLoading = false;
 
+        }
+      );
+    }
   }
 }

@@ -39,34 +39,35 @@
           <Row style="margin: 0px 0px 16px 0px; float: right">
             <Button class="operatebutton" type="success" @click="handleAdd()">添加</Button>
 
-            <Button class="operatebutton" type="warning">修改</Button>
-            <Button class="operatebutton" type="error">删除</Button>
+            <Button class="operatebutton" type="warning" @click="handleUpdate()">修改</Button>
+            <Button class="operatebutton" type="error" :loading="delectLoading" @click="handleDelete()">删除</Button>
+            <Button class="operatebutton" type="primary" icon="md-send" >分配权限</Button>
           </Row>
-          <Table :columns="columns" :data="roleTable" border stripe>
+          <Table :columns="columns" :data="roleTable" border stripe @on-select-cancel="CurrentRowEventCancel"    @on-select="CurrentRowEventArray">
             <template slot-scope="{ row }" slot="isAdmin">
               <Tag v-if="row.isAdmin" color="red">是</Tag>
               <Tag v-else color="blue">否</Tag>
             </template>
-            <template  slot="action">
+            <template  slot="action" slot-scope="{ row }">
               <Button
                 class="table-button table-button--primary"
                 type="primary"
                 size="small"
-                ghost
+                ghost @click="handleView(row)"
                 >查看</Button
               >
               <Button
                 class="table-button table-button--info"
                 type="info"
                 size="small"
-                ghost
-                >编辑</Button
+                ghost   @click="handleUpdate(row,row.id)"
+                >修改</Button
               >
               <Button
                 class="table-button table-button--error"
                 type="error"
                 size="small"
-                ghost
+                ghost  @click="handleDelete(row.id)" :loading="delectLoading"
                 >删除</Button
               >
             </template>

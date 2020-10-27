@@ -19,7 +19,7 @@
           </i-switch>
         </FormItem>
         <FormItem label="描述：" prop="description">
-          <Input type="textarea" v-model="roleInput.description" />
+          <Input type="textarea" v-model="roleInput.description"  :autosize="{minRows: 5,maxRows: 10}"/>
         </FormItem>
       </Form>
       <div slot="footer">

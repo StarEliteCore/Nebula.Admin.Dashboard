@@ -62,15 +62,52 @@ export default class OperateMixins extends Vue {
     this.IsShow = false;
     (this.$refs.form as any).resetFields();
   }
-  protected ajaxcallback(res: IAjaxResult,_isresetform:boolean=false) {
+  protected ajaxcallback(res: IAjaxResult, _isresetform: boolean = false) {
     this.CB(res.success);
     res.success
       ? this.$Message.success(res.message)
       : this.$Message.error(res.message);
     this.IsShow = false;
-    if(_isresetform)
-    {
+    if (_isresetform) {
       (this.$refs.form as any).resetFields();
     }
+  }
+
+  //得到表格单选行
+  public getSingleSeletedRow(
+    selection: [],
+    callback: any,
+    infoCallback?: any,
+    key?: string
+  ): void {
+    if (selection == null || selection == undefined || selection.length === 0) {
+      this.$Message.error("请选择一行数据!!");
+      if (infoCallback) {
+        infoCallback();
+      }
+      return;
+    }
+
+    if (selection.length > 1) {
+      this.$Message.info(
+        `已选${selection.length},条选数据，请选择一条数据！！`
+      );
+      if (infoCallback) {
+        infoCallback();
+      }
+      return;
+    }
+    let newSelection: Array<any> = selection as [];
+
+    let fun = function() {
+      if (callback) {
+        if (typeof key == "undefined" || undefined || null) {
+          key = "id";
+        }
+        callback(newSelection[0][key], newSelection[0]);
+      }
+    };
+
+    fun();
   }
 }
