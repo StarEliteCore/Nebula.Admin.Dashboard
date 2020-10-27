@@ -46,3 +46,8 @@ export const RoleApi = {
    */
   getAllRole: "api/Role/GetRoleSelectListAsync",
 };
+
+
+export const MenuApi = {
+  
+};
