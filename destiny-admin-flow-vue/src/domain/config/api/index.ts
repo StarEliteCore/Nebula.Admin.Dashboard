@@ -20,7 +20,7 @@ export const UserApi = {
   /**
    * 用戶分配角色
    */
-  userAllocationRole:"api/User/AllocationRoleAsync",
+  userAllocationRole: "api/User/AllocationRoleAsync",
 };
 
 //代码生成器API
@@ -53,5 +53,48 @@ export const RoleApi = {
 
 
 export const MenuApi = {
-  
+  /**
+   * 获取表格菜单信息
+   */
+  getTable: "​/api​/Menu​/GetTableAsync",
+  /**
+   * 添加菜单
+   */
+  addMenu: "​/api​/Menu​/AddMenuAsync",
+  /**
+   * 修改菜单
+   */
+  updateMenu: "​/api​/Menu​/UpdateMenuAsync",
+  /**
+   * 删除
+   */
+  delete: "/api/Menu/DeleteAsync",
+  /**
+   * 异步加载表单菜单
+   */
+  loadFormMenu: "​/api​/Menu​/LoadFormMenuAsync",
+  /**
+   * 登录成功之后获取菜单
+   */
+  getMenu: "​/api​/Menu​/GetMenuAsync",
+  /**
+   * 登录成功之后获取用户菜单树
+   */
+  getUserMenuTree: "​/api​/Menu​/GetUserMenuTreeAsync",
+  /**
+   * 异步得到菜单树数据
+   */
+  getMenuTree: "​/api​/Menu​/GetMenuTreeAsync",
+  /**
+   * 异步得到菜单下的按钮
+   */
+  getMenuChildrenButton: "​/api​/Menu​/GetMenuChildrenButtonAsync",
+  /**
+   * 获取登录用户权限菜单
+   */
+  getMenuList: "​/api​/Menu​/GetMenuListAsync",
+  /**
+   * 异步到菜单功能集合
+   */
+  getMenuFunctionList: "​/api​/Menu​/GetMenuFunctionListAsync"
 };

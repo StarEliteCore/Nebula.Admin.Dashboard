@@ -4,14 +4,14 @@ import DeleteMixins from "@/shared/mixins/delete-dialog.mixins";
 
 import * as PageQuery from "@/shared/request";
 
-import { MenuEnum, IMenuTableDto } from '@/domain/entity/menudto/MenuDto';
+import { MenuEnum, IMenuTableDto } from '@/domain/entity/menudto/menuDto';
 import { ITableColumn } from '@/shared/table/ITable';
 
 import { MainManager } from "@/domain/services/main/main-manager";
 
 
 @Component({
-  name: "UserManagerment",
+  name: "MenuManagerment",
   components: {
     // UserOperate,
     // UserAllocationRole
@@ -25,11 +25,9 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
 
   private columns: ITableColumn[] = [
     {
-      type: "index",
-      title: "序号",
-      width: 70,
-      align: "center",
-      maxWidth: 30,
+      type: 'selection',
+      width: 60,
+      align: 'center'
     },
     {
       title: "名称",
@@ -69,13 +67,13 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
     this.getTableData();
   }
   private async getTableData() {
-    await this.mainManager.MenuService.getMenuTable(this.tranfer(this.queryfileter))
-      .then(res => {
-        if (res.success) {
-          this.userTable = res.itemList;
-          this.total = res.total;
-        }
-      });
+    // await this.mainManager.MenuService.getMenuTable(this.tranfer(this.queryfileter))
+    //   .then(res => {
+    //     if (res.success) {
+    //       this.userTable = res.itemList;
+    //       this.total = res.total;
+    //     }
+    //   });
   }
 
   private data1: Array<any> = [
@@ -103,6 +101,39 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
       address: 'Ottawa No. 2 Lake Park',
       date: '2016-10-04'
     }
+  ];
+
+  private data2:Array<any> = [
+    {
+      title: "parent 1",
+      expand: true,
+      children: [
+        {
+          title: "parent 1-1",
+          expand: true,
+          children: [
+            {
+              title: "leaf 1-1-1",
+            },
+            {
+              title: "leaf 1-1-2",
+            },
+          ],
+        },
+        {
+          title: "parent 1-2",
+          expand: true,
+          children: [
+            {
+              title: "leaf 1-2-1",
+            },
+            {
+              title: "leaf 1-2-1",
+            },
+          ],
+        },
+      ],
+    },
   ];
 
 
