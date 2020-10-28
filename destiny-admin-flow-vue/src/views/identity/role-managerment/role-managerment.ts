@@ -239,7 +239,14 @@ export default class RoleManagerment extends Mixins(PageMixins, DeleteMixins) {
 
   //分配权限
   public handleAuth() {
-    console.log(this.SetPerOperateInfo)
-    this.SetPerOperateInfo.Show();
+
+    let selecteds: any = this.CurrentSelectionArray;
+    this.RoleOperateInfo.getSingleSeletedRow(
+      selecteds,
+       (id: string, row: any) => {
+        this.SetPerOperateInfo.Show(id);
+      }
+    );
+  
   }
 }
