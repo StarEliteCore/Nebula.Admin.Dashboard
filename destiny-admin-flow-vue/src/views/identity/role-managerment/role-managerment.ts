@@ -15,11 +15,14 @@ import { MainManager } from "@/domain/services/main/main-manager";
 import PageMixins from "@/shared/mixins/page.mixins";
 import RoleOperate from "./role-operate/role-operate.vue";
 import RoleOperateInfo from "./role-operate/role-operate";
+import SetPerOperateInfo from "./role-operate/set-permission";
+import SetPermission from "./role-operate/set-permission.vue";
 
 @Component({
   name: "RoleManagerment",
   components: {
     RoleOperate,
+    SetPermission,
   },
 })
 export default class RoleManagerment extends Mixins(PageMixins, DeleteMixins) {
@@ -90,6 +93,9 @@ export default class RoleManagerment extends Mixins(PageMixins, DeleteMixins) {
 
   @Ref("RoleOperateInfo")
   private RoleOperateInfo!: RoleOperateInfo;
+
+  @Ref("SetPerOperateInfo")
+  private SetPerOperateInfo!: SetPerOperateInfo;
 
   //查询
   private search() {
@@ -223,11 +229,24 @@ export default class RoleManagerment extends Mixins(PageMixins, DeleteMixins) {
               }
               this.delectLoading = false;
             });
-        },()=> {
+        },
+        () => {
           this.delectLoading = false;
-
         }
       );
     }
+  }
+
+  //分配权限
+  public handleAuth() {
+
+    let selecteds: any = this.CurrentSelectionArray;
+    this.RoleOperateInfo.getSingleSeletedRow(
+      selecteds,
+       (id: string, row: any) => {
+        this.SetPerOperateInfo.Show(id);
+      }
+    );
+  
   }
 }

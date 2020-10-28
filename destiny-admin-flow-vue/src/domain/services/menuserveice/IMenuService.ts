@@ -1,5 +1,6 @@
+import { IAjaxResult, IServerPageReturn } from '@/shared/response';
+
 import { IPageRequest } from '@/shared/request';
-import { IServerPageReturn, IAjaxResult } from '@/shared/response';
 import { MenuDto } from '@/domain/entity/menudto/menuDto'
 
 /**
@@ -36,4 +37,10 @@ export interface IMenuService {
      * @param _id 菜单id
      */
     getMenuById(_id: string): Promise<IAjaxResult>;
+
+      /**
+     * 根据角色ID得到菜单树
+     * @param _roleId 角色id
+     */
+    getMenuTreeByRoleId(_roleId?: string): Promise<IAjaxResult>;
 }

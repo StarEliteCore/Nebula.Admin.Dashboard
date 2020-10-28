@@ -54,7 +54,6 @@ export default class RoleOperate extends Mixins(OperateMixins) {
     _rowId?: string,
     _row?: any
   ) {
-    debugger;
     switch (_type) {
       case EOperate.view:
         this.title = `查看角色`;
