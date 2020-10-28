@@ -86,6 +86,35 @@ export const MenuList: IMenuRouter =
                     children: [],
                 }
             ],
+        },
+        {
+            id: "9aed4b44-ee69-a7b9-93ff-ce3b9813dc37",
+            sort: -1,
+            type: MenuEnum.Menu,
+            path: "/layout",
+            redirect: "",
+            componentName: "",
+            component: "",
+            icon: "",
+            parentId: Guid.EMPTY, 
+            parentNumber: "",
+            name: "流程管理",
+            children: [
+                {
+                    id: Guid.create().toString(),
+                    sort: -1,
+                    type: MenuEnum.Menu,
+                    path: "/flow/managerment",
+                    redirect: "",
+                    componentName: "",
+                    component: "flow/flow-managerment/flow-managerment",
+                    icon: "",
+                    parentId: "9aed4b44-ee69-a7b9-93ff-ce3b9813dc37",
+                    parentNumber: "",
+                    name: "流程管理",
+                    children: [],
+                }
+            ],
         }
     ],
 }
