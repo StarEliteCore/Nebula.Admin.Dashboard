@@ -1,6 +1,7 @@
 import { Login, loginCallbackFunc } from './oidc-login/IdentityServerLogin';
 
 import EmptyView from "@/views/layout-emprty/layout-emprty.vue";
+import LayoutView from "@/layout/layout.vue";
 import { MenuList } from './modules/static/menuindex';
 import { MenuModule } from './store/modules/menumodule';
 import { TokenModule } from './store/modules/tokenmodule';
@@ -107,6 +108,7 @@ export const ToLogin = (to: any, from: any, next: any) => {
 function routeGo(to: any, from: any, next: any) {
     // console.log(_import(getRouter[0].component));
     getRouter = filterAsyncRouter(getRouter);
+    console.log(getRouter);
     router.addRoutes(getRouter);
     // router.addRoutes(NotFoundRouterMap);
     if (to.matched.length === 0) {
@@ -124,12 +126,19 @@ function routeGo(to: any, from: any, next: any) {
  */
 function filterAsyncRouter(asyncRouterMap: Route[]) {
     const accessedRouters = asyncRouterMap.filter(route => {
-        if (route.children && route.children.length) {
-            route.component = EmptyView;
-            route.children = filterAsyncRouter(route.children);
+        if (route.path === "/layout") {
+            route.component = LayoutView;
         }
         else {
-            route.component = _import(route.component);
+            try {
+                route.component = _import(route.component);
+            } catch (error) {
+                console.error('当前路由 '+route.path+'.vue 不存在，因此如法导入组件，请检查接口数据和组件是否匹配，并重新登录，清空缓存!')
+            }
+
+        }
+        if (route.children && route.children.length) {
+            route.children = filterAsyncRouter(route.children);
         }
         return true;
     });

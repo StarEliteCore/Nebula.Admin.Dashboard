@@ -19,25 +19,23 @@ export default class LayoutComponent extends Vue {
     private openNameArr: string[] = [];
     private linearMenuList: IMenuRouter[] = [];
     private defaulthomepage:IMenuRouter = {
-            id: "da92480a-5914-a8bc-110b-aedb0457ce6d",
-            sort: -1,
-            type: MenuEnum.Menu,
-            path: "/home-page",
-            redirect: "",
-            componentName: "",
-            component: "",
-            icon: "",
-            parentId: Guid.EMPTY,
-            parentNumber: "",
-            name: "主页",
-            children: [],
+        id: "da92480a-5914-a8bc-110b-aedb0457ce6d",
+        sort: -1,
+        type: MenuEnum.Menu,
+        path: "/home-page",
+        redirect: "",
+        componentName: "",
+        component: "home-page/home-page",
+        icon: "",
+        parentId: Guid.EMPTY,
+        parentNumber: "",
+        name: "主页",
+        children: [],
     }
-
-
     private created()
     {
         this.menus.menuItemList = MenuList.children;
-        // this.menus.menuItemList.unshift(this.defaulthomepage);
+        this.menus.menuItemList.unshift(this.defaulthomepage);
     }
     get menuShow() {
         return (

@@ -33,17 +33,23 @@ export const constansRoute = [
         component: () => import("@/views/login-page/login-page.vue"),
 
     }
-    //,
-    /**
-     * 默认主页
-     */
-    // {
-    //     path: '/home-page',
-    //     name: '主页',
-    //     component: () => import("@/views/home-page/home-page.vue"),
+    ,
+    // /**
+    //  * 默认主页
+    //  */
+    {
+        path: '/home',
+        name: '主页',
+        component: () => import("@/layout/layout.vue"),
+        children: [
+            {
+                path: '/home-page',
+                name: '主页',
+                component: () => import("@/views/home-page/home-page.vue"),
+            }
+        ]
 
-    // }
-    // ,
+    }
     // {
     //     path: '/system',
     //     name: '系统管理',
