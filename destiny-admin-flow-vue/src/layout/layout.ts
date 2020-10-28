@@ -3,10 +3,10 @@ import LayoutHeader from "./layout-header/layout-header.vue"
 import MenuTab from "@/components/menu-tab/menu-tab.vue"
 import { MenuList } from '@/modules/static/menuindex';
 import { IMenuInstance, MenuInstance } from '@/domain/entity/ConfigureInfo/menuConfigure/MenuInstance';
-import { IMenuRouter } from '@/domain/entity/menudto/MenuRouterDto';
+import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
 import { Guid } from 'guid-typescript';
 import SystemTitle from "./layout-left-title/layout-left-title.vue"
-import { MenuEnum } from '@/domain/entity/menudto/MenuDto';
+import { MenuEnum } from '@/domain/entity/menudto/menuDto';
 @Component({
     name: "LayoutComponent",
     components: {

@@ -1,5 +1,5 @@
-import { MenuEnum } from '@/domain/entity/menudto/MenuDto';
-import { IMenuRouter } from '@/domain/entity/menudto/MenuRouterDto';
+import { MenuEnum } from '@/domain/entity/menudto/menuDto';
+import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
 import defaultConsts from '@/shared/config/terminalconst';
 import store from "@/store"
 import { Guid } from 'guid-typescript';

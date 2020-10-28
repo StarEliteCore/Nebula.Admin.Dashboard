@@ -32,7 +32,7 @@
         </div>
       </header>
       <article>
-        <Table border ref="selection" :columns="columns4" :data="data1"></Table>
+        <Table border ref="selection" :columns="columns" :data="data1"></Table>
         <Page :total="40" size="small" show-elevator show-sizer />
       </article>
     </div>
