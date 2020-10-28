@@ -41,7 +41,7 @@
 
             <Button class="operatebutton" type="warning" @click="handleUpdate()">修改</Button>
             <Button class="operatebutton" type="error" :loading="delectLoading" @click="handleDelete()">删除</Button>
-            <Button class="operatebutton" type="primary" icon="md-send" >分配权限</Button>
+            <Button class="operatebutton" type="primary" @click="handleAuth()" icon="md-send" >分配权限</Button>
           </Row>
           <Table :columns="columns" :data="roleTable" border stripe @on-select-cancel="CurrentRowEventCancel"    @on-select="CurrentRowEventArray">
             <template slot-scope="{ row }" slot="isAdmin">
@@ -74,7 +74,9 @@
           </Table>
         </Card>
       </div>
+      <set-permission ref="SetPerOperateInfo"></set-permission>
       <role-operate ref="RoleOperateInfo"></role-operate>
+
       <page-component
         ref="PageInfo"
         :total="total"
