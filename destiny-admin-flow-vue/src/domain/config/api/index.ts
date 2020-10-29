@@ -49,8 +49,12 @@ export const RoleApi = {
    * 获取所有的角色
    */
   getAllRole: "api/Role/GetRoleSelectListAsync",
-};
 
+  /**
+   * 设置角色菜单
+   */
+  setRoleMenu: "api/Role/SetRoleMenuAsync",
+};
 
 export const MenuApi = {
   /**
@@ -84,7 +88,7 @@ export const MenuApi = {
   /**
    * 异步得到菜单树数据
    */
-  getMenuTree: "​api​/Menu/GetTableAsync",
+  getMenuTree: "​api/Menu/GetMenuTreeAsync",
   /**
    * 异步得到菜单下的按钮
    */
@@ -97,5 +101,4 @@ export const MenuApi = {
    * 异步到菜单功能集合
    */
   getMenuFunctionList: "​api​/Menu​/GetMenuFunctionListAsync",
-
 };

@@ -86,11 +86,13 @@ export class MenuDto implements IEntity<string> {
 }
 
 ///菜单树DTO
-export class MenuTreeOutDto {
+export class MenuTreeOutDto implements IEntity<string> {
+  id:string=Guid.EMPTY;
   title: string | undefined;
   expand: boolean = true;
   key: string | undefined;
   parentId: string | undefined;
   type:MenuEnum=MenuEnum.Menu;
   children:Array<MenuTreeOutDto>=[];
+  checked:boolean=false;
 }

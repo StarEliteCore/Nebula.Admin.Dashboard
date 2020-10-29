@@ -27,4 +27,9 @@ export interface IRoleService {
      * 获取所有的角色
      */
     getAllRoleAsync(): Promise<IAjaxResult>;
+
+     /**
+     * 设置角色菜单
+     */
+    setRoleMenu(_roleId: string,menuIds:string[]): Promise<IAjaxResult>;
 }

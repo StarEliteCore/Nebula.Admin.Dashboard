@@ -30,7 +30,8 @@ export default class MenuService implements IMenuService {
 
     getMenuTreeByRoleId(_roleId?: string): Promise<IAjaxResult>
     {
-        console.log(MenuApi.getMenuTree);
-        return MainManager.dataRequest.getRequest(MenuApi.getMenuTree);
+
+        return MainManager.dataRequest.getRequest("api/Menu/GetMenuTreeAsync",{roleId:_roleId});
     }
+
 }
