@@ -7,6 +7,7 @@
     </Row>
     </i-col>
     <i-col span="22" id="visualcanvasparent" style="background-color: white;margin-left: 10px;height: 100%;" >
+      <div><button @click="addLine">添加线</button></div>
       <div id="visualcanvas" style="height: 100%;width:100%;">
       </div>
     </i-col>

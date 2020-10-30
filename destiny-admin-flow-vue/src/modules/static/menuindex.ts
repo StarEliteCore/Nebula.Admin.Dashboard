@@ -98,7 +98,7 @@ export const MenuList: IMenuRouter =
             icon: "",
             parentId: Guid.EMPTY, 
             parentNumber: "",
-            name: "流程管理",
+            name: "流程系统",
             children: [
                 {
                     id: Guid.create().toString(),

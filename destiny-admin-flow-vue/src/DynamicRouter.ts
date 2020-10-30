@@ -108,7 +108,6 @@ export const ToLogin = (to: any, from: any, next: any) => {
 function routeGo(to: any, from: any, next: any) {
     // console.log(_import(getRouter[0].component));
     getRouter = filterAsyncRouter(getRouter);
-    console.log(getRouter);
     router.addRoutes(getRouter);
     // router.addRoutes(NotFoundRouterMap);
     if (to.matched.length === 0) {
