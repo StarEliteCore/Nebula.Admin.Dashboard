@@ -33,7 +33,7 @@ export default class MenuService implements IMenuService {
     }
 
     GetMenuPage(_page: IPageRequest): Promise<IServerPageReturn<Array<MenuOutPageListDto>>> {
-        return MainManager.dataRequest.getRequest(MenuApi.getMenuPage, _page);
+        return MainManager.dataRequest.postRequest(MenuApi.getMenuPage, _page);
     }
 
     GetAllMenuTree(): Promise<IServerPageReturn<any>> {

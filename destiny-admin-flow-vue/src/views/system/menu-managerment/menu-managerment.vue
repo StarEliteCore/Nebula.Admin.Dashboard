@@ -2,7 +2,7 @@
   <section class="box">
     <nav class="nav">
       <div>
-        <Input class="searchTree" placeholder="输入内容Enter搜索" />
+        <Input class="searchTree" placeholder="输入名称Enter搜索" />
         <br />
         <ButtonGroup class="btngroup">
           <Button>
@@ -18,10 +18,14 @@
       </div>
 
       <a-tree
-        :checkable="true"
-        :auto-expand-parent="true"
+        v-if="treeData && treeData.length > 0"
+        :checkable="false"
         :tree-data="treeData"
         class="menuTree"
+        :autoExpandParent="true"
+        :defaultExpandAll="true"
+        :defaultExpandParent="true"
+        @select="treeSelected"
       />
     </nav>
     <div class="body">
@@ -34,10 +38,15 @@
           </ButtonGroup>
         </div>
         <div class="searchdiv">
-          <Input placeholder="根据XXX搜索" class="searchInput" /><Button
-            type="primary"
-            ><Icon type="ios-search" />搜索</Button
-          >
+          <Input
+            placeholder="根据名称搜索"
+            class="searchInput"
+            @keyup.enter.native="loadTableData"
+            v-model="dynamicQuery.name"
+          />
+          <Button type="primary" @click="loadTableData">
+            <Icon type="ios-search" />搜索
+          </Button>
         </div>
       </header>
       <article>
@@ -47,7 +56,14 @@
           border
           stripe
           @on-select="CurrentRowEventArray"
+          class="table"
         >
+          <template v-slot:type="{ row }">
+            <Tag v-if="row.type == enumOptions.Menu" color="red">菜单</Tag>
+            <Tag v-else-if="row.type == enumOptions.Button" color="blue"
+              >功能</Tag
+            >
+          </template>
         </Table>
         <page-component
           ref="PageInfo"
