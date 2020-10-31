@@ -100,7 +100,7 @@ export default class UserOperate extends Mixins(OperateMixins) {
     let res = await MainManager.Instance().UserService.createUser(
       this.userInput
     );
-    this.ajaxcallback(res);
+    this.ajaxcallback(res,true);
   }
   private async UpdateUser() {
     let updateinfo: UserUpdateInputDto = new UserUpdateInputDto();
@@ -114,6 +114,6 @@ export default class UserOperate extends Mixins(OperateMixins) {
     let res = await MainManager.Instance().UserService.updateUser(
       updateinfo
     );
-    this.ajaxcallback(res);
+    this.ajaxcallback(res,true);
   }
 }

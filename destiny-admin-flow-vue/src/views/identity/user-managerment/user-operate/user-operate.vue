@@ -22,10 +22,10 @@
             <Option v-for="item in SexSelectOptions" :value="item.key" :key="item.key">{{ item.label }}</Option>
           </Select>
         </FormItem>
-        <FormItem label="选择角色：" prop="roleIds">
+        <!-- <FormItem label="选择角色：" prop="roleIds">
           <Select v-model="userInput.roleIds" multiple style="width: 260px">
           </Select>
-        </FormItem>
+        </FormItem> -->
         <FormItem label="是否是系统用户：">
           <i-switch v-model="userInput.isSystem" size="large">
             <span slot="open">是</span>

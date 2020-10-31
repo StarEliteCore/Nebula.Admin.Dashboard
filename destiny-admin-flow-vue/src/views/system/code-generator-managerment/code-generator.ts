@@ -155,7 +155,7 @@ export default class CodeGeneratorManagerment extends Mixins(PageMixins) {
       .then((result: AjaxResult) => {
         if (result.success) {
           $this.cSharpTypeList = result.data;
-          console.log($this.cSharpTypeList);
+          // console.log($this.cSharpTypeList);
         }
       });
   }

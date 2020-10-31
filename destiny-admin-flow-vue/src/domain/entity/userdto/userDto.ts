@@ -57,6 +57,14 @@ export class UserUpdateInputDto implements IEntity<string>, IDescription, IUserB
     roleIds: Array<string> = [];
 }
 /**
+ * 用戶分配角色输入dto
+ */
+export class UserAllocationRoleInputDto implements IEntity<string> {
+    id: string = Guid.EMPTY;
+    roleIds: Array<string> = [];
+}
+
+/**
  * 性別枚舉
  */
 export enum ESex {

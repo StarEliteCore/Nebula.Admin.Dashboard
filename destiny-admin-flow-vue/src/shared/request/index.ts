@@ -1,4 +1,5 @@
 import * as QueryEnum from "@/shared/request/query.enum";
+
 import { EFilterConnect, ESort } from '@/shared/request/query.enum';
 
 /**
@@ -12,7 +13,7 @@ export interface IQueryFilter {
     /**
      * 查询条件列表
      */
-    filters: Array<IFilterCondition>;
+    conditions: Array<IFilterCondition>;
   }
   export interface IFieldOperate {
     /**
@@ -51,7 +52,7 @@ export interface IQueryFilter {
     pageIndex: number;
     pageRow: number;
     orderConditions: IOrderCondition[];
-    queryFilter: IQueryFilter;
+    filter: IQueryFilter;
   }
   
   export interface IOrderTable {
@@ -106,7 +107,7 @@ export interface IQueryFilter {
     /**
      * 查询条件列表
      */
-    filters: Array<IFilterCondition> = new Array<IFilterCondition>();
+    conditions: Array<IFilterCondition> = new Array<IFilterCondition>();
   }
 
 
@@ -114,5 +115,5 @@ export interface IQueryFilter {
     pageIndex: number = 1;
     pageRow: number = 10;
     orderConditions: IOrderCondition[] = [];
-    queryFilter: IQueryFilter = new QueryFilter();
+    filter: IQueryFilter = new QueryFilter();
   } 

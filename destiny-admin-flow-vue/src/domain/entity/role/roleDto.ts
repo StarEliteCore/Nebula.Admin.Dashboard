@@ -1,5 +1,7 @@
 import { ICreatedTime, IDescription, IEntity, IIsDeleted, ILastModifionTime } from '@/shared/baseentity/IEntity';
 
+import { Guid } from 'guid-typescript';
+
 export interface IRoleBaseDto extends IEntity<string>,IDescription
 {
     
@@ -14,11 +16,17 @@ export interface IRoleBaseDto extends IEntity<string>,IDescription
 export class RoleInputDto implements IRoleBaseDto
 {
 
-    constructor(public id:string, public name:string,public isAdmin:boolean,public description: string,public menuIds:string[])
+    constructor(public id:string,public name:string,public isAdmin:boolean,public description:string)
     {
 
         
     }
+
+    
+}
+
+export interface IRoleInputDto extends RoleInputDto
+{
 
     
 }

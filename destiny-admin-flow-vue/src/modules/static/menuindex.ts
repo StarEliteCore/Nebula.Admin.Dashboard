@@ -1,6 +1,6 @@
 import { Guid } from 'guid-typescript';
-import { IMenuRouter } from '@/domain/entity/menudto/MenuRouterDto';
-import { MenuEnum } from '@/domain/entity/menudto/MenuDto';
+import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
+import { MenuEnum } from '@/domain/entity/menudto/menuDto';
 
 export const MenuList: IMenuRouter =
 {
@@ -17,29 +17,15 @@ export const MenuList: IMenuRouter =
     name: "根节点",
     children: [
         {
-            id: "da92480a-5914-a8bc-110b-aedb0457ce6d",
-            sort: -1,
-            type: MenuEnum.Menu,
-            path: "/home-page",
-            redirect: "",
-            componentName: "",
-            component: "home-page/home-page",
-            icon: "",
-            parentId: Guid.EMPTY,
-            parentNumber: "",
-            name: "主页",
-            children: [],
-        },
-        {
             id: "da92480a-5914-a8bc-110b-aedb0457ce6c",
             sort: -1,
             type: MenuEnum.Menu,
-            path: "/system",
+            path: "/layout",
             redirect: "",
             componentName: "",
             component: "",
             icon: "",
-            parentId: Guid.EMPTY,
+            parentId: Guid.EMPTY, 
             parentNumber: "",
             name: "系统管理",
             children: [
@@ -55,6 +41,20 @@ export const MenuList: IMenuRouter =
                     parentId: "da92480a-5914-a8bc-110b-aedb0457ce6d",
                     parentNumber: "",
                     name: "用户管理",
+                    children: [],
+                },
+                {
+                    id: Guid.create().toString(),
+                    sort: -1,
+                    type: MenuEnum.Menu,
+                    path: "/identity/role",
+                    redirect: "",
+                    componentName: "",
+                    component: "identity/role-managerment/role-managerment",
+                    icon: "",
+                    parentId: "da92480a-5914-a8bc-110b-aedb0457ce6d",
+                    parentNumber: "",
+                    name: "角色管理",
                     children: [],
                 },
                 {

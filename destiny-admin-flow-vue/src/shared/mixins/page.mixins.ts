@@ -1,9 +1,9 @@
 import { Component, Ref, Vue } from "vue-property-decorator";
 
 import { EOperate } from '../eoperate';
+import { IPageRequest } from '../request';
 import PageComponent from "@/components/page-component/page-component.vue";
 import PageInfo from "@/components/page-component/page-component";
-import { IPageRequest } from '../request';
 
 @Component({
   name: "PageMixins",

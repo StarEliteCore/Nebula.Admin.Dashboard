@@ -1,4 +1,4 @@
-import { IMenu } from './MenuDto';
+import { IMenu } from './menuDto';
 
 export interface IRouter{
     /**

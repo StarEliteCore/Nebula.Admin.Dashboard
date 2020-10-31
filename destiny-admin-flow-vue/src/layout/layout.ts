@@ -3,10 +3,10 @@ import LayoutHeader from "./layout-header/layout-header.vue"
 import MenuTab from "@/components/menu-tab/menu-tab.vue"
 import { MenuList } from '@/modules/static/menuindex';
 import { IMenuInstance, MenuInstance } from '@/domain/entity/ConfigureInfo/menuConfigure/MenuInstance';
-import { IMenuRouter } from '@/domain/entity/menudto/MenuRouterDto';
+import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
 import { Guid } from 'guid-typescript';
 import SystemTitle from "./layout-left-title/layout-left-title.vue"
-import { MenuEnum } from '@/domain/entity/menudto/MenuDto';
+import { MenuEnum } from '@/domain/entity/menudto/menuDto';
 @Component({
     name: "LayoutComponent",
     components: {
@@ -19,25 +19,23 @@ export default class LayoutComponent extends Vue {
     private openNameArr: string[] = [];
     private linearMenuList: IMenuRouter[] = [];
     private defaulthomepage:IMenuRouter = {
-            id: "da92480a-5914-a8bc-110b-aedb0457ce6d",
-            sort: -1,
-            type: MenuEnum.Menu,
-            path: "/home-page",
-            redirect: "",
-            componentName: "",
-            component: "",
-            icon: "",
-            parentId: Guid.EMPTY,
-            parentNumber: "",
-            name: "主页",
-            children: [],
+        id: "da92480a-5914-a8bc-110b-aedb0457ce6d",
+        sort: -1,
+        type: MenuEnum.Menu,
+        path: "/home-page",
+        redirect: "",
+        componentName: "",
+        component: "home-page/home-page",
+        icon: "",
+        parentId: Guid.EMPTY,
+        parentNumber: "",
+        name: "主页",
+        children: [],
     }
-
-
     private created()
     {
         this.menus.menuItemList = MenuList.children;
-        // this.menus.menuItemList.unshift(this.defaulthomepage);
+        this.menus.menuItemList.unshift(this.defaulthomepage);
     }
     get menuShow() {
         return (
