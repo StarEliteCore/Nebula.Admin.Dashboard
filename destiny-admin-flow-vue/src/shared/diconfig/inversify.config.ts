@@ -1,6 +1,8 @@
 import { CodeGeneratorService } from '@/domain/services/codeGeneratorServeice/CodeGeneratorService';
 import { Container } from "inversify";
+import { FunctionService } from '@/domain/services/functionservice/FunctionService';
 import { ICodeGeneratorService } from '@/domain/services/codeGeneratorServeice/ICodeGeneratorService';
+import { IFunctionService } from '@/domain/services/functionservice/IFunctionService';
 import { IMenuService } from '@/domain/services/menuserveice/IMenuService';
 import { IRoleService } from '@/domain/services/roleservice/IRoleService';
 import { IUserService } from '@/domain/services/userservice/IUserService';
@@ -16,4 +18,6 @@ container.bind<IMenuService>(IocTypes.MenuService).to(MenuService)
 container.bind<IUserService>(IocTypes.UserService).to(UserService)
 container.bind<ICodeGeneratorService>(IocTypes.CodeGeneratorService).to(CodeGeneratorService)
 container.bind<IRoleService>(IocTypes.RoleService).to(RoleService)
+container.bind<IFunctionService>(IocTypes.FunctionService).to(FunctionService)
+
 export default container;

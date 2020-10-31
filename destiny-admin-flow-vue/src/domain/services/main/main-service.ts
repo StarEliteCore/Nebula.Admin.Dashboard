@@ -2,7 +2,10 @@
 import { IocTypes } from "@/shared/diconfig/ioc-types";
 import { injectable, inject } from "inversify";
 import "reflect-metadata";
+
+
 import { ICodeGeneratorService } from "../codeGeneratorServeice/ICodeGeneratorService";
+import { IFunctionService } from "../functionservice/IFunctionService";
 import { IMenuService } from "../menuserveice/IMenuService";
 import { IRoleService } from "../roleservice/IRoleService";
 import { IUserService } from "../userservice/IUserService";
@@ -12,6 +15,8 @@ export class MainService {
   private _userserverceApi: IUserService;
   private _codeGeneratorService: ICodeGeneratorService;
   private _roleService: IRoleService;
+  private _functionService: IFunctionService;
+
   public get MenuServiceApi(): IMenuService {
     return this._menuserverceApi;
   }
@@ -26,6 +31,11 @@ export class MainService {
   public get RoleService(): IRoleService {
     return this._roleService;
   }
+
+  public get FunctionService(): IFunctionService {
+    return this._functionService;
+  }
+
   /**
    * 好几巴垃圾不能自动注入呢？？？？？？？？？
    * @param _menu
@@ -37,11 +47,14 @@ export class MainService {
     @inject(IocTypes.UserService) _user: IUserService,
     @inject(IocTypes.CodeGeneratorService)
     _codeGenerator: ICodeGeneratorService,
-    @inject(IocTypes.RoleService) _roleService: IRoleService
+    @inject(IocTypes.RoleService) _roleService: IRoleService,
+    @inject(IocTypes.FunctionService) _functionService: IFunctionService
   ) {
     this._menuserverceApi = _menu;
     this._userserverceApi = _user;
     this._codeGeneratorService = _codeGenerator;
     this._roleService = _roleService;
+    this._functionService = _functionService;
+ 
   }
 }

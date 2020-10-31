@@ -1,6 +1,7 @@
 import DataRequest, { IDataRequest } from '@/shared/data-request';
 
 import { ICodeGeneratorService } from '../codeGeneratorServeice/ICodeGeneratorService';
+import { IFunctionService } from '../functionservice/IFunctionService';
 import { IMenuService } from '../menuserveice/IMenuService';
 import { IRoleService } from '../roleservice/IRoleService';
 import { IUserService } from "../userservice/IUserService";
@@ -37,6 +38,13 @@ export class MainManager {
     public get RoleService(): IRoleService {
         return this.services.RoleService;
     }
+
+
+    
+    public get FunctionService(): IFunctionService {
+        return this.services.FunctionService;
+    }
+
 
     constructor() {
         this.services = container.get<MainService>(IocTypes.MainService);
