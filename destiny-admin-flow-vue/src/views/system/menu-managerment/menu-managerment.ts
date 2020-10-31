@@ -4,7 +4,7 @@ import DeleteMixins from "@/shared/mixins/delete-dialog.mixins";
 
 import * as PageQuery from "@/shared/request";
 
-import { MenuEnum, IMenuTableDto } from '@/domain/entity/menudto/menuDto';
+import { MenuEnum, IMenuTableDto, MenuOutPageListDto } from '@/domain/entity/menudto/menuDto';
 import { ITableColumn } from '@/shared/table/ITable';
 
 import { MainManager } from "@/domain/services/main/main-manager";
@@ -14,7 +14,7 @@ import { MainManager } from "@/domain/services/main/main-manager";
   name: "MenuManagerment",
   components: {
     // UserOperate,
-    // UserAllocationRole
+    // UserAllocationRole,
   }
 })
 
@@ -22,6 +22,8 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
   private queryfileter: PageQuery.IPageRequest = new PageQuery.PageRequest();
   private CurrentRow: any = {};
   private CurrentArray: Array<IMenuTableDto> = [];
+  private treeData: Array<any> = [];
+  private tableData: Array<MenuOutPageListDto> = [];
 
   private columns: ITableColumn[] = [
     {
@@ -57,84 +59,49 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
 
   private manuTable: Array<IMenuTableDto> = [];
 
-  private mainManager : MainManager = MainManager.Instance();
+  private mainManager: MainManager = MainManager.Instance();
 
   @Emit()
   pageChange() {
-    this.getTableData();
+    this.loadTreeData();
+    this.loadTableData();
   }
-  private mounted() {
-    this.getTableData();
+  private created() {
+    this.loadTreeData();
+    this.loadTableData();
   }
-  private async getTableData() {
-    // await this.mainManager.MenuService.getMenuTable(this.tranfer(this.queryfileter))
-    //   .then(res => {
-    //     if (res.success) {
-    //       this.userTable = res.itemList;
-    //       this.total = res.total;
-    //     }
-    //   });
+  private mounted()
+  {
+    debugger
+    console.log(this.PageInfo)
+
   }
 
-  private data1: Array<any> = [
-    {
-      name: 'John Brown',
-      age: 18,
-      address: 'New York No. 1 Lake Park',
-      date: '2016-10-03'
-    },
-    {
-      name: 'Jim Green',
-      age: 24,
-      address: 'London No. 1 Lake Park',
-      date: '2016-10-01'
-    },
-    {
-      name: 'Joe Black',
-      age: 30,
-      address: 'Sydney No. 1 Lake Park',
-      date: '2016-10-02'
-    },
-    {
-      name: 'Jon Snow',
-      age: 26,
-      address: 'Ottawa No. 2 Lake Park',
-      date: '2016-10-04'
-    }
-  ];
+  private loadTableData() {
+    this.mainManager.MenuService.GetMenuPage(this.tranfer(this.queryfileter))
+      .then(res => {
+        if (res.success) {
+          this.tableData = res.itemList;
+        }
+      });
+  }
+  private loadTreeData() {
+    this.mainManager.MenuService.GetAllMenuTree()
+      .then(res => {
+        if (res.success) {
+          this.treeData = res.itemList;
+        }
+      });
+  }
 
-  private data2:Array<any> = [
-    {
-      title: "parent 1",
-      expand: true,
-      children: [
-        {
-          title: "parent 1-1",
-          expand: true,
-          children: [
-            {
-              title: "leaf 1-1-1",
-            },
-            {
-              title: "leaf 1-1-2",
-            },
-          ],
-        },
-        {
-          title: "parent 1-2",
-          expand: true,
-          children: [
-            {
-              title: "leaf 1-2-1",
-            },
-            {
-              title: "leaf 1-2-1",
-            },
-          ],
-        },
-      ],
-    },
-  ];
+
+  private CurrentRowEventArray(_selection: any, _row: any) {
+    this.CurrentRow = _row;
+    this.CurrentRowEventArray = _selection;
+    // console.log(_row, _selection);
+  }
+
+
 
 
 }

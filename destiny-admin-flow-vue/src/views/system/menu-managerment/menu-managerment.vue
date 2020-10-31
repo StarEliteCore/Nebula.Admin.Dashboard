@@ -2,7 +2,7 @@
   <section class="box">
     <nav class="nav">
       <div>
-        <Input class="searchTree" placeholder="输入内容搜索" />
+        <Input class="searchTree" placeholder="输入内容Enter搜索" />
         <br />
         <ButtonGroup class="btngroup">
           <Button>
@@ -16,7 +16,13 @@
           </Button>
         </ButtonGroup>
       </div>
-      <Tree :data="data2" show-checkbox></Tree>
+
+      <a-tree
+        :checkable="true"
+        :auto-expand-parent="true"
+        :tree-data="treeData"
+        class="menuTree"
+      />
     </nav>
     <div class="body">
       <header>
@@ -28,12 +34,26 @@
           </ButtonGroup>
         </div>
         <div class="searchdiv">
-            <Input placeholder="根据XXX搜索" class="searchInput" /><Button type="primary"><Icon type="ios-search" />搜索</Button>
+          <Input placeholder="根据XXX搜索" class="searchInput" /><Button
+            type="primary"
+            ><Icon type="ios-search" />搜索</Button
+          >
         </div>
       </header>
       <article>
-        <Table border ref="selection" :columns="columns" :data="data1"></Table>
-        <Page :total="40" size="small" show-elevator show-sizer />
+        <Table
+          :columns="columns"
+          :data="tableData"
+          border
+          stripe
+          @on-select="CurrentRowEventArray"
+        >
+        </Table>
+        <page-component
+          ref="PageInfo"
+          :total="total"
+          @PageChange="pageChange"
+        ></page-component>
       </article>
     </div>
   </section>
