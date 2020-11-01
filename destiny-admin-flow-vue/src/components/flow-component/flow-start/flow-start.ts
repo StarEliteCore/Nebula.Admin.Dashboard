@@ -1,5 +1,7 @@
-import { Component, Vue, Emit, Mixins, Ref } from "vue-property-decorator";
+import { Component, Emit, Mixins, Ref, Vue } from "vue-property-decorator";
+
 import antg6 from "@antv/g6"
+
 @Component({
     name: "FlowManagerment",
 })
@@ -33,7 +35,7 @@ export default class FlowStart extends Mixins() {
             width: 60,
             height: 60,
         });
-        console.log(graph);
+        // console.log(graph);
         graph.data(this.data);
         graph.render();
         // graph.on('node:mouseenter', (evt: any) => {

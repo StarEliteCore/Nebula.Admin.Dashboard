@@ -1,6 +1,9 @@
-import { Component, Vue, Emit, Mixins, Ref } from "vue-property-decorator";
+import { Component, Emit, Mixins, Ref, Vue } from "vue-property-decorator";
+
 import FlowStart from "@/components/flow-component/flow-start/flow-start.vue"
+import { Guid } from 'guid-typescript';
 import antg6 from "@antv/g6"
+
 @Component({
     name: "FlowManagerment",
     components: {
@@ -9,95 +12,10 @@ import antg6 from "@antv/g6"
 })
 export default class FlowManagerment extends Mixins() {
     private visualcanvasdata = {
-        nodes: [
-            {
-                id: '123456645616',
-                type: 'circle',
-                label: '开始节点',
-                // img: 'https://gw.alipayobjects.com/zos/rmsportal/XuVpGqBFxXplzvLjJBZB.svg',
-                x: 526,
-                y: 215,
-                size: 70,
-                style: {
-                    fill: '#9EC9FF',
-                    lineWidth: 3,
-                },
-                labelCfg: {
-                    style: {
-                        fill: '#1890ff',
-                        fontSize: 24,
-                    },
-                    position: 'center',
-                },
-                // configurations for four linkpoints
-                linkPoints: {
-                    top: false,
-                    right: false,
-                    bottom: false,
-                    left: false,
-                    // the diameter of the linkPoint
-                    size: 10,
-                    lineWidth: 1,
-                    fill: '#fff',
-                    stroke: '#1890FF',
-                },
-                // // icon configuration
-                // icon: {
-                //     // whether show the icon
-                //     show: true,
-                //     // icon's img address, string type
-                //     img:
-                //         'https://gw.alipayobjects.com/zos/rmsportal/XuVpGqBFxXplzvLjJBZB.svg',
-                //     width: 60,
-                //     height: 60,
-                // },
-            },
-            {
-                id: '1234566sdfasd45616',
-                type: 'circle',
-                label: '审批',
-                // img: 'https://gw.alipayobjects.com/zos/rmsportal/XuVpGqBFxXplzvLjJBZB.svg',
-                x: 150,
-                y: 150,
-                size: 70,
-                style: {
-                    fill: '#9EC9FF',
-                    lineWidth: 3,
-                },
-                labelCfg: {
-                    style: {
-                        fill: '#1890ff',
-                        fontSize: 24,
-                    },
-                    position: 'center',
-                },
-                // configurations for four linkpoints
-                linkPoints: {
-                    top: false,
-                    right: false,
-                    bottom: false,
-                    left: false,
-                    // the diameter of the linkPoint
-                    size: 10,
-                    lineWidth: 1,
-                    fill: '#fff',
-                    stroke: '#1890FF',
-                },
-                // // icon configuration
-                // icon: {
-                //     // whether show the icon
-                //     show: true,
-                //     // icon's img address, string type
-                //     img:
-                //         'https://gw.alipayobjects.com/zos/rmsportal/XuVpGqBFxXplzvLjJBZB.svg',
-                //     width: 60,
-                //     height: 60,
-                // },
-            }
-        ],
-        edges:[
-
-        ],
+        // nodes: [
+        // ],
+        // edges:[
+        // ],
     };
 
     private graph: any;
@@ -186,9 +104,9 @@ export default class FlowManagerment extends Mixins() {
         // console.log(this.graph);
         this.graph.data(this.visualcanvasdata);
         this.graph.render();
-        this.graph.on('node:click', (evt: any) => {
-            this.onNodeClick(evt)
-        });
+        // this.graph.on('node:click', (evt: any) => {
+        //     this.onNodeClick(evt)
+        // });
         // this.graph.on('node:mousedown', (evt: any) => {
         //     console.log(evt)
         // });
@@ -203,6 +121,56 @@ export default class FlowManagerment extends Mixins() {
     }
     private addLine()
     {
+
+        // console.log(this.graph)
+        this.graph.addItem("node",{
+            id: Guid.create(),
+            type: 'circle',
+            label: '审批1',
+            // img: 'https://gw.alipayobjects.com/zos/rmsportal/XuVpGqBFxXplzvLjJBZB.svg',
+            x: 350,
+            y: 250,
+            size: 70,
+            style: {
+                fill: '#9EC9FF',
+                lineWidth: 3,
+            },
+            labelCfg: {
+                style: {
+                    fill: '#1890ff',
+                    fontSize: 24,
+                },
+                position: 'center',
+            },
+            // configurations for four linkpoints
+            linkPoints: {
+                top: false,
+                right: false,
+                bottom: false,
+                left: false,
+                // the diameter of the linkPoint
+                size: 10,
+                lineWidth: 1,
+                fill: '#fff',
+                stroke: '#1890FF',
+            },
+        })
+        console.log(this.graph.cfg.nodes,12316546561666);
+
+        // console.log(this.graph)
+        // this.graph.refresh();
+
+        // this.graph.group.set("circle", {
+        //     name:"anchor",
+        //     attrs: {
+        //       x: 0,
+        //       y: 0,
+        //       size:100,
+        //       fill: "#bae637",
+        //       stroke: "#eaff8f",
+        //       lineWidth: 5
+        //     }
+        //   });
         // this.graph.on('aftercreateedge', (e: any) => {
         //     const edges = this.graph.save().edges;
         //     antg6.Util.processParallelEdges(edges);
