@@ -11,15 +11,16 @@ import { MainManager } from "@/domain/services/main/main-manager";
 import { IFilterCondition, IQueryFilter } from '@/shared/request';
 import { EFilterConnect, EFilterOprator } from '@/shared/request/query.enum';
 
-// import MenuOperate from "./menu-operate/menu-operate.vue"
-// import MenuOperateInfo from "./menu-operate/menu-operate"
+import MenuOperate from "./menu-operate/menu-operate.vue"
+import MenuOperateInfo from "./menu-operate/menu-operate"
+
+import { EOperate } from '@/shared/eoperate';
 
 
 @Component({
   name: "MenuManagerment",
   components: {
-    // MenuOperate,
-    // MenuOperateInfo,
+    MenuOperate,
   }
 })
 
@@ -30,10 +31,7 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
   private treeData: Array<any> = [];
   private tableData: Array<MenuOutPageListDto> = [];
 
-  private enumOptions: any = {
-    Menu: MenuEnum.Menu,
-    Button: MenuEnum.Button,
-  };
+  private enumOptions = MenuEnum;
 
 
   private columns: ITableColumn[] = [
@@ -149,7 +147,7 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
   private treeSelected(expandedKeys: any, expanded: any) {
     if (expanded.selected === true) {
       this.dynamicQuery.parentId = expandedKeys[0];
-    }else{
+    } else {
       this.dynamicQuery.parentId = "";
     }
     this.loadTableData();
@@ -161,8 +159,32 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
     // console.log(_row, _selection);
   }
 
+  @Ref("MenuOperateInfo")
+  private MenuOperateInfo!: MenuOperateInfo;
 
+  /**
+   * @param _type 操作方法
+   * @param _rowId 
+   */
+  private operateItem(_type: EOperate, _rowId?: string) {
+    if (typeof this.CurrentRow === "undefined" && (_type === EOperate.update)) {
+      this.$Message.error("请选择要修改的菜单");
+      return;
+    }
+    if (_type === EOperate.update) {
+      this.MenuOperateInfo.Show(_type, this.treeData,this.dynamicQuery.parentId, (res: boolean) => {
+        this.loadTreeData();
+        this.loadTableData();
+      }, this.CurrentRow.id)
+    }
+    else {
+      this.MenuOperateInfo.Show(_type, this.treeData,this.dynamicQuery.parentId, (res: boolean) => {
+        this.loadTreeData();
+        this.loadTableData();
+      })
+    }
 
+  }
 
 }
 
