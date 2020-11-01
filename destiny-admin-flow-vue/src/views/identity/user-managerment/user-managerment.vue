@@ -5,33 +5,36 @@
         <Collapse v-model="CollapseDefault">
           <Panel name="1">
             查询面板
-            <p slot="content">
-              <Button type="primary" ghost @click="getTableData">查询</Button>
-              <Button type="primary" ghost @click="getTableData">查询</Button>
-              <Button type="primary" ghost @click="getTableData">查询</Button>
-              <Button type="primary" ghost @click="getTableData">查询</Button>
-              <Button type="primary" ghost @click="getTableData">查询</Button>
-            </p>
-            <p slot="content">
-              <Button type="primary" ghost @click="getTableData">查询</Button>
-              <Button type="primary" ghost @click="getTableData">查询</Button>
-              <Button type="primary" ghost @click="getTableData">查询</Button>
-              <Button type="primary" ghost @click="getTableData">查询</Button>
-              <Button type="primary" ghost @click="getTableData">查询</Button>
-            </p>
-            <p slot="content">
-              <Button type="primary" ghost @click="getTableData">查询</Button>
-              <Button type="primary" ghost @click="getTableData">查询</Button>
-              <Button type="primary" ghost @click="getTableData">查询</Button>
-              <Button type="primary" ghost @click="getTableData">查询</Button>
-              <Button type="primary" ghost @click="getTableData">查询</Button>
-            </p>
-            <p slot="content">
-              <Button type="primary" ghost @click="getTableData">查询</Button>
-              <Button type="primary" ghost @click="getTableData">查询</Button>
-              <Button type="primary" ghost @click="getTableData">查询</Button>
-              <Button type="primary" ghost @click="getTableData">查询</Button>
-              <Button type="primary" ghost @click="getTableData">查询</Button>
+           <p slot="content" >
+                <Form  inline  :label-width="120" :model="dynamicQuery" ref="formInline">
+                  <Row> 
+                      <Col span="6">
+                      <FormItem label="用户名：">
+                       <Input  v-model="dynamicQuery.userName"   />
+        
+                        </FormItem>
+                      </Col>
+                         <Col span="6">
+                      <FormItem label="用户昵称：">
+                       <Input  v-model="dynamicQuery.nickName"   />
+        
+                        </FormItem>
+                      </Col>
+                       <Col span="6">
+                      <FormItem label="是否系统用户：" >
+                     <Select  style="width:200px" v-model="dynamicQuery.isSystem" >
+                       <Option value="true">是</Option>
+                       <Option value="false">否</Option>
+                      </Select>
+                        </FormItem>
+                      </Col>
+                   
+               
+                  </Row>
+                    <FormItem >
+                          <Button type="primary" @click="search()">查询</Button>
+                    </FormItem>
+                </Form>
             </p>
           </Panel>
         </Collapse>

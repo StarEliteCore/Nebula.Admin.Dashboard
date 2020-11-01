@@ -161,7 +161,6 @@ export default class FunctionManagerment extends Mixins(PageMixins) {
 
   //更新
   public async handleUpdate() {
-      console.log(this.FunctionOperateInfo);
     let selecteds: any = this.CurrentSelectionArray;
     this.FunctionOperateInfo.getSingleSeletedRow( selecteds, (id: string, row: any) => {
         this.FunctionOperateInfo.Show(

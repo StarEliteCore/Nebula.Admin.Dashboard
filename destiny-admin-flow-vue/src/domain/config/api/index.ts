@@ -136,5 +136,9 @@ export const FunctionApi = {
 export const AuditApi = {
   // 分页 + 条件获取功能列表
   getAuditLogPage: "api/AuditLog/GetAuditLogPageAsync",
- 
+  // 得到数据审计分页
+  getAuditEntryPage: "api/AuditEntry/GetAuditEntryPageAsync",
+
+   // 得到数据属性分页
+  getAuditEntryPropertyPage: "api/AuditEntry/GetAuditEntryPropertyPageAsync",
 };
