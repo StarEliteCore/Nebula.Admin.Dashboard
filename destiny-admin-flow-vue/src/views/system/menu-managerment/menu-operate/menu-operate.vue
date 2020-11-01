@@ -7,17 +7,31 @@
       ref="form"
       :rules="ruleValidate"
     >
+      <FormItem label="上级菜单：" prop="parentId">
+        <a-tree-select
+          v-model="menuDto.parentId"
+          :tree-data="treeData"
+          placeholder="请选择"
+          tree-default-expand-all
+          :replaceFields="{children:'children', title:'title', key:'key', value: 'id' }"
+        >
+        </a-tree-select>
+      </FormItem>
+      <FormItem label="类型：" prop="type">
+        <Select v-model="menuDto.type">
+          <Option
+            v-for="item in enumSelectOptions"
+            :value="item.key"
+            :key="item.key"
+            >{{ item.label }}</Option
+          >
+        </Select>
+      </FormItem>
       <FormItem label="菜单名称：" prop="name">
         <Input v-model="menuDto.name" />
       </FormItem>
-      <FormItem label="排序：" prop="sort">
-        <Input v-model="menuDto.sort" />
-      </FormItem>
-      <FormItem label="组件地址(前端)：" prop="path">
+      <FormItem label="路由地址：" prop="path">
         <Input v-model="menuDto.path" />
-      </FormItem>
-      <FormItem label="父级菜单ID：" prop="parentId">
-        <Input v-model="menuDto.parentId" />
       </FormItem>
       <FormItem label="组件地址：" prop="component">
         <Input v-model="menuDto.component" />
@@ -25,17 +39,17 @@
       <FormItem label="菜单图标：" prop="icon">
         <Input v-model="menuDto.icon" />
       </FormItem>
+      <FormItem label="排序：" prop="sort">
+        <Input v-model="menuDto.sort" />
+      </FormItem>
       <FormItem label="描述：" prop="description">
-        <Input v-model="menuDto.description" />
-      </FormItem>
-      <FormItem label="当前菜单以上所有的父级：" prop="parentNumber">
-        <Input v-model="menuDto.parentNumber" />
-      </FormItem>
-      <FormItem label="深度：" prop="depth">
-        <Input v-model="menuDto.depth" />
-      </FormItem>
-      <FormItem label="类型：" prop="type">
-        <Input v-model="menuDto.type" />
+        <Input
+          v-model="menuDto.description"
+          maxlength="255"
+          show-word-limit
+          type="textarea"
+          placeholder=""
+        />
       </FormItem>
     </Form>
   </Modal>

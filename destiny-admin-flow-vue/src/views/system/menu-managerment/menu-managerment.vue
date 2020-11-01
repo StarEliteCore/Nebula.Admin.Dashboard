@@ -32,8 +32,12 @@
       <header>
         <div>
           <ButtonGroup>
-            <Button> <Icon type="md-add" />添加 </Button>
-            <Button> <Icon type="ios-create" />编辑 </Button>
+            <Button @click="operateItem(operate.add)">
+              <Icon type="md-add" />添加
+            </Button>
+            <Button @click="operateItem(operate.update)">
+              <Icon type="ios-create" />编辑
+            </Button>
             <Button> <Icon type="ios-trash" />删除 </Button>
           </ButtonGroup>
         </div>
@@ -72,6 +76,8 @@
         ></page-component>
       </article>
     </div>
+    <menu-operate ref="MenuOperateInfo"></menu-operate>
+    <delete-dialog ref="DeleteInfo"></delete-dialog>
   </section>
 </template>
 
