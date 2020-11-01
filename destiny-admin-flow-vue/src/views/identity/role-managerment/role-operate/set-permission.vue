@@ -2,7 +2,7 @@
   <Modal v-model="IsShow" :title="title" :mask-closable="false">
 
       <a-tree
-        :expanded-keys="expandedKeys"
+        v-if="treeData && treeData.length > 0"
         showLine
         v-model="checkedKeys"
         :auto-expand-parent="autoExpandParent"

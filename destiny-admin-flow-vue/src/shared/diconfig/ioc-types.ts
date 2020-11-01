@@ -5,5 +5,6 @@ export const IocTypes = {
   CodeGeneratorService: Symbol("CodeGeneratorService"),
   RoleService: Symbol("RoleService"),
   FunctionService: Symbol("FunctionService"),
-  // AuditService:Symbol("AuditService"),
+  SystemService: Symbol("SystemService"),
+  
 };
