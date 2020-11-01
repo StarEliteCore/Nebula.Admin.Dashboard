@@ -4,7 +4,7 @@ import { IMenuService } from './IMenuService';
 import { IPageRequest } from '@/shared/request';
 import { MainManager } from '../main/main-manager';
 import { MenuApi } from '@/domain/config/api';
-import { MenuDto } from '@/domain/entity/menudto/menuDto';
+import { MenuDto, MenuOutPageListDto } from '@/domain/entity/menudto/menuDto';
 import { injectable } from 'inversify';
 
 @injectable()
@@ -28,10 +28,16 @@ export default class MenuService implements IMenuService {
         return MainManager.dataRequest.postRequest("", _page);
     }
 
-    getMenuTreeByRoleId(_roleId?: string): Promise<IAjaxResult>
-    {
+    getMenuTreeByRoleId(_roleId?: string): Promise<IAjaxResult> {
+        return MainManager.dataRequest.getRequest(MenuApi.getMenuTree, { roleId: _roleId });
+    }
 
-        return MainManager.dataRequest.getRequest("api/Menu/GetMenuTreeAsync",{roleId:_roleId});
+    GetMenuPage(_page: IPageRequest): Promise<IServerPageReturn<Array<MenuOutPageListDto>>> {
+        return MainManager.dataRequest.postRequest(MenuApi.getMenuPage, _page);
+    }
+
+    GetAllMenuTree(): Promise<IServerPageReturn<any>> {
+        return MainManager.dataRequest.getRequest(MenuApi.GetAllMenuTree);
     }
 
 }

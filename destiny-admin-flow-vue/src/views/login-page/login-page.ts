@@ -67,9 +67,7 @@ export default class Login extends Vue {
             .then((res: Oidc.User) => {
                 // res.profile.name 用户名
                 // res.profile.sub 密码
-                debugger
                 if (res.access_token) {
-                    debugger
                     TokenModule.SetToken(res.access_token);
                     // ...  信息处理
                     // 跳转路由
