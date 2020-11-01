@@ -110,3 +110,31 @@ export const MenuApi = {
    */
   GetAllMenuTree:"/api/Menu/GetAllMenuTreeAsync",
 };
+
+///功能API
+export const FunctionApi = {
+  // 分页 + 条件获取功能列表
+  getFunctionPage: "api/Function/GetFunctionPageAsync",
+  /**
+   * 添加或者修改功能
+   */
+  createrOrUpdateFunction: "api/Function/AddOrUpdateAsync",
+
+  /**
+   * 删除一个功能
+   */
+  deleteFunction: "api/Function/DeleteAsync",
+ 
+    /**
+   * 获取一个功能
+   */
+  loadFunction: "api/Function/LoadAsync",
+};
+
+
+///审计API
+export const AuditApi = {
+  // 分页 + 条件获取功能列表
+  getAuditLogPage: "api/AuditLog/GetAuditLogPageAsync",
+ 
+};

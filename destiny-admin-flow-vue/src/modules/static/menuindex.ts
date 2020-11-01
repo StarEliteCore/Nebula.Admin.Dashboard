@@ -85,6 +85,21 @@ export const MenuList: IMenuRouter =
                     name: "菜单管理",
                     children: [],
                 }
+                ,
+                {
+                    id: Guid.create().toString(),
+                    sort: -1,
+                    type: MenuEnum.Menu,
+                    path: "/identity/function",
+                    redirect: "",
+                    componentName: "",
+                    component: "identity/function-managerment/function-managerment",
+                    icon: "",
+                    parentId: "da92480a-5914-a8bc-110b-aedb0457ce6d",
+                    parentNumber: "",
+                    name: "功能管理",
+                    children: [],
+                }
             ],
         }
     ],
