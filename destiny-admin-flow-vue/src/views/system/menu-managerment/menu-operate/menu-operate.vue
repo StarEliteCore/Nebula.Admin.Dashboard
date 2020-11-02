@@ -13,7 +13,13 @@
           :tree-data="treeData"
           placeholder="请选择"
           tree-default-expand-all
-          :replaceFields="{children:'children', title:'title', key:'key', value: 'id' }"
+          :replaceFields="{
+            children: 'children',
+            title: 'title',
+            key: 'key',
+            value: 'id',
+          }"
+          allow-clear
         >
         </a-tree-select>
       </FormItem>
@@ -27,16 +33,24 @@
           >
         </Select>
       </FormItem>
-      <FormItem label="菜单名称：" prop="name">
+      <FormItem label="名称：" prop="name">
         <Input v-model="menuDto.name" />
       </FormItem>
-      <FormItem label="路由地址：" prop="path">
+      <FormItem
+        v-show="menuDto.type === enumOptions.Menu"
+        label="路由地址："
+        prop="path"
+      >
         <Input v-model="menuDto.path" />
       </FormItem>
-      <FormItem label="组件地址：" prop="component">
+      <FormItem
+        v-show="menuDto.type === enumOptions.Menu"
+        label="组件地址："
+        prop="component"
+      >
         <Input v-model="menuDto.component" />
       </FormItem>
-      <FormItem label="菜单图标：" prop="icon">
+      <FormItem label="图标：" prop="icon">
         <Input v-model="menuDto.icon" />
       </FormItem>
       <FormItem label="排序：" prop="sort">
@@ -52,6 +66,20 @@
         />
       </FormItem>
     </Form>
+    <template v-slot:footer>
+      <div>
+        <Button v-if="canEdit" class="dialog-btn" @click="OnHandleCancel"
+          >取消</Button
+        >
+        <Button
+          type="primary"
+          v-if="canEdit"
+          class="dialog-btn--primary"
+          @click="OnHandleCommit"
+          >保存</Button
+        >
+      </div>
+    </template>
   </Modal>
 </template>
 

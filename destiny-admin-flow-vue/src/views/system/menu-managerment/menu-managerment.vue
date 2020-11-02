@@ -2,16 +2,16 @@
   <section class="box">
     <nav class="nav">
       <div>
-        <Input class="searchTree" placeholder="输入名称Enter搜索" />
+        <Input class="searchTree" placeholder="输入名称搜索" />
         <br />
         <ButtonGroup class="btngroup">
-          <Button>
+          <Button @click="operateItem(operate.add)">
             <Icon type="md-add" />
           </Button>
-          <Button>
+          <Button @click="EditTreeMenu">
             <Icon type="ios-create" />
           </Button>
-          <Button>
+          <Button @click="deleteItemTreeMenu">
             <Icon type="ios-trash" />
           </Button>
         </ButtonGroup>
@@ -38,7 +38,7 @@
             <Button @click="operateItem(operate.update)">
               <Icon type="ios-create" />编辑
             </Button>
-            <Button> <Icon type="ios-trash" />删除 </Button>
+            <Button @click="deleteItem"> <Icon type="ios-trash" />删除 </Button>
           </ButtonGroup>
         </div>
         <div class="searchdiv">
@@ -59,7 +59,7 @@
           :data="tableData"
           border
           stripe
-          @on-select="CurrentRowEventArray"
+          @on-selection-change="CurrentRowEventArray"
           class="table"
         >
           <template v-slot:type="{ row }">
