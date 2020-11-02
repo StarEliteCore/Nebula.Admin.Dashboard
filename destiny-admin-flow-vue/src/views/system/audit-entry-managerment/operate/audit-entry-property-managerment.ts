@@ -60,7 +60,7 @@ export default class AuditEntryPropertyManagerment extends Mixins(PageMixins, De
   ];
   private auditEntryPropertyTable: Array<IAuditEntryPropertyTableDto> = [];
 
-
+  private auditEntryId!: string;
   private filters: IFilterCondition[] = [
     {
       field: "entityAllName",
@@ -72,9 +72,17 @@ export default class AuditEntryPropertyManagerment extends Mixins(PageMixins, De
       value: "",
       operator: EFilterOprator.Equal,
     },
+    {
+      field: "auditEntryId",
+      value:'',
+      operator: EFilterOprator.Equal,
+    },
   ];
 
-  private dynamicQuery: any = {};
+  private dynamicQuery: any = {
+
+    auditEntryId:''
+  };
 
  public styles:any= {
     height: 'calc(100% - 55px)',
@@ -83,10 +91,10 @@ export default class AuditEntryPropertyManagerment extends Mixins(PageMixins, De
     position: 'static'
 };
 
-  //查询
-  private search(auditEntryId?:string) {
-    let newFilters: IFilterCondition[] = [];
 
+  //查询
+  private search() {
+    let newFilters: IFilterCondition[] = [];
     let $this = this;
 
     this.filters.forEach((f) => {
@@ -100,16 +108,16 @@ export default class AuditEntryPropertyManagerment extends Mixins(PageMixins, De
         newFilters.push(filter);
       }
 
-      if(typeof auditEntryId != "undefined"&&newFilters.filter(o=>o.field=="AuditEntryId").length<=0)
-      {
+      // if(typeof auditEntryId != "undefined"&&newFilters.filter(o=>o.field=="AuditEntryId").length<=0)
+      // {
         
-        let filter: IFilterCondition = {
-          field: "AuditEntryId",
-          value:auditEntryId,
-          operator: EFilterOprator.Equal,
-        };
-        newFilters.push(filter);
-      }
+      //   let filter: IFilterCondition = {
+      //     field: "AuditEntryId",
+      //     value:auditEntryId,
+      //     operator: EFilterOprator.Equal,
+      //   };
+      //   newFilters.push(filter);
+      // }
     });
 
     let filter: IQueryFilter = {
@@ -129,7 +137,7 @@ export default class AuditEntryPropertyManagerment extends Mixins(PageMixins, De
    */
   private created() {}
   private mounted() {
-    //this.getAuditEntryPropertyPageAsync();
+   
   }
 
   private async getAuditEntryPropertyPageAsync() {
@@ -155,11 +163,23 @@ export default class AuditEntryPropertyManagerment extends Mixins(PageMixins, De
     this.CurrentSelectionArray = _selection;
   }
   
-  public showDrawer(auditEntryId?:string)
+
+  public showDrawer(auditEntryId:string)
   {
 
+      this.auditEntryId=auditEntryId;
       this.isOpenDrawer=true;
-      this.search(auditEntryId);
+      this.dynamicQuery.auditEntryId=auditEntryId;
+      this.PageInfo.PaginationHandle.Pagination.pageIndex=1;  //不设置就有BUG
+      // this.filters.map(o=>({
+
+      //   field:o.field,
+      //   value:o.field=="auditEntryId"?auditEntryId :o.value,
+      //   operator:o.operator
+
+      // }));
+      //this.getAuditEntryPropertyPageAsync();
+      this.search();
   }
 
 }

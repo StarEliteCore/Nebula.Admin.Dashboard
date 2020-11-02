@@ -27,20 +27,32 @@ export default class AuditLogManagerment extends Mixins(PageMixins, DeleteMixins
 
   private columns: ITableColumn[] = [
     {
-      type: "selection",
-      width: 60,
-      align: "center",
-    },
-
-    {
       title: "功能名",
       key: "functionName",
       align: "center",
       maxWidth: 150,
     },
     {
-      title: "审计Url",
+      title: "用户名",
+      key: "userName",
+      align: "center",
+      maxWidth: 90,
+    },
+    {
+      title: "昵称",
+      key: "nickName",
+      align: "center",
+      maxWidth: 90,
+    },
+  
+    {
+      title: "Url",
       key: "action",
+      align: "center",
+    },
+    {
+      title: "IP地址",
+      key: "ip",
       align: "center",
     },
     {
@@ -53,11 +65,8 @@ export default class AuditLogManagerment extends Mixins(PageMixins, DeleteMixins
         key: "browserInformation",
         align: "center",
       },
-      {
-        title: "IP地址",
-        key: "ip",
-        align: "center",
-      },
+     
+
     {
       title: "审计时间",
       key: "createdTime",

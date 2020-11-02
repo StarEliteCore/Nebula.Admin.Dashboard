@@ -71,6 +71,7 @@ export default class RoleManagerment extends Mixins(PageMixins, DeleteMixins) {
       title: "操作",
       slot: "action",
       align: "center",
+      width: 100,
     },
   ];
   private roleTable: Array<RoleOutputPageListDto> = [];
