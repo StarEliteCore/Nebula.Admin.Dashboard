@@ -1,15 +1,17 @@
-import { MenuEnum } from '@/domain/entity/menudto/menuDto';
-import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
-import defaultConsts from '@/shared/config/terminalconst';
-import store from "@/store"
-import { Guid } from 'guid-typescript';
 import {
-    VuexModule,
+    Action,
     Module,
     Mutation,
-    Action,
+    VuexModule,
     getModule
-  } from "vuex-module-decorators";
+} from "vuex-module-decorators";
+
+import { Guid } from 'guid-typescript';
+import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
+import { MenuEnum } from '@/domain/entity/menudto/menuDto';
+import defaultConsts from '@/shared/config/terminalconst';
+import store from "@/store"
+
 export interface IMenuRouerStore
 {
     menus:string 
@@ -35,11 +37,27 @@ class MenuRouerStore extends VuexModule implements IMenuRouerStore{
         localStorage.setItem(defaultConsts.menu,_menuString)
     }
     /**
+     * 
+     * @param _menus 属性
+     */
+    @Mutation
+    private Remove_MENUS()
+    {
+        localStorage.removeItem(defaultConsts.menu)
+    }
+    /**
      * 写入值
      */
     @Action
     public SetMenus(_menus:Array<IMenuRouter>) {
         this.SET_MENUS(_menus)
+    }
+    /**
+     * 清除用户路由
+     */
+    @Action
+    public RemoveMenus() {
+        this.Remove_MENUS()
     }
 }
 
