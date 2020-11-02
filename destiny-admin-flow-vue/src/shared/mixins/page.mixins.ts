@@ -26,7 +26,7 @@ export default class PageMixins extends Vue {
     );
     // filter.queryFilter.filters = filters;
     filter.pageIndex = this.PageInfo.PaginationHandle.Pagination.pageIndex;
-    filter.pageRow = this.PageInfo.PaginationHandle.Pagination.pageSize;
+    filter.pageSize = this.PageInfo.PaginationHandle.Pagination.pageSize;
     return filter;
   }
 }

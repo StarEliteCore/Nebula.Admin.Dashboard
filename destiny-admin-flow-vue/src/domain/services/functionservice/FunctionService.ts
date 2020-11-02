@@ -11,7 +11,7 @@ import { MainManager } from "../main/main-manager";
 import { injectable } from "inversify";
 
 @injectable()
-export class FunctionService implements IFunctionService {
+export default class FunctionService implements IFunctionService {
   /**
    * 分页获取
    * @param _page
