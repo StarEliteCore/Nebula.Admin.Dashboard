@@ -81,7 +81,7 @@ export class MenuDto implements IEntity<string> {
   description: string = "";
   parentNumber: string = "";
   depth: number = 0;
-  functionId: Array<string> = [];
+  // functionId: Array<string> = [];
   type: MenuEnum = MenuEnum.Menu;
 }
 
