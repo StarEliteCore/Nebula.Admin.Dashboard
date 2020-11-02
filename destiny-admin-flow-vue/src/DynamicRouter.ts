@@ -1,4 +1,4 @@
-import { Login, loginCallbackFunc } from './oidc-login/IdentityServerLogin';
+// import { Login, loginCallbackFunc } from './oidc-login/IdentityServerLogin';
 
 import EmptyView from "@/views/layout-emprty/layout-emprty.vue";
 import LayoutView from "@/layout/layout.vue";
@@ -21,7 +21,7 @@ router.beforeEach(async (to: any, from, next) => {
          * 存在token并且路由指定的是登录路由 
          */
         if (to.path === "/login") {
-            ToLogin(to, from, next);
+            next();
         }
         /**
          * 否则
@@ -65,38 +65,38 @@ router.beforeEach(async (to: any, from, next) => {
         }
     }
     else {
-        /**
-         * 判断是否是回调回来的页面
-         */
-        if (to.path === "/callback") {
+        // /**
+        //  * 判断是否是回调回来的页面
+        //  */
+        // if (to.path === "/callback") {
             // loginCallbackFunc();
             next();
-        }
-        else {
-            Login();
-        }
+        // }
+        // else {
+        //     Login();
+        // }
     }
 })
-/**
- * 跳转登录
- * @param to 
- * @param from 
- * @param next 
- */
-export const ToLogin = (to: any, from: any, next: any) => {
-    const IdentityServer4 = true; /**是否启用IdentityServer4 */
-    if (IdentityServer4) {
-        if (to.path === "/callback") {
-            next()
-        }
-        else {
-            Login();
-        }
-    }
-    else {
-        console.log("暂未实现非IdentityServer4登录")
-    }
-}
+// /**
+//  * 跳转登录
+//  * @param to 
+//  * @param from 
+//  * @param next 
+//  */
+// export const ToLogin = (to: any, from: any, next: any) => {
+//     const IdentityServer4 = true; /**是否启用IdentityServer4 */
+//     if (IdentityServer4) {
+//         if (to.path === "/callback") {
+//             next()
+//         }
+//         else {
+//             Login();
+//         }
+//     }
+//     else {
+//         console.log("暂未实现非IdentityServer4登录")
+//     }
+// }
 
 
 /**
