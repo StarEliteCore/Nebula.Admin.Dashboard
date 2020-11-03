@@ -76,7 +76,7 @@ export const MenuApi = {
   /**
    * 异步加载表单菜单
    */
-  loadFormMenu: "api/Menu​/LoadFormMenuAsync",
+  loadFormMenu: "api/Menu/LoadFormMenuAsync",
   /**
    * 登录成功之后获取菜单
    */
