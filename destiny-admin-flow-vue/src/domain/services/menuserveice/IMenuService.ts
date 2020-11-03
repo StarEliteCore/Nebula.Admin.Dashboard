@@ -1,7 +1,7 @@
 import { IAjaxResult, IServerPageReturn } from '@/shared/response';
 
 import { IPageRequest } from '@/shared/request';
-import { MenuDto } from '@/domain/entity/menudto/menuDto'
+import { MenuDto,MenuOutPageListDto } from '@/domain/entity/menudto/menuDto'
 
 /**
  * 菜单服务层接口定义
@@ -38,9 +38,22 @@ export interface IMenuService {
      */
     getMenuById(_id: string): Promise<IAjaxResult>;
 
-      /**
+    /**
      * 根据角色ID得到菜单树
      * @param _roleId 角色id
      */
     getMenuTreeByRoleId(_roleId?: string): Promise<IAjaxResult>;
+
+    /**
+     * 得到菜单分页数据（不是树，只是普通表格）
+     * @param _page 查询DTO
+     */
+    GetMenuPage(_page: IPageRequest): Promise<IServerPageReturn<Array<MenuOutPageListDto>>>;
+
+    /**
+     * 获取所有菜单
+     */
+    GetAllMenuTree() : Promise<IServerPageReturn<any>>;
+
+
 }

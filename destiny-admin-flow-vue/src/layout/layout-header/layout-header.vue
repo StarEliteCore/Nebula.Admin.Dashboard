@@ -1,7 +1,7 @@
 <template>
     <Header class="main-app-layout__header">
         <div>
-            头部
+            头部<button @click="LogOut">退出登录</button>
         </div>
   </Header>
 </template>>

@@ -7,7 +7,8 @@
         border: 1px solid #ddd;
         height: 100%;
         flex: 0 0 300px;
-        .searchTree,.btngroup {
+        .searchTree,
+        .btngroup {
             margin: 5px;
             width: 290px;
         }
@@ -16,24 +17,29 @@
         flex: 1;
         display: flex;
         flex-direction: column;
-        header{
+        header {
             display: flex;
             justify-content: space-between;
-            .searchdiv{
+            .searchdiv {
                 flex: 0 0 280px;
-                .searchInput{
+                .searchInput {
                     width: 200px;
                 }
-                button{
+                button {
                     width: 80px;
                 }
             }
         }
-        article{
+        article {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             height: 100%;
+            .table {
+                width: 100%;
+                flex: 1;
+                max-width: calc(100% - 1px);
+            }
         }
     }
 }

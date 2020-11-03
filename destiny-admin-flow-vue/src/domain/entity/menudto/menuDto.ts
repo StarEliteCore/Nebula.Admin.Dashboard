@@ -68,7 +68,7 @@ export interface IMenuTableDto extends IMenu, IDescription {
 }
 
 /**
- * 用户DTO
+ * 菜单DTO
  */
 export class MenuDto implements IEntity<string> {
   id: string = Guid.EMPTY;
@@ -81,18 +81,36 @@ export class MenuDto implements IEntity<string> {
   description: string = "";
   parentNumber: string = "";
   depth: number = 0;
-  functionId: Array<string> = [];
+  // functionId: Array<string> = [];
   type: MenuEnum = MenuEnum.Menu;
 }
 
-///菜单树DTO
+/**
+ * 菜单树DTO
+ */
 export class MenuTreeOutDto implements IEntity<string> {
-  id:string=Guid.EMPTY;
+  id: string = Guid.EMPTY;
   title: string | undefined;
   expand: boolean = true;
   key: string | undefined;
   parentId: string | undefined;
-  type:MenuEnum=MenuEnum.Menu;
-  children:Array<MenuTreeOutDto>=[];
-  checked:boolean=false;
+  type: MenuEnum = MenuEnum.Menu;
+  children: Array<MenuTreeOutDto> = [];
+  checked: boolean = false;
+}
+
+
+/**
+ * 菜单表格请求实体
+ */
+export class MenuOutPageListDto implements IEntity<string>, IDescription {
+  id: string = Guid.EMPTY;
+  name: string = "";
+  sort: number = 0;
+  routerPath: string = "";
+  parentId: string = "";
+  iocn: string = "";
+  depth: string = "";
+  description: string = "";
+  children: Array<MenuOutPageListDto> = new Array<MenuOutPageListDto>();
 }

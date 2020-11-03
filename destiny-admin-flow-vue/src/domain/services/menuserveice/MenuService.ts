@@ -4,7 +4,7 @@ import { IMenuService } from './IMenuService';
 import { IPageRequest } from '@/shared/request';
 import { MainManager } from '../main/main-manager';
 import { MenuApi } from '@/domain/config/api';
-import { MenuDto } from '@/domain/entity/menudto/menuDto';
+import { MenuDto, MenuOutPageListDto } from '@/domain/entity/menudto/menuDto';
 import { injectable } from 'inversify';
 
 @injectable()
@@ -13,25 +13,31 @@ export default class MenuService implements IMenuService {
         return MainManager.dataRequest.getRequest(MenuApi.getTable);
     }
     addMenu(_menu: MenuDto): Promise<IAjaxResult> {
-        return MainManager.dataRequest.getRequest(MenuApi.addMenu, _menu);
+        return MainManager.dataRequest.postRequest(MenuApi.addMenu, _menu);
     }
     updateMenu(_menu: MenuDto): Promise<IAjaxResult> {
-        return MainManager.dataRequest.getRequest(MenuApi.updateMenu, _menu);
+        return MainManager.dataRequest.putRequest(MenuApi.updateMenu, _menu);
     }
     delete(_id: string): Promise<IAjaxResult> {
-        return MainManager.dataRequest.getRequest(MenuApi.delete, _id);
+        return MainManager.dataRequest.deleteRequest(MenuApi.delete, { Id: _id });
     }
     getMenuById(_id: string): Promise<IAjaxResult> {
-        return MainManager.dataRequest.getRequest(MenuApi.loadFormMenu, _id);
+        return MainManager.dataRequest.getRequest(MenuApi.loadFormMenu, { Id: _id });
     }
     getMenuTable(_page: IPageRequest): Promise<IServerPageReturn<any>> {
         return MainManager.dataRequest.postRequest("", _page);
     }
 
-    getMenuTreeByRoleId(_roleId?: string): Promise<IAjaxResult>
-    {
+    getMenuTreeByRoleId(_roleId?: string): Promise<IAjaxResult> {
+        return MainManager.dataRequest.getRequest(MenuApi.getMenuTree, { roleId: _roleId });
+    }
 
-        return MainManager.dataRequest.getRequest("api/Menu/GetMenuTreeAsync",{roleId:_roleId});
+    GetMenuPage(_page: IPageRequest): Promise<IServerPageReturn<Array<MenuOutPageListDto>>> {
+        return MainManager.dataRequest.postRequest(MenuApi.getMenuPage, _page);
+    }
+
+    GetAllMenuTree(): Promise<IServerPageReturn<any>> {
+        return MainManager.dataRequest.getRequest(MenuApi.GetAllMenuTree);
     }
 
 }

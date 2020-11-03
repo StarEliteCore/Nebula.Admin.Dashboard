@@ -36,16 +36,18 @@ export default class SetPermission extends Mixins(OperateMixins) {
           this.title = `分配权限`;
           this.IsShow = true;
           this.roleId = _rowId;
-          console.log(res.data.selected);
-          this.defaultCheckedKeys=res.data.selected as string[];
-          // debugger;
+   
+          //this.defaultCheckedKeys=res.data.selected as string[];
           this.checkedKeys.checked=res.data.selected as string[];
+          this.expandedKeys=res.data.selected;
         }
       });
   }
 
-  private onExpand(expandedKeys: any) {
-    console.log("onExpand", expandedKeys);
+
+
+
+  public onExpand(expandedKeys:any) {
 
     this.expandedKeys = expandedKeys;
     this.autoExpandParent = false;
@@ -65,13 +67,10 @@ export default class SetPermission extends Mixins(OperateMixins) {
       });
   }
 
-  // public onCheck(checkedKeys:any)
-  // {
-  //   this.checkedKeys = checkedKeys.checked;
-  // }
-  //  public OnHandleCancelNotform()
-  //   {
+ 
+  public onSearch()
+  {
 
-  //     this.Ishow
-  //   }
+
+  }
 }
