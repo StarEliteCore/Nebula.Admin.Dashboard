@@ -50,7 +50,7 @@ export interface IQueryFilter {
   
   export interface IPageRequest {
     pageIndex: number;
-    pageRow: number;
+    pageSize: number;
     orderConditions: IOrderCondition[];
     filter: IQueryFilter;
   }
@@ -113,7 +113,7 @@ export interface IQueryFilter {
 
   export class PageRequest implements IPageRequest {
     pageIndex: number = 1;
-    pageRow: number = 10;
+    pageSize: number = 10;
     orderConditions: IOrderCondition[] = [];
     filter: IQueryFilter = new QueryFilter();
   } 

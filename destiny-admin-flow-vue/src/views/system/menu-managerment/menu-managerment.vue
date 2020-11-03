@@ -2,40 +2,82 @@
   <section class="box">
     <nav class="nav">
       <div>
-        <Input class="searchTree" placeholder="输入内容搜索" />
+        <Input class="searchTree" placeholder="输入名称搜索" />
         <br />
         <ButtonGroup class="btngroup">
-          <Button>
+          <Button @click="operateItem(operate.add)">
             <Icon type="md-add" />
           </Button>
-          <Button>
+          <Button @click="EditTreeMenu">
             <Icon type="ios-create" />
           </Button>
-          <Button>
+          <Button @click="deleteItemTreeMenu">
             <Icon type="ios-trash" />
           </Button>
         </ButtonGroup>
       </div>
-      <Tree :data="data2" show-checkbox></Tree>
+
+      <a-tree
+        v-if="treeData && treeData.length > 0"
+        :checkable="false"
+        :tree-data="treeData"
+        class="menuTree"
+        :autoExpandParent="true"
+        :defaultExpandAll="true"
+        :defaultExpandParent="true"
+        @select="treeSelected"
+      />
     </nav>
     <div class="body">
       <header>
         <div>
           <ButtonGroup>
-            <Button> <Icon type="md-add" />添加 </Button>
-            <Button> <Icon type="ios-create" />编辑 </Button>
-            <Button> <Icon type="ios-trash" />删除 </Button>
+            <Button @click="operateItem(operate.add)">
+              <Icon type="md-add" />添加
+            </Button>
+            <Button @click="operateItem(operate.update)">
+              <Icon type="ios-create" />编辑
+            </Button>
+            <Button @click="deleteItem"> <Icon type="ios-trash" />删除 </Button>
           </ButtonGroup>
         </div>
         <div class="searchdiv">
-            <Input placeholder="根据XXX搜索" class="searchInput" /><Button type="primary"><Icon type="ios-search" />搜索</Button>
+          <Input
+            placeholder="根据名称搜索"
+            class="searchInput"
+            @keyup.enter.native="loadTableData"
+            v-model="dynamicQuery.name"
+          />
+          <Button type="primary" @click="loadTableData">
+            <Icon type="ios-search" />搜索
+          </Button>
         </div>
       </header>
       <article>
-        <Table border ref="selection" :columns="columns" :data="data1"></Table>
-        <Page :total="40" size="small" show-elevator show-sizer />
+        <Table
+          :columns="columns"
+          :data="tableData"
+          border
+          stripe
+          @on-selection-change="CurrentRowEventArray"
+          class="table"
+        >
+          <template v-slot:type="{ row }">
+            <Tag v-if="row.type == enumOptions.Menu" color="red">菜单</Tag>
+            <Tag v-else-if="row.type == enumOptions.Button" color="blue"
+              >功能</Tag
+            >
+          </template>
+        </Table>
+        <page-component
+          ref="PageInfo"
+          :total="total"
+          @PageChange="pageChange"
+        ></page-component>
       </article>
     </div>
+    <menu-operate ref="MenuOperateInfo"></menu-operate>
+    <delete-dialog ref="DeleteInfo"></delete-dialog>
   </section>
 </template>
 

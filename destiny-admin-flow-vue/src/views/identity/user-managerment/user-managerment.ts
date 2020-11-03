@@ -3,6 +3,7 @@ import * as PageQuery from "@/shared/request";
 import { Component, Emit, Mixins, Ref } from "vue-property-decorator";
 import { EFilterConnect, EFilterOprator } from "@/shared/request/query.enum";
 import { ESex, IUserTableDto } from '@/domain/entity/userdto/userDto';
+import { IFilterCondition, IQueryFilter } from '@/shared/request';
 
 import DeleteMixins from "@/shared/mixins/delete-dialog.mixins";
 import { EOperate } from '@/shared/eoperate';
@@ -96,6 +97,26 @@ export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
   ];
   private userTable: Array<IUserTableDto> = [];
   private CollapseDefault: string = "1";
+  
+  private filters: IFilterCondition[] = [
+    {
+      field: "userName",
+      value: "",
+      operator: EFilterOprator.Like,
+    },
+    {
+      field: "nickName",
+      value: "",
+      operator: EFilterOprator.Like,
+    },
+    {
+      field: "isSystem",
+      value: "",
+      operator: EFilterOprator.Equal,
+    },
+  ];
+
+  private dynamicQuery: any = {};
 
   @Emit()
   pageChange() {
@@ -184,4 +205,30 @@ export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
       this.getTableData();
     })
   }
+
+    //查询
+    private search() {
+      let newFilters: IFilterCondition[] = [];
+  
+      let $this = this;
+  
+      this.filters.forEach((f) => {
+        let value = $this.dynamicQuery[f.field];
+        if (value != undefined && value != "") {
+          let filter: IFilterCondition = {
+            field: f.field,
+            value: f.operator == EFilterOprator.Like ? `%${value}%` : value,
+            operator: f.operator,
+          };
+          newFilters.push(filter);
+        }
+      });
+  
+      let filter: IQueryFilter = {
+        filterConnect: EFilterConnect.And,
+        conditions: newFilters,
+      };
+      this.queryfileter.filter = filter;
+      this.getTableData();
+    }
 }

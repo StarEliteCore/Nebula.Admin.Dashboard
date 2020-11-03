@@ -1,4 +1,4 @@
-import { Login } from '@/oidc-login/IdentityServerLogin';
+// import { Login } from '@/oidc-login/IdentityServerLogin';
 import NoticeUtils from '@/shared/Noticemessage/NoticeUtils';
 import { TokenModule } from '@/store/modules/tokenmodule';
 import axios from "axios"
@@ -34,7 +34,7 @@ service.interceptors.response.use(
             case 401:
                 // NoticeUtils.Inst().Warning("未登录","12312131313");
                 TokenModule.ResetToken();
-                Login();
+                // Login();
               break;
             case 403:
 
