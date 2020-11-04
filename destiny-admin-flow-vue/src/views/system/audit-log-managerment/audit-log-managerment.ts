@@ -10,11 +10,13 @@ import { EOperate } from "@/shared/eoperate";
 import { ITableColumn } from "@/shared/table/ITable";
 import { MainManager } from "@/domain/services/main/main-manager";
 import PageMixins from "@/shared/mixins/page.mixins";
+import TableExpandOperate from "./log-operate/table-expand.vue";
+import TableExpandOperateInfo from "./log-operate/table-expand";
 
 @Component({
   name: "AuditLogManagerment",
   components: {
-
+    TableExpandOperate
   },
 })
 export default class AuditLogManagerment extends Mixins(PageMixins, DeleteMixins) {
@@ -24,8 +26,22 @@ export default class AuditLogManagerment extends Mixins(PageMixins, DeleteMixins
 
   private CurrentSelectionArray: any = [];
 
-
+  @Ref("TableExpandOperateInfo")
+  private TableExpandOperateInfo!: TableExpandOperateInfo;
   private columns: ITableColumn[] = [
+    {
+      type: "expand",
+      width: 50,
+      align: "center",
+      render: (h: any, params: any) => {
+        // console.log(params.row);
+        return h(TableExpandOperate, {
+          props: {        
+            row: params.row,
+          },
+        });
+      },
+    },
     {
       title: "功能名",
       key: "functionName",
@@ -64,6 +80,7 @@ export default class AuditLogManagerment extends Mixins(PageMixins, DeleteMixins
         title: "浏览器信息",
         key: "browserInformation",
         align: "center",
+        tooltip:true,
       },
      
 

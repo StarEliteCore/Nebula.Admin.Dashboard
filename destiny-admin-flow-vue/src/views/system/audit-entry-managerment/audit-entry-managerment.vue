@@ -54,6 +54,10 @@
                 >查看</Button>
             
             </template>
+               <template  v-slot:keyValues="{row,index}">
+                {{row.keyValues.id}}
+                <!-- {{JSON.parse(row.keyValues)}} -->
+              </template>
           </Table>
    
         </Card>
