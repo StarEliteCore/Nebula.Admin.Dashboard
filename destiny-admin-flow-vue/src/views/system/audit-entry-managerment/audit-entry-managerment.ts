@@ -43,10 +43,11 @@ export default class AuditEntryManagerment extends Mixins(PageMixins, DeleteMixi
       maxWidth: 150
     },
     {
-      title: "主键",
+      title: "编号",
       key: "keyValues",
       align: "center",
-      maxWidth: 300
+      maxWidth: 300,
+      slot: "keyValues",
     },
     {
       title: "操作类型",
@@ -66,7 +67,13 @@ export default class AuditEntryManagerment extends Mixins(PageMixins, DeleteMixi
       title: "审计时间",
       key: "createdTime",
       align: "center",
-    }
+    },
+    {
+      title: "操作",
+      slot: "action",
+      align: "center",
+      width: 100,
+    },
   ];
   private auditEntryTable: Array<IAuditEntryTableDto> = [];
 
@@ -81,7 +88,7 @@ export default class AuditEntryManagerment extends Mixins(PageMixins, DeleteMixi
       field: "entityDisplayName",
       value: "",
       operator: EFilterOprator.Equal,
-    },
+    }
   ];
 
   private dynamicQuery: any = {};

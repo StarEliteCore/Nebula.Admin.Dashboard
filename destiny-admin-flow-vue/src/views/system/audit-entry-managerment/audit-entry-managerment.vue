@@ -20,7 +20,7 @@
                              <Input  v-model="dynamicQuery.entityDisplayName"   />
                         </FormItem>
                       </Col>
-                   
+                  
                
                   </Row>
                     <FormItem >
@@ -45,8 +45,21 @@
               <Tag v-else-if="row.operationType===2" color="blue">删除</Tag>
               <Tag v-else-if="row.operationType===3" color="blue">更新</Tag>
             </template>
+            <template  slot="action" slot-scope="{row,index}">
+              <Button
+                class="table-button table-button--primary"
+                type="primary"
+                size="small"
+                ghost @click="CurrentRowClick(row,index)"
+                >查看</Button>
+            
+            </template>
+               <template  v-slot:keyValues="{row,index}">
+                {{row.keyValues.id}}
+                <!-- {{JSON.parse(row.keyValues)}} -->
+              </template>
           </Table>
-      
+   
         </Card>
       </div>
         <entry-propert-operate ref="EntryPropertyOperateInfo"></entry-propert-operate>
