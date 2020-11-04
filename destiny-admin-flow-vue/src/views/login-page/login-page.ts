@@ -64,7 +64,6 @@ export default class Login extends Vue {
     oidcmgr
       .signinRedirectCallback()
       .then((res: Oidc.User) => {
-        debugger;
         console.log(res.profile);
         // res.profile.name 用户名
         // res.profile.sub 密码
