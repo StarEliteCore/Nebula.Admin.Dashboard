@@ -55,6 +55,7 @@ export default class Login extends Vue {
    * 登录
    */
   loginFunc() {
+    debugger
     oidcmgr.signinRedirect(); //执行重定向
   }
   /**

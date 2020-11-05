@@ -1,3 +1,4 @@
+/* eslint-disable vue/no-unused-vars */
 <template>
   <section class="box">
     <div class="body">
@@ -20,8 +21,6 @@
                              <Input  v-model="dynamicQuery.entityDisplayName"   />
                         </FormItem>
                       </Col>
-                  
-               
                   </Row>
                     <FormItem >
                           <Button type="primary" @click="search()">查询</Button>
@@ -34,7 +33,6 @@
       <div>
         <Card :dis-hover="true">
         <Table :columns="columns" :data="auditEntryTable" border stripe @on-select-cancel="CurrentRowEventCancel"    @on-select="CurrentRowEventArray" @on-row-click="CurrentRowClick">
-            
             <template slot-scope="{ row }" slot="operationType">
               <Tag v-if="row.operationType===0" color="blue">
                  无
@@ -54,7 +52,7 @@
                 >查看</Button>
             
             </template>
-               <template  v-slot:keyValues="{row,index}">
+               <template  v-slot:keyValues="{row}">
                 {{row.keyValues.id}}
                 <!-- {{JSON.parse(row.keyValues)}} -->
               </template>
