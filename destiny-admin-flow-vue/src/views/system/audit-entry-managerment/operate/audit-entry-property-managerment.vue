@@ -1,17 +1,23 @@
+<style scoped>
+.expand-row {
+  margin-bottom: 16px;
+}
+</style>
 <template>
-   <Drawer :styles="styles"  title="查看属性审计"      width="720" :closable="false"  v-model="isOpenDrawer" >
-
-      <Table :columns="columns" :data="auditEntryPropertyTable"   border stripe @on-select-cancel="CurrentRowEventCancel"    @on-select="CurrentRowEventArray">
-            
- 
-    </Table>
-   <page-component
-        ref="PageInfo"
-        :total="total"
-        @PageChange="pageChange"
-      ></page-component>
-   
-  </Drawer>
+  <div>
+    <Row class="expand-row">
+      <Card :dis-hover="true">
+        <p slot="title">属性变更明细</p>
+        <Table :columns="columns" :data="auditEntryPropertyTable" border stripe>
+        </Table>
+        <page-component
+          ref="PageInfo"
+          :total="total"
+          @PageChange="pageChange"
+        ></page-component>
+      </Card>
+    </Row>
+  </div>
 </template>
 
 <script lang="ts" src="./audit-entry-property-managerment.ts"></script>

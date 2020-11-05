@@ -8,7 +8,6 @@ import { IFilterCondition, IQueryFilter, QueryFilter } from "@/shared/request";
 import DeleteMixins from "@/shared/mixins/delete-dialog.mixins";
 import { EOperate } from "@/shared/eoperate";
 import EntryPropertOperate from "./operate/audit-entry-property-managerment.vue"
-import EntryPropertyOperateInfo from "./operate/audit-entry-property-managerment"
 import { ITableColumn } from "@/shared/table/ITable";
 import { MainManager } from "@/domain/services/main/main-manager";
 import PageMixins from "@/shared/mixins/page.mixins";
@@ -22,14 +21,22 @@ import { Row } from 'ant-design-vue';
 })
 export default class AuditEntryManagerment extends Mixins(PageMixins, DeleteMixins) {
   private queryfileter: PageQuery.IPageRequest = new PageQuery.PageRequest();
-  private CurrentRow!: IAuditEntryTableDto;
-  private CurrentArray: Array<IAuditEntryTableDto> = [];
 
-  private CurrentSelectionArray: any = [];
 
 
   private columns: ITableColumn[] = [
-
+    {
+      type: "expand",
+      width: 50,
+      align: "center",
+      render: (h: any, params: any) => {
+        return h(EntryPropertOperate, {
+          props: {
+            row: params.row,
+          },
+        });
+      },
+    },
     {
       title: "实体名称",
       key: "entityAllName",
@@ -67,13 +74,7 @@ export default class AuditEntryManagerment extends Mixins(PageMixins, DeleteMixi
       title: "审计时间",
       key: "createdTime",
       align: "center",
-    },
-    {
-      title: "操作",
-      slot: "action",
-      align: "center",
-      width: 100,
-    },
+    }
   ];
   private auditEntryTable: Array<IAuditEntryTableDto> = [];
 
@@ -145,26 +146,4 @@ export default class AuditEntryManagerment extends Mixins(PageMixins, DeleteMixi
   }
 
 
-  private CurrentRowEventArray(_selection: any, _row: any) {
-    this.CurrentRow = _row;
-    this.CurrentSelectionArray = _selection;
-    // console.log(_row, _selection);
-  }
-
-  private CurrentRowEventCancel(_selection: any, _row: any) {
-    this.CurrentRow = _row;
-    this.CurrentSelectionArray = _selection;
-  }
-
-
-  @Ref("EntryPropertyOperateInfo")
-  private EntryPropertyOperateInfo!:EntryPropertyOperateInfo;
-
-  private CurrentRowClick(row:any,index:any)
-  {
-
-
-    this.EntryPropertyOperateInfo.showDrawer(row.id);
-
-  }
 }
