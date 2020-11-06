@@ -5,18 +5,19 @@ import { MenuList } from "@/modules/static/menuindex";
 import { MenuModule } from "@/store/modules/menumodule";
 import Oidc from "oidc-client";
 import { TokenModule } from "@/store/modules/tokenmodule";
+import ApplicationUserManager from '@/shared/config/IdentityServerFourLogin';
 
 const oidcmgr = new Oidc.UserManager(LoginConfig);
 @Component({
   name: "Login",
 })
 export default class Login extends Vue {
-  @Watch("$route.name", { immediate: true }) //监听路由名称的变化
-  WatchRoute(_name: string) {
-    this.init(_name);
-  }
+  // @Watch("$route.name", { immediate: true }) //监听路由名称的变化
+  // WatchRoute(_name: string) {
+  //   this.init(_name);
+  // }
   private created() {
-    // this.loginCallbackFn();
+    this.loginCallbackFn();
     // oidcmgr
     //     .signinRedirectCallback()
     //     .then((res: Oidc.User) => {
@@ -55,38 +56,30 @@ export default class Login extends Vue {
    * 登录
    */
   loginFunc() {
-    debugger
     oidcmgr.signinRedirect(); //执行重定向
   }
   /**
    * 登录重定向
    */
-  loginCallbackFn() {
-    oidcmgr
-      .signinRedirectCallback()
-      .then((res: Oidc.User) => {
-        console.log(res.profile);
-        // res.profile.name 用户名
-        // res.profile.sub 密码
-        if (res.access_token) {
-          localStorage.setItem("id_token", res.id_token);
-          TokenModule.SetToken(res.access_token);
-          // ...  信息处理
-          // 跳转路由
-          this.$router.push({
-            path: "/home-page",
-          });
-        }
-      })
-      .catch((e: any) => {
-        console.error(e);
+  async loginCallbackFn() {
+    await ApplicationUserManager.signinRedirectCallback();
+    let user = await ApplicationUserManager.getUser();
+    console.log(user)
+    if (user !== null) {
+      localStorage.setItem("id_token", user.id_token);
+      TokenModule.SetToken(user.access_token);
+      // ...  信息处理
+      // 跳转路由
+      this.$router.push({
+        path: "/home-page",
       });
+    }
+
   }
   /**
    * 退出登录
    */
   logoutFn() {
-      debugger
     oidcmgr
       .signoutRedirectCallback(LoginConfig.post_logout_redirect_uri)
       .then((res: any) => {
@@ -97,7 +90,6 @@ export default class Login extends Vue {
         Object.keys(sessionStorage).forEach((item) =>
           item.indexOf("oidc.") != -1 ? sessionStorage.removeItem(item) : ""
         );
-        debugger
         this.$router.push({
           name: "login",
         });
