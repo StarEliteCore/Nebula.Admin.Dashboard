@@ -11,7 +11,7 @@ export class ApplicationUserManager extends UserManager {
     public async Login() {
         // console.log(LoginConfig.authority,LoginConfig.client_id,LoginConfig.redirect_uri,LoginConfig.response_type,LoginConfig.scope,LoginConfig.post_logout_redirect_uri)
 
-
+debugger
         this.signinRedirect(); //执行重定向
     };
     /**
