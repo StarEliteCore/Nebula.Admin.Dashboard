@@ -1,6 +1,7 @@
 .box {
     display: flex;
     height: 100%;
+width: 100%;
     .nav {
         display: flex;
         flex-direction: column;
@@ -14,9 +15,7 @@
         }
     }
     .body {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
+width: calc(100% - 300px);
         header {
             display: flex;
             justify-content: space-between;
@@ -34,7 +33,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 100%;
+            height: calc(100% - 60px);
             .table {
                 width: 100%;
                 flex: 1;
