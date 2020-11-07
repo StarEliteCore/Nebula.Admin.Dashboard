@@ -7,9 +7,9 @@ import OperateMixins from "@/shared/mixins/operate.mixins";
 
 
 @Component({
-    name: "MenuOperates",
+    name: "MenuOperate",
 })
-export default class UserOperate extends Mixins(OperateMixins) {
+export default class MenuOperate extends Mixins(OperateMixins) {
     private menuDto: MenuDto = new MenuDto();
     private treeData: Array<any> = [];
     private enumSelectOptions: Array<any> = [
