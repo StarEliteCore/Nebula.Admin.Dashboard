@@ -12,7 +12,6 @@ import { IFilterCondition, IQueryFilter } from '@/shared/request';
 import { EFilterConnect, EFilterOprator } from '@/shared/request/query.enum';
 
 import MenuOperate from "./menu-operate/menu-operate.vue";
-import MenuOperateInfo from "./menu-operate/menu-operate";
 
 import { EOperate } from '@/shared/eoperate';
 
@@ -153,8 +152,8 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
       });
   }
   private loadTreeData() {
-    this.treeSelectedId = "";
-    this.treeSelectedMenu = {};
+    // this.treeSelectedId = "";
+    // this.treeSelectedMenu = {};
 
     this.showTreeLoading = true;
     this.mainManager.MenuService.GetAllMenuTree()
@@ -183,21 +182,13 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
     this.CurrentArray = _selection;
   }
 
-  @Ref("MenuOperateInfo")
-  private MenuOperateInfo!: MenuOperateInfo;
-
   /**
    * @param _type 操作方法
    * @param _rowId 
    */
-  private operateItem(_type: EOperate, _rowId?: string) {
+  private operateItem(_type: EOperate) {
     if (_type === EOperate.add) {
-      this.MenuOperateInfo.Show(
-        _type,
-        this.treeData,
-        this.treeSelectedId,
-        (res: boolean) => { this.loadData(); }
-      );
+      (this.$refs.MenuOperateInfo as Vue).$emit("showAdd");
     } else if (_type === EOperate.update) {
       if (this.CurrentArray.length === 0) {
         this.$Message.error("请选择要修改的项");
@@ -206,14 +197,7 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
         this.$Message.error("请选择一项修改");
         return;
       }
-      const _row = this.CurrentRow;
-      this.MenuOperateInfo.Show(
-        _type,
-        this.treeData,
-        this.treeSelectedId,
-        (res: boolean) => { this.loadData(_row.type); },
-        _row.id
-      );
+      (this.$refs.MenuOperateInfo as Vue).$emit("showEdit");
     }
 
   }
@@ -224,13 +208,7 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
       return;
     }
 
-    this.MenuOperateInfo.Show(
-      EOperate.update,
-      this.treeData,
-      "",
-      (res: boolean) => { this.loadData(); },
-      this.treeSelectedId
-    );
+    (this.$refs.MenuOperateInfo as Vue).$emit("showTreeNodeEdit");
   }
 
   private deleteItemTreeMenu() {

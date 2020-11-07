@@ -96,7 +96,14 @@
         ></page-component>
       </article>
     </div>
-    <menu-operate ref="MenuOperateInfo"></menu-operate>
+    <menu-operate
+      ref="MenuOperateInfo"
+      :treeData="treeData"
+      :currentMenu="CurrentRow"
+      :currentTreeNode="treeSelectedMenu"
+      @refreshAll="loadData"
+      @refreshButton="loadData(enumOptions.Button)"
+    ></menu-operate>
     <delete-dialog ref="DeleteInfo"></delete-dialog>
     <add-menu-function
       ref="AddMenuFunction"
