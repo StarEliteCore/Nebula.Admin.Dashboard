@@ -34,13 +34,15 @@
       <div>
         <Card :dis-hover="true">
         <Table :columns="columns" :data="auditLogTable" border stripe @on-select-cancel="CurrentRowEventCancel"    @on-select="CurrentRowEventArray">
-            
+            <!-- <template slot-scope="{ row }" slot="expand">
+              <table-expand-operate :row="row"></table-expand-operate>
+            </template> -->
         
           </Table>
       
         </Card>
       </div>
-      
+        <!-- <table-expand-operate ref="TableExpandOperateInfo"></table-expand-operate> -->
       <page-component
         ref="PageInfo"
         :total="total"

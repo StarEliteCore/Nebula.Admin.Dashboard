@@ -2,7 +2,10 @@ import * as PageQuery from "@/shared/request";
 
 import { Component, Emit, Mixins, Ref } from "vue-property-decorator";
 import { EFilterConnect, EFilterOprator } from "@/shared/request/query.enum";
-import { IAuditLogOutputPageDto, IAuditLogTableDto } from '@/domain/entity/auditdto/auditDto';
+import {
+  IAuditLogOutputPageDto,
+  IAuditLogTableDto,
+} from "@/domain/entity/auditdto/auditDto";
 import { IFilterCondition, IQueryFilter, QueryFilter } from "@/shared/request";
 
 import DeleteMixins from "@/shared/mixins/delete-dialog.mixins";
@@ -10,28 +13,37 @@ import { EOperate } from "@/shared/eoperate";
 import { ITableColumn } from "@/shared/table/ITable";
 import { MainManager } from "@/domain/services/main/main-manager";
 import PageMixins from "@/shared/mixins/page.mixins";
+import TableExpandOperate from "./log-operate/audit-entry-table-expand.vue";
 
 @Component({
   name: "AuditLogManagerment",
   components: {
-
+    TableExpandOperate,
   },
 })
-export default class AuditLogManagerment extends Mixins(PageMixins, DeleteMixins) {
+export default class AuditLogManagerment extends Mixins(
+  PageMixins,
+  DeleteMixins
+) {
   private queryfileter: PageQuery.IPageRequest = new PageQuery.PageRequest();
   private CurrentRow!: IAuditLogTableDto;
   private CurrentArray: Array<IAuditLogTableDto> = [];
 
   private CurrentSelectionArray: any = [];
 
-
   private columns: ITableColumn[] = [
     {
-      type: "selection",
-      width: 60,
+      type: "expand",
+      width: 50,
       align: "center",
+      render: (h: any, params: any) => {
+        return h(TableExpandOperate, {
+          props: {
+            row: params.row,
+          },
+        });
+      },
     },
-
     {
       title: "功能名",
       key: "functionName",
@@ -39,8 +51,26 @@ export default class AuditLogManagerment extends Mixins(PageMixins, DeleteMixins
       maxWidth: 150,
     },
     {
-      title: "审计Url",
+      title: "用户名",
+      key: "userName",
+      align: "center",
+      maxWidth: 90,
+    },
+    {
+      title: "昵称",
+      key: "nickName",
+      align: "center",
+      maxWidth: 90,
+    },
+
+    {
+      title: "Url",
       key: "action",
+      align: "center",
+    },
+    {
+      title: "IP地址",
+      key: "ip",
       align: "center",
     },
     {
@@ -49,23 +79,19 @@ export default class AuditLogManagerment extends Mixins(PageMixins, DeleteMixins
       align: "center",
     },
     {
-        title: "浏览器信息",
-        key: "browserInformation",
-        align: "center",
-      },
-      {
-        title: "IP地址",
-        key: "ip",
-        align: "center",
-      },
+      title: "浏览器信息",
+      key: "browserInformation",
+      align: "center",
+      tooltip: true,
+    },
+
     {
       title: "审计时间",
       key: "createdTime",
       align: "center",
-    }
+    },
   ];
   private auditLogTable: Array<IAuditLogOutputPageDto> = [];
-
 
   private filters: IFilterCondition[] = [
     {
@@ -81,8 +107,6 @@ export default class AuditLogManagerment extends Mixins(PageMixins, DeleteMixins
   ];
 
   private dynamicQuery: any = {};
-
-
 
   //查询
   private search() {
@@ -133,7 +157,6 @@ export default class AuditLogManagerment extends Mixins(PageMixins, DeleteMixins
       });
   }
 
-
   private CurrentRowEventArray(_selection: any, _row: any) {
     this.CurrentRow = _row;
     this.CurrentSelectionArray = _selection;
@@ -144,6 +167,4 @@ export default class AuditLogManagerment extends Mixins(PageMixins, DeleteMixins
     this.CurrentRow = _row;
     this.CurrentSelectionArray = _selection;
   }
-
-
 }

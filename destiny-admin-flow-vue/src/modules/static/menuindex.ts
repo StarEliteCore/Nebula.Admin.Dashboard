@@ -142,6 +142,20 @@ export const MenuList: IMenuRouter =
                     parentNumber: "",
                     name: "数据字典",
                     children: [],
+                },
+                {
+                    id: Guid.create().toString(),
+                    sort: -1,
+                    type: MenuEnum.Menu,
+                    path: "/identity/organization",
+                    redirect: "",
+                    componentName: "",
+                    component: "identity/organization-managerment/organization-managerment",
+                    icon: "",
+                    parentId: "da92480a-5914-a8bc-110b-aedb0457ce6d",
+                    parentNumber: "",
+                    name: "组织架构",
+                    children: [],
                 }
             ],
         }

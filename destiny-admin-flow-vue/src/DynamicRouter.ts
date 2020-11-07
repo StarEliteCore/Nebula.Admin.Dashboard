@@ -6,6 +6,7 @@ import { MenuList } from './modules/static/menuindex';
 import { MenuModule } from './store/modules/menumodule';
 import { TokenModule } from './store/modules/tokenmodule';
 import router from "@/router/index";
+import ApplicationUserManager  from '@/shared/config/IdentityServerFourLogin';
 
 const _import = require("./router/import/_import_" + process.env.NODE_ENV);
 
@@ -68,13 +69,12 @@ router.beforeEach(async (to: any, from, next) => {
         // /**
         //  * 判断是否是回调回来的页面
         //  */
-        // if (to.path === "/callback") {
-            // loginCallbackFunc();
+        if (to.path === "/callback") {
             next();
-        // }
-        // else {
-        //     Login();
-        // }
+        }
+        else {
+            ApplicationUserManager.Login();
+        }
     }
 })
 // /**
@@ -108,7 +108,6 @@ router.beforeEach(async (to: any, from, next) => {
 function routeGo(to: any, from: any, next: any) {
     // console.log(_import(getRouter[0].component));
     getRouter = filterAsyncRouter(getRouter);
-    console.log(getRouter);
     router.addRoutes(getRouter);
     // router.addRoutes(NotFoundRouterMap);
     if (to.matched.length === 0) {
