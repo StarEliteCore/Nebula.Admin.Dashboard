@@ -4,6 +4,9 @@ import DeleteMixins from '@/shared/mixins/delete-dialog.mixins';
 import * as PageQuery from '@/shared/request';
 import { ITableColumn } from '../../../shared/table/ITable';
 import { MenuEnum } from '@/domain/entity/menudto/menuDto';
+import { IDataDictionaryDto } from '@/domain/entity/dataDictionaryDto/dataDictionaryDto';
+import { MainManager } from '../../../domain/services/main/main-manager';
+
 
 @Component({
     name:"DataDictionaryManagerment",
@@ -15,6 +18,7 @@ import { MenuEnum } from '@/domain/entity/menudto/menuDto';
 export default class DataDictionaryManagerment extends Mixins(PageMixins,DeleteMixins){
     private queryfileter: PageQuery.IPageRequest = new PageQuery.PageRequest();
     private CurrentRow: any = {};
+    private treeData:Array<IDataDictionaryDto> = [];
 
     private columns: ITableColumn[] = [
         {
@@ -32,8 +36,24 @@ export default class DataDictionaryManagerment extends Mixins(PageMixins,DeleteM
         }
     ];
 
+    private mainManager : MainManager = MainManager.Instance();
+
+    @Emit()
     pageChange(){
         this.loadData(MenuEnum.Button);
+    }
+
+    private mounted() {
+        this.loadData();
+    }
+
+    private loadTreeData(){
+        this.mainManager.DataDictionarySrevice.getDataDictionaryTree()
+        .then(res => {
+            if(res.success){
+                this.treeData = res.data
+            }
+        })
     }
 
     private async getTableData(){
@@ -41,6 +61,7 @@ export default class DataDictionaryManagerment extends Mixins(PageMixins,DeleteM
     }
 
     private loadData(type?:MenuEnum){
-        
+        debugger
+        if (type !== MenuEnum.Button) this.loadTreeData();
     }
 }

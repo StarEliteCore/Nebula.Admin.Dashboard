@@ -59,10 +59,10 @@
             <article>
                 <Table
                     :columns="columns"
-                    :data="tableData"
+                    
                     border
                     tripe
-                    @on-selection-change="CurrentRowEventArray"
+                    
                     class="table"
                 >
 

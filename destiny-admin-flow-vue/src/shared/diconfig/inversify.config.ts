@@ -13,6 +13,8 @@ import MenuService from '@/domain/services/menuserveice/MenuService';
 import RoleService from '@/domain/services/roleservice/RoleService';
 import SystemService from '@/domain/services/systemservice/SystemService';
 import UserService from '@/domain/services/userservice/UserService';
+import { IDataDictionaryService } from '../../domain/services/dataDictionaryServeice/IDataDictionaryService';
+import DataDictionaryService from '@/domain/services/dataDictionaryServeice/DataDictionaryService';
 
 const container = new Container();
 container.bind<MainService>(IocTypes.MainService).to(MainService)
@@ -22,4 +24,5 @@ container.bind<ICodeGeneratorService>(IocTypes.CodeGeneratorService).to(CodeGene
 container.bind<IRoleService>(IocTypes.RoleService).to(RoleService)
 container.bind<IFunctionService>(IocTypes.FunctionService).to(FunctionService)
 container.bind<ISystemService>(IocTypes.SystemService).to(SystemService);
+container.bind<IDataDictionaryService>(IocTypes.DataDictionaryService).to(DataDictionaryService)
 export default container;

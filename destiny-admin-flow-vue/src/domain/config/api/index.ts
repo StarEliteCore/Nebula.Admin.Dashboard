@@ -142,3 +142,13 @@ export const AuditApi = {
    // 得到数据属性分页
   getAuditEntryPropertyPage: "api/AuditEntry/GetAuditEntryPropertyPageAsync",
 };
+
+/**
+ * 数据字典API
+ */
+export const DataDictionaryApi = {
+  /**
+   * 数据字典树
+   */
+  getDataDictionaryTreeData:"api/DataDictionary/GetTableAsync"
+}

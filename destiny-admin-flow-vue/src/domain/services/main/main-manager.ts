@@ -10,6 +10,7 @@ import { IocTypes } from "@/shared/diconfig/ioc-types";
 import { MainService } from "./main-service";
 import container from "@/shared/diconfig/inversify.config";
 import request from "@/utils/request";
+import { IDataDictionaryService } from '../dataDictionaryServeice/IDataDictionaryService';
 
 export class MainManager {
   //#region  单例
@@ -46,6 +47,10 @@ export class MainManager {
 
   public get SystemService(): ISystemService {
     return this.services.SystemService;
+  }
+
+  public get DataDictionarySrevice():IDataDictionaryService{
+    return this.services.DataDictionaryService;
   }
 
   constructor() {
