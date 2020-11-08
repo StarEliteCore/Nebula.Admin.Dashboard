@@ -142,3 +142,28 @@ export const AuditApi = {
    // 得到数据属性分页
   getAuditEntryPropertyPage: "api/AuditEntry/GetAuditEntryPropertyPageAsync",
 };
+
+///组织架构API
+export const OrganizationApi = {
+  /**
+   * 分页 + 条件获取组织架构子级列表
+   */
+  getOrganizationPage: "api/Organization/GetPageOrganizationAsync",
+  /**
+   * 获取树形
+   */
+  getOrganizationTree: "api/Organization/GetOrganizationTreeAsync",
+  /**
+   * 添加组织架构
+   */
+  createrOrganization: "api/Organization/CreateAsync",
+
+  /**
+   * 删除一个组织架构
+   */
+  deleteOrganization: "api/Organization/DeleteAsync",
+  /**
+   * 修改组织架构
+   */
+  updateOrganization:"api/Organization/UpdateAsync",
+};

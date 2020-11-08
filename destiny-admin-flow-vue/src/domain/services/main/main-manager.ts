@@ -3,6 +3,7 @@ import DataRequest, { IDataRequest } from "@/shared/data-request";
 import { ICodeGeneratorService } from "../codeGeneratorServeice/ICodeGeneratorService";
 import { IFunctionService } from "../functionservice/IFunctionService";
 import { IMenuService } from "../menuserveice/IMenuService";
+import { IOrganizationService } from '../organizationservice/IOrganizationService';
 import { IRoleService } from "../roleservice/IRoleService";
 import { ISystemService } from '../systemservice/ISystemService';
 import { IUserService } from "../userservice/IUserService";
@@ -46,6 +47,9 @@ export class MainManager {
 
   public get SystemService(): ISystemService {
     return this.services.SystemService;
+  }
+  public get OrganizationService(): IOrganizationService {
+    return this.services.OrganizationService;
   }
 
   constructor() {

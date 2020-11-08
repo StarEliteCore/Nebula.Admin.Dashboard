@@ -9,6 +9,7 @@ import "reflect-metadata";
 import { ICodeGeneratorService } from "../codeGeneratorServeice/ICodeGeneratorService";
 import { IFunctionService } from "../functionservice/IFunctionService";
 import { IMenuService } from "../menuserveice/IMenuService";
+import { IOrganizationService } from '../organizationservice/IOrganizationService';
 import { IRoleService } from "../roleservice/IRoleService";
 import { ISystemService } from '../systemservice/ISystemService';
 import { IUserService } from "../userservice/IUserService";
@@ -20,7 +21,7 @@ export class MainService {
   private _roleService: IRoleService;
   private _functionService: IFunctionService;
  private  _systemService:ISystemService;
-
+ private  _organizationService:IOrganizationService;
   public get MenuServiceApi(): IMenuService {
     return this._menuserverceApi;
   }
@@ -45,6 +46,12 @@ export class MainService {
     return this._systemService;
 
   }
+  public get OrganizationService():IOrganizationService{
+
+    return this._organizationService;
+
+  }
+  
   
 
   /**
@@ -60,7 +67,8 @@ export class MainService {
     _codeGenerator: ICodeGeneratorService,
     @inject(IocTypes.RoleService) _roleService: IRoleService,
     @inject(IocTypes.FunctionService) _functionService: IFunctionService,
-    @inject(IocTypes.SystemService) _systemService:ISystemService
+    @inject(IocTypes.SystemService) _systemService:ISystemService,
+    @inject(IocTypes.OrganizationService) _organizationService:IOrganizationService
   ) {
     this._menuserverceApi = _menu;
     this._userserverceApi = _user;
@@ -68,6 +76,7 @@ export class MainService {
     this._roleService = _roleService;
     this._functionService = _functionService;
     this._systemService=_systemService;
+    this._organizationService=_organizationService;
  
   }
 }

@@ -16,7 +16,7 @@ switch (env) {
     case "development":
         // 测试站点
         defaultConsts.appBaseUrl = "http://localhost:8848";
-        defaultConsts.token_root = "http://localhost:50001";//"http://localhost:50001";
+        defaultConsts.token_root = "https://auth.destinycore.club";//"http://localhost:50001";
         defaultConsts.client_id = "DestinyCoreFlowReactClient";
         break;
     case "production":
