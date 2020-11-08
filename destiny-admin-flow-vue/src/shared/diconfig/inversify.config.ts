@@ -1,7 +1,9 @@
 import { CodeGeneratorService } from '@/domain/services/codeGeneratorServeice/CodeGeneratorService';
 import { Container } from "inversify";
+import DestinyCoreServeice from '@/domain/services/destinycoreserveice/DestinyCoreServeice';
 import FunctionService from '@/domain/services/functionservice/FunctionService';
 import { ICodeGeneratorService } from '@/domain/services/codeGeneratorServeice/ICodeGeneratorService';
+import { IDestinyCoreServeice } from '@/domain/services/destinycoreserveice/IDestinyCoreServeice';
 import { IFunctionService } from '@/domain/services/functionservice/IFunctionService';
 import { IMenuService } from '@/domain/services/menuserveice/IMenuService';
 import { IRoleService } from '@/domain/services/roleservice/IRoleService';
@@ -21,5 +23,6 @@ container.bind<IUserService>(IocTypes.UserService).to(UserService)
 container.bind<ICodeGeneratorService>(IocTypes.CodeGeneratorService).to(CodeGeneratorService)
 container.bind<IRoleService>(IocTypes.RoleService).to(RoleService)
 container.bind<IFunctionService>(IocTypes.FunctionService).to(FunctionService)
-container.bind<ISystemService>(IocTypes.SystemService).to(SystemService);
+container.bind<ISystemService>(IocTypes.SystemService).to(SystemService)
+container.bind<IDestinyCoreServeice>(IocTypes.DestinyCoreServeice).to(DestinyCoreServeice)
 export default container;
