@@ -12,14 +12,14 @@ import { FunctionInputDto } from "@/domain/entity/functiondto/functionDto";
     name: "add-menu-function",
 })
 export default class AddMenuFunction extends Mixins(PageMixins) {
-    @Prop(Boolean) isShow!: Boolean;
-    @Prop(String) menuId!: String;
-    @Prop(String) name!: String;
+    @Prop(Boolean) isShow!: boolean;
+    @Prop(String) menuId!: string;
+    @Prop(String) name!: string;
 
     get isShowModal() {
         return this.isShow;
     }
-    set isShowModal(isShow: Boolean) {
+    set isShowModal(isShow: boolean) {
         if (isShow === false) {
             this.ClearData();
         }
@@ -150,7 +150,7 @@ export default class AddMenuFunction extends Mixins(PageMixins) {
         }
         this.isLoading = true;
         this.mainManager.MenuService.BatchAddMenuFunctionAsync(
-            this.menuId as string,
+            this.menuId,
             this.CurrentArray.map((p) => p.id)
         ).then((res) => {
             if (res.success) {

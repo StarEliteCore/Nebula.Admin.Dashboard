@@ -12,14 +12,14 @@ import { FunctionInputDto } from "@/domain/entity/functiondto/functionDto";
     name: "remove-menu-function",
 })
 export default class RemoveMenuFunction extends Mixins(PageMixins) {
-    @Prop(Boolean) isShow!: Boolean;
-    @Prop(String) menuId!: String;
-    @Prop(String) name!: String;
+    @Prop(Boolean) isShow!: boolean;
+    @Prop(String) menuId!: string;
+    @Prop(String) name!: string;
 
     get isShowModal() {
         return this.isShow;
     }
-    set isShowModal(isShow: Boolean) {
+    set isShowModal(isShow: boolean) {
         if (isShow === false) {
             this.ClearData();
         }
@@ -95,7 +95,7 @@ export default class RemoveMenuFunction extends Mixins(PageMixins) {
         var mid = this.menuId;
 
         this.mainManager.MenuService.GetMenuFunctionByMenuIdPageAsync(
-            this.menuId as string,
+            this.menuId,
             this.tranfer(this.queryfileter)
         ).then((res) => {
             if (res.success) {
