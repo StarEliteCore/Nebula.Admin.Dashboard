@@ -3,15 +3,27 @@
  */
 export interface ISelectListItem {
     /**
-     * 唯一值
+     * 值
      */
-    value: boolean;
+    value: string;
     /**
-     * 顯示值
+     * 显示名
      */
-    text: string;
+    label: string;
     /**
      * 是否選中
      */
-    selected: boolean;
+    selected?: boolean;
+}
+
+export class SelectListItem implements ISelectListItem
+{
+
+    constructor(public value:string,public label:string,public selected?:boolean)
+    {
+
+
+    }
+    
+    
 }
