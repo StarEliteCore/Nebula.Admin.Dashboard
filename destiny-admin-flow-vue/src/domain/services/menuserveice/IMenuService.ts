@@ -1,7 +1,9 @@
 import { IAjaxResult, IServerPageReturn } from '@/shared/response';
 
 import { IPageRequest } from '@/shared/request';
-import { MenuDto,MenuOutPageListDto } from '@/domain/entity/menudto/menuDto'
+import { MenuDto, MenuOutPageListDto } from '@/domain/entity/menudto/menuDto';
+
+import { FunctionInputDto } from "@/domain/entity/functiondto/functionDto";
 
 /**
  * 菜单服务层接口定义
@@ -53,7 +55,25 @@ export interface IMenuService {
     /**
      * 获取所有菜单
      */
-    GetAllMenuTree() : Promise<IServerPageReturn<any>>;
+    GetAllMenuTree(): Promise<IServerPageReturn<any>>;
 
+    /**
+     * 批量添加功能菜单
+     * @param menuId 菜单ID
+     * @param functionIds 功能ID集合
+     */
+    BatchAddMenuFunctionAsync(menuId: string, functionIds: Array<string>): Promise<IAjaxResult>;
 
+    /**
+     * 批量删除功能菜单
+     * @param menuId 菜单ID
+     * @param functionIds 功能ID集合
+     */
+    BatchDeleteMenuFunctionAsync(menuId: string, functionIds: Array<string>): Promise<IAjaxResult>;
+
+    /**
+     * 根据菜单ID得到菜单功能分页
+     * @param _page 查询DTO
+     */
+    GetMenuFunctionByMenuIdPageAsync(menuId: string,_page: IPageRequest): Promise<IServerPageReturn<Array<FunctionInputDto>>>;
 }

@@ -109,6 +109,18 @@ export const MenuApi = {
    * 获取所有菜单
    */
   GetAllMenuTree:"/api/Menu/GetAllMenuTreeAsync",
+  /**
+   * 批量添加功能菜单
+   */
+  BatchAddMenuFunction:"/api/MenuFunction/BatchAddMenuFunctionAsync",
+  /**
+   * 批量删除功能菜单
+   */
+  BatchDeleteMenuFunction:"/api/MenuFunction/BatchDeleteMenuFunctionAsync",
+  /**
+   * 根据菜单ID得到菜单功能分页
+   */
+  GetMenuFunctionByMenuIdPage:"/api/MenuFunction/GetMenuFunctionByMenuIdPageAsync",
 };
 
 ///功能API
