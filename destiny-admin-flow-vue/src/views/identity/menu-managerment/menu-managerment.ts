@@ -1,4 +1,4 @@
-import { Component, Emit, Mixins, Ref } from "vue-property-decorator";
+import { Component, Emit, Mixins, Watch } from "vue-property-decorator";
 import PageMixins from "@/shared/mixins/page.mixins";
 import DeleteMixins from "@/shared/mixins/delete-dialog.mixins";
 
@@ -40,6 +40,9 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
   private showTableLoading: boolean = true;
   private isShowViewMenuFunDModal: boolean = false;
   private ClickCurrentRow: any = {};
+  private notNestTreeData: Array<any> = [];
+  private treeSearchText: string = "";
+
 
   private enumOptions = MenuEnum;
 
@@ -96,6 +99,68 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
 
   private mounted() {
     this.loadData();
+  }
+
+  @Watch('treeData', { immediate: false, deep: true })
+  onTreeDataChanged(val: Array<any>) {
+    const datas: Array<any> = [];
+    const childrenKey = "children";
+    const addList = (data: Array<any>) => {
+      for (const one of data) {
+        const children = one[childrenKey];
+        if (children === undefined || children.length < 1) {
+          datas.push(one);
+          continue;
+        }
+        const parentOne: any = {};
+        for (const key of Object.keys(one)) {
+          if (key === childrenKey) {
+            parentOne[childrenKey] = [];
+          } else {
+            parentOne[key] = one[key];
+          }
+        }
+        datas.push(parentOne);
+        addList(one.children);
+      }
+    };
+    addList(val);
+    this.notNestTreeData = datas;
+  }
+
+  private prevSearchTreeData: Map<string, Array<any>> = new Map<string, Array<any>>();
+  get SearchTreeData() {
+    const text = this.treeSearchText;
+    if (text.length === 0) return this.treeData;
+    if (this.prevSearchTreeData.has(text)) return this.prevSearchTreeData.get(text);
+    const datas = this.notNestTreeData;
+    const searchData = datas.filter(p => p.title.includes(text));
+    let notNestData: Array<any> = [];
+    const addParent = (item: any) => {
+      notNestData.push(item);
+      const index = datas.findIndex(p => p.id === item.parentId);
+      if (index != -1) {
+        addParent(datas[index]);
+      }
+    };
+    for (const item of searchData) {
+      addParent(item);
+    }
+    const map = new Map();
+    notNestData = notNestData.filter(p => !map.has(p.id) && map.set(p.id, 1)).concat();
+    const result = notNestData.filter(p => !p.parentId || p.parentId === "00000000-0000-0000-0000-000000000000");
+    const generateResult = (items: Array<any>) => {
+      for (const item of items) {
+        item.children = notNestData.filter(p => p.parentId === item.id);
+        if (item.children.length > 0) {
+          generateResult(item.children);
+        }
+      }
+    };
+    generateResult(result);
+    this.prevSearchTreeData.clear();
+    this.prevSearchTreeData.set(text, result);
+    return result;
   }
 
 
