@@ -97,7 +97,6 @@ export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
   ];
   private userTable: Array<IUserTableDto> = [];
   private CollapseDefault: string = "1";
-  
   private filters: IFilterCondition[] = [
     {
       field: "userName",

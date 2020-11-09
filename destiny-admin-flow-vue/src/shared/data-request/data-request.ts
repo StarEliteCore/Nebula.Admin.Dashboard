@@ -34,8 +34,21 @@ export default class DataRequest implements IDataRequest {
      * @returns {Promise<R>} 返回值
      * @memberof DataRequest
      */
-    public deleteRequest<R, T>(_url: string, _params?: T, _timeout?: number): Promise<R> {
-        return this.getOrDeleteRequest<R, T>(_url, _params, "delete", _timeout);
+    public deleteRequest<R, T>(_url: string, _params?: T, _data?: any, _timeout?: number): Promise<R> {
+        // return this.getOrDeleteRequest<R, T>(_url, _params, "delete", _timeout);
+        return new Promise((resolve, reject) => {
+            this.request({
+                method: "DELETE",
+                url: _url,
+                params: _params,
+                data: _data,
+                timeout: _timeout
+            }).then((response: any) => {
+                resolve(response);
+            }).catch((error: any) => {
+                reject(error);
+            })
+        })
     }
     /**
      * @description post请求

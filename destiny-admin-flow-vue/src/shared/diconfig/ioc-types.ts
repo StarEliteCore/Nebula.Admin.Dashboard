@@ -6,5 +6,7 @@ export const IocTypes = {
   RoleService: Symbol("RoleService"),
   FunctionService: Symbol("FunctionService"),
   SystemService: Symbol("SystemService"),
-  DataDictionaryService: Symbol("DataDictionaryService")
+  DataDictionaryService: Symbol("DataDictionaryService"),
+  OrganizationService: Symbol("OrganizationService"),
+  DestinyCoreServeice: Symbol("DestinyCoreServeice"),
 };

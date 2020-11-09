@@ -4,24 +4,26 @@ import DeleteMixins from "@/shared/mixins/delete-dialog.mixins";
 
 import * as PageQuery from "@/shared/request";
 
-import { MenuEnum, IMenuTableDto, MenuOutPageListDto } from '@/domain/entity/menudto/menuDto';
+import { MenuEnum, MenuOutPageListDto } from '@/domain/entity/menudto/menuDto';
 import { ITableColumn } from '@/shared/table/ITable';
 
 import { MainManager } from "@/domain/services/main/main-manager";
 import { IFilterCondition, IQueryFilter } from '@/shared/request';
 import { EFilterConnect, EFilterOprator } from '@/shared/request/query.enum';
 
-import MenuOperate from "./menu-operate/menu-operate.vue"
-import MenuOperateInfo from "./menu-operate/menu-operate"
+import MenuOperate from "./menu-operate/menu-operate.vue";
 
 import { EOperate } from '@/shared/eoperate';
 
-
+import AddMenuFunction from './menu-function/add-menu-function.vue';
+import RemoveMenuFunction from './menu-function/remove-menu-function.vue';
 
 @Component({
   name: "MenuManagerment",
   components: {
     MenuOperate,
+    AddMenuFunction,
+    RemoveMenuFunction,
   }
 })
 
@@ -33,9 +35,13 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
   private tableData: Array<MenuOutPageListDto> = [];
   private treeSelectedId: string = "";
   private treeSelectedMenu: any = {};
+  private isShowAddMenuFunDModal: boolean = false;
+  private showTreeLoading: boolean = true;
+  private showTableLoading: boolean = true;
+  private isShowViewMenuFunDModal: boolean = false;
+  private ClickCurrentRow: any = {};
 
   private enumOptions = MenuEnum;
-
 
   private columns: ITableColumn[] = [
     {
@@ -59,20 +65,26 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
       title: "类型",
       key: "type",
       align: "center",
-      maxWidth: 150,
+      maxWidth: 90,
       slot: "type"
     },
     {
       title: "层级",
       key: "depth",
       align: "center",
-      maxWidth: 120
+      maxWidth: 80,
     },
     {
       title: "描述",
       key: "description",
       align: "center",
     },
+    {
+      title: '操作',
+      slot: 'action',
+      width: 150,
+      align: 'center'
+    }
   ];
 
   private mainManager: MainManager = MainManager.Instance();
@@ -125,10 +137,14 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
 
 
   private loadTableData() {
+    this.CurrentRow = {};
+    this.CurrentArray = [];
 
+    this.showTableLoading = true;
     this.queryfileter.filter = this.filter();
     this.mainManager.MenuService.GetMenuPage(this.tranfer(this.queryfileter))
       .then(res => {
+        this.showTableLoading = false;
         if (res.success) {
           this.tableData = res.itemList;
           this.total = res.total;
@@ -136,8 +152,13 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
       });
   }
   private loadTreeData() {
+    // this.treeSelectedId = "";
+    // this.treeSelectedMenu = {};
+
+    this.showTreeLoading = true;
     this.mainManager.MenuService.GetAllMenuTree()
       .then(res => {
+        this.showTreeLoading = false;
         if (res.success) {
           this.treeData = res.itemList;
         }
@@ -157,25 +178,17 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
   }
 
   private CurrentRowEventArray(_selection: Array<any>) {
-    this.CurrentRow = _selection.length > 0 ? _selection[0] : undefined;
+    this.CurrentRow = _selection.length > 0 ? _selection[0] : {};
     this.CurrentArray = _selection;
   }
-
-  @Ref("MenuOperateInfo")
-  private MenuOperateInfo!: MenuOperateInfo;
 
   /**
    * @param _type 操作方法
    * @param _rowId 
    */
-  private operateItem(_type: EOperate, _rowId?: string) {
+  private operateItem(_type: EOperate) {
     if (_type === EOperate.add) {
-      this.MenuOperateInfo.Show(
-        _type,
-        this.treeData,
-        this.treeSelectedId,
-        (res: boolean) => { this.loadData(); }
-      );
+      (this.$refs.MenuOperateInfo as Vue).$emit("showAdd");
     } else if (_type === EOperate.update) {
       if (this.CurrentArray.length === 0) {
         this.$Message.error("请选择要修改的项");
@@ -184,14 +197,7 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
         this.$Message.error("请选择一项修改");
         return;
       }
-      const _row = this.CurrentRow;
-      this.MenuOperateInfo.Show(
-        _type,
-        this.treeData,
-        this.treeSelectedId,
-        (res: boolean) => { this.loadData(_row.type); },
-        _row.id
-      );
+      (this.$refs.MenuOperateInfo as Vue).$emit("showEdit");
     }
 
   }
@@ -202,13 +208,7 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
       return;
     }
 
-    this.MenuOperateInfo.Show(
-      EOperate.update,
-      this.treeData,
-      "",
-      (res: boolean) => { this.loadData(); },
-      this.treeSelectedId
-    );
+    (this.$refs.MenuOperateInfo as Vue).$emit("showTreeNodeEdit");
   }
 
   private deleteItemTreeMenu() {
@@ -254,6 +254,24 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
     if (type !== MenuEnum.Button) this.loadTreeData();
   }
 
+  private showAddMenuFunction() {
+    if (this.CurrentArray.length < 1) {
+      this.$Message.error("请选择一项后再点击");
+      return;
+    }
+    if (this.CurrentArray.length > 1) {
+      this.$Message.error("只能选择一项分配菜单功能");
+      return;
+    }
+    this.isShowAddMenuFunDModal = true;
+    (this.$refs.AddMenuFunction as Vue).$emit("loadData");
+  }
+
+  private showMenuFunctionView(row: any) {
+    this.ClickCurrentRow = row;
+    this.isShowViewMenuFunDModal = true;
+    this.$nextTick(() => (this.$refs.RemoveMenuFunction as Vue).$emit("loadData"));
+  }
 }
 
 

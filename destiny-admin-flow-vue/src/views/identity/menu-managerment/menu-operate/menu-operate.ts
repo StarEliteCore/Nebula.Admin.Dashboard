@@ -1,4 +1,4 @@
-import { Component, Mixins } from "vue-property-decorator";
+import { Component, Mixins, Prop } from "vue-property-decorator";
 import { MenuDto, MenuEnum } from "@/domain/entity/menudto/menuDto";
 
 import { EOperate } from "@/shared/eoperate";
@@ -7,17 +7,27 @@ import OperateMixins from "@/shared/mixins/operate.mixins";
 
 
 @Component({
-    name: "MenuOperates",
+    name: "MenuOperate",
 })
-export default class UserOperate extends Mixins(OperateMixins) {
+export default class MenuOperate extends Mixins(OperateMixins) {
+    @Prop(Array) treeData!: Array<any>;
+    @Prop(Object) currentMenu!: any;
+    @Prop(Object) currentTreeNode!: any;
+
     private menuDto: MenuDto = new MenuDto();
-    private treeData: Array<any> = [];
+
     private enumSelectOptions: Array<any> = [
         { key: MenuEnum.Menu, label: "菜单" },
         { key: MenuEnum.Button, label: "按钮" },
     ];
 
     private enumOptions = MenuEnum;
+
+    private created() {
+        this.$on("showAdd", this.showAdd);
+        this.$on("showEdit", () => { this.showEdit(this.currentMenu.id) });
+        this.$on("showTreeNodeEdit", () => { this.showEdit(this.currentTreeNode.id) })
+    }
 
     private enumValidate = (rule: any, value: string | null, callback: Function) => {
         if (value === null || value === "") {
@@ -32,35 +42,31 @@ export default class UserOperate extends Mixins(OperateMixins) {
         type: [{ required: true, validator: this.enumValidate, trigger: "OnHandleCommit" }],
     };
 
-    public async Show(
-        _type: EOperate,
-        treeData: Array<any>,
-        parentId: string,
-        callback: (res: boolean) => void,
-        _rowId?: string
-    ) {
-
-        switch (_type) {
-            case EOperate.add:
-                this.title = "添加";
-                this.menuDto = new MenuDto();
-                this.treeData = treeData;
-                console.log(this.treeData);
-                this.menuDto.parentId = parentId;
-                break;
-            case EOperate.update:
-                this.disabled = false;
-                this.IsShowColumn = false;
-                if (typeof _rowId !== "undefined") {
-                    this.treeData = treeData;
-                    await this.getMenuById(_rowId);
-                }
-                this.title = `编辑—「${this.menuDto.name}」`;
-                break;
-        }
-        this.CB = callback;
-        this.type = _type;
+    private showAdd() {
+        this.title = "添加";
+        this.menuDto = new MenuDto();
+        this.menuDto.parentId = this.currentTreeNode.id;
+        this.CB = () => { this.callbackRefresh(this.menuDto.type) };
+        this.type = EOperate.add;
         this.IsShow = true;
+    }
+
+    private async showEdit(id: string) {
+        this.disabled = false;
+        this.IsShowColumn = false;
+        await this.getMenuById(id);
+        this.title = `编辑—「${this.menuDto.name}」`;
+        this.CB = this.callbackRefresh;
+        this.type = EOperate.update;
+        this.IsShow = true;
+    }
+
+    private callbackRefresh(type?: MenuEnum) {
+        if (type === MenuEnum.Button) {
+            this.$emit('refreshButton');
+        } else {
+            this.$emit('refreshAll');
+        }
     }
 
     private OnHandleCommit() {
@@ -89,24 +95,39 @@ export default class UserOperate extends Mixins(OperateMixins) {
      * @param {string} _id id
      */
     private async getMenuById(_id: string) {
+        const closeLoading = this.$Message.loading({
+            content: 'Loading...',
+            duration: 0
+        }) as any;
         let res = await MainManager.Instance().MenuService.getMenuById(_id);
         if (res.success) {
             this.menuDto = res.data;
         }
+        closeLoading();
     }
 
     private async addMenu() {
+        const closeLoading = this.$Message.loading({
+            content: 'Loading...',
+            duration: 0
+        }) as any;
         let res = await MainManager.Instance().MenuService.addMenu(
             this.menuDto
         );
         this.ajaxcallback(res, true);
+        closeLoading();
     }
 
     private async updateMenu() {
+        const closeLoading = this.$Message.loading({
+            content: 'Loading...',
+            duration: 0
+        }) as any;
         let res = await MainManager.Instance().MenuService.updateMenu(
             this.menuDto
         );
         this.ajaxcallback(res, true);
+        closeLoading();
     }
 
 }

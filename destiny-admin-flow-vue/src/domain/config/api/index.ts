@@ -109,6 +109,18 @@ export const MenuApi = {
    * 获取所有菜单
    */
   GetAllMenuTree:"/api/Menu/GetAllMenuTreeAsync",
+  /**
+   * 批量添加功能菜单
+   */
+  BatchAddMenuFunction:"/api/MenuFunction/BatchAddMenuFunctionAsync",
+  /**
+   * 批量删除功能菜单
+   */
+  BatchDeleteMenuFunction:"/api/MenuFunction/BatchDeleteMenuFunctionAsync",
+  /**
+   * 根据菜单ID得到菜单功能分页
+   */
+  GetMenuFunctionByMenuIdPage:"/api/MenuFunction/GetMenuFunctionByMenuIdPageAsync",
 };
 
 ///功能API
@@ -124,7 +136,7 @@ export const FunctionApi = {
    * 删除一个功能
    */
   deleteFunction: "api/Function/DeleteAsync",
- 
+
     /**
    * 获取一个功能
    */
@@ -152,3 +164,27 @@ export const DataDictionaryApi = {
    */
   getDataDictionaryTreeData:"api/DataDictionary/GetTableAsync"
 }
+///组织架构API
+export const OrganizationApi = {
+  /**
+   * 分页 + 条件获取组织架构子级列表
+   */
+  getOrganizationPage: "api/Organization/GetPageOrganizationAsync",
+  /**
+   * 获取树形
+   */
+  getOrganizationTree: "api/Organization/GetOrganizationTreeAsync",
+  /**
+   * 添加组织架构
+   */
+  createrOrganization: "api/Organization/CreateAsync",
+
+  /**
+   * 删除一个组织架构
+   */
+  deleteOrganization: "api/Organization/DeleteAsync",
+  /**
+   * 修改组织架构
+   */
+  updateOrganization:"api/Organization/UpdateAsync",
+};

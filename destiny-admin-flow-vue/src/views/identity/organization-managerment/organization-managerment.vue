@@ -4,13 +4,13 @@
         <div>
         <Input class="searchTree" placeholder="输入名称搜索" />
         <ButtonGroup class="btngroup">
-          <Button>
-            <Icon type="md-add" />
+          <Button @click="operateItem(operate.add)">
+            <Icon type="md-add"  />
           </Button>
-          <Button>
+          <Button >
             <Icon type="ios-create" />
           </Button>
-          <Button>
+          <Button @click="deleteItemTree">
             <Icon type="ios-trash" />
           </Button>
         </ButtonGroup>
@@ -30,18 +30,18 @@
       <header>
           <div>
             <ButtonGroup>
-              <Button> <Icon type="md-add" />添加 </Button>
+              <Button> <Icon type="md-add" @click="operateItem(operate.add)"/>添加 </Button>
               <Button> <Icon type="ios-create" />编辑 </Button>
-              <Button> <Icon type="ios-trash" />删除 </Button>
+              <Button @click="deleteItem"> <Icon type="ios-trash"  />删除 </Button>
             </ButtonGroup>
           </div>
           <div class="searchdiv">
             <Input placeholder="根据名称搜索" class="searchInput" />
-            <Button type="primary"> <Icon type="ios-search" />搜索 </Button>
+            <Button type="primary"> <Icon type="ios-search" @click="loadTableData"/>搜索 </Button>
           </div>
         </header>
         <article>
-          <Table :columns="columns" :data="tableData" border stripe>
+          <Table :columns="columns" :data="tableData" border stripe @on-selection-change="CurrentRowEventArray">
             <!-- <template v-slot:type="{ row }">
             <Tag v-if="row.type == enumOptions.Menu" color="red">菜单</Tag>
             <Tag v-else-if="row.type == enumOptions.Button" color="blue"
@@ -57,6 +57,8 @@
         </article>
       </Col>
     </div>
+    <organization-operate ref="OrganizationInfo"></organization-operate>
+    <delete-dialog ref="DeleteInfo"></delete-dialog>
   </div>
 </template>
 <style lang="scss" src="./organization-managerment.scss" scoped></style>

@@ -7,6 +7,8 @@ import { MenuApi } from '@/domain/config/api';
 import { MenuDto, MenuOutPageListDto } from '@/domain/entity/menudto/menuDto';
 import { injectable } from 'inversify';
 
+import { FunctionInputDto } from "@/domain/entity/functiondto/functionDto";
+
 @injectable()
 export default class MenuService implements IMenuService {
     getTable(): Promise<IServerPageReturn<any>> {
@@ -38,6 +40,16 @@ export default class MenuService implements IMenuService {
 
     GetAllMenuTree(): Promise<IServerPageReturn<any>> {
         return MainManager.dataRequest.getRequest(MenuApi.GetAllMenuTree);
+    }
+
+    BatchAddMenuFunctionAsync(menuId: string, functionIds: string[]): Promise<IAjaxResult> {
+        return MainManager.dataRequest.postRequest(MenuApi.BatchAddMenuFunction, { menuId, functionIds });
+    }
+    BatchDeleteMenuFunctionAsync(menuId: string, functionIds: string[]): Promise<IAjaxResult> {
+        return MainManager.dataRequest.deleteRequest(MenuApi.BatchDeleteMenuFunction, null, { menuId, functionIds });
+    }
+    GetMenuFunctionByMenuIdPageAsync(menuId: string, _page: IPageRequest): Promise<IServerPageReturn<FunctionInputDto[]>> {
+        return MainManager.dataRequest.postRequest(MenuApi.GetMenuFunctionByMenuIdPage, Object.assign({ menuId }, _page));
     }
 
 }
