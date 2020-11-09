@@ -3,7 +3,7 @@ import { Component, Mixins } from "vue-property-decorator";
 import { EOperate } from "@/shared/eoperate";
 import { MainManager } from "@/domain/services/main/main-manager";
 import OperateMixins from "@/shared/mixins/operate.mixins";
-import { OrganizationInputDto } from "@/domain/entity/organization/organization";
+import { OrganizationInputDto } from "@/domain/entity/organization/OrganizationDto";
 
 @Component({
   name: "MenuOperates",

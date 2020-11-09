@@ -1,5 +1,5 @@
 import { IAjaxResult, IServerPageReturn } from "@/shared/response";
-import { OrganizationInputDto, OrganizationPageListDto } from "@/domain/entity/organization/organization";
+import { OrganizationInputDto, OrganizationPageListDto } from "@/domain/entity/organization/OrganizationDto";
 
 import { IPageRequest } from "@/shared/request";
 

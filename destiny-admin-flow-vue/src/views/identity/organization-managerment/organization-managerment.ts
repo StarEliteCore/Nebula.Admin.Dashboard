@@ -11,7 +11,7 @@ import { ITreeDto } from "@/shared/baseentity/itreeentity";
 import { MainManager } from "@/domain/services/main/main-manager";
 import OrganizationInfo from "@/views/identity/organization-managerment/organization-operate/organization-operate";
 import OrganizationOperate from "@/views/identity/organization-managerment/organization-operate/organization-operate.vue";
-import { OrganizationPageListDto } from "@/domain/entity/organization/organization";
+import { OrganizationPageListDto } from "@/domain/entity/organization/OrganizationDto";
 import PageMixins from "@/shared/mixins/page.mixins";
 
 @Component({
