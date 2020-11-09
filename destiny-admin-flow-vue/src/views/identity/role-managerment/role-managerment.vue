@@ -1,18 +1,41 @@
 <template>
   <section class="box">
     <div class="body">
-     <my-search :fields="fields" @click="search"></my-search>
-  
+      <my-search :fields="fields" @click="search"></my-search>
+
       <div>
         <Card :dis-hover="true">
           <Row style="margin: 0px 0px 16px 0px; float: right">
-            <Button class="operatebutton" type="success" @click="handleAdd()">添加</Button>
+            <Button class="operatebutton" type="success" @click="handleAdd()"
+              >添加</Button
+            >
 
-            <Button class="operatebutton" type="warning" @click="handleUpdate()">修改</Button>
-            <Button class="operatebutton" type="error" :loading="delectLoading" @click="handleDelete()">删除</Button>
-            <Button class="operatebutton" type="primary" @click="handleAuth()" icon="md-send" >分配权限</Button>
+            <Button class="operatebutton" type="warning" @click="handleUpdate()"
+              >修改</Button
+            >
+            <Button
+              class="operatebutton"
+              type="error"
+              :loading="delectLoading"
+              @click="handleDelete()"
+              >删除</Button
+            >
+            <Button
+              class="operatebutton"
+              type="primary"
+              @click="handleAuth()"
+              icon="md-send"
+              >分配权限</Button
+            >
           </Row>
-          <Table :columns="columns" :data="tableData" border stripe @on-select-cancel="currentRowEventCancel"    @on-select="currentRowEventArray">
+          <Table
+            :columns="columns"
+            :data="tableData"
+            border
+            stripe
+            @on-select-cancel="currentRowEventCancel"
+            @on-select="currentRowEventArray"
+          >
             <template slot-scope="{ row }" slot="isAdmin">
               <Tag v-if="row.isAdmin" color="red">是</Tag>
               <Tag v-else color="blue">否</Tag>
@@ -21,14 +44,18 @@
         </Card>
       </div>
       <set-permission ref="SetPerOperateInfo"></set-permission>
-      <role-operate ref="RoleOperateInfo"></role-operate>
-
+     
+      <role-operate ref="editModel" :editTitle="editTitle" :editData="editData"  @saveEdit="saveEdit"></role-operate>
+      <!-- <edit-modal ref="editModel" :editTitle="editTitle">
+        <template v-slot:content>
+      
+        </template>
+      </edit-modal> -->
       <page-component
         ref="PageInfo"
         :total="total"
         @PageChange="pageChange"
       ></page-component>
-
     </div>
   </section>
 </template>

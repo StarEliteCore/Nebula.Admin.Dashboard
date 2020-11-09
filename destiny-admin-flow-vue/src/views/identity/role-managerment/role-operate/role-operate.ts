@@ -1,4 +1,4 @@
-import { Component, Mixins } from "vue-property-decorator";
+import { Component, Mixins, Prop } from "vue-property-decorator";
 import { IRoleInputDto, RoleInputDto } from "@/domain/entity/role/roleDto";
 
 import { EOperate } from "@/shared/eoperate";
@@ -29,55 +29,18 @@ export default class RoleOperate extends Mixins(OperateMixins) {
   private OnHandleCommit() {
     (this.$refs.form as any).validate((valid: boolean) => {
       if (valid) {
-        this.CreateOrUpdateRole();
+        this.$emit("saveEdit", this.roleInput);
+        //this.CreateOrUpdateRole();
       }
     });
   }
 
-  protected OnHandleCancel() {
-    /**
-     * 取消顯示
-     */
-    this.IsShow = false;
-    this.roleInput= new RoleInputDto(
-      Guid.EMPTY,
-      "",
-      false,
-      ""
-    );
-    (this.$refs.form as any).resetFields();
-  }
 
-  Show(
-    _type: EOperate,
-    callback: (res: boolean) => void,
-    _rowId?: string,
-    _row?: any
-  ) {
-    switch (_type) {
-      case EOperate.view:
-        this.title = `查看角色`;
-        this.disabled = true;
 
-        this.roleInput = this.ToRoleInputDto(_row);
-        break;
-      case EOperate.add:
-        this.title = "添加角色";
-        this.roleInput = new RoleInputDto(Guid.EMPTY, "", false, "");
-        break;
-      case EOperate.update:
-        this.disabled = false;
-        this.IsShowColumn = false;
-        this.roleInput = this.ToRoleInputDto(_row);
-        this.title = `修改角色`;
-        break;
+  private ToRoleInputDto = (_row?: any): IRoleInputDto => {
+    if (_row === undefined) {
+      return this.roleInput;
     }
-    this.CB = callback;
-    this.type = _type;
-    this.IsShow = true;
-  }
-
-  private ToRoleInputDto = (_row: any): IRoleInputDto => {
     let dto: IRoleInputDto = {
       description: _row.description,
       id: _row.id,
@@ -87,20 +50,29 @@ export default class RoleOperate extends Mixins(OperateMixins) {
     return dto;
   };
 
-  // Show(_type: EOperate, callback: (res: boolean) => void, _rowId?: string) {
+  
 
-  //   this.title = "添加角色";
-  //   this.CB = callback;
-  //   this.type = _type;
-  //   this.IsShow = true;
-  // }
+  @Prop()
+  editTitle!: string;
 
-  //创建或者更新角色
-  private async CreateOrUpdateRole() {
-    let res = await MainManager.Instance().RoleService.createOrUpdateRole(
-      this.roleInput
-    );
-    this.ajaxcallback(res, true);
-    this.IsShow = false;
+  @Prop()
+  editData!: any;
+
+  isOpen: boolean = false;
+
+
+  private created() {
+    this.$on("open", this.open);
+    this.$on("close", this.close);
+  }
+
+  public open() {
+    this.isOpen = true;
+     
+     this.roleInput = this.ToRoleInputDto(this.editData);
+  }
+
+  public close() {
+    this.isOpen = false;
   }
 }

@@ -9,9 +9,11 @@ import {
   SearchFilter,
 } from "@/shared/request";
 
-import { DestinyCoreBase } from '../core/destiny-core-base';
+import { DestinyCoreBase } from "../core/destiny-core-base";
+import { ESex } from "@/domain/entity/userdto/userDto";
+import EditModal from "@/components/edit-modal/edit-modal.vue";
 import { IAjaxResult } from "../response";
-import { IDestinyCoreServeice } from '@/domain/services/destinycoreserveice/IDestinyCoreServeice';
+import { IDestinyCoreServeice } from "@/domain/services/destinycoreserveice/IDestinyCoreServeice";
 import { ITableColumn } from "../table/ITable";
 import { MainManager } from "@/domain/services/main/main-manager";
 import MySearch from "@/shared/search/my-search.vue";
@@ -24,14 +26,15 @@ import SearchInfo from "@/shared/search/my-search";
   components: {
     MySearch,
     PageComponent,
+    EditModal,
   },
 })
-export class ComponentMixins extends Vue implements DestinyCoreBase {
-
+export class ComponentMixins extends Vue {
   request!: IPageRequest;
   mainManager!: MainManager;
   pageUrl!: string;
   deleteUrl!: string;
+  saveEditUrl!: string;
 
   columns: ITableColumn[] = [];
   tableData: any[] = [];
@@ -47,11 +50,12 @@ export class ComponentMixins extends Vue implements DestinyCoreBase {
 
   protected Init() {
     this.request = new PageRequest();
-    this.mainManager = MainManager.Instance();
     this.columns = this.GetColumn();
     this.fields = this.GetFields();
-    this.destinyCoreServeice= this.mainManager.DestinyCoreServeice;
+    this.mainManager = MainManager.Instance();
+    this.destinyCoreServeice = this.mainManager.DestinyCoreServeice;
     this.GetPage();
+    this.editModel = this.$refs.editModel as Vue;
   }
 
   public mounted() {
@@ -121,7 +125,7 @@ export class ComponentMixins extends Vue implements DestinyCoreBase {
   //删除回调
   deleteCallback(res: IAjaxResult) {}
 
- handleDelete() {
+  handleDelete() {
     if (this.deleteUrl) {
       this.delectLoading = true;
       let selecteds: any = this.currentSelectionArray;
@@ -146,10 +150,13 @@ export class ComponentMixins extends Vue implements DestinyCoreBase {
             this.delectLoading = false;
           });
       });
-     
     }
   }
 
+  getSeletedRow(callback: any) {
+    let selecteds: any = this.currentSelectionArray;
+    this.getSingleSeletedRow(selecteds, callback);
+  }
   //得到表格单选行
   getSingleSeletedRow(
     selection: [],
@@ -191,5 +198,36 @@ export class ComponentMixins extends Vue implements DestinyCoreBase {
   @Emit()
   pageChange() {
     this.GetPage();
+  }
+
+  editModel: any;
+  editTitle: string = "新增";
+  editData: any = {};
+  handleAdd() {
+    if (!this.editModel) {
+      return;
+    }
+    this.editTitle = "新增";
+
+    this.editModel.$emit("open");
+  }
+
+  @Emit()
+  saveEdit(_data: any) {
+    if (this.saveEditUrl) {
+      this.mainManager.DestinyCoreServeice.save(this.saveEditUrl, _data)
+        .then((res: IAjaxResult) => {
+          if (res.success) {
+            this.$Message.success("保存成功");
+            this.editModel.$emit("close");
+            this.GetPage();
+          } else {
+            this.$Message.error("保存失败");
+          }
+        })
+        .catch((res: any) => {
+          this.$Message.error(res);
+        });
+    }
   }
 }
