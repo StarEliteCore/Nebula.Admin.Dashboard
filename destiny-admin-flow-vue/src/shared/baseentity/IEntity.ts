@@ -1,3 +1,5 @@
+import { Guid } from 'guid-typescript';
+
 /**
  * 主键
  */
@@ -31,3 +33,8 @@ export interface ILastModifionTime {
 export interface IIsDeleted {
   isDeleted: boolean;
 }
+
+
+
+
+

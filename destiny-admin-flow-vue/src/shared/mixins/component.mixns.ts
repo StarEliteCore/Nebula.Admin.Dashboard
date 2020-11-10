@@ -212,6 +212,17 @@ export class ComponentMixins extends Vue {
     this.editModel.$emit("open");
   }
 
+  handleUpdate() {
+    if (this.editModel) {
+      this.getSeletedRow((id: string, row: any) => {
+        this.editTitle = "修改";
+        this.editData = row;
+       
+        this.$nextTick(() => this.editModel.$emit("open") );
+      });
+    }
+  }
+
   @Emit()
   saveEdit(_data: any) {
     if (this.saveEditUrl) {
@@ -222,12 +233,17 @@ export class ComponentMixins extends Vue {
             this.editModel.$emit("close");
             this.GetPage();
           } else {
-            this.$Message.error("保存失败");
+            this.$Message.error(res.message);
           }
         })
         .catch((res: any) => {
           this.$Message.error(res);
         });
     }
+  }
+
+  @Emit()
+  refresh(){
+   this.GetPage();
   }
 }

@@ -1,5 +1,6 @@
 import { Component, Mixins, Ref } from "vue-property-decorator";
 
+import { EditModalMixins } from "@/shared/mixins/edit-modal.mixins";
 import { Guid } from "guid-typescript";
 import { IAjaxResult } from "@/shared/response";
 import { MainManager } from "@/domain/services/main/main-manager";
@@ -9,10 +10,7 @@ import OperateMixins from "@/shared/mixins/operate.mixins";
 @Component({
   name: "SetPermission",
 })
-export default class SetPermission extends Mixins(OperateMixins) {
-  @Ref("tree")
-  private tree: any;
-
+export default class SetPermission extends Mixins(EditModalMixins) {
   private treeData: Array<MenuTreeOutDto> = [];
 
   private autoExpandParent: boolean = true;
@@ -20,57 +18,59 @@ export default class SetPermission extends Mixins(OperateMixins) {
     checked: [],
   };
 
-  private defaultCheckedKeys:string[]=[];
+  loading: boolean = false;
+  private defaultCheckedKeys: string[] = [];
 
   private roleId: string = Guid.EMPTY;
 
   private defaultExpandedKeys: string[] = [];
   private expandedKeys: any;
-  Show(_rowId: string) {
+
+  protected MapTo(_rowId: string) {
     MainManager.Instance()
       .MenuService.getMenuTreeByRoleId(_rowId)
       .then((res: IAjaxResult) => {
         if (res.success == true) {
           let menuTreeDto = res.data.itemList as MenuTreeOutDto[];
           this.treeData = menuTreeDto;
-          this.title = `分配权限`;
-          this.IsShow = true;
+
           this.roleId = _rowId;
-   
+
           //this.defaultCheckedKeys=res.data.selected as string[];
-          this.checkedKeys.checked=res.data.selected as string[];
-          this.expandedKeys=res.data.selected;
+          this.checkedKeys.checked = res.data.selected as string[];
+          this.expandedKeys = res.data.selected;
         }
       });
   }
 
+  protected InIt() {
+  
+    this.MapTo(this.editData.id as string);
 
+  }
 
-
-  public onExpand(expandedKeys:any) {
-
+  public onExpand(expandedKeys: any) {
     this.expandedKeys = expandedKeys;
     this.autoExpandParent = false;
   }
 
-  public OnHandleCommit() {
+  public onHandleCommit() {
+    this.loading=true;
     MainManager.Instance()
       .RoleService.setRoleMenu(this.roleId, this.checkedKeys.checked)
       .then((res: IAjaxResult) => {
         if (res.success) {
           this.$Message.success("分配权限成功!!");
-          this.IsShow=false;
-          this.checkedKeys.checked=[];
+          this.isOpen = false;
+          this.checkedKeys.checked = [];
+          this.$emit("refresh");
+
         } else {
           this.$Message.error(res.message);
         }
+        this.loading=false;
       });
   }
 
- 
-  public onSearch()
-  {
-
-
-  }
+  public onSearch() {}
 }

@@ -5,11 +5,13 @@ import { ComponentMixins } from "@/shared/mixins/component.mixns";
 import DeleteMixins from "@/shared/mixins/delete-dialog.mixins";
 import { EFilterOprator } from "@/shared/request/query.enum";
 import { EOperate } from "@/shared/eoperate";
+import { Guid } from 'guid-typescript';
 import { RoleApi } from "@/domain/config/api";
 import RoleOperate from "./role-operate/role-operate.vue";
 import RoleOperateInfo from "./role-operate/role-operate";
 import SetPerOperateInfo from "./role-operate/set-permission";
 import SetPermission from "./role-operate/set-permission.vue";
+import { id } from 'inversify';
 
 @Component({
   name: "RoleManagerment",
@@ -63,8 +65,6 @@ export default class RoleManagerment extends Mixins(
     ];
   }
 
- 
-
   private CollapseDefault: string = "1";
 
   GetFields(): ISearchFilter[] {
@@ -100,79 +100,24 @@ export default class RoleManagerment extends Mixins(
     ];
   }
 
-  @Ref("RoleOperateInfo")
-  private RoleOperateInfo!: RoleOperateInfo;
-
-  @Ref("SetPerOperateInfo")
-  private SetPerOperateInfo!: SetPerOperateInfo;
-
-  // public mounted(){
-  //   console.log(this.editData);
-  // }
 
 
-  handleUpdate() {
-
-    if (this.editModel) {
-     
+  permissionTitle = "分配权限";
+  role?:any={};
+  //分配权限
+  public handleAuth() {
+    let permissionModel = this.$refs["setPermissionModel"] as Vue;
+    if (permissionModel) {
       this.getSeletedRow((id: string, row: any) => {
-
-
-        this.editTitle = "修改";
-        this.editData = row;
      
-        this.$nextTick(() => this.editModel.$emit("open"));
+        this.role=row;
        
-      
+        this.$nextTick(() =>  permissionModel.$emit("open"));
+        // this.$nextTick(() => );
       });
+     
     }
   }
 
-  //更新
-  // public async handleUpdate(row?: any, _rowId?: string) {
-  //   if (typeof row !== "undefined" && typeof _rowId !== "undefined") {
-  //     this.RoleOperateInfo.Show(
-  //       EOperate.update,
-  //       async (res: boolean) => {
-  //         if (res) {
-  //           await this.GetPage();
-  //         }
-  //       },
-  //       _rowId,
-  //       row
-  //     );
-  //   } else {
-  //     let selecteds: any = this.currentSelectionArray;
-  //     this.RoleOperateInfo.getSingleSeletedRow(
-  //       selecteds,
-  //       (id: string, row: any) => {
-  //         this.RoleOperateInfo.Show(
-  //           EOperate.update,
-  //           async (res: boolean) => {
-  //             if (res) {
-  //               await this.GetPage();
-  //             }
-  //           },
-  //           id,
-  //           row
-  //         );
-  //       }
-  //     );
-  //   }
-  // }
-
-  // public handleView(row?: any) {
-  //   this.RoleOperateInfo.Show(EOperate.view, (res: boolean) => {}, row.id, row);
-  // }
-
-  //分配权限
-  public handleAuth() {
-    let selecteds: any = this.currentSelectionArray;
-    this.RoleOperateInfo.getSingleSeletedRow(
-      selecteds,
-      (id: string, row: any) => {
-        this.SetPerOperateInfo.Show(id);
-      }
-    );
-  }
+ 
 }
