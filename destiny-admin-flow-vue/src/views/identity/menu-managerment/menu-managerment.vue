@@ -3,7 +3,12 @@
     <nav class="nav">
       <div>
         <div>
-          <Input class="searchTree" placeholder="输入名称搜索" />
+          <Input
+            class="searchTree"
+            suffix="ios-search"
+            placeholder="输入名称搜索"
+            v-model="treeSearchText"
+          />
         </div>
         <ButtonGroup class="btngroup">
           <Button @click="operateItem(operate.add)">
@@ -22,7 +27,7 @@
         <a-tree
           v-if="treeData && treeData.length > 0"
           :checkable="false"
-          :tree-data="treeData"
+          :tree-data="SearchTreeData"
           class="menuTree"
           :autoExpandParent="true"
           :defaultExpandAll="true"
