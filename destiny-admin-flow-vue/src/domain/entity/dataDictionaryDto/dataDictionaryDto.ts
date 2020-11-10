@@ -1,7 +1,7 @@
 import { IEntity } from '@/shared/baseentity/IEntity';
 import { Guid } from 'guid-typescript';
 
-export class IDataDictionaryDto implements IEntity<string>{
+export class DataDictionaryDto implements IEntity<string>{
     /**
      * id
      */
@@ -21,5 +21,5 @@ export class IDataDictionaryDto implements IEntity<string>{
     /**
      * 子集
      */
-    children:Array<IDataDictionaryDto> = []
+    children:Array<DataDictionaryDto> = []
 }

@@ -2,8 +2,9 @@
     <section class="box">
         <nav class="nav">
             <div>
-                <Input class="searchTree" placeholder="输入名称搜索"/>
-                <br/>
+                <div>
+                    <Input class="searchTree" placeholder="输入名称搜索"/>
+                </div>
                 <ButtonGroup class="btngroup">
                     <Button>
                         <Icon type="md-add" />

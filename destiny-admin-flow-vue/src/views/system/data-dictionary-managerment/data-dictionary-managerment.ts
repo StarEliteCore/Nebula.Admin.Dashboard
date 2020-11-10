@@ -4,8 +4,11 @@ import DeleteMixins from '@/shared/mixins/delete-dialog.mixins';
 import * as PageQuery from '@/shared/request';
 import { ITableColumn } from '../../../shared/table/ITable';
 import { MenuEnum } from '@/domain/entity/menudto/menuDto';
-import { IDataDictionaryDto } from '@/domain/entity/dataDictionaryDto/dataDictionaryDto';
+import { DataDictionaryDto } from '@/domain/entity/dataDictionaryDto/dataDictionaryDto';
 import { MainManager } from '../../../domain/services/main/main-manager';
+import { ITreeDto } from '@/shared/baseentity/itreeentity';
+import { IFilterCondition, IQueryFilter } from '../../../shared/request/index';
+import { EFilterConnect, EFilterOprator } from '@/shared/request/query.enum';
 
 
 @Component({
@@ -18,7 +21,18 @@ import { MainManager } from '../../../domain/services/main/main-manager';
 export default class DataDictionaryManagerment extends Mixins(PageMixins,DeleteMixins){
     private queryfileter: PageQuery.IPageRequest = new PageQuery.PageRequest();
     private CurrentRow: any = {};
-    private treeData:Array<IDataDictionaryDto> = [];
+    private treeData:Array<ITreeDto> = [];
+    private treeSelectedId:string = "";
+    private treeSelectedMenu:any = {};
+    private dymaicQuery:any = {};
+    private currentArray = [];
+
+    /**
+     * table加载状态
+     */
+    private showTableLoading:boolean = true;
+
+    private filter = this.getFilter();
 
     private columns: ITableColumn[] = [
         {
@@ -48,20 +62,72 @@ export default class DataDictionaryManagerment extends Mixins(PageMixins,DeleteM
     }
 
     private loadTreeData(){
+        debugger
         this.mainManager.DataDictionarySrevice.getDataDictionaryTree()
         .then(res => {
             if(res.success){
-                this.treeData = res.data
+                this.treeData = res.itemList
             }
         })
     }
 
+    private treeSelected(selectedKeys:any,e:any){
+        if(e.selected){
+            this.treeSelectedId = selectedKeys[0];
+            this.treeSelectedMenu = e.selectedNodes[0].data.props;
+        }else{
+            this.treeSelectedId = "";
+            this.treeSelectedMenu = {};
+        }
+        this.dymaicQuery.parentId = this.treeSelectedId;
+        this.loadData(MenuEnum.Button);
+    }
+
     private async getTableData(){
+        this.CurrentRow = {};
+        this.currentArray = [];
+
+        this.showTableLoading = true;
+        this.queryfileter.filter = this.filter();
         
     }
 
+    getFilter(){
+        const filters:IFilterCondition[] = [
+            {
+                field: "name",
+                value: "",
+                operator: EFilterOprator.Like,
+            },
+            {
+                field: "parentId",
+                value: "",
+                operator: EFilterOprator.Equal,
+            },
+        ]
+        return ():IQueryFilter => {
+            const newFilters: IFilterCondition[] = [];
+            filters.forEach(p => {
+                const value = this.dymaicQuery[p.field];
+                if(value != undefined && value != ""){
+                    const filter: IFilterCondition = {
+                        field: p.field,
+                        value: p.operator == EFilterOprator.Like ? `%${value}%` : value,
+                        operator: p.operator,
+                    }; 
+                    newFilters.push(filter);
+                }
+            });
+            const filter: IQueryFilter = {
+                filterConnect: EFilterConnect.And,
+                conditions: newFilters,
+            };
+            return filter;
+        }
+    }
+
     private loadData(type?:MenuEnum){
-        debugger
+        this.getTableData();
         if (type !== MenuEnum.Button) this.loadTreeData();
     }
 }
