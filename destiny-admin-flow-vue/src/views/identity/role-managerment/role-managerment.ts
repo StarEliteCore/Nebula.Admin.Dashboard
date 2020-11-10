@@ -1,8 +1,5 @@
 import { Component, Emit, Mixins, Ref } from "vue-property-decorator";
-import {
-  ControlTypeEnum,
-  ISearchFilter,
-} from "@/shared/request";
+import { ControlTypeEnum, ISearchFilter } from "@/shared/request";
 
 import { ComponentMixins } from "@/shared/mixins/component.mixns";
 import DeleteMixins from "@/shared/mixins/delete-dialog.mixins";
@@ -25,11 +22,9 @@ export default class RoleManagerment extends Mixins(
   DeleteMixins,
   ComponentMixins
 ) {
-
- 
   pageUrl: string = RoleApi.getRolePage;
   deleteUrl: string = RoleApi.deleteRole;
-
+  saveEditUrl: string = RoleApi.createrOrUpdateRole;
   GetColumn() {
     return [
       {
@@ -68,6 +63,8 @@ export default class RoleManagerment extends Mixins(
     ];
   }
 
+ 
+
   private CollapseDefault: string = "1";
 
   GetFields(): ISearchFilter[] {
@@ -103,57 +100,70 @@ export default class RoleManagerment extends Mixins(
     ];
   }
 
-
-
   @Ref("RoleOperateInfo")
   private RoleOperateInfo!: RoleOperateInfo;
 
   @Ref("SetPerOperateInfo")
   private SetPerOperateInfo!: SetPerOperateInfo;
 
-  //添加
-  private async handleAdd() {
-    this.RoleOperateInfo.Show(EOperate.add, async (res: boolean) => {
-      await this.GetPage();
-    });
-  }
+  // public mounted(){
+  //   console.log(this.editData);
+  // }
 
-  //更新
-  public async handleUpdate(row?: any, _rowId?: string) {
-    if (typeof row !== "undefined" && typeof _rowId !== "undefined") {
-      this.RoleOperateInfo.Show(
-        EOperate.update,
-        async (res: boolean) => {
-          if (res) {
-            await this.GetPage();
-          }
-        },
-        _rowId,
-        row
-      );
-    } else {
-      let selecteds: any = this.currentSelectionArray;
-      this.RoleOperateInfo.getSingleSeletedRow(
-        selecteds,
-        (id: string, row: any) => {
-          this.RoleOperateInfo.Show(
-            EOperate.update,
-            async (res: boolean) => {
-              if (res) {
-                await this.GetPage();
-              }
-            },
-            id,
-            row
-          );
-        }
-      );
+
+  handleUpdate() {
+
+    if (this.editModel) {
+     
+      this.getSeletedRow((id: string, row: any) => {
+
+
+        this.editTitle = "修改";
+        this.editData = row;
+     
+        this.$nextTick(() => this.editModel.$emit("open"));
+       
+      
+      });
     }
   }
 
-  public handleView(row?: any) {
-    this.RoleOperateInfo.Show(EOperate.view, (res: boolean) => {}, row.id, row);
-  }
+  //更新
+  // public async handleUpdate(row?: any, _rowId?: string) {
+  //   if (typeof row !== "undefined" && typeof _rowId !== "undefined") {
+  //     this.RoleOperateInfo.Show(
+  //       EOperate.update,
+  //       async (res: boolean) => {
+  //         if (res) {
+  //           await this.GetPage();
+  //         }
+  //       },
+  //       _rowId,
+  //       row
+  //     );
+  //   } else {
+  //     let selecteds: any = this.currentSelectionArray;
+  //     this.RoleOperateInfo.getSingleSeletedRow(
+  //       selecteds,
+  //       (id: string, row: any) => {
+  //         this.RoleOperateInfo.Show(
+  //           EOperate.update,
+  //           async (res: boolean) => {
+  //             if (res) {
+  //               await this.GetPage();
+  //             }
+  //           },
+  //           id,
+  //           row
+  //         );
+  //       }
+  //     );
+  //   }
+  // }
+
+  // public handleView(row?: any) {
+  //   this.RoleOperateInfo.Show(EOperate.view, (res: boolean) => {}, row.id, row);
+  // }
 
   //分配权限
   public handleAuth() {

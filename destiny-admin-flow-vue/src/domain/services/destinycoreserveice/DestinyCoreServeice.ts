@@ -10,7 +10,6 @@ import container from "@/shared/diconfig/inversify.config";
 
 @injectable()
 export default class DestinyCoreServeice implements IDestinyCoreServeice {
-
   delete(_url: string, _id: string): Promise<IAjaxResult> {
     return MainManager.dataRequest.deleteRequest(_url, {
       id: _id,
@@ -18,5 +17,9 @@ export default class DestinyCoreServeice implements IDestinyCoreServeice {
   }
   getPage(_url: string, _page: IPageRequest): Promise<IServerPageReturn<any>> {
     return MainManager.dataRequest.postRequest(_url, _page);
+  }
+
+  save(_url: string, _data: any): Promise<IAjaxResult> {
+    return MainManager.dataRequest.postRequest(_url, _data);
   }
 }
