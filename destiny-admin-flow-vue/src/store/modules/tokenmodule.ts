@@ -9,7 +9,7 @@ import {
 } from "vuex-module-decorators";
 
 import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
-import defaultConsts from '@/shared/config/terminalconst';
+import defaultConsts from '@/shared/config/appconst';
 import store from "@/store"
 
 export interface ITokenRouerStore

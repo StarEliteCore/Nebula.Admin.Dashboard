@@ -6,7 +6,7 @@ import { MenuList } from './modules/static/menuindex';
 import { MenuModule } from './store/modules/menumodule';
 import { TokenModule } from './store/modules/tokenmodule';
 import router from "@/router/index";
-import ApplicationUserManager  from '@/shared/config/IdentityServerFourLogin';
+import  ApplicationUserManager  from './shared/config/IdentityServerLogin';
 
 const _import = require("./router/import/_import_" + process.env.NODE_ENV);
 
