@@ -1,17 +1,12 @@
-import { Component, Emit, Mixins, Ref } from "vue-property-decorator";
+import { Component, Mixins } from "vue-property-decorator";
 import { ControlTypeEnum, ISearchFilter } from "@/shared/request";
 
 import { ComponentMixins } from "@/shared/mixins/component.mixns";
 import DeleteMixins from "@/shared/mixins/delete-dialog.mixins";
 import { EFilterOprator } from "@/shared/request/query.enum";
-import { EOperate } from "@/shared/eoperate";
-import { Guid } from 'guid-typescript';
 import { RoleApi } from "@/domain/config/api";
 import RoleOperate from "./role-operate/role-operate.vue";
-import RoleOperateInfo from "./role-operate/role-operate";
-import SetPerOperateInfo from "./role-operate/set-permission";
 import SetPermission from "./role-operate/set-permission.vue";
-import { id } from 'inversify';
 
 @Component({
   name: "RoleManagerment",

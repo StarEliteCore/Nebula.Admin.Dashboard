@@ -2,6 +2,7 @@ import * as PageQuery from "@/shared/request";
 
 import { Component, Emit, Ref, Vue } from "vue-property-decorator";
 import {
+  IFilterCondition,
   IPageRequest,
   IQueryFilter,
   ISearchFilter,
@@ -105,11 +106,19 @@ export class ComponentMixins extends Vue {
   protected PageInfo!: PageInfo;
 
   protected GetReq(_pageRequest: IPageRequest) {
+    let conditions = this.GetFilterCondition();
+    if (conditions.length > 0) {
+      _pageRequest.filter.conditions.concat(conditions);
+    }
     let filter: IPageRequest = JSON.parse(JSON.stringify(_pageRequest));
     // filter.queryFilter.filters = filters;
     filter.pageIndex = this.PageInfo.PaginationHandle.Pagination.pageIndex;
     filter.pageSize = this.PageInfo.PaginationHandle.Pagination.pageSize;
     return filter;
+  }
+
+  protected GetFilterCondition(): IFilterCondition[] {
+    return [];
   }
 
   currentRowEventArray(_selection: any, _row: any) {
@@ -217,8 +226,8 @@ export class ComponentMixins extends Vue {
       this.getSeletedRow((id: string, row: any) => {
         this.editTitle = "修改";
         this.editData = row;
-       
-        this.$nextTick(() => this.editModel.$emit("open") );
+
+        this.$nextTick(() => this.editModel.$emit("open"));
       });
     }
   }
@@ -243,7 +252,7 @@ export class ComponentMixins extends Vue {
   }
 
   @Emit()
-  refresh(){
-   this.GetPage();
+  refresh() {
+    this.GetPage();
   }
 }

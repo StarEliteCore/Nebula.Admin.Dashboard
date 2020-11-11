@@ -1,11 +1,10 @@
-import { Component, Mixins, Ref } from "vue-property-decorator";
+import { Component, Mixins } from "vue-property-decorator";
 
 import { EditModalMixins } from "@/shared/mixins/edit-modal.mixins";
 import { Guid } from "guid-typescript";
 import { IAjaxResult } from "@/shared/response";
 import { MainManager } from "@/domain/services/main/main-manager";
 import { MenuTreeOutDto } from "@/domain/entity/menudto/menuDto";
-import OperateMixins from "@/shared/mixins/operate.mixins";
 
 @Component({
   name: "SetPermission",
@@ -19,11 +18,10 @@ export default class SetPermission extends Mixins(EditModalMixins) {
   };
 
   loading: boolean = false;
-  private defaultCheckedKeys: string[] = [];
+
 
   private roleId: string = Guid.EMPTY;
 
-  private defaultExpandedKeys: string[] = [];
   private expandedKeys: any;
 
   protected MapTo(_rowId: string) {
@@ -36,7 +34,6 @@ export default class SetPermission extends Mixins(EditModalMixins) {
 
           this.roleId = _rowId;
 
-          //this.defaultCheckedKeys=res.data.selected as string[];
           this.checkedKeys.checked = res.data.selected as string[];
           this.expandedKeys = res.data.selected;
         }
