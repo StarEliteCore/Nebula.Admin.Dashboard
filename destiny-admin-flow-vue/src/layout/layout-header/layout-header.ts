@@ -11,7 +11,6 @@ export default class LayoutHeader extends Vue {
 
   private LogOut()
   {
-    debugger
     TokenModule.ResetToken();
     // MenuModule.RemoveMenus();
     ApplicationUserManager.Logout();

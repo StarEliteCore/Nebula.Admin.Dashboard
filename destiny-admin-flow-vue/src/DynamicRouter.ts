@@ -10,7 +10,6 @@ import  ApplicationUserManager  from './shared/config/IdentityServerLogin';
 
 const _import = require("./router/import/_import_" + process.env.NODE_ENV);
 
-console.log(process.env.NODE_ENV)
 let first = true;//第一次获取菜单
 var getRouter: Route[];
 router.beforeEach(async (to: any, from, next) => {
