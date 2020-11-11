@@ -43,7 +43,7 @@
           </Table>
         </Card>
       </div>
-      <set-permission ref="SetPerOperateInfo"></set-permission>
+      <set-permission ref="setPermissionModel" :editData="role" :editTitle="permissionTitle" @refresh="refresh"></set-permission>
      
       <role-operate ref="editModel" :editTitle="editTitle" :editData="editData"  @saveEdit="saveEdit"></role-operate>
       <!-- <edit-modal ref="editModel" :editTitle="editTitle">
