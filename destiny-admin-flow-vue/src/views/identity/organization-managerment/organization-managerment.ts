@@ -136,9 +136,25 @@ export default class OrganizationManagerment extends Mixins(
       );
     }
   }
+  private EditTree()
+  {
+    if (!this.treeSelectedId) {
+      this.$Message.error("请选择要编辑的组织架构");
+      return;
+    }
+    this.OrganizationInfo.Show(
+      EOperate.update,
+      this.treeData,
+      this.treeSelectedId,
+      (res: boolean) => {
+        this.loadData();
+      },this.treeSelectedId
+    );
+
+  }
   private async loadTree() {
     await MainManager.Instance()
-      .OrganizationService.GetAllOrganizationTree()
+      .OrganizationService.getAllOrganizationTree()
       .then((res) => {
         if (res.success) {
           this.treeData = res.itemList;
@@ -196,7 +212,7 @@ export default class OrganizationManagerment extends Mixins(
    *
    * @param _row 删除组织架构
    */
-  private deleteItem() {
+  private deleteItem(_row: OrganizationPageListDto) {
     if( typeof this.CurrentRow === "undefined")
     {
       this.$Message.warning("请选择要删除的行！");

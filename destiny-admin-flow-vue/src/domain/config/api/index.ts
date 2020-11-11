@@ -21,6 +21,10 @@ export const UserApi = {
    * 用戶分配角色
    */
   userAllocationRole: "api/User/AllocationRoleAsync",
+    /**
+   * 用戶分配角色
+   */
+  userAll: "api/User/GetUsersAsync",
 };
 
 //代码生成器API
@@ -203,4 +207,8 @@ export const OrganizationApi = {
    * 修改组织架构
    */
   updateOrganization:"api/Organization/UpdateAsync",
+    /**
+   * 加载组织架构
+   */
+  loadOrganization:"api/Organization/LoadFormOrganizationAsync",
 };

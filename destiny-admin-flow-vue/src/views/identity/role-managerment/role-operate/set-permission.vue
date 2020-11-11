@@ -1,5 +1,5 @@
 <template>
-  <Modal v-model="IsShow" :title="title" :mask-closable="false">
+  <Modal v-model="isOpen" :title="editTitle" :mask-closable="false"    >
 
       <a-tree
         v-if="treeData && treeData.length > 0"
@@ -15,10 +15,10 @@
         
       </a-tree>
     <div slot="footer">
-      <Button type="primary" class="dialog-btn--primary" @click="OnHandleCommit"
+      <Button type="primary" class="dialog-btn--primary" :loading="loading" @click="onHandleCommit"
         >保存</Button
       >
-      <Button class="dialog-btn" @click="OnHandleCancelNotform">关闭</Button>
+      <Button class="dialog-btn" @click="close">关闭</Button>
     </div>
   </Modal>
 </template>

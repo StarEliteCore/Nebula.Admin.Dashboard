@@ -9,7 +9,7 @@ import {
 import { Guid } from 'guid-typescript';
 import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
 import { MenuEnum } from '@/domain/entity/menudto/menuDto';
-import defaultConsts from '@/shared/config/terminalconst';
+import defaultConsts from "@/shared/config/appconst"
 import store from "@/store"
 
 export interface IMenuRouerStore
