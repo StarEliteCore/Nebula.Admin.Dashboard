@@ -4,12 +4,20 @@ import { UserManager } from "oidc-client"
 export class ApplicationUserManager extends UserManager {
     constructor() {
         super({
-            authority: defaultConsts.token_root,
-            client_id: defaultConsts.client_id,
-            redirect_uri: defaultConsts.redirect_uri,
-            response_type: defaultConsts.response_type,
-            scope: defaultConsts.scope,
-            post_logout_redirect_uri: defaultConsts.appBaseUrl,
+            authority: process.env.VUE_APP_AUTHORITY_SERVER,
+            client_id: process.env.VUE_APP_CLIENT_ID,
+            redirect_uri: window.location.origin + "/callback",
+            response_type: process.env.VUE_APP_RESPONSE_TYPE,
+            scope: process.env.VUE_APP_SCOPE,
+            post_logout_redirect_uri: window.location.origin,
+        })
+        console.log({
+            authority: process.env.VUE_APP_AUTHORITY_SERVER,
+            client_id: process.env.VUE_APP_CLIENT_ID,
+            redirect_uri: window.location.origin + "/callback",
+            response_type: process.env.VUE_APP_RESPONSE_TYPE,
+            scope: process.env.VUE_APP_SCOPE,
+            post_logout_redirect_uri: window.location.origin,
         })
     }
 
@@ -20,6 +28,7 @@ export class ApplicationUserManager extends UserManager {
         /**
          * 登录重定向
          */
+        debugger
         this.signinRedirect();
     }
     /**
