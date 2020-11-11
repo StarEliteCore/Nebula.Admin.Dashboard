@@ -28,7 +28,6 @@ export class ApplicationUserManager extends UserManager {
         /**
          * 登录重定向
          */
-        debugger
         this.signinRedirect();
     }
     /**
