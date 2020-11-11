@@ -27,4 +27,7 @@ export default class UserService implements IUserService {
     deleteUserById(_id: string): Promise<IAjaxResult> {
         return MainManager.dataRequest.deleteRequest(UserApi.deleteUser, { id: _id });
     }
+    getSelectAllUser(): Promise<IAjaxResult> {
+        return MainManager.dataRequest.getRequest(UserApi.userAll);
+    }
 }

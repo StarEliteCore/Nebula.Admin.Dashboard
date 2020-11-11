@@ -4,6 +4,7 @@ import { EOperate } from "@/shared/eoperate";
 import { MainManager } from "@/domain/services/main/main-manager";
 import OperateMixins from "@/shared/mixins/operate.mixins";
 import { OrganizationInputDto } from "@/domain/entity/organization/OrganizationDto";
+import { UserOutputListDto } from '@/domain/entity/userdto/userDto';
 
 @Component({
   name: "MenuOperates",
@@ -14,7 +15,7 @@ export default class Organization extends Mixins(OperateMixins) {
    */
   private organizationDto: OrganizationInputDto = new OrganizationInputDto();
   private treeData: Array<any> = [];
-
+  private userArray: Array<UserOutputListDto> = new Array<UserOutputListDto>();
   private ruleValidate: any = {
     name: [
       { required: true, message: "名称不可为空", trigger: "OnHandleCommit" },
@@ -28,6 +29,11 @@ export default class Organization extends Mixins(OperateMixins) {
     callback: (res: boolean) => void,
     _rowId?: string
   ) {
+    MainManager.Instance().UserService.getSelectAllUser().then(x=>{
+      if(x.success)
+      this.userArray=x.data
+      console.log(this.userArray)
+    })
     switch (_type) {
       case EOperate.add:
         this.title = "添加";
@@ -40,7 +46,7 @@ export default class Organization extends Mixins(OperateMixins) {
         this.IsShowColumn = false;
         if (typeof _rowId !== "undefined") {
           this.treeData = _treeData;
-          await this.getMenuById(_rowId);
+          await this.getOrganizationById(_rowId);
         }
         this.title = `编辑—「${this.organizationDto.name}」`;
         break;
@@ -74,8 +80,8 @@ export default class Organization extends Mixins(OperateMixins) {
    * @description 根据id获取菜单
    * @param {string} _id id
    */
-  private async getMenuById(_id: string) {
-    let res = await MainManager.Instance().MenuService.getMenuById(_id);
+  private async getOrganizationById(_id: string) {
+    let res = await MainManager.Instance().OrganizationService.loadFormOrganization(_id);
     if (res.success) {
       this.organizationDto = res.data;
     }

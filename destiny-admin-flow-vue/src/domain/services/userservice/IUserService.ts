@@ -36,4 +36,8 @@ export interface IUserService {
      * @param _user 
      */
     userAllocationRole(_user:UserAllocationRoleInputDto): Promise<IAjaxResult>;
+    /**
+     * 获取所有用户下拉框
+     */
+    getSelectAllUser(): Promise<IAjaxResult>;
 }
