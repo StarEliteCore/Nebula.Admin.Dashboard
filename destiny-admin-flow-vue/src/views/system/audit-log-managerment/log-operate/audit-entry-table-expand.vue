@@ -10,7 +10,7 @@
         <p slot="title">数据审计信息</p>
         <Table
           :columns="columns"
-          :data="auditEntryTable"
+          :data="tableData"
           border
           stripe
           size="small"

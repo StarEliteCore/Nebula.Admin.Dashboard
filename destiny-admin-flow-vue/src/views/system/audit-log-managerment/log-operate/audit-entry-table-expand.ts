@@ -1,14 +1,11 @@
-import * as PageQuery from "@/shared/request";
+import { Component, Mixins, Prop } from "vue-property-decorator";
 
-import { Component, Emit, Mixins, Prop } from "vue-property-decorator";
-import { EFilterConnect, EFilterOprator } from '@/shared/request/query.enum';
-import { IFilterCondition, IQueryFilter } from '@/shared/request';
-
-import AuditEntryPropertyExpandOperate from "../../audit-entry-managerment/operate/audit-entry-property-managerment.vue"
-import { IAuditEntryTableDto } from "@/domain/entity/auditdto/auditDto";
+import { AuditApi } from "@/domain/config/api";
+import AuditEntryPropertyExpandOperate from "../../audit-entry-managerment/operate/audit-entry-property-managerment.vue";
+import { ComponentMixins } from "@/shared/mixins/component.mixns";
+import { EFilterOprator } from "@/shared/request/query.enum";
+import { IFilterCondition } from "@/shared/request";
 import { ITableColumn } from "@/shared/table/ITable";
-import { MainManager } from "@/domain/services/main/main-manager";
-import PageMixins from "@/shared/mixins/page.mixins";
 
 @Component({
   name: "TableExpand",
@@ -16,80 +13,74 @@ import PageMixins from "@/shared/mixins/page.mixins";
     AuditEntryPropertyExpandOperate,
   },
 })
-export default class TableExpand extends Mixins(PageMixins) {
-  private queryfileter: PageQuery.IPageRequest = new PageQuery.PageRequest();
+export default class TableExpand extends Mixins(ComponentMixins) {
+  pageUrl: string = AuditApi.getAuditEntryPage;
 
   @Prop()
   protected row!: any;
 
-  private columns: ITableColumn[] = [
-    {
-      type: "expand",
-      width: 50,
-      align: "center",
-      render: (h: any, params: any) => {
-        return h(AuditEntryPropertyExpandOperate, {
-          props: {
-            row: params.row,
-          },
-        });
+  GetColumn(): ITableColumn[] {
+    return [
+      {
+        type: "expand",
+        width: 50,
+        align: "center",
+        render: (h: any, params: any) => {
+          return h(AuditEntryPropertyExpandOperate, {
+            props: {
+              row: params.row,
+            },
+          });
+        },
       },
-    },
-    {
-      title: "实体名称",
-      key: "entityDisplayName",
-      align: "center",
-    },
-    {
-      title: "实体类型",
-      key: "entityAllName",
-      align: "center",
-    },
-    {
-      title: "编号",
-      key: "keyValues",
-      align: "center",
-      slot: "keyValues",
-    },
-    {
-      title: "类型",
-      key: "operationType",
-      align: "center",
-      slot: "operationType",
-    },
-  ];
-
-  private async getAuditEntryPageAsync() {
-    await MainManager.Instance()
-      .SystemService.getAuditEntryPage(this.tranfer(this.queryfileter))
-      .then((res) => {
-        if (res.success) {
-          this.auditEntryTable = res.itemList;
-          this.total = res.total;
-        }
-      });
+      {
+        title: "实体名称",
+        key: "entityDisplayName",
+        align: "center",
+      },
+      {
+        title: "实体类型",
+        key: "entityAllName",
+        align: "center",
+      },
+      {
+        title: "编号",
+        key: "keyValues",
+        align: "center",
+        slot: "keyValues",
+      },
+      {
+        title: "类型",
+        key: "operationType",
+        align: "center",
+        slot: "operationType",
+      },
+    ];
   }
 
-  @Emit()
-  pageChange() {
-    this.getAuditEntryPageAsync();
+  GetFilterCondition() {
+    let newFilters: IFilterCondition[] = [
+      {
+        field: "AuditLogId",
+        operator: EFilterOprator.Equal,
+        value: this.row.id,
+      },
+    ];
+    return newFilters;
   }
 
-  private auditEntryTable: Array<IAuditEntryTableDto> = [];
-  private created() {}
-  private mounted() {
-    let newFilters: IFilterCondition[] = [{
-      field:"AuditLogId",
-      operator:EFilterOprator.Equal,
-      value:this.row.id
-    }];
-    let filter: IQueryFilter = {
-      filterConnect: EFilterConnect.And,
-      conditions: newFilters,
-    };
-    this.queryfileter.filter = filter;
+  // private mounted() {
+  //   let newFilters: IFilterCondition[] = [{
+  //     field:"AuditLogId",
+  //     operator:EFilterOprator.Equal,
+  //     value:this.row.id
+  //   }];}
+  //   let filter: IQueryFilter = {
+  //     filterConnect: EFilterConnect.And,
 
+  //   this.getAuditEntryPageAsync();      conditions: newFilters,
+  //   };
+  //   this.queryfileter.filter = filter;
 
-    this.getAuditEntryPageAsync();
-  }
+  // }
 }

@@ -18,6 +18,10 @@ export class EditModalMixins extends Vue {
   isOpen: boolean = false;
   private form!: any;
   protected InIt() {
+    this.GetFormRef();
+  }
+
+  protected GetFormRef() {
     this.form = this.$refs[this.formName] as any;
   }
 
@@ -41,10 +45,7 @@ export class EditModalMixins extends Vue {
     }
   }
 
-
-
-  protected MapTo(row: any){
-  }
+  protected MapTo(row: any) {}
 
   formName: string = "form";
   onHandleCommit() {

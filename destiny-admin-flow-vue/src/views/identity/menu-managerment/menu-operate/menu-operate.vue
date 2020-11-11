@@ -8,7 +8,7 @@
       :rules="ruleValidate"
     >
       <FormItem label="上级菜单：" prop="parentId">
-        <a-tree-select
+        <a-tree-select style="z-index:3000"
           v-model="menuDto.parentId"
           :tree-data="treeData"
           placeholder="请选择"
