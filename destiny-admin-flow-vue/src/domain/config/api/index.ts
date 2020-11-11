@@ -86,9 +86,9 @@ export const MenuApi = {
    */
   getMenu: "api/Menu/GetMenuAsync",
   /**
-   * 登录成功之后获取用户菜单树
+   * 登录成功之后获取Vue动态路由菜单
    */
-  getUserMenuTree: "api/Menu/GetUserMenuTreeAsync",
+  getVueDynamicRouterTreeAsync: "api/Menu/GetVueDynamicRouterTreeAsync",
   /**
    * 异步得到菜单树数据
    */

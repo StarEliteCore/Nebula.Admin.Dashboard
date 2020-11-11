@@ -1,8 +1,12 @@
 import { Component, Vue, Watch } from "vue-property-decorator";
+
+import ApplicationUserManager from "@/shared/config/IdentityServerLogin";
+import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
+import { MainManager } from "@/domain/services/main/main-manager";
 import { MenuList } from "@/modules/static/menuindex";
 import { MenuModule } from "@/store/modules/menumodule";
 import { TokenModule } from "@/store/modules/tokenmodule";
-import ApplicationUserManager from '@/shared/config/IdentityServerLogin';
+
 @Component({
   name: "Login",
 })
@@ -12,7 +16,7 @@ export default class Login extends Vue {
   //   this.init(_name);
   // }
   private created() {
-      this.loginCallbackFn()
+    this.loginCallbackFn();
   }
   async loginCallbackFn() {
     await ApplicationUserManager.signinRedirectCallback();
@@ -23,8 +27,16 @@ export default class Login extends Vue {
       TokenModule.SetToken(user.access_token);
       // this.getUserMenuTree();
       this.$router.push({
-        path: "/home-page"
+        path: "/home-page",
       });
     }
+  }
+  private getVueDynamicRouterTreeAsync() {
+    MainManager.Instance()
+      .MenuService.getVueDynamicRouterTreeAsync()
+      .then((x) => {
+        const data=x.data.itemList
+        MenuModule.SetMenus(data as IMenuRouter[]);
+      });
   }
 }

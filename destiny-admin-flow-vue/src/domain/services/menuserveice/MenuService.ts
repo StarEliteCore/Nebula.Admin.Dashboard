@@ -1,13 +1,12 @@
 import { IAjaxResult, IServerPageReturn } from '@/shared/response';
+import { MenuDto, MenuOutPageListDto } from '@/domain/entity/menudto/menuDto';
 
+import { FunctionInputDto } from "@/domain/entity/functiondto/functionDto";
 import { IMenuService } from './IMenuService';
 import { IPageRequest } from '@/shared/request';
 import { MainManager } from '../main/main-manager';
 import { MenuApi } from '@/domain/config/api';
-import { MenuDto, MenuOutPageListDto } from '@/domain/entity/menudto/menuDto';
 import { injectable } from 'inversify';
-
-import { FunctionInputDto } from "@/domain/entity/functiondto/functionDto";
 
 @injectable()
 export default class MenuService implements IMenuService {
@@ -51,5 +50,10 @@ export default class MenuService implements IMenuService {
     GetMenuFunctionByMenuIdPageAsync(menuId: string, _page: IPageRequest): Promise<IServerPageReturn<FunctionInputDto[]>> {
         return MainManager.dataRequest.postRequest(MenuApi.GetMenuFunctionByMenuIdPage, Object.assign({ menuId }, _page));
     }
-
+    /**
+     * 获取动态路由
+     */
+    getVueDynamicRouterTreeAsync(): Promise<IAjaxResult> {
+        return MainManager.dataRequest.getRequest(MenuApi.getVueDynamicRouterTreeAsync);
+    }
 }
