@@ -27,6 +27,20 @@
         <FormItem label="名称：" prop="name">
           <Input v-model="organizationDto.name" />
         </FormItem>
+        <FormItem label="主管领导：" prop="ladingCadre">
+          <Select v-model="organizationDto.ladingCadre">
+            <Option :key="item.id" :value="item.id" v-for="item in userArray">{{
+              item.userName
+            }}</Option>
+          </Select>
+        </FormItem>
+        <FormItem label="分管领导：" prop="firstLeader">
+          <Select v-model="organizationDto.firstLeader">
+            <Option :key="item.id" :value="item.id" v-for="item in userArray">{{
+              item.userName
+            }}</Option>
+          </Select>
+        </FormItem>
       </Form>
       <template v-slot:footer>
         <div>

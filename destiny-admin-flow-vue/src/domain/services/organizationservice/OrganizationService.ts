@@ -27,7 +27,7 @@ export default class OrganizationService implements IOrganizationService {
   updateOrganizationAsync(
     _organization: OrganizationInputDto
   ): Promise<IAjaxResult> {
-    return MainManager.dataRequest.postRequest(
+    return MainManager.dataRequest.putRequest(
       OrganizationApi.updateOrganization,
       _organization
     );
@@ -38,7 +38,10 @@ export default class OrganizationService implements IOrganizationService {
       { id: _id }
     );
   }
-  GetAllOrganizationTree(): Promise<IServerPageReturn<ITreeDto>> {
+  getAllOrganizationTree(): Promise<IServerPageReturn<ITreeDto>> {
     return MainManager.dataRequest.getRequest(OrganizationApi.getOrganizationTree);
-}
+  }
+  loadFormOrganization(_id:string):Promise<IAjaxResult>{
+    return MainManager.dataRequest.getRequest(OrganizationApi.loadOrganization,{ id: _id })
+  }
 }

@@ -26,17 +26,17 @@ export class OrganizationInputDto implements IEntity<string> {
    */
   depth: number = 0;
   /**
-   *
+   * 领导
    */
   ladingCadre: string = "";
   /**
-   * 主管领导
+   * 其他领导
    */
-  firstLeader: string = Guid.EMPTY;
+  firstLeader: string = "";
   /**
    * 分管领导
    */
-  secondLeader: string = Guid.EMPTY;
+  secondLeader: string = "";
 }
 
 /**

@@ -20,6 +20,19 @@ export interface IUserBaseDto {
      */
     userName: string
 }
+/**
+ * 用户输出集合DTO
+ */
+export class UserOutputListDto implements IUserBaseDto,IEntity<string>,IDescription {
+    isSystem: boolean=false;
+    nickName: string="";
+    sex: ESex=ESex.Man;
+    userName: string="";
+    id: string=Guid.EMPTY;
+    description: string="";
+}
+
+
 export interface IPassWord {
     passwordHash: string;
 }

@@ -35,5 +35,10 @@ export interface IOrganizationService {
   /**
    * 获取树形组织架构
    */
-  GetAllOrganizationTree(): Promise<IServerPageReturn<any>>;
+  getAllOrganizationTree(): Promise<IServerPageReturn<any>>;
+  /**
+   * 加载组织架构
+   * @param _id 
+   */
+  loadFormOrganization(_id:string):Promise<IAjaxResult>;
 }

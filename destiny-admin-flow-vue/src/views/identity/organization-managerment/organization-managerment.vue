@@ -7,7 +7,7 @@
           <Button @click="operateItem(operate.add)">
             <Icon type="md-add"  />
           </Button>
-          <Button >
+          <Button @click="EditTree" >
             <Icon type="ios-create" />
           </Button>
           <Button @click="deleteItemTree">
@@ -30,8 +30,8 @@
       <header>
           <div>
             <ButtonGroup>
-              <Button> <Icon type="md-add" @click="operateItem(operate.add)"/>添加 </Button>
-              <Button> <Icon type="ios-create" />编辑 </Button>
+              <Button  @click="operateItem(operate.add)"> <Icon type="md-add"/>添加 </Button>
+              <Button  @click="operateItem(operate.update)"> <Icon type="ios-create"/>编辑 </Button>
               <Button @click="deleteItem"> <Icon type="ios-trash"  />删除 </Button>
             </ButtonGroup>
           </div>
