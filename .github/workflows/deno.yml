@@ -28,30 +28,30 @@ jobs:
         uses: actions/checkout@v2
 
       - name: cd /destiny-admin-flow-vue  # 进入前端根目录
-        run: cd /destiny-admin-flow-vue
+        run: ls /home/runner/work/Destiny.Core.Flow.WebUI
 
-      - name: cd /destiny-admin-flow-vue  # 进入前端根目录
-        run: cd /destiny-admin-flow-vue
+      #- name: cd /destiny-admin-flow-vue  # 进入前端根目录
+      #  run: cd /destiny-admin-flow-vue
 
       - name: 列出目录  # 进入前端根目录
         run: ls
 
-      - name: yarn install  # 安装npm 包
-        run: yarn install
+      #- name: yarn install  # 安装npm 包
+      #  run: yarn install
     
-      - name: yarn build  # 打包前端项目
-        run: yarn build
+     # - name: yarn build  # 打包前端项目
+     #   run: yarn build
 
-      - name: copy config to dist  # 拷贝文件进入dist目录
-        run: cp nginx.conf Dockerfile dist/
+     # - name: copy config to dist  # 拷贝文件进入dist目录
+     #   run: cp nginx.conf Dockerfile dist/
 
-      - name: build image
-        uses: docker/build-push-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: 18790997531/destinycoreweb
-          tags: latest
-          path: /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/dist
-          dockerfile: /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/Dockerfile
+     # - name: build image
+     #   uses: docker/build-push-action@v1
+     #   with:
+     #     username: ${{ secrets.DOCKER_USERNAME }}
+     #     password: ${{ secrets.DOCKER_PASSWORD }}
+     #     repository: 18790997531/destinycoreweb
+     #     tags: latest
+     #     path: /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/dist
+      #    dockerfile: /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/Dockerfile
     
