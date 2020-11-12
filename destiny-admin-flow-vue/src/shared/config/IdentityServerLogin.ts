@@ -1,22 +1,22 @@
-import defaultConsts from "@/shared/config/appconst"
 import { UserManager } from "oidc-client"
+import defaultConsts from "@/shared/config/appconst"
 
 export class ApplicationUserManager extends UserManager {
     constructor() {
         super({
-            authority: process.env.VUE_APP_AUTHORITY_SERVER,
-            client_id: process.env.VUE_APP_CLIENT_ID,
+            authority: "https://auth.destinycore.club",
+            client_id: "DestinyCoreFlowReactClient",
             redirect_uri: window.location.origin + "/callback",
-            response_type: process.env.VUE_APP_RESPONSE_TYPE,
-            scope: process.env.VUE_APP_SCOPE,
+            response_type: "id_token token",
+            scope: "openid profile roles Destiny.Core.Flow.API",
             post_logout_redirect_uri: window.location.origin,
         })
         console.log({
-            authority: process.env.VUE_APP_AUTHORITY_SERVER,
+            authority: "https://auth.destinycore.club",
             client_id: process.env.VUE_APP_CLIENT_ID,
             redirect_uri: window.location.origin + "/callback",
-            response_type: process.env.VUE_APP_RESPONSE_TYPE,
-            scope: process.env.VUE_APP_SCOPE,
+            response_type: "id_token token",
+            scope: "openid profile roles Destiny.Core.Flow.API",
             post_logout_redirect_uri: window.location.origin,
         })
     }
