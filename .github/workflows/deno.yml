@@ -34,7 +34,7 @@ jobs:
         run: cd /home/runner/work/Destiny.Core.Flow.WebUI
 
       - name: 列出目录  # 进入前端根目录
-        run: ls /home/runner/work/Destiny.Core.Flow.WebUI
+        run: ls /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI
 
       #- name: yarn install  # 安装npm 包
       #  run: yarn install
