@@ -30,7 +30,6 @@ jobs:
       - name: 列出仓库，目录  # 进入前端项目仓库
         run: ls /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI
       - name: 进入前端项目目录  # 进入前端项目
-        - run: 
         - run: cd /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue && yarn install && yarn build    # 打包前端项目
         - run: ls  /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue  
     
