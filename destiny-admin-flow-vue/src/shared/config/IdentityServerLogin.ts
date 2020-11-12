@@ -28,6 +28,7 @@ export class ApplicationUserManager extends UserManager {
         /**
          * 登录重定向
          */
+        console.log("______________________________==========================================")
         this.signinRedirect();
     }
     /**

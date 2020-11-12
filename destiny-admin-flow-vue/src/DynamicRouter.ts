@@ -1,12 +1,12 @@
 // import { Login, loginCallbackFunc } from './oidc-login/IdentityServerLogin';
 
+import  ApplicationUserManager  from './shared/config/IdentityServerLogin';
 import EmptyView from "@/views/layout-emprty/layout-emprty.vue";
 import LayoutView from "@/layout/layout.vue";
 import { MenuList } from './modules/static/menuindex';
 import { MenuModule } from './store/modules/menumodule';
 import { TokenModule } from './store/modules/tokenmodule';
 import router from "@/router/index";
-import  ApplicationUserManager  from './shared/config/IdentityServerLogin';
 
 const _import = require("./router/import/_import_" + process.env.NODE_ENV);
 
@@ -72,6 +72,7 @@ router.beforeEach(async (to: any, from, next) => {
             next();
         }
         else {
+            console.log(1234564896)
             ApplicationUserManager.Login();
         }
     }
