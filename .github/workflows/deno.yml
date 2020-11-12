@@ -32,10 +32,10 @@ jobs:
       - name: 进入前端项目目录  # 进入前端项目
         run: cd /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue && yarn install && yarn build    # 打包前端项目
     
-      #- name: copy config to dist  # 拷贝文件进入dist目录
-      #  run: cp nginx.conf Dockerfile /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/dist/
-      #- name: 列出打包后的目录
-     #   run: ls /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/dist 
+      - name: copy config to dist  # 拷贝文件进入dist目录
+        run: cp /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/nginx.conf /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/Dockerfile /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/dist/
+      - name: 列出打包后的目录
+        run: ls /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/dist 
      # - name: build image
      #   uses: docker/build-push-action@v1
      #   with:
