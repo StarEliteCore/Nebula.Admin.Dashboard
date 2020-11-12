@@ -30,19 +30,19 @@ jobs:
       - name: 列出仓库，目录  # 进入前端项目仓库
         run: ls /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI
       - name: 进入前端项目目录  # 进入前端项目
-        run: cd /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue && yarn install && yarn build    # 打包前端项目
+        run: cd /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue && yarn install && yarn build    # build WebUI Project 
     
       - name: copy config to dist  # 拷贝文件进入dist目录
         run: cp /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/nginx.conf /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/Dockerfile /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/dist/
       - name: 列出打包后的目录
-        run: ls /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/dist 
-     # - name: build image
-     #   uses: docker/build-push-action@v1
-     #   with:
-     #     username: ${{ secrets.DOCKER_USERNAME }}
-     #     password: ${{ secrets.DOCKER_PASSWORD }}
-     #     repository: 18790997531/destinycoreweb
-     #     tags: latest
-     #     path: /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/dist
-      #    dockerfile: /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/Dockerfile
+        run: ls /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/dist # Project path in github 
+      - name: build docker image
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }} # username in Dockerhub
+          password: ${{ secrets.DOCKER_PASSWORD }} # password in Dockerhub
+          repository: 18790997531/destinycoreweb   # repository in Dockerhub
+          tags: latest
+          path: /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/dist 
+          dockerfile: /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/dist/Dockerfile # Build docker Image
     
