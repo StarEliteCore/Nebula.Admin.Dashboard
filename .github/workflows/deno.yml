@@ -32,7 +32,7 @@ jobs:
       - name: 进入前端项目目录  # 进入前端项目
         run: cd /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/
       - name: yarn install   # 安装npm 包
-        run: yarn install 
+        run: ls  
     
       - name: yarn build  # 打包前端项目
         run: ls 
