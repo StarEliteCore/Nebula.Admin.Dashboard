@@ -16,7 +16,7 @@ on:
 
 jobs:
   test:
-    runs-on: ${{ matrix.os }} # runs a test on Ubuntu, Windows and macOS
+    runs-on: ubuntu-latest # 编译环境
 
     strategy:
       matrix:
@@ -27,13 +27,24 @@ jobs:
       - name: Setup repo
         uses: actions/checkout@v2
 
-      - name: Setup Deno
-        uses: denolib/setup-deno@c7d7968ad4a59c159a777f79adddad6872ee8d96
-        with:
-          deno-version: ${{ matrix.deno }} # tests across multiple Deno versions
+      - name: cd destiny-admin-flow-vue  # 进入前端根目录
+        run: cd destiny-admin-flow-vue
 
-      - name: Cache Dependencies
-        run: deno cache deps.ts
+      - name: yarn install  # 安装npm 包
+        run: yarn install
 
-      - name: Run Tests
-        run: deno test -A --unstable
+      - name: yarn build  # 打包前端项目
+        run: yarn build
+
+     - name: copy config to dist  # 拷贝文件进入dist目录
+        run: cp nginx.conf Dockerfile dist/
+    - name: build image
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: 18790997531/destinycoreweb
+        tags: latest
+        path: /home/runner/work/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/dist
+        dockerfile: /home/runner/work/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/Dockerfile
+    
