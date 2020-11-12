@@ -46,6 +46,6 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: 18790997531/destinycoreweb
           tags: latest
-          path: /home/runner/work/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/dist
-          dockerfile: /home/runner/work/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/Dockerfile
+          path: /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/dist
+          dockerfile: /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/Dockerfile
     
