@@ -41,7 +41,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }} # username in Dockerhub
           password: ${{ secrets.DOCKER_PASSWORD }} # password in Dockerhub
-          repository: 18790997531/destinycoreweb   # repository in Dockerhub
+          build-push: 18790997531/destinycoreweb   # repository in Dockerhub
           tags: latest
           path: /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/dist 
           dockerfile: /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/dist/Dockerfile # Build docker Image
