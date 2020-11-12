@@ -37,12 +37,11 @@ jobs:
       - name: 列出打包后的目录
         run: ls /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/dist # Project path in github 
       - name: build docker image
-        uses: docker/build-push-action@v1
+        uses: docker/build-push-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }} # username in Dockerhub
           password: ${{ secrets.DOCKER_PASSWORD }} # password in Dockerhub
-          build-push: 18790997531/destinycoreweb   # repository in Dockerhub
-          tags: latest
+          tags: 18790997531/destinycoreweb:latest
           path: /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/dist 
-          dockerfile: /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/dist/Dockerfile # Build docker Image
+          file: /home/runner/work/Destiny.Core.Flow.WebUI/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/dist/Dockerfile # Build docker Image
     
