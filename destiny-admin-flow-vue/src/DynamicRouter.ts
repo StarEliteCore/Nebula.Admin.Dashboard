@@ -16,6 +16,7 @@ router.beforeEach(async (to: any, from, next) => {
     /**
      * 判断是否存在token
      */
+    console.log(12345646516516)
     if (TokenModule.token) {
         /**
          * 存在token并且路由指定的是登录路由 
