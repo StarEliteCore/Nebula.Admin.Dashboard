@@ -19,11 +19,11 @@ jobs:
       - name: Setup repo
         uses: actions/checkout@v2
 
-      - name: 进入前端项目目录  # 进入前端项目
-        run: cd Destiny.Core.Flow.WebUI/destiny-admin-flow-vue && yarn install && yarn build    # build WebUI Project 
+      - name: 构建  # 进入前端项目
+        run: yarn install --cwd destiny-admin-flow-vue && cd destiny-admin-flow-vue && yarn build
     
       - name: copy config to dist  # 拷贝文件进入dist目录
-        run: cp Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/nginx.conf Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/Dockerfile Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/dist/
+        run: cp destiny-admin-flow-vue/nginx.conf destiny-admin-flow-vue/Dockerfile destiny-admin-flow-vue/dist/
       - name: 登录docker
         uses: docker/login-action@v1
         with:
@@ -34,6 +34,6 @@ jobs:
         with:
           tags: 18790997531/destinycoreweb:latest
           push: true
-          context: Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/dist 
-          file: Destiny.Core.Flow.WebUI/destiny-admin-flow-vue/dist/Dockerfile # Build docker Image
+          context: destiny-admin-flow-vue/dist 
+          file: destiny-admin-flow-vue/dist/Dockerfile # Build docker Image
     
