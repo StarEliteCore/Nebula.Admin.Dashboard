@@ -60,11 +60,13 @@
             <article>
                 <Table
                     :columns="columns"
-                    
+                    :data="tableData"
                     border
                     tripe
-                    
+                    stripe
                     class="table"
+                    @on-select-cancel="currentRowEventCancel"
+                    @on-select="currentRowEventArray"
                 >
 
                 </Table>
@@ -72,7 +74,7 @@
                     ref="PageInfo"
                     :total="total"
                     @PageChange="pageChange"
-        ></page-component>
+                ></page-component>
             </article>
         </div>
     </section>

@@ -9,6 +9,9 @@ import { MainManager } from '../../../domain/services/main/main-manager';
 import { ITreeDto } from '@/shared/baseentity/itreeentity';
 import { IFilterCondition, IQueryFilter } from '../../../shared/request/index';
 import { EFilterConnect, EFilterOprator } from '@/shared/request/query.enum';
+import { ComponentMixins } from '@/shared/mixins/component.mixns';
+import { DataDictionaryApi } from '../../../domain/config/api/index';
+import { DataDictionaryInputDto, DataDictionaryPageListDto } from '../../../domain/entity/dataDictionaryDto/dataDictionaryDto';
 
 
 @Component({
@@ -26,6 +29,10 @@ export default class DataDictionaryManagerment extends Mixins(PageMixins,DeleteM
     private treeSelectedMenu:any = {};
     private dymaicQuery:any = {};
     private currentArray = [];
+
+    private tableData:Array<DataDictionaryPageListDto> = [];
+
+    pageUrl:string = DataDictionaryApi.getDataDictionaryPageListAsync
 
     /**
      * table加载状态
@@ -62,7 +69,6 @@ export default class DataDictionaryManagerment extends Mixins(PageMixins,DeleteM
     }
 
     private loadTreeData(){
-        debugger
         this.mainManager.DataDictionarySrevice.getDataDictionaryTree()
         .then(res => {
             if(res.success){
@@ -89,7 +95,14 @@ export default class DataDictionaryManagerment extends Mixins(PageMixins,DeleteM
 
         this.showTableLoading = true;
         this.queryfileter.filter = this.filter();
-        
+        // this.mainManager.DataDictionarySrevice.getDataDictionaryPageListAsync(this.tranfer(this.queryfileter))
+        MainManager.Instance().DataDictionarySrevice.getDataDictionaryPageListAsync(this.tranfer(this.queryfileter))
+        .then(res => {
+            if(res.success){
+                this.tableData = res.itemList;
+                this.total = res.total;
+            }
+        })
     }
 
     getFilter(){
