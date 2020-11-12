@@ -28,8 +28,8 @@ jobs:
         uses: actions/checkout@v2
 
       - name: cd destiny-admin-flow-vue  # 进入前端根目录
-        run: cd destiny-admin-flow-vue
-        
+        run: cd destiny-admin-flow-vue/destiny-admin-flow-vue
+
       - name: 列出目录  # 进入前端根目录
         run: ls
 
