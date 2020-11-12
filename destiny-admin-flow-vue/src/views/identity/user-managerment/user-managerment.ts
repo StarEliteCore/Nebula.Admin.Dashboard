@@ -129,6 +129,8 @@ export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
     // this.PageInfo.total=100;
   }
   private mounted() {
+    // let res = MainManager.Instance().MenuService.getVueDynamicRouterTreeAsync();
+    // console.log(res)
     this.getTableData();
   }
   @Ref("UserOperateInfo")

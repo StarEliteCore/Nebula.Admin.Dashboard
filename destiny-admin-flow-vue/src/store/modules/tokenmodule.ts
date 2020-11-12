@@ -22,7 +22,7 @@ export interface ITokenRouerStore
  */
 @Module({dynamic:true,store,name:"token"})
 class TokenRouerStore extends VuexModule implements ITokenRouerStore{
-    token: string=CookieInfo.getcookie(defaultConsts.cookiename)|| "";
+    token: string=localStorage.getItem(defaultConsts.cookiename)|| "";
     /**
      * 
      * @param _menus 属性
@@ -30,7 +30,7 @@ class TokenRouerStore extends VuexModule implements ITokenRouerStore{
     @Mutation
     private SET_TOKEN(_token:string)
     {
-        CookieInfo.setcookie(defaultConsts.cookiename,_token);
+        localStorage.setItem(defaultConsts.cookiename,_token);
     }
     /**
      * 写入值
@@ -42,7 +42,7 @@ class TokenRouerStore extends VuexModule implements ITokenRouerStore{
     // 重置Token
   @Action
   public ResetToken() {
-    CookieInfo.removecookie(defaultConsts.cookiename)
+    localStorage.removeItem(defaultConsts.cookiename)
     localStorage.clear();
   }
 }

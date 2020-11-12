@@ -7,6 +7,8 @@ import { MenuModule } from './store/modules/menumodule';
 import { TokenModule } from './store/modules/tokenmodule';
 import router from "@/router/index";
 import  ApplicationUserManager  from './shared/config/IdentityServerLogin';
+import { MainManager } from './domain/services/main/main-manager';
+import { IMenuRouter } from './domain/entity/menudto/menuRouterDto';
 
 const _import = require("./router/import/_import_" + process.env.NODE_ENV);
 
@@ -35,7 +37,8 @@ router.beforeEach(async (to: any, from, next) => {
                  * 如果本地缓存中没有存储菜单去获取菜单
                  */
                 if (!MenuModule.menus) {
-                    MenuModule.SetMenus(MenuList.children);
+                    let res = await MainManager.Instance().MenuService.getVueDynamicRouterTreeAsync();
+                    MenuModule.SetMenus(res.data.itemList as Array<IMenuRouter>);
                     if (MenuModule.menus) {
                         const routerarr = JSON.parse(MenuModule.menus);
                         if (routerarr) {
@@ -43,7 +46,8 @@ router.beforeEach(async (to: any, from, next) => {
                         }
                     }
                     else {
-                        const arr = JSON.parse((JSON.stringify(MenuList.children)));
+                        debugger
+                        const arr = JSON.parse((JSON.stringify(res.data.itemList)));
                         getRouter = arr;
                     }
                     routeGo(to, from, next);
@@ -129,6 +133,7 @@ function filterAsyncRouter(asyncRouterMap: Route[]) {
         }
         else {
             try {
+                debugger
                 route.component = _import(route.component);
             } catch (error) {
                 console.error('当前路由 '+route.path+'.vue 不存在，因此如法导入组件，请检查接口数据和组件是否匹配，并重新登录，清空缓存!')

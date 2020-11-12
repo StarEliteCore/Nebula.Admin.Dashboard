@@ -7,6 +7,7 @@ import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
 import { Guid } from 'guid-typescript';
 import SystemTitle from "./layout-left-title/layout-left-title.vue"
 import { MenuEnum } from '@/domain/entity/menudto/menuDto';
+import { MenuModule } from '@/store/modules/menumodule';
 @Component({
     name: "LayoutComponent",
     components: {
@@ -34,7 +35,7 @@ export default class LayoutComponent extends Vue {
     }
     private created()
     {
-        this.menus.menuItemList = MenuList.children;
+        this.menus.menuItemList =JSON.parse(MenuModule.menus);
         this.menus.menuItemList.unshift(this.defaulthomepage);
     }
     get menuShow() {
