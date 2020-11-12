@@ -24,6 +24,9 @@ jobs:
     
       - name: copy config to dist  # 拷贝文件进入dist目录
         run: cp destiny-admin-flow-vue/nginx.conf destiny-admin-flow-vue/Dockerfile destiny-admin-flow-vue/dist/
+      - uses: docker/setup-buildx-action@v1
+        with:
+          driver: docker
       - name: 登录docker
         uses: docker/login-action@v1
         with:
@@ -36,4 +39,3 @@ jobs:
           push: true
           context: destiny-admin-flow-vue/dist 
           file: destiny-admin-flow-vue/dist/Dockerfile # Build docker Image
-    
