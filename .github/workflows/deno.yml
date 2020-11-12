@@ -21,18 +21,18 @@ jobs:
     strategy:
       matrix:
         deno: ["v1.x", "nightly"]
-        os: [macOS-latest, windows-latest, ubuntu-latest]
+        os: [ubuntu-latest]
 
     steps:
       - name: Setup repo
         uses: actions/checkout@v2
 
       - name: cd destiny-admin-flow-vue  # 进入前端根目录
-        run: cd destiny-admin-flow-vue
+        run: /home/runner/work/Destiny.Core.Flow.WebUI/destiny-admin-flow-vue`
 
       - name: yarn install  # 安装npm 包
         run: yarn install
-
+    
       - name: yarn build  # 打包前端项目
         run: yarn build
 
