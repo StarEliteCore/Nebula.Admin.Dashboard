@@ -18,7 +18,7 @@ export default class LayoutComponent extends Vue {
     private menus: IMenuInstance = new MenuInstance();
     private openNameArr: string[] = [];
     private linearMenuList: IMenuRouter[] = [];
-    private defaulthomepage:IMenuRouter = {
+    private defaulthomepage: IMenuRouter = {
         id: "da92480a-5914-a8bc-110b-aedb0457ce6d",
         sort: -1,
         type: MenuEnum.Menu,
@@ -32,9 +32,8 @@ export default class LayoutComponent extends Vue {
         name: "主页",
         children: [],
     }
-    private created()
-    {
-        this.menus.menuItemList = MenuList.children;
+    private async created() {
+        this.menus.menuItemList = (await MenuList);
         this.menus.menuItemList.unshift(this.defaulthomepage);
     }
     get menuShow() {
