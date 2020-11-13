@@ -23,22 +23,31 @@ router.beforeEach(async (to: any, from, next) => {
          * 存在token并且路由指定的是登录路由 
          */
         if (to.path === "/login") {
-            next();
+            ApplicationUserManager.Login();
         }
         /**
          * 否则
          */
         else {
+            console.log(getRouter);
+            // debugger
             /**
              * getRouter不存在后台获取出的路由
              */
             if (!getRouter) {
+            //    debugger
+               
                 /**
                  * 如果本地缓存中没有存储菜单去获取菜单
                  */
                 if (!MenuModule.menus) {
+                    // debugger
                     let res = await MainManager.Instance().MenuService.getVueDynamicRouterTreeAsync();
                     MenuModule.SetMenus(res.data.itemList as Array<IMenuRouter>);
+                    // MenuModule.SetMenus(MenuList.children);
+                    // console.log(MenuList.children)
+                    console.log(res.data.itemList)
+                    // debugger
                     if (MenuModule.menus) {
                         const routerarr = JSON.parse(MenuModule.menus);
                         if (routerarr) {
@@ -46,13 +55,17 @@ router.beforeEach(async (to: any, from, next) => {
                         }
                     }
                     else {
-                        debugger
+                        console.log(MenuList.children)
+                        console.log(res.data.itemList)
+                        // debugger
                         const arr = JSON.parse((JSON.stringify(res.data.itemList)));
+                        // const arr = JSON.parse((JSON.stringify(MenuList.children)));
                         getRouter = arr;
                     }
                     routeGo(to, from, next);
                 }
                 else {
+                    // debugger
                     var routerarr = JSON.parse(MenuModule.menus);
                     if (routerarr) {
                         getRouter = routerarr;
@@ -64,7 +77,10 @@ router.beforeEach(async (to: any, from, next) => {
              * getRouter存在菜单
              */
             else {
-                next()
+                console.log(to.path);
+                // debugger
+                // routeGo(to, from, next);
+                next();
             }
         }
     }
@@ -113,6 +129,8 @@ function routeGo(to: any, from: any, next: any) {
     getRouter = filterAsyncRouter(getRouter);
     router.addRoutes(getRouter);
     // router.addRoutes(NotFoundRouterMap);
+    console.log(to,"to---"); 
+    console.log(getRouter);
     if (to.matched.length === 0) {
         from.name
             ? next({
@@ -133,7 +151,6 @@ function filterAsyncRouter(asyncRouterMap: Route[]) {
         }
         else {
             try {
-                debugger
                 route.component = _import(route.component);
             } catch (error) {
                 console.error('当前路由 '+route.path+'.vue 不存在，因此如法导入组件，请检查接口数据和组件是否匹配，并重新登录，清空缓存!')

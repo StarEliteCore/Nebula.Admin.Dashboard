@@ -7,6 +7,7 @@ export default class MenuItemChild extends Vue {
   @Prop()
   private menuItemmessage!: IMenuRouter;
   getName(_item: IMenuRouter) {
+    console.log(_item.name,"menu++++++++++++");
     return  _item.name ;
   }
 }
