@@ -1,6 +1,6 @@
 import { Component, Emit, Vue } from "vue-property-decorator";
 
-import ApplicationUserManager  from '@/shared/config/IdentityServerLogin';
+import ApplicationUserManager from '@/shared/config/IdentityServerLogin';
 import { MenuModule } from '@/store/modules/menumodule';
 import { TokenModule } from '@/store/modules/tokenmodule';
 
@@ -9,10 +9,8 @@ import { TokenModule } from '@/store/modules/tokenmodule';
 })
 export default class LayoutHeader extends Vue {
 
-  private LogOut()
-  {
-     
-    //  MenuModule.RemoveMenus();
+  private LogOut() {
+    TokenModule.ResetToken();
     ApplicationUserManager.Logout();
     this.$router.push({
       path: "/login",

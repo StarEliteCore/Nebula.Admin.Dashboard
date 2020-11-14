@@ -21,7 +21,7 @@ export interface IMenuRouerStore {
  */
 @Module({ dynamic: true, store, name: "menu" })
 class MenuRouerStore extends VuexModule implements IMenuRouerStore {
-    menus: string = sessionStorage.getItem(defaultConsts.menu) || "";
+    menus: string = localStorage.getItem(defaultConsts.menu) || "";
 
     /**
      * 
@@ -32,7 +32,7 @@ class MenuRouerStore extends VuexModule implements IMenuRouerStore {
         // _menus.unshift(this.defaulthomepage);
         // console.log(_menus)
         let _menuString = JSON.stringify(_menus);
-        sessionStorage.setItem(defaultConsts.menu, _menuString)
+        localStorage.setItem(defaultConsts.menu, _menuString)
     }
     /**
      * 
@@ -40,7 +40,7 @@ class MenuRouerStore extends VuexModule implements IMenuRouerStore {
      */
     @Mutation
     private Remove_MENUS() {
-        sessionStorage.removeItem(defaultConsts.menu)
+        localStorage.removeItem(defaultConsts.menu)
     }
     /**
      * 写入值

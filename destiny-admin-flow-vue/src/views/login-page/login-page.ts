@@ -3,9 +3,10 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 import ApplicationUserManager from "@/shared/config/IdentityServerLogin";
 import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
 import { MainManager } from "@/domain/services/main/main-manager";
-import { MenuList } from "@/modules/static/menuindex";
+import { GetMenuList } from "@/modules/static/menuindex";
 import { MenuModule } from "@/store/modules/menumodule";
 import { TokenModule } from "@/store/modules/tokenmodule";
+import router from "@/router/index";
 
 @Component({
   name: "Login",
@@ -15,8 +16,8 @@ export default class Login extends Vue {
   // WatchRoute(_name: string) {
   //   this.init(_name);
   // }
-  private async created() {
-    TokenModule.ResetToken();
+  private created() {
+    // TokenModule.ResetToken();
     // await this.loginCallbackFn();
     // // debugger
     // this.$router.push({
@@ -24,16 +25,18 @@ export default class Login extends Vue {
     // });
   }
   async loginCallbackFn() {
-    
+
     await ApplicationUserManager.signinRedirectCallback();
-    
+
     // debugger;
     let user = await ApplicationUserManager.getUser();
     console.log(user)
     // console.log(user);
     if (user !== null) {
       TokenModule.SetToken(user.access_token);
-      MenuModule.SetMenus(await MenuList);
+      const menuList = await GetMenuList();
+      MenuModule.SetMenus(menuList);
+      (router as any).$addRoutes(menuList);
     }
   }
   async getVueDynamicRouterTreeAsync() {

@@ -39,7 +39,7 @@ export const constansRoute = [
     //  */
     {
         path: '/home',
-        name: '主页',
+        name: '首页',
         component: () => import("@/layout/layout.vue"),
         children: [
             {

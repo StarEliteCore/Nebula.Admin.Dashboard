@@ -3,10 +3,11 @@
 import ApplicationUserManager from './shared/config/IdentityServerLogin';
 import EmptyView from "@/views/layout-emprty/layout-emprty.vue";
 import LayoutView from "@/layout/layout.vue";
-import { MenuList } from './modules/static/menuindex';
+import { GetMenuList } from './modules/static/menuindex';
 import { MenuModule } from './store/modules/menumodule';
 import { TokenModule } from './store/modules/tokenmodule';
 import router from "@/router/index";
+import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
 
 const _import = require("./router/import/_import_" + process.env.NODE_ENV);
 
@@ -22,6 +23,8 @@ router.beforeEach(async (to: any, from, next) => {
          */
         if (to.path === "/login") {
             next();
+        } else if ((to.fullPath as string).includes("#error=login_required")) {
+            next(false);//已经有token还提示登录？当然直接拦截掉。
         }
         /**
          * 否则
@@ -35,7 +38,7 @@ router.beforeEach(async (to: any, from, next) => {
                  * 如果本地缓存中没有存储菜单去获取菜单
                  */
                 if (!MenuModule.menus) {
-                    MenuModule.SetMenus(await MenuList);
+                    MenuModule.SetMenus(await GetMenuList());
                     if (MenuModule.menus) {
                         const routerarr = JSON.parse(MenuModule.menus);
                         if (routerarr) {
@@ -43,7 +46,7 @@ router.beforeEach(async (to: any, from, next) => {
                         }
                     }
                     else {
-                        const arr = JSON.parse((JSON.stringify(await MenuList)));
+                        const arr = JSON.parse((JSON.stringify(await GetMenuList())));
                         getRouter = arr;
                     }
                     routeGo(to, from, next);
@@ -97,6 +100,8 @@ router.beforeEach(async (to: any, from, next) => {
 //     }
 // }
 
+//在以下页面中，不需要加载后端返回的路由（只需要默认内置写死的路由足以）。
+const ignoreRouteGoAsPaths: Array<string> = ['/callback', '/logout', '/login'];
 
 /**
  * DynamicRouter跳转
@@ -105,6 +110,10 @@ router.beforeEach(async (to: any, from, next) => {
  * @param next 
  */
 function routeGo(to: any, from: any, next: any) {
+    if (ignoreRouteGoAsPaths.includes(to.path)) {
+        next();
+        return;
+    }
     // console.log(_import(getRouter[0].component));
     getRouter = filterAsyncRouter(getRouter);
     router.addRoutes(getRouter);
@@ -124,8 +133,7 @@ function routeGo(to: any, from: any, next: any) {
  */
 function filterAsyncRouter(asyncRouterMap: Route[]) {
     const accessedRouters = asyncRouterMap.filter(route => {
-        if(route.path==="/layout-empty")
-        {
+        if (route.path === "/layout-empty") {
             route.component = EmptyView;
         }
         else if (route.path === "/layout") {
@@ -146,3 +154,8 @@ function filterAsyncRouter(asyncRouterMap: Route[]) {
     });
     return accessedRouters;
 }
+
+//添加路由
+(router as any).$addRoutes = (getRouter: IMenuRouter[]) => {
+    router.addRoutes(filterAsyncRouter(getRouter as any as Route[]));
+};

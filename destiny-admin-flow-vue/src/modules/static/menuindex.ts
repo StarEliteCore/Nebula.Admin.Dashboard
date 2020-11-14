@@ -15,23 +15,20 @@ import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
 //         console.log(r);
 //     });
 
-export const MenuList = function () {
-    const getmenu = async (): Promise<Array<IMenuRouter>> => {
-        return new Promise<Array<IMenuRouter>>((resolve, reject) => {
-            MainManager.Instance()
-                .DestinyCoreServeice.getVueDynamicRouter()
-                .then((result) => {
-                    if (result.success) {
-                        resolve(result.data);
-                    }
-                })
-                .catch((r: any) => {
-                    resolve(r);
-                });
-        });
-    };
-    return getmenu();
-}();
+export const GetMenuList = function () {
+    return new Promise<Array<IMenuRouter>>((resolve, reject) => {
+        MainManager.Instance()
+            .DestinyCoreServeice.getVueDynamicRouter()
+            .then((result) => {
+                if (result.success) {
+                    resolve(result.data);
+                }
+            })
+            .catch((r: any) => {
+                resolve(r);
+            });
+    });
+};
 
 
 

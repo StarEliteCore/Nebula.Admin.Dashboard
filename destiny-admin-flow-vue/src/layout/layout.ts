@@ -1,7 +1,7 @@
 import { Component, Vue, Emit } from "vue-property-decorator";
 import LayoutHeader from "./layout-header/layout-header.vue"
 import MenuTab from "@/components/menu-tab/menu-tab.vue"
-import { MenuList } from '@/modules/static/menuindex';
+import { MenuModule } from "@/store/modules/menumodule";
 import { IMenuInstance, MenuInstance } from '@/domain/entity/ConfigureInfo/menuConfigure/MenuInstance';
 import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
 import { Guid } from 'guid-typescript';
@@ -16,7 +16,7 @@ import { MenuEnum } from '@/domain/entity/menudto/menuDto';
 })
 export default class LayoutComponent extends Vue {
     private menus: IMenuInstance = new MenuInstance();
-    private openNameArr: string[] = [];
+    // private openNameArr: string[] = [];
     private linearMenuList: IMenuRouter[] = [];
     private defaulthomepage: IMenuRouter = {
         id: "da92480a-5914-a8bc-110b-aedb0457ce6d",
@@ -33,7 +33,7 @@ export default class LayoutComponent extends Vue {
         children: [],
     }
     private async created() {
-        this.menus.menuItemList = (await MenuList);
+        this.menus.menuItemList = MenuModule.menus ? JSON.parse(MenuModule.menus) : [];
         this.menus.menuItemList.unshift(this.defaulthomepage);
     }
     get menuShow() {
