@@ -57,7 +57,7 @@ export enum MenuEnum {
   /**
    * 按钮
    */
-  Button = 5,
+  Function = 5,
 }
 
 export interface IMenuTableDto extends IMenu, IDescription {
@@ -83,6 +83,9 @@ export class MenuDto implements IEntity<string> {
   depth: number = 0;
   // functionId: Array<string> = [];
   type: MenuEnum = MenuEnum.Menu;
+  layout: string = "";
+  isHide: boolean = false;
+  eventName: string = "";
 }
 
 /**

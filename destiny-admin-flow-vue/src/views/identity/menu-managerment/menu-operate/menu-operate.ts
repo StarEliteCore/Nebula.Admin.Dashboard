@@ -18,7 +18,7 @@ export default class MenuOperate extends Mixins(OperateMixins) {
 
     private enumSelectOptions: Array<any> = [
         { key: MenuEnum.Menu, label: "菜单" },
-        { key: MenuEnum.Button, label: "按钮" },
+        { key: MenuEnum.Function, label: "功能" },
     ];
 
     private enumOptions = MenuEnum;
@@ -62,7 +62,7 @@ export default class MenuOperate extends Mixins(OperateMixins) {
     }
 
     private callbackRefresh(type?: MenuEnum) {
-        if (type === MenuEnum.Button) {
+        if (type === MenuEnum.Function) {
             this.$emit('refreshButton');
         } else {
             this.$emit('refreshAll');

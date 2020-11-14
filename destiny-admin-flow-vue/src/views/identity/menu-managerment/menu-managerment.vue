@@ -50,7 +50,7 @@
             <Button @click="operateItem(operate.update)">
               <Icon type="ios-create" />编辑
             </Button>
-            <Button @click="deleteItem"> <Icon type="ios-trash" />删除 </Button>
+            <Button @click="deleteItem"> <Icon type="ios-trash" />删除</Button>
             <Button @click="showAddMenuFunction">分配菜单功能</Button>
           </ButtonGroup>
         </div>
@@ -78,9 +78,12 @@
         >
           <template v-slot:type="{ row }">
             <Tag v-if="row.type == enumOptions.Menu" color="red">菜单</Tag>
-            <Tag v-else-if="row.type == enumOptions.Button" color="blue"
+            <Tag v-else-if="row.type == enumOptions.Function" color="blue"
               >功能</Tag
             >
+          </template>
+          <template v-slot:isHide="row">
+            {{ row.isHide ? "是" : "否" }}
           </template>
           <template v-slot:action="{ row }">
             <Button
@@ -107,7 +110,7 @@
       :currentMenu="CurrentRow"
       :currentTreeNode="treeSelectedMenu"
       @refreshAll="loadData"
-      @refreshButton="loadData(enumOptions.Button)"
+      @refreshButton="loadData(enumOptions.Function)"
     ></menu-operate>
     <delete-dialog ref="DeleteInfo"></delete-dialog>
     <add-menu-function
