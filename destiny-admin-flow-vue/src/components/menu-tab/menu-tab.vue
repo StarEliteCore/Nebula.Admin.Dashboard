@@ -9,6 +9,7 @@
     :active-name="activeName"
     :open-names="openNames"
     @on-open-change="OpenChange"
+    @on-select="changeSelect"
     class="menu-component"
   >
     <menu-item-child

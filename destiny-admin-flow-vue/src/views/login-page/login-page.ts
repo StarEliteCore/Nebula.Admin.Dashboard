@@ -15,8 +15,11 @@ export default class Login extends Vue {
   // WatchRoute(_name: string) {
   //   this.init(_name);
   // }
-  private created() {
+  private  created() {
     this.loginCallbackFn();
+    this.$router.push({
+      path: "/home-page",
+    });
   }
   async loginCallbackFn() {
     await ApplicationUserManager.signinRedirectCallback();
@@ -25,18 +28,11 @@ export default class Login extends Vue {
     // console.log(user);
     if (user !== null) {
       TokenModule.SetToken(user.access_token);
-      // this.getUserMenuTree();
-      this.$router.push({
-        path: "/home-page",
-      });
     }
   }
-  private getVueDynamicRouterTreeAsync() {
-    MainManager.Instance()
-      .MenuService.getVueDynamicRouterTreeAsync()
-      .then((x) => {
-        const data=x.data.itemList
-        MenuModule.SetMenus(data as IMenuRouter[]);
-      });
+  async getVueDynamicRouterTreeAsync() {
+    let res = await MainManager.Instance().MenuService.getVueDynamicRouterTreeAsync();
+    console.log(res)
   }
+
 }
