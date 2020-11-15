@@ -24,7 +24,7 @@
   </Layout>
 </template>
 <style lang="scss" src="./layout.scss" scoped></style>
-<script lang="ts" src="./layout.ts"></script>>
+<script lang="ts" src="./layout.ts"></script>
 <style lang="scss">
 @import "~@/assets/styles/index.scss";
 .fade-enter-active,

@@ -11,4 +11,4 @@
   </div>
 </template>
 <style lang="scss" scoped src="./delete-dialog.scss"></style>
-<script lang="ts" src="./delete-dialog.ts"></script>>
+<script lang="ts" src="./delete-dialog.ts"></script>

@@ -16,4 +16,11 @@ export default class LayoutHeader extends Vue {
       path: "/login",
     });
   }
+
+  private GetUserName() {
+    const key = "oidc.user:https://auth.destinycore.club:DestinyCoreFlowReactClient";
+    const ids4Info = sessionStorage.getItem(key) as any;
+    return JSON.parse(ids4Info).profile.name;
+  }
+
 }

@@ -34,4 +34,7 @@
 .ivu-table-body {
   overflow: hidden !important;
 }
+.ant-select-dropdown {
+  z-index: 16777271 !important;
+}
 </style>

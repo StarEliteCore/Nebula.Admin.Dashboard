@@ -31,6 +31,7 @@ export default class Callback extends Vue {
     await ApplicationUserManager.signinRedirectCallback();
     let user = await ApplicationUserManager.getUser();
     if (user !== null) {
+      // console.log(user.profile)//用户信息
       TokenModule.SetToken(user.access_token);
       const menuList = await GetMenuList();
       MenuModule.SetMenus(menuList);

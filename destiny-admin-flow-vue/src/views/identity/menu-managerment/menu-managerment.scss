@@ -12,20 +12,6 @@
             margin: 5px;
             width: 290px;
         }
-        .demo-spin-icon-load {
-            animation: ani-demo-spin 0.5s linear infinite;
-        }
-        @keyframes ani-demo-spin {
-            from {
-                transform: rotate(0deg);
-            }
-            50% {
-                transform: rotate(180deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
     }
     .body {
         width: calc(100% - 300px);
