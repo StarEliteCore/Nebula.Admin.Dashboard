@@ -28,6 +28,7 @@ class TokenRouerStore extends VuexModule implements ITokenRouerStore {
      */
     @Mutation
     private SET_TOKEN(_token: string) {
+        console.log(defaultConsts.cookiename);
         CookieInfo.setcookie(defaultConsts.cookiename, _token);
     }
     /**
@@ -47,3 +48,7 @@ class TokenRouerStore extends VuexModule implements ITokenRouerStore {
 }
 
 export const TokenModule = getModule(TokenRouerStore);//获取模块
+
+export function GetToken(): string {
+    return CookieInfo.getcookie(defaultConsts.cookiename) || "";
+}

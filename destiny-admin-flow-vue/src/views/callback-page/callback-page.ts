@@ -1,11 +1,12 @@
 import { Component, Vue, Watch } from "vue-property-decorator";
 
 import ApplicationUserManager from "@/shared/config/IdentityServerLogin";
-import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
-import { MainManager } from "@/domain/services/main/main-manager";
-import { MenuList } from "@/modules/static/menuindex";
+// import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
+// import { MainManager } from "@/domain/services/main/main-manager";
+import { GetMenuList } from "@/modules/static/menuindex";
 import { MenuModule } from "@/store/modules/menumodule";
 import { TokenModule } from "@/store/modules/tokenmodule";
+import router from "@/router/index";
 
 @Component({
   name: "Callback",
@@ -15,23 +16,30 @@ export default class Callback extends Vue {
   // WatchRoute(_name: string) {
   //   this.init(_name);
   // }
-  private async created() {
-    await this.loginCallbackFn();
-    this.$router.push({
-      path: "/home-page",
-    });
+  private created() {
+    this.loginCallbackFn().then(() => {
+      this.$router.push({
+        path: "/home-page",
+      });
+    })
+      .catch((res) => {
+        console.warn(res);
+      });
   }
   async loginCallbackFn() {
-    
+
     await ApplicationUserManager.signinRedirectCallback();
     let user = await ApplicationUserManager.getUser();
     if (user !== null) {
       TokenModule.SetToken(user.access_token);
+      const menuList = await GetMenuList();
+      MenuModule.SetMenus(menuList);
+      (router as any).$addRoutes(menuList);
     }
   }
-  async getVueDynamicRouterTreeAsync() {
-    let res = await MainManager.Instance().MenuService.getVueDynamicRouterTreeAsync();
-    console.log(res)
-  }
+  // async getVueDynamicRouterTreeAsync() {
+  //   let res = await MainManager.Instance().MenuService.getVueDynamicRouterTreeAsync();
+  //   console.log(res)
+  // }
 
 }

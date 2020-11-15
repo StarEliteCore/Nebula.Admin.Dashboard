@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-import Home from '@/views/home-page/home-page.vue'
+// import Home from '@/views/home-page/home-page.vue'
 import { constansRoute } from './constansRoute';
 
 Vue.use(VueRouter)
