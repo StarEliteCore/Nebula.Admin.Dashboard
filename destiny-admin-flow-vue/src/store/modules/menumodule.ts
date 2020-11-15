@@ -12,44 +12,41 @@ import { MenuEnum } from '@/domain/entity/menudto/menuDto';
 import defaultConsts from "@/shared/config/appconst"
 import store from "@/store"
 
-export interface IMenuRouerStore
-{
-    menus:string 
+export interface IMenuRouerStore {
+    menus: string
 }
 
 /**
  * 菜单模块
  */
-@Module({dynamic:true,store,name:"menu"})
-class MenuRouerStore extends VuexModule implements IMenuRouerStore{
-    menus: string=localStorage.getItem(defaultConsts.menu)||"";
-    
+@Module({ dynamic: true, store, name: "menu" })
+class MenuRouerStore extends VuexModule implements IMenuRouerStore {
+    menus: string = sessionStorage.getItem(defaultConsts.menu) || "";
+
     /**
      * 
      * @param _menus 属性
      */
     @Mutation
-    private SET_MENUS(_menus:Array<IMenuRouter>)
-    {
+    private SET_MENUS(_menus: Array<IMenuRouter>) {
         // _menus.unshift(this.defaulthomepage);
         // console.log(_menus)
-        let _menuString=JSON.stringify(_menus);
-        localStorage.setItem(defaultConsts.menu,_menuString)
+        let _menuString = JSON.stringify(_menus);
+        sessionStorage.setItem(defaultConsts.menu, _menuString)
     }
     /**
      * 
      * @param _menus 属性
      */
     @Mutation
-    private Remove_MENUS()
-    {
-        localStorage.removeItem(defaultConsts.menu)
+    private Remove_MENUS() {
+        sessionStorage.removeItem(defaultConsts.menu)
     }
     /**
      * 写入值
      */
     @Action
-    public SetMenus(_menus:Array<IMenuRouter>) {
+    public SetMenus(_menus: Array<IMenuRouter>) {
         this.SET_MENUS(_menus)
     }
     /**
@@ -61,6 +58,6 @@ class MenuRouerStore extends VuexModule implements IMenuRouerStore{
     }
 }
 
-export const MenuModule =getModule(MenuRouerStore);//获取模块
+export const MenuModule = getModule(MenuRouerStore);//获取模块
 
 

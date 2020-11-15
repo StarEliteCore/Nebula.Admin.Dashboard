@@ -16,7 +16,6 @@ router.beforeEach(async (to: any, from, next) => {
     /**
      * 判断是否存在token
      */
-    console.log(12345646516516)
     if (TokenModule.token) {
         /**
          * 存在token并且路由指定的是登录路由 
@@ -36,7 +35,8 @@ router.beforeEach(async (to: any, from, next) => {
                  * 如果本地缓存中没有存储菜单去获取菜单
                  */
                 if (!MenuModule.menus) {
-                    MenuModule.SetMenus(MenuList.children);
+   
+                    MenuModule.SetMenus(await MenuList);
                     if (MenuModule.menus) {
                         const routerarr = JSON.parse(MenuModule.menus);
                         if (routerarr) {
@@ -44,7 +44,7 @@ router.beforeEach(async (to: any, from, next) => {
                         }
                     }
                     else {
-                        const arr = JSON.parse((JSON.stringify(MenuList.children)));
+                        const arr = JSON.parse((JSON.stringify(await MenuList)));
                         getRouter = arr;
                     }
                     routeGo(to, from, next);
@@ -73,7 +73,7 @@ router.beforeEach(async (to: any, from, next) => {
             next();
         }
         else {
-            console.log(1234564896)
+
             ApplicationUserManager.Login();
         }
     }
@@ -133,7 +133,7 @@ function filterAsyncRouter(asyncRouterMap: Route[]) {
             try {
                 route.component = _import(route.component);
             } catch (error) {
-                console.error('当前路由 '+route.path+'.vue 不存在，因此如法导入组件，请检查接口数据和组件是否匹配，并重新登录，清空缓存!')
+
             }
 
         }

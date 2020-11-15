@@ -78,6 +78,25 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
       maxWidth: 80,
     },
     {
+      title: "模板页",
+      key: "layout",
+      align: "center",
+      maxWidth: 80,
+    },
+    {
+      title: "事件名",
+      key: "eventName",
+      align: "center",
+      maxWidth: 80,
+    },
+    {
+      title: "隐藏",
+      key: "isHide",
+      align: "center",
+      maxWidth: 70,
+      slot: "isHide"
+    },
+    {
       title: "描述",
       key: "description",
       align: "center",
@@ -94,7 +113,7 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
 
   @Emit()
   pageChange() {
-    this.loadData(MenuEnum.Button);
+    this.loadData(MenuEnum.Function);
   }
 
   private mounted() {
@@ -133,7 +152,7 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
     const text = this.treeSearchText;
     if (text.length === 0) return this.treeData;
     if (this.prevSearchTreeData.has(text)) return this.prevSearchTreeData.get(text);
-    const datas = this.notNestTreeData;
+    const datas = this.notNestTreeData.concat();
     const searchData = datas.filter(p => p.title.includes(text));
     let notNestData: Array<any> = [];
     const addParent = (item: any) => {
@@ -147,7 +166,7 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
       addParent(item);
     }
     const map = new Map();
-    notNestData = notNestData.filter(p => !map.has(p.id) && map.set(p.id, 1)).concat();
+    notNestData = notNestData.filter(p => !map.has(p.id) && map.set(p.id, 1));
     const result = notNestData.filter(p => !p.parentId || p.parentId === "00000000-0000-0000-0000-000000000000");
     const generateResult = (items: Array<any>) => {
       for (const item of items) {
@@ -239,7 +258,7 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
       this.treeSelectedMenu = {};
     }
     this.dynamicQuery.parentId = this.treeSelectedId;
-    this.loadData(MenuEnum.Button);
+    this.loadData(MenuEnum.Function);
   }
 
   private CurrentRowEventArray(_selection: Array<any>) {
@@ -316,7 +335,7 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
 
   private loadData(type?: MenuEnum) {
     this.loadTableData();
-    if (type !== MenuEnum.Button) this.loadTreeData();
+    if (type !== MenuEnum.Function) this.loadTreeData();
   }
 
   private showAddMenuFunction() {
