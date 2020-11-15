@@ -1,9 +1,8 @@
 import { IAjaxResult, IServerPageReturn } from '@/shared/response';
-
-import { IPageRequest } from '@/shared/request';
 import { MenuDto, MenuOutPageListDto } from '@/domain/entity/menudto/menuDto';
 
 import { FunctionInputDto } from "@/domain/entity/functiondto/functionDto";
+import { IPageRequest } from '@/shared/request';
 
 /**
  * 菜单服务层接口定义
@@ -76,4 +75,8 @@ export interface IMenuService {
      * @param _page 查询DTO
      */
     GetMenuFunctionByMenuIdPageAsync(menuId: string,_page: IPageRequest): Promise<IServerPageReturn<Array<FunctionInputDto>>>;
+    /**
+     * 获取动态路由菜单
+     */
+    getVueDynamicRouterTreeAsync(): Promise<IAjaxResult> ;
 }

@@ -16,6 +16,7 @@
     <Layout class="main-app-layout--right">
       <layout-header class="main-app-layout__header"></layout-header>
       <Content class="main-app-layout__content">
+
         <router-view class="admin-layout_content"></router-view>
         <!-- <router-view class="component child-demo" v-show="$route.name" /> -->
       </Content>

@@ -1,0 +1,57 @@
+name: Deno
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  webUI:
+    runs-on: ubuntu-latest # 编译环境
+
+    strategy:
+      matrix:
+        deno: ["v1.x", "nightly"]
+        os: [ubuntu-latest]
+
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v2
+
+      - name: 构建  # 进入前端项目
+        run: yarn install --cwd destiny-admin-flow-vue && cd destiny-admin-flow-vue && yarn build
+    
+      - name: copy config to dist  # 拷贝文件进入dist目录
+        run: cp destiny-admin-flow-vue/nginx.conf destiny-admin-flow-vue/Dockerfile destiny-admin-flow-vue/dist/
+      - name: 登录docker
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: build docker image
+        uses: docker/build-push-action@v2
+        with:
+          tags: 18790997531/destinycorevue:latest
+          context: destiny-admin-flow-vue/dist 
+          file: destiny-admin-flow-vue/dist/Dockerfile # Build docker Image
+      - run: docker push 18790997531/destinycorevue:latest
+      - name: deploy to portainer
+        uses: LGinC/portainer-stack-deploy@0.2
+        with: 
+          serverurl: http://1065.cloud:8862
+          username: ${{ secrets.PORTAINER_USERNAME }}
+          password: ${{ secrets.PORTAINER_PASSWORD }}
+          endpointId: 1
+          stackname: destinyweb
+          imagename: 18790997531/destinycorevue:latest
+          docker_compose: |
+            version: "2"
+            services:
+              destinyapi:
+                image:  18790997531/destinycorevue
+                container_name: DestinyFlowWEB_From_GithubAction             
+                ports:
+                - 7762:80
+                environment: 
+                  TZ: Asia/Shanghai      

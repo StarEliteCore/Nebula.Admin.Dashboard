@@ -17,4 +17,7 @@ export interface IDestinyCoreServeice {
 
   //保存
   save(_url: string, _data: any): Promise<IAjaxResult>;
+
+  //得到动态路由
+  getVueDynamicRouter(): Promise<IAjaxResult>;
 }

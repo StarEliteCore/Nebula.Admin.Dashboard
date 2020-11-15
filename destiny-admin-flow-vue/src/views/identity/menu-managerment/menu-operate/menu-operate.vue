@@ -9,6 +9,7 @@
     >
       <FormItem label="上级菜单：" prop="parentId">
         <a-tree-select
+          style="z-index: 3000"
           v-model="menuDto.parentId"
           :tree-data="treeData"
           placeholder="请选择"
@@ -50,8 +51,17 @@
       >
         <Input v-model="menuDto.component" />
       </FormItem>
+      <FormItem v-show="menuDto.type === enumOptions.Menu" label="模板页">
+        <Input v-model="menuDto.layout" />
+      </FormItem>
+      <FormItem v-show="menuDto.type === enumOptions.Function" label="事件名">
+        <Input v-model="menuDto.eventName" />
+      </FormItem>
       <FormItem label="图标：" prop="icon">
         <Input v-model="menuDto.icon" />
+      </FormItem>
+      <FormItem>
+        <Checkbox v-model="menuDto.isHide" label="是否隐藏"></Checkbox>
       </FormItem>
       <FormItem label="排序：" prop="sort">
         <Input v-model="menuDto.sort" />

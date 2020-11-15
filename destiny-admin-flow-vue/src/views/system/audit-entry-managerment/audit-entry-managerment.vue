@@ -2,38 +2,10 @@
   <section>
     <div class="body">
      
-      <Row>
-        <Collapse>
-          <Panel name="1">
-            查询面板
-            <p slot="content" >
-                <Form  inline  :label-width="120" :model="dynamicQuery" ref="formInline">
-                  <Row> 
-                      <Col span="6">
-                      <FormItem label="实体名称：">
-                       <Input  v-model="dynamicQuery.entityAllName"   />
-        
-                        </FormItem>
-                      </Col>
-                       <Col span="6">
-                      <FormItem label="实体显示名称：" >
-                             <Input  v-model="dynamicQuery.entityDisplayName"   />
-                        </FormItem>
-                      </Col>
-                  
-               
-                  </Row>
-                    <FormItem >
-                          <Button type="primary" @click="search()">查询</Button>
-                    </FormItem>
-                </Form>
-            </p>
-          </Panel>
-        </Collapse>
-      </Row>
+     <my-search :fields="fields" @click="search"></my-search>
       <div>
         <Card :dis-hover="true">
-        <Table :columns="columns" :data="auditEntryTable" border stripe @on-select-cancel="CurrentRowEventCancel"    @on-select="CurrentRowEventArray" >
+        <Table :columns="columns" :data="tableData" border stripe>
             
             <template  v-slot:operationType="{row}" >
               <Tag v-if="row.operationType===0" color="blue">

@@ -61,3 +61,9 @@
 </template>
 
 <script lang="ts" src="./role-managerment.ts"></script>
+<style scoped>
+  .operatebutton{
+
+    margin-left: 10px;
+  }
+</style>

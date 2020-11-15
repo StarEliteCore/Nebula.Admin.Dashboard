@@ -8,8 +8,7 @@
     <Row class="expand-row">
       <Card :dis-hover="true">
         <p slot="title">属性变更明细</p>
-        <Table :columns="columns" :data="auditEntryPropertyTable" border stripe>
-        </Table>
+        <Table :columns="columns" :data="tableData" border stripe> </Table>
         <page-component
           ref="PageInfo"
           :total="total"

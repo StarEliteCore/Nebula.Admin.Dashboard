@@ -35,3 +35,9 @@
   </div>
 </template>
 <script lang="ts" src="./role-operate.ts"></script>
+<style scoped>
+   .operatebutton{
+     margin-right: 5px;
+    
+   }
+</style>

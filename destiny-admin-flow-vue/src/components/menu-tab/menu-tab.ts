@@ -15,7 +15,7 @@ export default class MenuTab extends Vue {
   @Prop()
   private openNames!: Array<string>;
   get MenuList() {
-    return this.menus.menuItemList.length > 1 ? this.menus.menuItemList : this.menus.menuItemList[0].children;
+    return this.menus.menuItemList.length > 1 ? this.menus.menuItemList : [];
   }
   @Prop()
   private isCollapsed!: boolean;
@@ -35,5 +35,10 @@ export default class MenuTab extends Vue {
     } else {
       this.$emit("OpenChange", _nameArr);
     }
+  }
+  private changeSelect(_name:string){
+    console.log(_name);
+    console.log(this.$route);
+    console.log(this.menus);
   }
 }

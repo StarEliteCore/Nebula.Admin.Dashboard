@@ -61,7 +61,7 @@ export default class DataDictionaryManagerment extends Mixins(PageMixins,DeleteM
 
     @Emit()
     pageChange(){
-        this.loadData(MenuEnum.Button);
+        this.loadData(MenuEnum.Function);
     }
 
     private mounted() {
@@ -86,7 +86,7 @@ export default class DataDictionaryManagerment extends Mixins(PageMixins,DeleteM
             this.treeSelectedMenu = {};
         }
         this.dymaicQuery.parentId = this.treeSelectedId;
-        this.loadData(MenuEnum.Button);
+        this.loadData(MenuEnum.Function);
     }
 
     private async getTableData(){
@@ -141,6 +141,6 @@ export default class DataDictionaryManagerment extends Mixins(PageMixins,DeleteM
 
     private loadData(type?:MenuEnum){
         this.getTableData();
-        if (type !== MenuEnum.Button) this.loadTreeData();
+        if (type !== MenuEnum.Function) this.loadTreeData();
     }
 }

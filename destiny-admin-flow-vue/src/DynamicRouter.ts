@@ -1,12 +1,12 @@
 // import { Login, loginCallbackFunc } from './oidc-login/IdentityServerLogin';
 
+import ApplicationUserManager from './shared/config/IdentityServerLogin';
 import EmptyView from "@/views/layout-emprty/layout-emprty.vue";
 import LayoutView from "@/layout/layout.vue";
 import { MenuList } from './modules/static/menuindex';
 import { MenuModule } from './store/modules/menumodule';
 import { TokenModule } from './store/modules/tokenmodule';
 import router from "@/router/index";
-import  ApplicationUserManager  from './shared/config/IdentityServerLogin';
 
 const _import = require("./router/import/_import_" + process.env.NODE_ENV);
 
@@ -35,7 +35,7 @@ router.beforeEach(async (to: any, from, next) => {
                  * 如果本地缓存中没有存储菜单去获取菜单
                  */
                 if (!MenuModule.menus) {
-                    MenuModule.SetMenus(MenuList.children);
+                    MenuModule.SetMenus(await MenuList);
                     if (MenuModule.menus) {
                         const routerarr = JSON.parse(MenuModule.menus);
                         if (routerarr) {
@@ -43,7 +43,7 @@ router.beforeEach(async (to: any, from, next) => {
                         }
                     }
                     else {
-                        const arr = JSON.parse((JSON.stringify(MenuList.children)));
+                        const arr = JSON.parse((JSON.stringify(await MenuList)));
                         getRouter = arr;
                     }
                     routeGo(to, from, next);
@@ -124,14 +124,18 @@ function routeGo(to: any, from: any, next: any) {
  */
 function filterAsyncRouter(asyncRouterMap: Route[]) {
     const accessedRouters = asyncRouterMap.filter(route => {
-        if (route.path === "/layout") {
+        if(route.path==="/layout-empty")
+        {
+            route.component = EmptyView;
+        }
+        else if (route.path === "/layout") {
             route.component = LayoutView;
         }
         else {
             try {
                 route.component = _import(route.component);
             } catch (error) {
-                console.error('当前路由 '+route.path+'.vue 不存在，因此如法导入组件，请检查接口数据和组件是否匹配，并重新登录，清空缓存!')
+                console.error('当前路由 ' + route.path + '.vue 不存在，因此如法导入组件，请检查接口数据和组件是否匹配，并重新登录，清空缓存!')
             }
 
         }
