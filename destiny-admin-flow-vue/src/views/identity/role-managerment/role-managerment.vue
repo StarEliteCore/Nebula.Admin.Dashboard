@@ -6,7 +6,7 @@
       <div>
         <Card :dis-hover="true">
           <Row style="margin: 0px 0px 16px 0px; float: right">
-            <Button class="operatebutton" type="success" @click="handleAdd()"
+            <Button class="operatebutton" v-SmsTiming="['sys:user:add']"  type="success" @click="handleAdd()"
               >添加</Button
             >
 

@@ -1,12 +1,13 @@
-import { Component, Mixins, Emit, Prop } from "vue-property-decorator";
-import PageMixins from "@/shared/mixins/page.mixins";
 import * as PageQuery from "@/shared/request";
-import { ITableColumn } from "@/shared/table/ITable";
-import { MainManager } from "@/domain/services/main/main-manager";
-import { IFilterCondition, IQueryFilter } from "@/shared/request";
+
+import { Component, Emit, Mixins, Prop } from "vue-property-decorator";
 import { EFilterConnect, EFilterOprator } from "@/shared/request/query.enum";
+import { IFilterCondition, IQueryFilter } from "@/shared/request";
 
 import { FunctionInputDto } from "@/domain/entity/functiondto/functionDto";
+import { ITableColumn } from "@/shared/table/ITable";
+import { MainManager } from "@/domain/services/main/main-manager";
+import PageMixins from "@/shared/mixins/page.mixins";
 
 @Component({
     name: "add-menu-function",
@@ -101,7 +102,10 @@ export default class AddMenuFunction extends Mixins(PageMixins) {
         });
     }
 
-    private dynamicQuery: any = {};
+    private dynamicQuery: any = {
+
+        
+    };
     private filter = this.getFilter();
     private getFilter() {
         const filters: IFilterCondition[] = [
