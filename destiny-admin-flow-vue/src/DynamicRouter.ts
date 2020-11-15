@@ -143,7 +143,7 @@ function filterAsyncRouter(asyncRouterMap: Route[]) {
             try {
                 route.component = _import(route.component);
             } catch (error) {
-                console.error('当前路由 ' + route.path + '.vue 不存在，因此如法导入组件，请检查接口数据和组件是否匹配，并重新登录，清空缓存!')
+                console.error(`当前路由${route.path} 或 组件${route.component} 不存在，因此如法导入组件，请检查接口数据和组件是否匹配，并重新登录，清空缓存!`);
             }
 
         }
