@@ -16,6 +16,8 @@ export default class LayoutHeader extends Vue {
     });
   }
 
+ 
+
   private GetUserName() {
     const key =
       "oidc.user:https://auth.destinycore.club:DestinyCoreFlowReactClient";
@@ -30,6 +32,7 @@ export default class LayoutHeader extends Vue {
   };
 
   validatePass: any = (rule: any, value: string, callback: any) => {
+    
     if (value === "") {
       callback(new Error("请输入您的密码!!"));
     } else {
