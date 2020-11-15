@@ -10,6 +10,7 @@ service.interceptors.request.use(
     config => {
         // Add Authorization header to every request, you can add other custom headers here
     if (TokenModule.token) {
+        console.log(TokenModule.token)
       config.headers["Authorization"] = `Bearer ${TokenModule.token}`;
     }
     return config;

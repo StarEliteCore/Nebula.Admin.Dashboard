@@ -36,4 +36,9 @@ export default class MenuTab extends Vue {
       this.$emit("OpenChange", _nameArr);
     }
   }
+  private changeSelect(_name:string){
+    console.log(_name);
+    console.log(this.$route);
+    console.log(this.menus);
+  }
 }

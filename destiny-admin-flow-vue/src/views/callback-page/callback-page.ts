@@ -8,32 +8,25 @@ import { MenuModule } from "@/store/modules/menumodule";
 import { TokenModule } from "@/store/modules/tokenmodule";
 
 @Component({
-  name: "Login",
+  name: "Callback",
 })
-export default class Login extends Vue {
+export default class Callback extends Vue {
   // @Watch("$route.name", { immediate: true }) //监听路由名称的变化
   // WatchRoute(_name: string) {
   //   this.init(_name);
   // }
   private async created() {
-    TokenModule.ResetToken();
-    // await this.loginCallbackFn();
-    // // debugger
-    // this.$router.push({
-    //   path: "/home-page",
-    // });
+    await this.loginCallbackFn();
+    this.$router.push({
+      path: "/home-page",
+    });
   }
   async loginCallbackFn() {
     
     await ApplicationUserManager.signinRedirectCallback();
-    
-    // debugger;
     let user = await ApplicationUserManager.getUser();
-    console.log(user)
-    // console.log(user);
     if (user !== null) {
       TokenModule.SetToken(user.access_token);
-      MenuModule.SetMenus(await MenuList);
     }
   }
   async getVueDynamicRouterTreeAsync() {

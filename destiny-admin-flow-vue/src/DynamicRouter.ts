@@ -1,6 +1,6 @@
 // import { Login, loginCallbackFunc } from './oidc-login/IdentityServerLogin';
 
-import  ApplicationUserManager  from './shared/config/IdentityServerLogin';
+import ApplicationUserManager from './shared/config/IdentityServerLogin';
 import EmptyView from "@/views/layout-emprty/layout-emprty.vue";
 import LayoutView from "@/layout/layout.vue";
 import { MenuList } from './modules/static/menuindex';
@@ -73,7 +73,6 @@ router.beforeEach(async (to: any, from, next) => {
             next();
         }
         else {
-
             ApplicationUserManager.Login();
         }
     }
@@ -126,7 +125,11 @@ function routeGo(to: any, from: any, next: any) {
  */
 function filterAsyncRouter(asyncRouterMap: Route[]) {
     const accessedRouters = asyncRouterMap.filter(route => {
-        if (route.path === "/layout") {
+        if(route.path==="/layout-empty")
+        {
+            route.component = EmptyView;
+        }
+        else if (route.path === "/layout") {
             route.component = LayoutView;
         }
         else {
