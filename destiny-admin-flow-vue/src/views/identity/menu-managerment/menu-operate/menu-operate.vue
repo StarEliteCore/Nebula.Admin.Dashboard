@@ -60,8 +60,8 @@
       <FormItem label="图标：" prop="icon">
         <Input v-model="menuDto.icon" />
       </FormItem>
-      <FormItem>
-        <Checkbox v-model="menuDto.isHide" label="是否隐藏"></Checkbox>
+      <FormItem label="是否隐藏">
+        <Checkbox v-model="menuDto.isHide"></Checkbox>
       </FormItem>
       <FormItem label="排序：" prop="sort">
         <Input v-model="menuDto.sort" />

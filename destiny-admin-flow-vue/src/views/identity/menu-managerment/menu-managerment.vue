@@ -34,10 +34,7 @@
           :defaultExpandParent="true"
           @select="treeSelected"
         />
-        <Spin v-show="showTreeLoading">
-          <Icon type="ios-loading" size="18" class="demo-spin-icon-load"></Icon>
-          <div>加载中···</div>
-        </Spin>
+        <CircleLoading :isShow="showTreeLoading"></CircleLoading>
       </div>
     </nav>
     <div class="body">

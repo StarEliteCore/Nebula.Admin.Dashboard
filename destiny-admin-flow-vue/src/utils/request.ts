@@ -2,6 +2,7 @@
 import NoticeUtils from '@/shared/Noticemessage/NoticeUtils';
 import { TokenModule, GetToken } from '@/store/modules/tokenmodule';
 import axios from "axios"
+import ApplicationUserManager from '@/shared/config/IdentityServerLogin';
 
 const service = axios.create({
     baseURL: process.env.VUE_APP_BASE_API // url = base url + request url
@@ -33,7 +34,8 @@ service.interceptors.response.use(
                 break;
             case 401:
                 // NoticeUtils.Inst().Warning("未登录","12312131313");
-                TokenModule.ResetToken();
+                //TokenModule.ResetToken();
+                ApplicationUserManager.Login();
                 // Login();
                 break;
             case 403:
