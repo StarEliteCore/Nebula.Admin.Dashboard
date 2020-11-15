@@ -36,6 +36,5 @@ export default class PageMixins extends Vue {
 
   @Emit()
   pageChange() {
-    console.log("d");
   }
 }

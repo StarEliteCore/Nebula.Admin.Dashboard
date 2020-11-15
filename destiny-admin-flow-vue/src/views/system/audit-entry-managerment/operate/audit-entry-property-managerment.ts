@@ -48,6 +48,7 @@ export default class AuditEntryPropertyManagerment extends Mixins(
         title: "属性类型",
         key: "propertiesType",
         align: "center",
+        slot: "propertiesType",
       },
     ];
   }

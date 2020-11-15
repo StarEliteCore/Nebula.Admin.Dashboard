@@ -12,6 +12,7 @@ import {
   ISearchFilter,
 } from "@/shared/request";
 
+import { AjaxResultType } from '@/shared/response';
 import { AuditApi } from "@/domain/config/api";
 import { ComponentMixins } from "@/shared/mixins/component.mixns";
 import DeleteMixins from "@/shared/mixins/delete-dialog.mixins";
@@ -29,6 +30,8 @@ export default class AuditLogManagerment extends Mixins(
   ComponentMixins
 ) {
   pageUrl: string = AuditApi.getAuditLogPage;
+  likeValueFormat: string = "{0}";
+  private operationType = AjaxResultType;
 
   GetColumn() {
     return [
@@ -84,7 +87,16 @@ export default class AuditLogManagerment extends Mixins(
         align: "center",
         tooltip: true,
       },
-
+      {
+        title: "类型",
+        key: "operationType",
+        align: "center",
+        slot: "operationType",
+      },{
+        title:"消息",
+        key:"message",
+        align: "center",
+      },
       {
         title: "审计时间",
         key: "createdTime",
@@ -93,18 +105,19 @@ export default class AuditLogManagerment extends Mixins(
     ];
   }
 
+
   GetFields(): ISearchFilter[] {
     return [
       {
         field: "functionName",
         value: "",
-        operator: EFilterOprator.Equal,
+        operator: EFilterOprator.Like,
         title: "功能名：",
       },
       {
         field: "action",
         value: "",
-        operator: EFilterOprator.Equal,
+        operator: EFilterOprator.Like,
         title: "审计URL：",
       },
     ];

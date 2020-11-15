@@ -108,7 +108,11 @@ export class ComponentMixins extends Vue {
   protected GetReq(_pageRequest: IPageRequest) {
     let conditions = this.GetFilterCondition();
     if (conditions.length > 0) {
-      _pageRequest.filter.conditions.concat(conditions);
+      conditions.forEach((e:IFilterCondition,i:number)=>{
+           _pageRequest.filter.conditions.push(e);
+
+      })
+
     }
     let filter: IPageRequest = JSON.parse(JSON.stringify(_pageRequest));
     // filter.queryFilter.filters = filters;
