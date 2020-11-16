@@ -1,3 +1,5 @@
+import { AjaxResultType, IAjaxResult } from '@/shared/response';
+
 import { Dictionary } from 'vue-router/types/router';
 import { IEntity } from '@/shared/baseentity/IEntity';
 
@@ -12,6 +14,8 @@ export interface IAuditLogOutputPageDto extends IEntity<string>
     createdTime:string;
     userName:string;
     nickName:string;
+    message:string;
+    operationType:AjaxResultType;
 }
 
 export interface IAuditLogTableDto extends IAuditLogOutputPageDto

@@ -1,8 +1,12 @@
 .main-app-layout__header {
-    overflow: hidden;
-    background: linear-gradient(to right, #386be1, #614bc0);
-    .main-app-layout__header-language {
-      float: right;
-    }
+  overflow: hidden;
+  background: linear-gradient(to right, #386be1, #614bc0);
+  .main-app-layout__header-language {
+    float: right;
   }
-  
+  display: flex;
+  justify-content: space-between;
+  .img-user {
+    border-radius: 50%;
+  }
+}

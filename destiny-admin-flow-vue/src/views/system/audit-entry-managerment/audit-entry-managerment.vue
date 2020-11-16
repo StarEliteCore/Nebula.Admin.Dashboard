@@ -2,7 +2,7 @@
   <section>
     <div class="body">
      
-     <my-search :fields="fields" @click="search"></my-search>
+     <my-search :fields="fields" @click="search" :likeValueFormat="likeValueFormat"></my-search>
       <div>
         <Card :dis-hover="true">
         <Table :columns="columns" :data="tableData" border stripe>

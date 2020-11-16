@@ -42,6 +42,7 @@ export default class TableExpand extends Mixins(ComponentMixins) {
         title: "实体类型",
         key: "entityAllName",
         align: "center",
+
       },
       {
         title: "编号",

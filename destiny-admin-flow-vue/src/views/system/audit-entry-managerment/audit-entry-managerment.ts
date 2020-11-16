@@ -15,7 +15,7 @@ import { ITableColumn } from "@/shared/table/ITable";
 })
 export default class AuditEntryManagerment extends Mixins(ComponentMixins) {
   pageUrl: string = AuditApi.getAuditEntryPage;
-
+  likeValueFormat: string = "{0}";
   GetColumn(): ITableColumn[] {
     return [
       {
@@ -77,13 +77,13 @@ export default class AuditEntryManagerment extends Mixins(ComponentMixins) {
         field: "entityAllName",
         value: "",
         title: "类型",
-        operator: EFilterOprator.Equal,
+        operator: EFilterOprator.Like,
       },
       {
         field: "entityDisplayName",
         value: "",
         title: "实体名",
-        operator: EFilterOprator.Equal,
+        operator: EFilterOprator.Like,
       },
     ];
   }

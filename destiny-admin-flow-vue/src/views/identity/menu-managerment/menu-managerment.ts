@@ -17,6 +17,7 @@ import { EOperate } from '@/shared/eoperate';
 
 import AddMenuFunction from './menu-function/add-menu-function.vue';
 import RemoveMenuFunction from './menu-function/remove-menu-function.vue';
+import CircleLoading from '@/components/circle-loading/circle-loading.vue';
 
 @Component({
   name: "MenuManagerment",
@@ -24,6 +25,7 @@ import RemoveMenuFunction from './menu-function/remove-menu-function.vue';
     MenuOperate,
     AddMenuFunction,
     RemoveMenuFunction,
+    CircleLoading,
   }
 })
 

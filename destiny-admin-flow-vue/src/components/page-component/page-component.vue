@@ -34,6 +34,6 @@
       >尾页</Button
     >
   </div>
-</template>>
+</template>
 <script lang="ts" src="./page-component.ts"></script>
 <style lang="scss" src="./page-component.scss" scoped></style>
