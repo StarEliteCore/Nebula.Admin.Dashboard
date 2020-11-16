@@ -6,7 +6,6 @@ import ApplicationUserManager from "@/shared/config/IdentityServerLogin";
 import { GetMenuList } from "@/modules/static/menuindex";
 import { MenuModule } from "@/store/modules/menumodule";
 import { TokenModule } from "@/store/modules/tokenmodule";
-import router from "@/router/index";
 
 @Component({
   name: "Callback",
@@ -35,7 +34,7 @@ export default class Callback extends Vue {
       TokenModule.SetToken(user.access_token);
       const menuList = await GetMenuList();
       MenuModule.SetMenus(menuList);
-      (router as any).$addRoutes(menuList);
+      (this.$router as any).$addRoutes(menuList);
     }
   }
   // async getVueDynamicRouterTreeAsync() {

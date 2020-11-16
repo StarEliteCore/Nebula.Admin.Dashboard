@@ -1,84 +1,68 @@
 // import { Login, loginCallbackFunc } from './oidc-login/IdentityServerLogin';
 
 import ApplicationUserManager from './shared/config/IdentityServerLogin';
-import EmptyView from "@/views/layout-emprty/layout-emprty.vue";
-import LayoutView from "@/layout/layout.vue";
 import { GetMenuList } from './modules/static/menuindex';
-import { MenuModule } from './store/modules/menumodule';
-import { TokenModule } from './store/modules/tokenmodule';
+import { MenuModule, GetMenus } from './store/modules/menumodule';
+import { GetToken } from './store/modules/tokenmodule';
 import router from "@/router/index";
 import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
+import { RouteConfig } from "vue-router";
 
-const _import = require("./router/import/_import_" + process.env.NODE_ENV);
+/**
+ * 在以下页面中，不需要加载后端返回的路由（只需要默认内置写死的路由足以）。
+ */
+const ignoreRouteGoAsPaths: Array<string> = ['/callback', '/logout', '/login'];
 
-let first = true;//第一次获取菜单
-var getRouter: Route[];
+let getRouter: IMenuRouter[];
+
 router.beforeEach(async (to: any, from, next) => {
+
+    const token = GetToken();
+
+    /* 不存在token，并且不在回调页面。 */
+    if (!token && to.path !== "/callback") {
+        ApplicationUserManager.Login();
+        return;
+    }
+
+    /* 拦截掉已经有token还提示登录的请求。 */
+    if (token && (to.fullPath as string).includes("#error=login_required")) {
+        next(false);
+        return;
+    }
+
+    /* 有菜单就存 */
+    const menus = GetMenus();
+    if (!getRouter && menus) getRouter = JSON.parse(menus);
+
+    /* 过滤掉不需要处理的路由 */
+    const isIgnore: boolean = ignoreRouteGoAsPaths.includes(to.path);
+    if (isIgnore) {
+        next();
+        return;
+    }
+
     /**
-     * 判断是否存在token
+     * 存在token，但是getRouter不存在则后端获取出的路由。
      */
-    if (TokenModule.token) {
+    if (token && !getRouter) {
         /**
-         * 存在token并且路由指定的是登录路由 
+         * 如果本地缓存中没有存储菜单去获取菜单
          */
-        if (to.path === "/login") {
-            next();
-        } else if ((to.fullPath as string).includes("#error=login_required")) {
-            next(false);//已经有token还提示登录？当然直接拦截掉。
+        const menuList = await GetMenuList();
+        if (menuList) {
+            MenuModule.SetMenus(menuList);
+            getRouter = menuList;
         }
-        /**
-         * 否则
-         */
-        else {
-            /**
-             * getRouter不存在后台获取出的路由
-             */
-            if (!getRouter) {
-                /**
-                 * 如果本地缓存中没有存储菜单去获取菜单
-                 */
-                if (!MenuModule.menus) {
-                    MenuModule.SetMenus(await GetMenuList());
-                    if (MenuModule.menus) {
-                        const routerarr = JSON.parse(MenuModule.menus);
-                        if (routerarr) {
-                            getRouter = routerarr;
-                        }
-                    }
-                    else {
-                        const arr = JSON.parse((JSON.stringify(await GetMenuList())));
-                        getRouter = arr;
-                    }
-                    routeGo(to, from, next);
-                }
-                else {
-                    var routerarr = JSON.parse(MenuModule.menus);
-                    if (routerarr) {
-                        getRouter = routerarr;
-                    }
-                    routeGo(to, from, next);
-                }
-            }
-            /**
-             * getRouter存在菜单
-             */
-            else {
-                next()
-            }
-        }
+        routeGo(to, from, next);
+        return;
     }
-    else {
-        // /**
-        //  * 判断是否是回调回来的页面
-        //  */
-        if (to.path === "/callback") {
-            next();
-        }
-        else {
-            ApplicationUserManager.Login();
-        }
-    }
-})
+
+    /* 默认执行跳转 */
+    next();
+    return;
+});
+
 // /**
 //  * 跳转登录
 //  * @param to 
@@ -100,8 +84,6 @@ router.beforeEach(async (to: any, from, next) => {
 //     }
 // }
 
-//在以下页面中，不需要加载后端返回的路由（只需要默认内置写死的路由足以）。
-const ignoreRouteGoAsPaths: Array<string> = ['/callback', '/logout', '/login'];
 
 /**
  * DynamicRouter跳转
@@ -110,13 +92,8 @@ const ignoreRouteGoAsPaths: Array<string> = ['/callback', '/logout', '/login'];
  * @param next 
  */
 function routeGo(to: any, from: any, next: any) {
-    if (ignoreRouteGoAsPaths.includes(to.path)) {
-        next();
-        return;
-    }
     // console.log(_import(getRouter[0].component));
-    getRouter = filterAsyncRouter(getRouter);
-    router.addRoutes(getRouter);
+    router.addRoutes(GetRoutes(getRouter));
     // router.addRoutes(NotFoundRouterMap);
     if (to.matched.length === 0) {
         from.name
@@ -124,38 +101,110 @@ function routeGo(to: any, from: any, next: any) {
                 name: from.name
             })
             : next("/404");
+        return;
     }
     next({ ...to, replace: true });
 }
-/**
- * 动态路由构建方法
- * @param asyncRouterMap 
- */
-function filterAsyncRouter(asyncRouterMap: Route[]) {
-    const accessedRouters = asyncRouterMap.filter(route => {
-        if (route.path === "/layout-empty") {
-            route.component = EmptyView;
-        }
-        else if (route.path === "/layout") {
-            route.component = LayoutView;
-        }
-        else {
-            try {
-                route.component = _import(route.component);
-            } catch (error) {
-                console.error(`当前路由${route.path} 或 组件${route.component} 不存在，因此如法导入组件，请检查接口数据和组件是否匹配，并重新登录，清空缓存!`);
-            }
 
+
+
+/**
+ * 获取路由对象集合
+ * @param menuRouters 从后端返回的菜单路由对象集合
+ */
+function GetRoutes(menuRouters: IMenuRouter[]): RouteConfig[] {
+
+    const _import = require("./router/import/_import_" + process.env.NODE_ENV);
+    const _importlayout = require("./router/import/_import_layout_" + process.env.NODE_ENV);
+
+    const generateVueRouters = (sonMenuRouters: IMenuRouter[]) => {
+        const vueRouters: Route[] = [];
+        const menuRouterToRoute = (menuRouter: IMenuRouter): Route => {
+            const { buttonChildren, component, icon, id, name, parentId, parentNumber, path, redirect, sort, type, componentName } = menuRouter;
+            const pushData: Route = {
+                path,
+                component,
+                name,
+                components: undefined,
+                redirect,
+                props: undefined,
+                alias: undefined,
+                children: undefined,
+                beforeEnter: undefined,
+            };
+            pushData.meta = { title: name, nextPath: "", requireAuth: true, processEnv: process.env.NODE_ENV, noLogin: true };
+            pushData.meta.menuInfo = {
+                buttonChildren,
+                children: [],
+                component,
+                icon,
+                id,
+                name,
+                parentId,
+                parentNumber,
+                path,
+                redirect,
+                sort,
+                type,
+                componentName
+            };
+            return pushData;
+        };
+
+        const generateChildren = (menuRouter: Route, children: IMenuRouter[]) => {
+            if (!children || !children?.length) return;
+            if (!menuRouter.children) menuRouter.children = [];
+            for (const item of children) {
+                const route: Route = menuRouterToRoute(item);
+                menuRouter.children.push(route);
+                generateChildren(route, item.children);
+            }
+        };
+
+        for (const menuRouter of sonMenuRouters) {
+            const route: Route = menuRouterToRoute(menuRouter);
+            vueRouters.push(route);
+            generateChildren(route, menuRouter.children);
         }
-        if (route.children && route.children.length) {
-            route.children = filterAsyncRouter(route.children);
-        }
-        return true;
-    });
-    return accessedRouters;
+
+        return vueRouters;
+    };
+
+
+    const filterAsyncRouter = (asyncRouterMap: Route[]): Route[] => {
+        const accessedRouters = asyncRouterMap.filter(route => {
+            let importPath;
+            try {
+                if (route.path === "/layout-empty") {
+                    importPath = "layout-emprty/layout-emprty";
+                    route.component = _import(importPath);
+                }
+                else if (route.path === "/layout") {
+                    importPath = "layout";
+                    route.component = _importlayout(importPath);
+                }
+                else {
+                    importPath = route.component;
+                    route.component = _import(route.component);
+
+                }
+            } catch (_) {
+                console.error(`${importPath}.vue不存在，无法导入组件。请检查接口数据和组件是否匹配，并重新登录和清空缓存!`);
+            }
+            if (route.children && route.children.length) {
+                route.children = filterAsyncRouter(route.children);
+            }
+            return true;
+        });
+        return accessedRouters;
+    };
+
+    return filterAsyncRouter(generateVueRouters(menuRouters)) as RouteConfig[];
 }
 
+
 //添加路由
-(router as any).$addRoutes = (getRouter: IMenuRouter[]) => {
-    router.addRoutes(filterAsyncRouter(getRouter as any as Route[]));
+Object.getPrototypeOf(router).$addRoutes = (getRouter: IMenuRouter[]) => {
+    const routes = GetRoutes(getRouter);
+    router.addRoutes(routes);
 };

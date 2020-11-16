@@ -119,6 +119,7 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
   }
 
   private mounted() {
+    console.log(this.$route);
     this.loadData();
   }
 

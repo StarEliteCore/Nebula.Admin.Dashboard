@@ -12,17 +12,11 @@ import { MenuEnum } from '@/domain/entity/menudto/menuDto';
 import defaultConsts from "@/shared/config/appconst"
 import store from "@/store"
 
-export interface IMenuRouerStore {
-    menus: string
-}
-
 /**
  * 菜单模块
  */
 @Module({ dynamic: true, store, name: "menu" })
-class MenuRouerStore extends VuexModule implements IMenuRouerStore {
-    menus: string = localStorage.getItem(defaultConsts.menu) || "";
-
+class MenuRouerStore extends VuexModule {
     /**
      * 
      * @param _menus 属性
@@ -59,5 +53,9 @@ class MenuRouerStore extends VuexModule implements IMenuRouerStore {
 }
 
 export const MenuModule = getModule(MenuRouerStore);//获取模块
+
+export function GetMenus(): string {
+    return localStorage.getItem(defaultConsts.menu) || "";
+}
 
 
