@@ -196,3 +196,10 @@ export const OrganizationApi = {
    */
   loadOrganization:"api/Organization/LoadFormOrganizationAsync",
 };
+
+
+export const  SystemApi={
+
+
+  changePassword: "api/Identity/ChangePassword",
+}

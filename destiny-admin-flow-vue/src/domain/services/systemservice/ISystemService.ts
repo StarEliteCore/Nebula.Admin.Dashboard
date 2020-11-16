@@ -1,7 +1,8 @@
+import { IAjaxResult, IServerPageReturn } from '@/shared/response';
 import { IAuditEntryOutputPageDto, IAuditEntryPropertyOutputPageDto, IAuditLogOutputPageDto } from '@/domain/entity/auditdto/auditDto';
 
+import { IChangePassInputDto } from '@/domain/entity/core/ChangePassInputDto';
 import { IPageRequest } from '@/shared/request';
-import { IServerPageReturn } from '@/shared/response';
 
 /**
  * 审计服务层接口定义(因为AuditService报错，所以无法使用这个名字。)
@@ -25,4 +26,7 @@ export interface ISystemService {
      * @param _page 
      */
     getAuditEntryPropertyPage(_page:IPageRequest):Promise<IServerPageReturn<IAuditEntryPropertyOutputPageDto[]>>;
+
+    ///更新密码
+    changePassword(_dto: IChangePassInputDto):Promise<IAjaxResult>;
 }

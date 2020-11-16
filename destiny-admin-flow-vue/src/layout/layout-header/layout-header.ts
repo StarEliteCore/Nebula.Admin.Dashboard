@@ -1,6 +1,10 @@
+import { AjaxResult, IAjaxResult } from "@/shared/response";
 import { Component, Emit, Vue } from "vue-property-decorator";
 
 import ApplicationUserManager from "@/shared/config/IdentityServerLogin";
+import DestinyCoreModule from "@/shared/core/DestinyCoreModule";
+import { IChangePassInputDto } from "@/domain/entity/core/ChangePassInputDto";
+import { MainManager } from "@/domain/services/main/main-manager";
 import { MenuModule } from "@/store/modules/menumodule";
 import { TokenModule } from "@/store/modules/tokenmodule";
 
@@ -8,6 +12,7 @@ import { TokenModule } from "@/store/modules/tokenmodule";
   name: "LayoutHeader",
 })
 export default class LayoutHeader extends Vue {
+  DestinyCoreModule: any;
   private LogOut() {
     TokenModule.ResetToken();
     ApplicationUserManager.Logout();
@@ -15,8 +20,6 @@ export default class LayoutHeader extends Vue {
       path: "/login",
     });
   }
-
- 
 
   private GetUserName() {
     const key =
@@ -32,9 +35,8 @@ export default class LayoutHeader extends Vue {
   };
 
   validatePass: any = (rule: any, value: string, callback: any) => {
-    
     if (value === "") {
-      callback(new Error("请输入您的密码!!"));
+      callback(new Error("请输入新密码"));
     } else {
       if (this.formCustom.passwdCheck !== "") {
         // 对第二个密码框单独验证
@@ -45,9 +47,9 @@ export default class LayoutHeader extends Vue {
   };
   validatePassCheck = (rule: any, value: string, callback: any) => {
     if (value === "") {
-      callback(new Error("请重新输入密码!"));
+      callback(new Error("请输入确认密码"));
     } else if (value !== this.formCustom.newPassword) {
-      callback(new Error("两个输入的密码不匹配！"));
+      callback(new Error("两个输入的密码不匹配"));
     } else {
       callback();
     }
@@ -55,7 +57,7 @@ export default class LayoutHeader extends Vue {
 
   private ruleCustom = {
     oldPassword: [
-      { required: true, message: "请输入上一次密码：", trigger: "blur" },
+      { required: true, message: "请输入当前密码：", trigger: "blur" },
     ],
     newPassword: [{ validator: this.validatePass, trigger: "blur" }],
     passwdCheck: [{ validator: this.validatePassCheck, trigger: "blur" }],
@@ -65,15 +67,36 @@ export default class LayoutHeader extends Vue {
 
   public OpenUpdatePaw() {
     this.isOpen = true;
+    (this.$refs["formCustom"] as any).resetFields();
   }
 
   handleSubmit(name: string) {
     (this.$refs[name] as any).validate((valid: any) => {
       if (valid) {
-        this.$Message.success("修改密码成功！！！");
-      } else {
-        this.$Message.error("修改密码失败！！！");
+        let dto: IChangePassInputDto = {
+          newPassword: this.formCustom.newPassword,
+          oldPassword: this.formCustom.oldPassword,
+        };
+        MainManager.Instance()
+          .SystemService.changePassword(dto)
+          .then((result: IAjaxResult) => {
+            DestinyCoreModule.ToAjaxResult(
+              result,
+              () => {
+                this.isOpen = false;
+                this.LogOut();
+              },
+              () => {
+                this.isOpen = true;
+              }
+            );
+          })
       }
     });
+  }
+
+  handleReset() {
+    this.isOpen = false;
+    (this.$refs["formCustom"] as any).resetFields();
   }
 }

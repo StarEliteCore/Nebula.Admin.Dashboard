@@ -25,7 +25,13 @@ export enum AjaxResultType{
   ///成功
   Success = 200,
 
-  Error=500
+  Error=500,
+
+  //未经授权
+  Unauthorized=401,
+
+   //已登录但权限不足
+   Uncertified=403,
 }
 export class AjaxResult implements IAjaxResult {
   constructor(
@@ -36,4 +42,6 @@ export class AjaxResult implements IAjaxResult {
   ) {
     // ...
   }
+
+
 }
