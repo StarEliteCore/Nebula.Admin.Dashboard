@@ -37,7 +37,28 @@
                 <FormItem label="备注" prop="remark">
                     <Input v-model="dataDictionInputDto.remark" />
                 </FormItem>
+                <FormItem label="编码" prop="code">
+                    <Input v-model="dataDictionInputDto.code"/>
+                </FormItem> 
             </Form>
+            <template v-slot:fppter>
+                <div>
+                    <Button v-if="canEdit" class="dialog-btn" @click="q">
+                        取消
+                    </Button>
+                    <Button
+                        type="primary"
+                        v-if="canEdit"
+                        class="dialog-btn--primary"
+                        @click="OnHandleCommit"
+                    >
+                        保存
+                    </Button>
+                </div>
+            </template>
         </Modal>
     </div>
 </template>
+
+<script lang="ts" src="./dataDictionary-operate.ts"/>
+<style lang="scss" src="./dataDictionary-operate.scss" />
