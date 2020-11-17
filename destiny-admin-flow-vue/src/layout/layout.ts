@@ -1,7 +1,7 @@
 import { Component, Vue, Emit } from "vue-property-decorator";
 import LayoutHeader from "./layout-header/layout-header.vue"
 import MenuTab from "@/components/menu-tab/menu-tab.vue"
-import { MenuModule, GetMenus } from "@/store/modules/menumodule";
+import { GetMenus } from "@/store/modules/menumodule";
 import { IMenuInstance, MenuInstance } from '@/domain/entity/ConfigureInfo/menuConfigure/MenuInstance';
 import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
 import { Guid } from 'guid-typescript';
@@ -32,6 +32,7 @@ export default class LayoutComponent extends Vue {
         name: "主页",
         children: [],
         buttonChildren: [],
+        eventName: "",
     }
     private async created() {
         const menus = GetMenus();

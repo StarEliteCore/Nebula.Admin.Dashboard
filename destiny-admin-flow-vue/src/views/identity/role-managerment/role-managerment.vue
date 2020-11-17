@@ -6,7 +6,7 @@
       <div>
         <Card :dis-hover="true">
           <Row style="margin: 0px 0px 16px 0px; float: right">
-            <Button class="operatebutton" v-SmsTiming="['sys:user:add']"  type="success" @click="handleAdd()"
+            <Button class="operatebutton" type="success" @click="handleAdd()"
               >添加</Button
             >
 
@@ -43,9 +43,19 @@
           </Table>
         </Card>
       </div>
-      <set-permission ref="setPermissionModel" :editData="role" :editTitle="permissionTitle" @refresh="refresh"></set-permission>
-     
-      <role-operate ref="editModel" :editTitle="editTitle" :editData="editData"  @saveEdit="saveEdit"></role-operate>
+      <set-permission
+        ref="setPermissionModel"
+        :editData="role"
+        :editTitle="permissionTitle"
+        @refresh="refresh"
+      ></set-permission>
+
+      <role-operate
+        ref="editModel"
+        :editTitle="editTitle"
+        :editData="editData"
+        @saveEdit="saveEdit"
+      ></role-operate>
       <!-- <edit-modal ref="editModel" :editTitle="editTitle">
         <template v-slot:content>
       
@@ -62,8 +72,7 @@
 
 <script lang="ts" src="./role-managerment.ts"></script>
 <style scoped>
-  .operatebutton{
-
-    margin-left: 10px;
-  }
+.operatebutton {
+  margin-left: 10px;
+}
 </style>

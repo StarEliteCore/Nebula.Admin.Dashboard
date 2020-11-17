@@ -8,12 +8,14 @@ import router from "@/router/index";
 import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
 import { RouteConfig } from "vue-router";
 
+
 /**
  * 在以下页面中，不需要加载后端返回的路由（只需要默认内置写死的路由足以）。
  */
 const ignoreRouteGoAsPaths: Array<string> = ['/callback', '/logout', '/login'];
 
 let getRouter: IMenuRouter[];
+let isAddRouter: boolean = false;
 
 router.beforeEach(async (to: any, from, next) => {
 
@@ -33,7 +35,9 @@ router.beforeEach(async (to: any, from, next) => {
 
     /* 有菜单就存 */
     const menus = GetMenus();
-    if (!getRouter && menus) getRouter = JSON.parse(menus);
+    if (!getRouter && menus && isAddRouter) {
+        getRouter = JSON.parse(menus);
+    }
 
     /* 过滤掉不需要处理的路由 */
     const isIgnore: boolean = ignoreRouteGoAsPaths.includes(to.path);
@@ -49,11 +53,17 @@ router.beforeEach(async (to: any, from, next) => {
         /**
          * 如果本地缓存中没有存储菜单去获取菜单
          */
-        const menuList = await GetMenuList();
-        if (menuList) {
-            MenuModule.SetMenus(menuList);
-            getRouter = menuList;
+
+        if (menus) {
+            getRouter = JSON.parse(menus);
+        } else {
+            const menuList = await GetMenuList();
+            if (menuList) {
+                MenuModule.SetMenus(menuList);
+                getRouter = menuList;
+            }
         }
+
         routeGo(to, from, next);
         return;
     }
@@ -93,8 +103,13 @@ router.beforeEach(async (to: any, from, next) => {
  */
 function routeGo(to: any, from: any, next: any) {
     // console.log(_import(getRouter[0].component));
-    router.addRoutes(GetRoutes(getRouter));
     // router.addRoutes(NotFoundRouterMap);
+    if (isAddRouter === false) {
+        _addRoutes(getRouter);
+        next({ ...to, replace: true });
+        return;
+    }
+
     if (to.matched.length === 0) {
         from.name
             ? next({
@@ -114,13 +129,10 @@ function routeGo(to: any, from: any, next: any) {
  */
 function GetRoutes(menuRouters: IMenuRouter[]): RouteConfig[] {
 
-    const _import = require("./router/import/_import_" + process.env.NODE_ENV);
-    const _importlayout = require("./router/import/_import_layout_" + process.env.NODE_ENV);
-
     const generateVueRouters = (sonMenuRouters: IMenuRouter[]) => {
         const vueRouters: Route[] = [];
         const menuRouterToRoute = (menuRouter: IMenuRouter): Route => {
-            const { buttonChildren, component, icon, id, name, parentId, parentNumber, path, redirect, sort, type, componentName } = menuRouter;
+            const { buttonChildren, component, icon, id, name, parentId, parentNumber, path, redirect, sort, type, componentName, eventName } = menuRouter;
             const pushData: Route = {
                 path,
                 component,
@@ -146,7 +158,8 @@ function GetRoutes(menuRouters: IMenuRouter[]): RouteConfig[] {
                 redirect,
                 sort,
                 type,
-                componentName
+                componentName,
+                eventName,
             };
             return pushData;
         };
@@ -173,23 +186,19 @@ function GetRoutes(menuRouters: IMenuRouter[]): RouteConfig[] {
 
     const filterAsyncRouter = (asyncRouterMap: Route[]): Route[] => {
         const accessedRouters = asyncRouterMap.filter(route => {
-            let importPath;
             try {
                 if (route.path === "/layout-empty") {
-                    importPath = "layout-emprty/layout-emprty";
-                    route.component = _import(importPath);
+                    route.component = () => import("@/views/layout-emprty/layout-emprty.vue");
                 }
                 else if (route.path === "/layout") {
-                    importPath = "layout";
-                    route.component = _importlayout(importPath);
+                    route.component = () => import("@/layout/layout.vue");
                 }
                 else {
-                    importPath = route.component;
-                    route.component = _import(route.component);
-
+                    const request: string = route.component;
+                    route.component = () => import(/* webpackChunkName: "[request]" */`@/views/${request}.vue`);
                 }
             } catch (_) {
-                console.error(`${importPath}.vue不存在，无法导入组件。请检查接口数据和组件是否匹配，并重新登录和清空缓存!`);
+                console.error(`${route.path}对应的组件不存在，无法导入组件。请检查接口数据和组件是否匹配，并重新登录和清空缓存!`);
             }
             if (route.children && route.children.length) {
                 route.children = filterAsyncRouter(route.children);
@@ -203,8 +212,11 @@ function GetRoutes(menuRouters: IMenuRouter[]): RouteConfig[] {
 }
 
 
-//添加路由
-Object.getPrototypeOf(router).$addRoutes = (getRouter: IMenuRouter[]) => {
-    const routes = GetRoutes(getRouter);
+function _addRoutes(routers: IMenuRouter[]) {
+    const routes = GetRoutes(routers);
     router.addRoutes(routes);
+    isAddRouter = true;
 };
+
+//添加路由
+Object.getPrototypeOf(router).$addRoutes = _addRoutes;

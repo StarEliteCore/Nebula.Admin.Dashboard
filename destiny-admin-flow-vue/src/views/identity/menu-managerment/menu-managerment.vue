@@ -41,7 +41,7 @@
       <header>
         <div>
           <ButtonGroup>
-            <Button @click="operateItem(operate.add)">
+            <Button v-hasPermission="'hhhhhh'" @click="operateItem(operate.add)">
               <Icon type="md-add" />添加
             </Button>
             <Button @click="operateItem(operate.update)">

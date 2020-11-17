@@ -44,6 +44,11 @@ export interface IMenu extends IEntity<string> {
   type: MenuEnum;
 
   /**
+   * 事件名
+   */
+  eventName: string;
+
+  /**
    * 子级
    */
   children: Array<IMenu>;
