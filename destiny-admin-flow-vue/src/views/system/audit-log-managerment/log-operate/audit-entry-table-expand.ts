@@ -28,7 +28,7 @@ export default class TableExpand extends Mixins(ComponentMixins) {
         render: (h: any, params: any) => {
           return h(AuditEntryPropertyExpandOperate, {
             props: {
-              row: params.row,
+              row1: params.row,
             },
           });
         },
