@@ -58,10 +58,10 @@ export interface IMenuService {
 
     /**
      * 批量添加功能菜单
-     * @param menuId 菜单ID
+     * @param menuIds 菜单ID
      * @param functionIds 功能ID集合
      */
-    BatchAddMenuFunctionAsync(menuId: string, functionIds: Array<string>): Promise<IAjaxResult>;
+    BatchAddMenuFunctionAsync(menuIds: Array<string>, functionIds: Array<string>): Promise<IAjaxResult>;
 
     /**
      * 批量删除功能菜单
@@ -74,9 +74,9 @@ export interface IMenuService {
      * 根据菜单ID得到菜单功能分页
      * @param _page 查询DTO
      */
-    GetMenuFunctionByMenuIdPageAsync(menuId: string,_page: IPageRequest): Promise<IServerPageReturn<Array<FunctionInputDto>>>;
+    GetMenuFunctionByMenuIdPageAsync(menuId: string, _page: IPageRequest): Promise<IServerPageReturn<Array<FunctionInputDto>>>;
     /**
      * 获取动态路由菜单
      */
-    getVueDynamicRouterTreeAsync(): Promise<IAjaxResult> ;
+    getVueDynamicRouterTreeAsync(): Promise<IAjaxResult>;
 }

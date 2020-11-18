@@ -14,7 +14,7 @@ import PageMixins from "@/shared/mixins/page.mixins";
 })
 export default class AddMenuFunction extends Mixins(PageMixins) {
     @Prop(Boolean) isShow!: boolean;
-    @Prop(String) menuId!: string;
+    @Prop(Array) menuIds!: Array<string>;
     @Prop(String) name!: string;
 
     get isShowModal() {
@@ -91,8 +91,11 @@ export default class AddMenuFunction extends Mixins(PageMixins) {
 
         this.isLoading = true;
         this.queryfileter.filter = this.filter();
+        const menuIds = this.menuIds;
+        let queryDto = this.tranfer(this.queryfileter);
+        Object.assign(queryDto, { menuIds });
         this.mainManager.FunctionService.getFunctionPage(
-            this.tranfer(this.queryfileter)
+            queryDto
         ).then((res) => {
             if (res.success) {
                 this.tableData = res.itemList;
@@ -102,10 +105,6 @@ export default class AddMenuFunction extends Mixins(PageMixins) {
         });
     }
 
-    private dynamicQuery: any = {
-
-        
-    };
     private filter = this.getFilter();
     private getFilter() {
         const filters: IFilterCondition[] = [
@@ -154,7 +153,7 @@ export default class AddMenuFunction extends Mixins(PageMixins) {
         }
         this.isLoading = true;
         this.mainManager.MenuService.BatchAddMenuFunctionAsync(
-            this.menuId,
+            this.menuIds,
             this.CurrentArray.map((p) => p.id)
         ).then((res) => {
             if (res.success) {

@@ -41,8 +41,7 @@
       <header>
         <div>
           <ButtonGroup>
-            <Button v-hasPermission="'handleAddMenuFunction'"  @click="operateItem(operate.add)">
-              <Icon type="md-add" />添加
+            <Button v-hasPermission="'handleAddMenuFunction'"  @click="operateItem(operate.add)"><Icon type="md-add" />添加
             </Button>
             <Button  v-hasPermission="'handleEditMenuFunction'" @click="operateItem(operate.update)">
               <Icon type="ios-create" />编辑
@@ -113,7 +112,7 @@
     <add-menu-function
       ref="AddMenuFunction"
       :isShow.sync="isShowAddMenuFunDModal"
-      :menuId="CurrentRow.id"
+      :menuIds="CurrentMenuIds"
       :name="CurrentRow.name"
     ></add-menu-function>
     <remove-menu-function

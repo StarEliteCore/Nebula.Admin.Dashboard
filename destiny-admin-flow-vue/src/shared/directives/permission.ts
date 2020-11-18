@@ -12,12 +12,20 @@ function GetFunctions(): IMenuRouter[] {
 }
 
 /**
+ * 获取是否管理员
+ */
+function GetIsAdmin(): boolean {
+    return false;
+}
+
+/**
  * 权限指令。支持Array<string>和string，如果无法匹配到权限则会删除或隐藏元素。
  */
 export const hasPermission: DirectiveOptions = {
     bind(el, binding) {
         const attributeValue = binding.value;
         if (!attributeValue) return;
+        if (GetIsAdmin()) return;
         const functions = GetFunctions().map(p => p.eventName);
 
         const hideEl = () => {
@@ -31,10 +39,13 @@ export const hasPermission: DirectiveOptions = {
         if (typeof attributeValue === "string") {
             if (!functions.includes(attributeValue)) hideEl();
         } else if (attributeValue.constructor === Array) {
-            const values = attributeValue as Array<string>;
+            const values = attributeValue as Array<any>;
             const { length } = values;
             let countNumber: number = 0;
             for (const item of values) {
+                if (typeof item !== "string") {
+                    throw new Error(`Only 'string' and 'array<string>' are supported, but '${typeof item}' is received`);
+                };
                 if (functions.includes(item)) ++countNumber;
             }
             if (countNumber !== length) hideEl();

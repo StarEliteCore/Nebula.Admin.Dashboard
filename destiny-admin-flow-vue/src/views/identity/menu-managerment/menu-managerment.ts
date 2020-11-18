@@ -45,6 +45,9 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
   private notNestTreeData: Array<any> = [];
   private treeSearchText: string = "";
 
+  get CurrentMenuIds() {
+    return this.CurrentArray.map(p => p.id);
+  }
 
   private enumOptions = MenuEnum;
 
@@ -345,10 +348,10 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
       this.$Message.error("请选择一项后再点击");
       return;
     }
-    if (this.CurrentArray.length > 1) {
-      this.$Message.error("只能选择一项分配菜单功能");
-      return;
-    }
+    // if (this.CurrentArray.length > 1) {
+    //   this.$Message.error("只能选择一项分配菜单功能");
+    //   return;
+    // }
     this.isShowAddMenuFunDModal = true;
     (this.$refs.AddMenuFunction as Vue).$emit("loadData");
   }
