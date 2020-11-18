@@ -43,14 +43,13 @@
             </Form>
             <template v-slot:fppter>
                 <div>
-                    <Button v-if="canEdit" class="dialog-btn" @click="q">
+                    <Button v-if="canEdit" class="dialog-btn">
                         取消
                     </Button>
                     <Button
                         type="primary"
                         v-if="canEdit"
                         class="dialog-btn--primary"
-                        @click="OnHandleCommit"
                     >
                         保存
                     </Button>

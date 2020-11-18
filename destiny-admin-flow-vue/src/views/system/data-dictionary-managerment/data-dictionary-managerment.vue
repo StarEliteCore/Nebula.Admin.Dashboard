@@ -6,15 +6,15 @@
                     <Input class="searchTree" placeholder="输入名称搜索"/>
                 </div>
                 <ButtonGroup class="btngroup">
-                    <Button>
+                    <Button @click="operateItem(operate.add)">
                         <Icon type="md-add" />
                     </Button>
                     <Button>
                         <Icon type="ios-create" />
                     </Button>
-                    <Button>
+                    <!-- <Button>
                         <Icon type="ios-refresh" />
-                    </Button>
+                    </Button> -->
                     <Button>
                         <Icon type="ios-trash" />
                     </Button>
@@ -77,6 +77,7 @@
                 ></page-component>
             </article>
         </div>
+        <data-dictionary-operate ref="DataDictionaryInfo"></data-dictionary-operate>
     </section>
 </template>
 <script lang="ts" src="./data-dictionary-managerment.ts"/>

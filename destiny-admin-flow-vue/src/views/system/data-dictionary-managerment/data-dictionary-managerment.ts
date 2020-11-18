@@ -12,13 +12,15 @@ import { EFilterConnect, EFilterOprator } from '@/shared/request/query.enum';
 import { ComponentMixins } from '@/shared/mixins/component.mixns';
 import { DataDictionaryApi } from '../../../domain/config/api/index';
 import { DataDictionaryInputDto, DataDictionaryPageListDto } from '../../../domain/entity/dataDictionaryDto/dataDictionaryDto';
-
+import DataDictionaryOperate from './dataDictionary-operate/dataDictionary-operate.vue';
+import { EOperate } from '../../../shared/eoperate/index';
+import DataDictionaryInfo from "./dataDictionary-operate/dataDictionary-operate"
 
 @Component({
-    name:"DataDictionaryManagerment",
-    // comments:{
-
-    // }
+    name: "DataDictionaryManagerment",
+    components: {
+        DataDictionaryOperate
+    },
 })
 
 export default class DataDictionaryManagerment extends Mixins(PageMixins,DeleteMixins){
@@ -138,6 +140,31 @@ export default class DataDictionaryManagerment extends Mixins(PageMixins,DeleteM
             return filter;
         }
     }
+
+    @Ref("DataDictionaryInfo")
+    private DataDictionaryInfo!: DataDictionaryInfo;
+
+    /**
+     * 操作方法
+     * @param _type 
+     * @param _rowId 
+     */
+    private operateItem(_type:EOperate,_rowId?:string){
+        debugger
+        switch(_type){
+            case EOperate.add:
+                this.DataDictionaryInfo.Show(
+                    _type,
+                    this.treeData,
+                    this.treeSelectedId,
+                    (res:boolean) => {
+                        this.loadData();
+                    }
+                );
+            break
+        }
+    }
+
 
     private loadData(type?:MenuEnum){
         this.getTableData();
