@@ -45,12 +45,15 @@
             <Button
               class="operatebutton"
               type="success"
+               v-hasPermission="'handleAdd'"
+
               @click="operateItem(operate.add)"
               >添加</Button
             >
             <Button class="operatebutton"
               icon="md-send"
                type="primary"
+                v-hasPermission="'allocationRole'"
               @click="allocationRole()"
               >分配角色</Button
             >
@@ -58,11 +61,12 @@
               class="operatebutton"
               type="warning"
               @click="operateItem(operate.update)"
+               v-hasPermission="'handleUpdate'"
               >修改</Button
             >
-            <!-- <Button class="operatebutton" type="error" @click="deleteItem()"
+            <Button class="operatebutton" type="error" @click="deleteItem()"  v-hasPermission="'handleDelete'"
               >删除</Button
-            > -->
+            >
           </Row>
           <Table
             :columns="columns"
@@ -75,7 +79,7 @@
               <Tag v-if="row.isSystem" color="red">是</Tag>
               <Tag v-else color="blue">否</Tag>
             </template>
-            <template slot-scope="{ row }" slot="action">
+            <!-- <template slot-scope="{ row }" slot="action">
               <Button
                 class="table-button table-button--primary"
                 type="primary"
@@ -100,7 +104,7 @@
                 @click="deleteItem(row)"
                 >删除</Button
               >
-            </template>
+            </template> -->
           </Table>
         </Card>
       </div>

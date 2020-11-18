@@ -5,10 +5,10 @@
       <div>
         <Card :dis-hover="true">
           <Row style="margin: 0px 0px 16px 0px; float: right">
-            <Button class="operatebutton" type="success" @click="handleAdd()">添加</Button>
+            <Button class="operatebutton" type="success" v-hasPermission="'handleAdd'" @click="handleAdd()">添加</Button>
 
-            <Button class="operatebutton" type="warning" @click="handleUpdate()">修改</Button>
-            <Button class="operatebutton" type="error" :loading="delectLoading" @click="handleDelete()">删除</Button>
+            <Button class="operatebutton" type="warning" v-hasPermission="'handleUpdate'" @click="handleUpdate()">修改</Button>
+            <Button class="operatebutton" type="error" v-hasPermission="'handleDelete'" :loading="delectLoading" @click="handleDelete()">删除</Button>
           </Row>
           <Table :columns="columns" :data="tableData" border stripe @on-select-cancel="currentRowEventCancel"
             @on-select="currentRowEventArray">

@@ -11,13 +11,13 @@
           />
         </div>
         <ButtonGroup class="btngroup">
-          <Button @click="operateItem(operate.add)">
+          <Button v-hasPermission="'handleAddTreeMenu'" @click="operateItem(operate.add)">
             <Icon type="md-add" />
           </Button>
-          <Button @click="EditTreeMenu">
+          <Button v-hasPermission="'handleEditTreeMenu'" @click="EditTreeMenu">
             <Icon type="ios-create" />
           </Button>
-          <Button @click="deleteItemTreeMenu">
+          <Button  v-hasPermission="'handleDeleteTreeMenu'" @click="deleteItemTreeMenu">
             <Icon type="ios-trash" />
           </Button>
         </ButtonGroup>
@@ -41,14 +41,14 @@
       <header>
         <div>
           <ButtonGroup>
-            <Button v-hasPermission="'hhhhhh'" @click="operateItem(operate.add)">
+            <Button v-hasPermission="'handleAddMenuFunction'"  @click="operateItem(operate.add)">
               <Icon type="md-add" />添加
             </Button>
-            <Button @click="operateItem(operate.update)">
+            <Button  v-hasPermission="'handleEditMenuFunction'" @click="operateItem(operate.update)">
               <Icon type="ios-create" />编辑
             </Button>
-            <Button @click="deleteItem"> <Icon type="ios-trash" />删除</Button>
-            <Button @click="showAddMenuFunction">分配菜单功能</Button>
+            <Button @click="deleteItem" v-hasPermission="'handleDeleteMenuFunction'"> <Icon type="ios-trash" />删除</Button>
+            <Button @click="showAddMenuFunction" v-hasPermission="'showAddMenuFunction'">分配菜单功能</Button>
           </ButtonGroup>
         </div>
         <div class="searchdiv">

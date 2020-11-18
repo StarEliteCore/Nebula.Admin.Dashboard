@@ -31,6 +31,7 @@ service.interceptors.response.use(
   (error) => {
     const response = error.response;
     switch (response.status) {
+        
       case 500:
         return Promise.reject(response);
         break;

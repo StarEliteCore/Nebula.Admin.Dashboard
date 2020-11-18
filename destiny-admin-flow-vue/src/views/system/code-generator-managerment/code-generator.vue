@@ -178,7 +178,7 @@
                   <Input v-model="projectFormItem.saveFilePath" />
                  </FormItem>
                  <FormItem >
-                    <Button type="primary" @click="save()">保存</Button>
+                    <Button type="primary" v-hasPermission="'save'" @click="save()">保存</Button>
                  </FormItem>
               </Form>
       
