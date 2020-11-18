@@ -41,8 +41,8 @@ export default class MenuService implements IMenuService {
         return MainManager.dataRequest.getRequest(MenuApi.GetAllMenuTree);
     }
 
-    BatchAddMenuFunctionAsync(menuId: string, functionIds: string[]): Promise<IAjaxResult> {
-        return MainManager.dataRequest.postRequest(MenuApi.BatchAddMenuFunction, { menuId, functionIds });
+    BatchAddMenuFunctionAsync(menuIds: Array<string>, functionIds: string[]): Promise<IAjaxResult> {
+        return MainManager.dataRequest.postRequest(MenuApi.BatchAddMenuFunction, { menuIds, functionIds });
     }
     BatchDeleteMenuFunctionAsync(menuId: string, functionIds: string[]): Promise<IAjaxResult> {
         return MainManager.dataRequest.deleteRequest(MenuApi.BatchDeleteMenuFunction, null, { menuId, functionIds });
