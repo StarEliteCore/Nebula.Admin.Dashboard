@@ -41,7 +41,7 @@
       <header>
         <div>
           <ButtonGroup>
-            <Button v-hasPermission="'hhhhhh'" @click="operateItem(operate.add)">
+            <Button @click="operateItem(operate.add)">
               <Icon type="md-add" />添加
             </Button>
             <Button @click="operateItem(operate.update)">
@@ -113,7 +113,7 @@
     <add-menu-function
       ref="AddMenuFunction"
       :isShow.sync="isShowAddMenuFunDModal"
-      :menuId="CurrentRow.id"
+      :menuIds="CurrentMenuIds"
       :name="CurrentRow.name"
     ></add-menu-function>
     <remove-menu-function
