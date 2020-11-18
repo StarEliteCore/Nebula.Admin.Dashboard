@@ -14,7 +14,7 @@ export default class AuditEntryPropertyManagerment extends Mixins(
   ComponentMixins
 ) {
   @Prop()
-  protected row!: any;
+  protected row1!: any;
   pageUrl: string = AuditApi.getAuditEntryPropertyPage;
 
   GetColumn(): ITableColumn[] {
@@ -58,7 +58,7 @@ export default class AuditEntryPropertyManagerment extends Mixins(
       {
         field: "AuditEntryId",
         operator: EFilterOprator.Equal,
-        value: this.row.id,
+        value: this.row1.id,
       },
     ];
     return newFilters;

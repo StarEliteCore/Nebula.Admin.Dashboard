@@ -10,7 +10,6 @@ import {
   SearchFilter,
 } from "@/shared/request";
 
-import { DestinyCoreBase } from "../core/destiny-core-base";
 import { ESex } from "@/domain/entity/userdto/userDto";
 import EditModal from "@/components/edit-modal/edit-modal.vue";
 import { IAjaxResult } from "../response";
@@ -47,6 +46,7 @@ export class ComponentMixins extends Vue {
   currentSelectionArray: any = [];
   currentRow: any = [];
 
+
   destinyCoreServeice!: IDestinyCoreServeice;
 
   protected Init() {
@@ -57,6 +57,8 @@ export class ComponentMixins extends Vue {
     this.destinyCoreServeice = this.mainManager.DestinyCoreServeice;
     this.GetPage();
     this.editModel = this.$refs.editModel as Vue;
+
+
   }
 
   public mounted() {

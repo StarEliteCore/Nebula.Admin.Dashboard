@@ -25,7 +25,7 @@ export default class AuditEntryManagerment extends Mixins(ComponentMixins) {
         render: (h: any, params: any) => {
           return h(EntryPropertOperate, {
             props: {
-              row: params.row,
+              row1: params.row,
             },
           });
         },

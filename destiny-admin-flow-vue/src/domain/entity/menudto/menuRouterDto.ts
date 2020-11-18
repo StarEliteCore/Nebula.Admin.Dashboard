@@ -1,6 +1,6 @@
 import { IMenu } from './menuDto';
 
-export interface IRouter{
+export interface IRouter {
     /**
      * 路径
      */
@@ -19,6 +19,11 @@ export interface IRouter{
     redirect: string;
 }
 
-export interface IMenuRouter extends IRouter,IMenu {
+export interface IMenuRouter extends IRouter, IMenu {
     children: IMenuRouter[];
+
+    /**
+     * 菜单下的按钮
+     */
+    buttonChildren: IMenuRouter[];
 }

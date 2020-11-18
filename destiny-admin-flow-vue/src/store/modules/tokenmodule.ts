@@ -8,20 +8,15 @@ import {
     getModule
 } from "vuex-module-decorators";
 
-import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
 import defaultConsts from '@/shared/config/appconst';
 import store from "@/store"
 
-export interface ITokenRouerStore {
-    token: string
-}
 
 /**
  * 菜单模块
  */
 @Module({ dynamic: true, store, name: "token" })
-class TokenRouerStore extends VuexModule implements ITokenRouerStore {
-    token: string = CookieInfo.getcookie(defaultConsts.cookiename) || "";
+class TokenRouerStore extends VuexModule {
     /**
      * 
      * @param _menus 属性

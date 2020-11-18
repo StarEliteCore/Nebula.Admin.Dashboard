@@ -14,7 +14,7 @@
       </a>
       <template v-slot:list>
         <DropdownMenu>
-          <DropdownItem @click.native="LogOut">退出登录</DropdownItem>
+          <DropdownItem @click.native="LogOut">安全退出</DropdownItem>
           <DropdownItem @click.native="OpenUpdatePaw">修改密码</DropdownItem>
         </DropdownMenu>
       </template>
@@ -28,13 +28,13 @@
           :model="formCustom"
           :label-width="100"
         >
-          <FormItem label="上一次密码:" prop="oldPassword">
+          <FormItem label="当前密码:" prop="oldPassword">
             <Input type="password" v-model="formCustom.oldPassword"></Input>
           </FormItem>
           <FormItem label="新密码：" prop="newPassword">
             <Input type="password" v-model="formCustom.newPassword"></Input>
           </FormItem>
-          <FormItem label="确认：" prop="passwdCheck">
+          <FormItem label="确认密码：" prop="passwdCheck">
             <Input type="password" v-model="formCustom.passwdCheck"></Input>
           </FormItem>
  
@@ -42,6 +42,7 @@
         </Form>
         <div slot="footer">
             <Button type="primary" @click="handleSubmit('formCustom')">保存</Button>
+             <Button @click="handleReset()" style="margin-left: 8px">取消</Button>
         </div>
       </Modal>
     </template>
