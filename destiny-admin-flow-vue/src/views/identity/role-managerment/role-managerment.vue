@@ -6,13 +6,10 @@
       <div>
         <Card :dis-hover="true">
           <Row style="margin: 0px 0px 16px 0px; float: right">
-            <Button class="operatebutton" type="success" @click="handleAdd()"
-              >添加</Button
-            >
+         
+            <Button class="operatebutton"   type="success" @click="handleAdd()">添加</Button>
 
-            <Button class="operatebutton" type="warning" @click="handleUpdate()"
-              >修改</Button
-            >
+            <Button class="operatebutton" type="warning" @click="handleUpdate()" >修改</Button>
             <Button
               class="operatebutton"
               type="error"
