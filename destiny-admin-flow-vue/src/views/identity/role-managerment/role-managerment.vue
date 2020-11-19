@@ -7,19 +7,20 @@
         <Card :dis-hover="true">
           <Row style="margin: 0px 0px 16px 0px; float: right">
          
-            <Button class="operatebutton"   type="success" @click="handleAdd()">添加</Button>
+            <Button class="operatebutton"    v-hasPermission="'handleAdd'" type="success" @click="handleAdd()">添加</Button>
 
-            <Button class="operatebutton" type="warning" @click="handleUpdate()" >修改</Button>
+            <Button class="operatebutton" v-hasPermission="'handleUpdate'" type="warning" @click="handleUpdate()" >修改</Button>
             <Button
               class="operatebutton"
               type="error"
-              :loading="delectLoading"
+              :loading="delectLoading" v-hasPermission="'handleDelete'"
               @click="handleDelete()"
               >删除</Button
             >
             <Button
               class="operatebutton"
               type="primary"
+              v-hasPermission="'handleAuth'"
               @click="handleAuth()"
               icon="md-send"
               >分配权限</Button

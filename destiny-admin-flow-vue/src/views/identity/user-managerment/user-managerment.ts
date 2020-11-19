@@ -88,11 +88,6 @@ export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
       title: "描述",
       key: "description",
       align: "center",
-    },
-    {
-      title: "操作",
-      slot: "action",
-      align: "center",
     }
   ];
   private userTable: Array<IUserTableDto> = [];
@@ -129,7 +124,6 @@ export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
     // this.PageInfo.total=100;
   }
   private mounted() {
-    console.log(this.$route);
     // let res = MainManager.Instance().MenuService.getVueDynamicRouterTreeAsync();
     // console.log(res)
     this.getTableData();

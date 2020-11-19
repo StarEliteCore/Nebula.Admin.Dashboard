@@ -1,6 +1,11 @@
 <template>
   <div class="home">
-    woshi主页
+    <Card style="width:320px;height:200px;" >
+      <div style="text-align:center">
+  aaa
+      </div>
+    </Card>
+    
   </div>
 </template>
 <script lang="ts" src="./home-page.ts"></script>

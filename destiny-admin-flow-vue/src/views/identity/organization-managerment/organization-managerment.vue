@@ -4,13 +4,13 @@
         <div>
         <Input class="searchTree" placeholder="输入名称搜索" />
         <ButtonGroup class="btngroup">
-          <Button @click="operateItem(operate.add)">
+          <Button v-hasPermission="'handleAddTree'" @click="operateItem(operate.add)">
             <Icon type="md-add"  />
           </Button>
-          <Button @click="EditTree" >
+          <Button @click="EditTree"  v-hasPermission="'handleEditTree'">
             <Icon type="ios-create" />
           </Button>
-          <Button @click="deleteItemTree">
+          <Button @click="deleteItemTree" v-hasPermission="'handleDeleteTree'">
             <Icon type="ios-trash" />
           </Button>
         </ButtonGroup>
@@ -30,9 +30,9 @@
       <header>
           <div>
             <ButtonGroup>
-              <Button  @click="operateItem(operate.add)"> <Icon type="md-add"/>添加 </Button>
-              <Button  @click="operateItem(operate.update)"> <Icon type="ios-create"/>编辑 </Button>
-              <Button @click="deleteItem"> <Icon type="ios-trash"  />删除 </Button>
+              <Button  v-hasPermission="'handleAdd'" @click="operateItem(operate.add)"> <Icon type="md-add"/>添加 </Button>
+              <Button  v-hasPermission="'handleUpdate'" @click="operateItem(operate.update)"> <Icon type="ios-create"/>编辑 </Button>
+              <Button @click="deleteItem" v-hasPermission="'handleDelete'"> <Icon type="ios-trash"  />删除 </Button>
             </ButtonGroup>
           </div>
           <div class="searchdiv">
