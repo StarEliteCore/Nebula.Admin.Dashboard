@@ -1,23 +1,19 @@
-import { Component, Emit, Mixins, Watch } from "vue-property-decorator";
-import PageMixins from "@/shared/mixins/page.mixins";
-import DeleteMixins from "@/shared/mixins/delete-dialog.mixins";
-
 import * as PageQuery from "@/shared/request";
 
-import { MenuEnum, MenuOutPageListDto } from '@/domain/entity/menudto/menuDto';
-import { ITableColumn } from '@/shared/table/ITable';
+import { Component, Emit, Mixins, Watch } from "vue-property-decorator";
+import { EFilterConnect, EFilterOprator } from "@/shared/request/query.enum";
+import { IFilterCondition, IQueryFilter } from "@/shared/request";
+import { MenuEnum, MenuOutPageListDto } from "@/domain/entity/menudto/menuDto";
 
+import AddMenuFunction from "./menu-function/add-menu-function.vue";
+import CircleLoading from "@/components/circle-loading/circle-loading.vue";
+import DeleteMixins from "@/shared/mixins/delete-dialog.mixins";
+import { EOperate } from "@/shared/eoperate";
+import { ITableColumn } from "@/shared/table/ITable";
 import { MainManager } from "@/domain/services/main/main-manager";
-import { IFilterCondition, IQueryFilter } from '@/shared/request';
-import { EFilterConnect, EFilterOprator } from '@/shared/request/query.enum';
-
 import MenuOperate from "./menu-operate/menu-operate.vue";
-
-import { EOperate } from '@/shared/eoperate';
-
-import AddMenuFunction from './menu-function/add-menu-function.vue';
-import RemoveMenuFunction from './menu-function/remove-menu-function.vue';
-import CircleLoading from '@/components/circle-loading/circle-loading.vue';
+import PageMixins from "@/shared/mixins/page.mixins";
+import RemoveMenuFunction from "./menu-function/remove-menu-function.vue";
 
 @Component({
   name: "MenuManagerment",
@@ -26,9 +22,8 @@ import CircleLoading from '@/components/circle-loading/circle-loading.vue';
     AddMenuFunction,
     RemoveMenuFunction,
     CircleLoading,
-  }
+  },
 })
-
 export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
   private queryfileter: PageQuery.IPageRequest = new PageQuery.PageRequest();
   private CurrentRow: any = {};
@@ -46,35 +41,35 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
   private treeSearchText: string = "";
 
   get CurrentMenuIds() {
-    return this.CurrentArray.map(p => p.id);
+    return this.CurrentArray.map((p) => p.id);
   }
 
   private enumOptions = MenuEnum;
 
   private columns: ITableColumn[] = [
     {
-      type: 'selection',
+      type: "selection",
       width: 60,
-      align: 'center'
+      align: "center",
     },
     {
       title: "名称",
       key: "name",
       align: "center",
-      maxWidth: 180
+      maxWidth: 180,
     },
     {
       title: "图标",
       key: "icon",
       align: "center",
-      maxWidth: 150
+      maxWidth: 150,
     },
     {
       title: "类型",
       key: "type",
       align: "center",
       maxWidth: 90,
-      slot: "type"
+      slot: "type",
     },
     {
       title: "层级",
@@ -99,7 +94,7 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
       key: "isHide",
       align: "center",
       maxWidth: 70,
-      slot: "isHide"
+      slot: "isHide",
     },
     {
       title: "描述",
@@ -107,11 +102,11 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
       align: "center",
     },
     {
-      title: '操作',
-      slot: 'action',
+      title: "操作",
+      slot: "action",
       width: 150,
-      align: 'center'
-    }
+      align: "center",
+    },
   ];
 
   private mainManager: MainManager = MainManager.Instance();
@@ -125,7 +120,7 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
     this.loadData();
   }
 
-  @Watch('treeData', { immediate: false, deep: true })
+  @Watch("treeData", { immediate: false, deep: true })
   onTreeDataChanged(val: Array<any>) {
     const datas: Array<any> = [];
     const childrenKey = "children";
@@ -152,17 +147,21 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
     this.notNestTreeData = datas;
   }
 
-  private prevSearchTreeData: Map<string, Array<any>> = new Map<string, Array<any>>();
+  private prevSearchTreeData: Map<string, Array<any>> = new Map<
+    string,
+    Array<any>
+  >();
   get SearchTreeData() {
     const text = this.treeSearchText;
     if (text.length === 0) return this.treeData;
-    if (this.prevSearchTreeData.has(text)) return this.prevSearchTreeData.get(text);
+    if (this.prevSearchTreeData.has(text))
+      return this.prevSearchTreeData.get(text);
     const datas = this.notNestTreeData.concat();
-    const searchData = datas.filter(p => p.title.includes(text));
+    const searchData = datas.filter((p) => p.title.includes(text));
     let notNestData: Array<any> = [];
     const addParent = (item: any) => {
       notNestData.push(item);
-      const index = datas.findIndex(p => p.id === item.parentId);
+      const index = datas.findIndex((p) => p.id === item.parentId);
       if (index != -1) {
         addParent(datas[index]);
       }
@@ -171,11 +170,14 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
       addParent(item);
     }
     const map = new Map();
-    notNestData = notNestData.filter(p => !map.has(p.id) && map.set(p.id, 1));
-    const result = notNestData.filter(p => !p.parentId || p.parentId === "00000000-0000-0000-0000-000000000000");
+    notNestData = notNestData.filter((p) => !map.has(p.id) && map.set(p.id, 1));
+    const result = notNestData.filter(
+      (p) =>
+        !p.parentId || p.parentId === "00000000-0000-0000-0000-000000000000"
+    );
     const generateResult = (items: Array<any>) => {
       for (const item of items) {
-        item.children = notNestData.filter(p => p.parentId === item.id);
+        item.children = notNestData.filter((p) => p.parentId === item.id);
         if (item.children.length > 0) {
           generateResult(item.children);
         }
@@ -186,7 +188,6 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
     this.prevSearchTreeData.set(text, result);
     return result;
   }
-
 
   private dynamicQuery: any = {};
   private filter = this.getFilter();
@@ -224,34 +225,33 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
     };
   }
 
-
   private loadTableData() {
     this.CurrentRow = {};
     this.CurrentArray = [];
 
     this.showTableLoading = true;
     this.queryfileter.filter = this.filter();
-    this.mainManager.MenuService.GetMenuPage(this.tranfer(this.queryfileter))
-      .then(res => {
-        this.showTableLoading = false;
-        if (res.success) {
-          this.tableData = res.itemList;
-          this.total = res.total;
-        }
-      });
+    this.mainManager.MenuService.GetMenuPage(
+      this.tranfer(this.queryfileter)
+    ).then((res) => {
+      this.showTableLoading = false;
+      if (res.success) {
+        this.tableData = res.itemList;
+        this.total = res.total;
+      }
+    });
   }
   private loadTreeData() {
     // this.treeSelectedId = "";
     // this.treeSelectedMenu = {};
 
     this.showTreeLoading = true;
-    this.mainManager.MenuService.GetAllMenuTree()
-      .then(res => {
-        this.showTreeLoading = false;
-        if (res.success) {
-          this.treeData = res.itemList;
-        }
-      });
+    this.mainManager.MenuService.GetAllMenuTree().then((res) => {
+      this.showTreeLoading = false;
+      if (res.success) {
+        this.treeData = res.itemList;
+      }
+    });
   }
 
   private treeSelected(expandedKeys: any, expanded: any) {
@@ -273,7 +273,7 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
 
   /**
    * @param _type 操作方法
-   * @param _rowId 
+   * @param _rowId
    */
   private operateItem(_type: EOperate) {
     if (_type === EOperate.add) {
@@ -288,7 +288,6 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
       }
       (this.$refs.MenuOperateInfo as Vue).$emit("showEdit");
     }
-
   }
 
   private EditTreeMenu() {
@@ -305,13 +304,10 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
       this.$Message.error("请选择要删除的菜单");
       return;
     }
-    this.DeleteInfo.Show(
-      "删除",
-      this.treeSelectedMenu.title,
-      async () => {
-        await this.deleteItemById(this.treeSelectedId);
-        this.loadData();
-      });
+    this.DeleteInfo.Show("删除", this.treeSelectedMenu.title, async () => {
+      await this.deleteItemById(this.treeSelectedId);
+      this.loadData();
+    });
   }
 
   private deleteItem() {
@@ -335,7 +331,9 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
    */
   private async deleteItemById(_id: string) {
     let res = await MainManager.Instance().MenuService.delete(_id);
-    res.success ? this.$Message.success(res.message) : this.$Message.error(res.message);
+    res.success
+      ? this.$Message.success(res.message)
+      : this.$Message.error(res.message);
   }
 
   private loadData(type?: MenuEnum) {
@@ -359,8 +357,8 @@ export default class MenuManagerment extends Mixins(PageMixins, DeleteMixins) {
   private showMenuFunctionView(row: any) {
     this.ClickCurrentRow = row;
     this.isShowViewMenuFunDModal = true;
-    this.$nextTick(() => (this.$refs.RemoveMenuFunction as Vue).$emit("loadData"));
+    this.$nextTick(() =>
+      (this.$refs.RemoveMenuFunction as Vue).$emit("loadData")
+    );
   }
 }
-
-

@@ -3,7 +3,7 @@
     <header>
       <div>
         <ButtonGroup>
-          <Button @click="deleteFun" type="error">
+          <Button v-hasPermission="'deleteFun'" @click="deleteFun" type="error">
             <Icon type="ios-trash" />删除
           </Button>
         </ButtonGroup>
