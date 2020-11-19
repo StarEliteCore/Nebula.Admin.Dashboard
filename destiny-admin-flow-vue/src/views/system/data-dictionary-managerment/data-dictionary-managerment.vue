@@ -65,9 +65,10 @@
                     tripe
                     stripe
                     class="table"
-                    @on-select-cancel="currentRowEventCancel"
-                    @on-select="currentRowEventArray"
+                    
                 >
+                    <!-- @on-select-cancel="currentRowEventCancel" -->
+                    <!-- @on-select="currentRowEventArray" -->
 
                 </Table>
                 <page-component

@@ -13,6 +13,7 @@ export default class DataDictionaryOperate extends Mixins(OperateMixins){
      */
     private dataDictionaryDto:DataDictionaryInputDto = new DataDictionaryInputDto();
     private treeData:Array<any> = [];
+    private dataDictionInputDto:DataDictionaryInputDto = new DataDictionaryInputDto();
 
     public async Show(
         _type:EOperate,
