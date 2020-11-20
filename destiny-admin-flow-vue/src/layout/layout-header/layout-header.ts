@@ -7,6 +7,7 @@ import { IChangePassInputDto } from "@/domain/entity/core/ChangePassInputDto";
 import { MainManager } from "@/domain/services/main/main-manager";
 import { MenuModule } from "@/store/modules/menumodule";
 import { TokenModule } from "@/store/modules/tokenmodule";
+import { UserInfoModule } from '@/store/modules/userinfomodule';
 
 @Component({
   name: "LayoutHeader",
@@ -15,6 +16,8 @@ export default class LayoutHeader extends Vue {
   DestinyCoreModule: any;
   private LogOut() {
     TokenModule.ResetToken();
+    MenuModule.RemoveMenus();
+    UserInfoModule.RemoveUserInfo();
     ApplicationUserManager.Logout();
     this.$router.push({
       path: "/login",
@@ -25,7 +28,7 @@ export default class LayoutHeader extends Vue {
     const key =
       "oidc.user:https://auth.destinycore.club:DestinyCoreFlowReactClient";
     const ids4Info = sessionStorage.getItem(key) as any;
-    return JSON.parse(ids4Info).profile.name;
+    return "123sad";
   }
 
   private formCustom: any = {

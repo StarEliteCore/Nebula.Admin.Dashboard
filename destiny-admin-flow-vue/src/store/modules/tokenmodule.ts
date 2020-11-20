@@ -38,7 +38,6 @@ class TokenRouerStore extends VuexModule {
     public ResetToken() {
         CookieInfo.removecookie(defaultConsts.cookiename)
         // localStorage.clear();
-        sessionStorage.clear();
     }
 }
 
