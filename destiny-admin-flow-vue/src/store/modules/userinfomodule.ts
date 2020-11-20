@@ -11,6 +11,7 @@ import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
 import { MenuEnum } from '@/domain/entity/menudto/menuDto';
 import defaultConsts from "@/shared/config/appconst"
 import store from "@/store"
+
 /**
  * 菜单模块
  */
@@ -49,3 +50,7 @@ class UserInfoStore extends VuexModule {
     }
 }
 export const UserInfoModule = getModule(UserInfoStore);//获取模块
+
+export function GetUserInfo(): string {
+    return localStorage.getItem(defaultConsts.userinfo) || "";
+}

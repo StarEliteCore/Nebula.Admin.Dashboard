@@ -1,5 +1,6 @@
 import { AjaxResult, IAjaxResult } from "@/shared/response";
 import { Component, Emit, Vue } from "vue-property-decorator";
+import { GetUserInfo, UserInfoModule } from '@/store/modules/userinfomodule';
 
 import ApplicationUserManager from "@/shared/config/IdentityServerLogin";
 import DestinyCoreModule from "@/shared/core/DestinyCoreModule";
@@ -7,7 +8,6 @@ import { IChangePassInputDto } from "@/domain/entity/core/ChangePassInputDto";
 import { MainManager } from "@/domain/services/main/main-manager";
 import { MenuModule } from "@/store/modules/menumodule";
 import { TokenModule } from "@/store/modules/tokenmodule";
-import { UserInfoModule } from '@/store/modules/userinfomodule';
 
 @Component({
   name: "LayoutHeader",
@@ -25,10 +25,7 @@ export default class LayoutHeader extends Vue {
   }
 
   private GetUserName() {
-    const key =
-      "oidc.user:https://auth.destinycore.club:DestinyCoreFlowReactClient";
-    const ids4Info = sessionStorage.getItem(key) as any;
-    return "123sad";
+    return JSON.parse(GetUserInfo()).nikename;
   }
 
   private formCustom: any = {
