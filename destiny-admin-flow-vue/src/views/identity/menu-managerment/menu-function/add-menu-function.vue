@@ -1,5 +1,5 @@
 <template>
-  <Modal v-model="isShowModal" :title="`添加菜单功能—「${name}」`" width="950">
+  <Modal v-model="isShowModal" :title="`添加菜单功能—「${Name}」`" width="950">
     <header>
       <div>
         <ButtonGroup>

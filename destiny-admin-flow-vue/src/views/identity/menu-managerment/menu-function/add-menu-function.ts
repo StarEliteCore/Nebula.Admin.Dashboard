@@ -17,6 +17,11 @@ export default class AddMenuFunction extends Mixins(PageMixins) {
     @Prop(Array) menuIds!: Array<string>;
     @Prop(String) name!: string;
 
+    get Name() {
+        const length: number = this.menuIds.length;
+        return length !== 1 ? `共${length}个菜单` : this.name;
+    }
+
     get isShowModal() {
         return this.isShow;
     }
