@@ -14,8 +14,8 @@
       </a>
       <template v-slot:list>
         <DropdownMenu>
-          <DropdownItem @click.native="LogOut">安全退出</DropdownItem>
           <DropdownItem @click.native="OpenUpdatePaw">修改密码</DropdownItem>
+          <DropdownItem @click.native="LogOut">安全退出</DropdownItem>
         </DropdownMenu>
       </template>
     </Dropdown>

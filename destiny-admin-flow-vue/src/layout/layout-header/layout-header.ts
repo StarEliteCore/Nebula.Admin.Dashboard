@@ -1,5 +1,6 @@
 import { AjaxResult, IAjaxResult } from "@/shared/response";
 import { Component, Emit, Vue } from "vue-property-decorator";
+import { GetUserInfo, UserInfoModule } from '@/store/modules/userinfomodule';
 
 import ApplicationUserManager from "@/shared/config/IdentityServerLogin";
 import DestinyCoreModule from "@/shared/core/DestinyCoreModule";
@@ -15,6 +16,8 @@ export default class LayoutHeader extends Vue {
   DestinyCoreModule: any;
   private LogOut() {
     TokenModule.ResetToken();
+    MenuModule.RemoveMenus();
+    UserInfoModule.RemoveUserInfo();
     ApplicationUserManager.Logout();
     this.$router.push({
       path: "/login",
@@ -22,10 +25,7 @@ export default class LayoutHeader extends Vue {
   }
 
   private GetUserName() {
-    const key =
-      "oidc.user:https://auth.destinycore.club:DestinyCoreFlowReactClient";
-    const ids4Info = sessionStorage.getItem(key) as any;
-    return JSON.parse(ids4Info).profile.name;
+    return JSON.parse(GetUserInfo()).nikename;
   }
 
   private formCustom: any = {

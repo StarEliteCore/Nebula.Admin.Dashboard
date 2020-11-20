@@ -6,6 +6,7 @@ import ApplicationUserManager from "@/shared/config/IdentityServerLogin";
 import { GetMenuList } from "@/modules/static/menuindex";
 import { MenuModule } from "@/store/modules/menumodule";
 import { TokenModule } from "@/store/modules/tokenmodule";
+import { UserInfoModule } from '@/store/modules/userinfomodule';
 
 @Component({
   name: "Callback",
@@ -30,8 +31,13 @@ export default class Callback extends Vue {
     await ApplicationUserManager.signinRedirectCallback();
     let user = await ApplicationUserManager.getUser();
     if (user !== null) {
+      console.log(user)
+      if(typeof user.access_token!=="undefined")
+      {
+        TokenModule.SetToken(user.access_token);
+        UserInfoModule.SetUserInfo(user.profile)
+      }
       // console.log(user.profile)//用户信息
-      TokenModule.SetToken(user.access_token);
       const menuList = await GetMenuList();
       MenuModule.SetMenus(menuList);
       (this.$router as any).$addRoutes(menuList);

@@ -7,6 +7,7 @@ const defaultConsts = {
     },
     cookiename: process.env.VUE_APP_COOKIENAME,
     menu: process.env.VUE_APP_MENU,
+    userinfo: process.env.VUE_APP_USERINFO,
   };
   export default defaultConsts;
 

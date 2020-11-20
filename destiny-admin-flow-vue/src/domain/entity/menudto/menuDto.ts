@@ -78,7 +78,7 @@ export interface IMenuTableDto extends IMenu, IDescription {
 export class MenuDto implements IEntity<string> {
   id: string = Guid.EMPTY;
   name: string = "";
-  sort: number = 0;
+  sort!: number;
   path: string = "";
   parentId: string = Guid.EMPTY;
   component: string = "";
