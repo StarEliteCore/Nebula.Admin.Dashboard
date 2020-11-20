@@ -45,7 +45,7 @@
         ref="setPermissionModel"
         :editData="role"
         :editTitle="permissionTitle"
-        @refresh="refresh"
+
       ></set-permission>
 
       <role-operate
