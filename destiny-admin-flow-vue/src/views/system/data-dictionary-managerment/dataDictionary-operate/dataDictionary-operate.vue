@@ -26,7 +26,7 @@
                             value: 'id',
                         }"
                         allow-clear
-                        :maxtagcount = 5
+                        :max-tag-count = 5
                     >
                     </a-tree-select>
                 </FormItem> 
@@ -43,7 +43,7 @@
                     <Input v-model="dataDictionInputDto.code"/>
                 </FormItem> 
             </Form>
-            <template v-slot:fppter>
+            <template v-slot:footer>
                 <div>
                     <Button v-if="canEdit" class="dialog-btn">
                         取消
@@ -52,6 +52,7 @@
                         type="primary"
                         v-if="canEdit"
                         class="dialog-btn--primary"
+                        @click="OnHandleCommit"
                     >
                         保存
                     </Button>

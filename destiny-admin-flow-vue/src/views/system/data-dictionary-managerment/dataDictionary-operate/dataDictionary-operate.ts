@@ -14,6 +14,11 @@ export default class DataDictionaryOperate extends Mixins(OperateMixins){
     private dataDictionaryDto:DataDictionaryInputDto = new DataDictionaryInputDto();
     private treeData:Array<any> = [];
     private dataDictionInputDto:DataDictionaryInputDto = new DataDictionaryInputDto();
+    private ruleValidate:any = {
+        title: [
+            { required: true, message: "标题不可为空", trigger: "OnHandleCommit" },
+        ],
+    }
 
     public async Show(
         _type:EOperate,
@@ -22,7 +27,6 @@ export default class DataDictionaryOperate extends Mixins(OperateMixins){
         callback:(res:boolean) => void,
         _rowId?:string
     ){
-        debugger
         switch(_type){
             case EOperate.add:
                 this.title="添加";
@@ -33,7 +37,30 @@ export default class DataDictionaryOperate extends Mixins(OperateMixins){
         }
         this.CB = callback;
         this.type = _type;
-        debugger
         this.IsShow = true;
+    }
+
+    private OnHandleCommit(){
+        debugger
+        (this.$refs.form as any).validate((valid:boolean) => {
+            if(valid){
+                switch (this.type) {
+                    case EOperate.view:
+                        this.IsShow = false;
+                        this.CB(true);
+                        break;
+                    case EOperate.add:
+                        this.addOrganization();
+                        break;
+                }
+            }
+        })
+    }
+
+    private async addOrganization() {
+        let res = await MainManager.Instance().DataDictionarySrevice.createDataDictionary(
+            this.dataDictionaryDto
+        );
+        this.ajaxcallback(res, true);
     }
 }

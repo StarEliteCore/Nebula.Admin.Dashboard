@@ -150,7 +150,6 @@ export default class DataDictionaryManagerment extends Mixins(PageMixins,DeleteM
      * @param _rowId 
      */
     private operateItem(_type:EOperate,_rowId?:string){
-        debugger
         switch(_type){
             case EOperate.add:
                 this.DataDictionaryInfo.Show(
