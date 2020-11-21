@@ -8,7 +8,7 @@
     <Row class="expand-row">
       <Card :dis-hover="true">
         <p slot="title">数据审计信息</p>
-        <Table
+        <Table width="1000"
           :columns="columns"
           :data="tableData"
           border

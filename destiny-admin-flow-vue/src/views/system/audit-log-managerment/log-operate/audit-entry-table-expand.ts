@@ -37,11 +37,13 @@ export default class TableExpand extends Mixins(ComponentMixins) {
         title: "实体名称",
         key: "entityDisplayName",
         align: "center",
+        maxWidth: 200,
       },
       {
         title: "实体类型",
         key: "entityAllName",
         align: "center",
+        maxWidth: 200,
 
       },
       {
@@ -49,12 +51,14 @@ export default class TableExpand extends Mixins(ComponentMixins) {
         key: "keyValues",
         align: "center",
         slot: "keyValues",
+        maxWidth: 200,
       },
       {
         title: "类型",
         key: "operationType",
         align: "center",
         slot: "operationType",
+
       },
     ];
   }
