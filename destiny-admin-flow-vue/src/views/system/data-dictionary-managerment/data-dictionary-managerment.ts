@@ -30,7 +30,7 @@ export default class DataDictionaryManagerment extends Mixins(PageMixins,DeleteM
     private treeSelectedId:string = "";
     private treeSelectedMenu:any = {};
     private dymaicQuery:any = {};
-    private currentArray = [];
+    private currentArray:Array<any> = [];
 
     private tableData:Array<DataDictionaryPageListDto> = [];
 
@@ -44,6 +44,11 @@ export default class DataDictionaryManagerment extends Mixins(PageMixins,DeleteM
     private filter = this.getFilter();
 
     private columns: ITableColumn[] = [
+        {
+            type: "selection",
+            width: 60,
+            align: "center",
+        },
         {
             title:"标题",
             key:"title",
@@ -97,7 +102,6 @@ export default class DataDictionaryManagerment extends Mixins(PageMixins,DeleteM
 
         this.showTableLoading = true;
         this.queryfileter.filter = this.filter();
-        // this.mainManager.DataDictionarySrevice.getDataDictionaryPageListAsync(this.tranfer(this.queryfileter))
         MainManager.Instance().DataDictionarySrevice.getDataDictionaryPageListAsync(this.tranfer(this.queryfileter))
         .then(res => {
             if(res.success){
@@ -160,8 +164,33 @@ export default class DataDictionaryManagerment extends Mixins(PageMixins,DeleteM
                         this.loadData();
                     }
                 );
-            break
+                break
+            case EOperate.update:
+                if(this.currentArray.length === 0){
+                    this.$Message.error("请选择要修改的项");
+                    return;
+                }
+                if(this.currentArray.length > 1){
+                    this.$Message.error("请选择一项修改");
+                    return;
+                }
+                debugger
+                this.DataDictionaryInfo.Show(
+                    _type,
+                    this.treeData,
+                    this.treeSelectedId,
+                    (res: boolean) => {
+                        this.loadData();
+                    },
+                    this.CurrentRow.id
+                );
+                break
         }
+    }
+
+    private CurrentRowEventArray(_selection:Array<DataDictionaryPageListDto>){
+        this.CurrentRow = _selection[0];
+        this.currentArray = _selection;
     }
 
 

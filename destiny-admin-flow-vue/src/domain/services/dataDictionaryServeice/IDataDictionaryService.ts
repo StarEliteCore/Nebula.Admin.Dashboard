@@ -1,7 +1,7 @@
 import { ITreeDto } from '@/shared/baseentity/itreeentity';
 import { IAjaxResult, IServerPageReturn } from '../../../shared/response/index';
 import { IPageRequest } from '../../../shared/request/index';
-import { DataDictionaryInputDto, DataDictionaryPageListDto } from '../../entity/dataDictionaryDto/dataDictionaryDto';
+import { DataDictionaryInputDto, DataDictionaryPageListDto, DataDictionnaryLoadDto } from '../../entity/dataDictionaryDto/dataDictionaryDto';
 /**
  * 数据字典服务层接口定义
  */
@@ -34,5 +34,11 @@ export interface IDataDictionaryService{
      * @param _id 数据字典ID
      */
     deleteDataDictionary(_id:string):Promise<IAjaxResult>;
+
+    /**
+     * 根据ID获取数据字典
+     * @param _id 
+     */
+    getLoadDictionnnary(_id:string):Promise<IAjaxResult>;
     
 }

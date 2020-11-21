@@ -36,6 +36,16 @@ export default class DataDictionaryOperate extends Mixins(OperateMixins){
                 this.dataDictionInputDto.id = Guid.EMPTY;
                 this.treeData = _treeData;
                 break;
+            case EOperate.update:
+                this.disabled = false;
+                this.IsShowColumn = false;
+                debugger
+                if (typeof _rowId !== "undefined") {
+                    this.treeData = _treeData;
+                    await this.getDataDictionaryById(_rowId);
+                }
+                this.title = `编辑—「${this.dataDictionInputDto.title}」`;
+                break;
         }
         this.CB = callback;
         this.type = _type;
@@ -43,7 +53,6 @@ export default class DataDictionaryOperate extends Mixins(OperateMixins){
     }
 
     private OnHandleCommit(){
-        debugger
         (this.$refs.form as any).validate((valid:boolean) => {
             if(valid){
                 switch (this.type) {
@@ -52,18 +61,37 @@ export default class DataDictionaryOperate extends Mixins(OperateMixins){
                         this.CB(true);
                         break;
                     case EOperate.add:
-                        this.addOrganization();
+                        this.addDataDictionary();
+                        break;
+                    case EOperate.update:
+                        this.updateDataDictionary();
+                        this.IsShow = false;
                         break;
                 }
             }
         })
     }
 
-    private async addOrganization() {
-        debugger
+    private async addDataDictionary() {
         let res = await MainManager.Instance().DataDictionarySrevice.createDataDictionary(
             this.dataDictionInputDto
         );
         this.ajaxcallback(res, true);
+    }
+
+    private async updateDataDictionary(){
+        let res = await MainManager.Instance().DataDictionarySrevice.updateDataDictionary(
+            this.dataDictionInputDto
+        );
+        this.ajaxcallback(res, true);
+    }
+
+    private async getDataDictionaryById(_id: string){
+        debugger
+        let res = await MainManager.Instance().DataDictionarySrevice.getLoadDictionnnary(_id);
+        if (res.success) {
+            debugger
+            this.dataDictionInputDto = res.data;
+        }
     }
 }

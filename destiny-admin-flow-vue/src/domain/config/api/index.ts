@@ -183,6 +183,10 @@ export const DataDictionaryApi = {
    * 删除数据字典
    */
   deleteDataDictionaryAsync:"api/DataDictionary/DeleteAsyc",
+  /**
+   * 根据ID获取数据字典
+   */
+  getLoadDictionnnary:"api/DataDictionary/GetDataDictionnnaryListAsync"
 }
 ///组织架构API
 export const OrganizationApi = {

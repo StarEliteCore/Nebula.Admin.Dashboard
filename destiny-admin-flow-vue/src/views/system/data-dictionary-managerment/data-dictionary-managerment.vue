@@ -10,13 +10,10 @@
                         <Icon type="md-add" />
                     </Button>
                     <Button>
-                        <Icon type="ios-create" />
+                        <Icon type="ios-create" @click="operateItem(operate.update)"/>
                     </Button>
-                    <!-- <Button>
-                        <Icon type="ios-refresh" />
-                    </Button> -->
                     <Button>
-                        <Icon type="ios-trash" />
+                        <Icon type="ios-trash"/>
                     </Button>
                 </ButtonGroup>
             </div>
@@ -37,7 +34,7 @@
                 <div>
                     <ButtonGroup>
                         <Button >
-                            <Icon type="md-add" />添加
+                            <Icon type="md-add" @click="operateItem(operate.update)"/>添加
                         </Button>
                         <Button >
                             <Icon type="ios-create" />编辑
@@ -65,7 +62,7 @@
                     tripe
                     stripe
                     class="table"
-                    
+                    @on-selection-change="CurrentRowEventArray"
                 >
                     <!-- @on-select-cancel="currentRowEventCancel" -->
                     <!-- @on-select="currentRowEventArray" -->

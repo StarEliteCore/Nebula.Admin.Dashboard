@@ -5,7 +5,7 @@ import { DataDictionaryApi, OrganizationApi } from '../../config/api/index';
 import { injectable } from 'inversify';
 import { ITreeDto } from '@/shared/baseentity/itreeentity';
 import { IPageRequest } from '../../../shared/request/index';
-import { DataDictionaryInputDto } from '@/domain/entity/dataDictionaryDto/dataDictionaryDto';
+import { DataDictionaryInputDto, DataDictionnaryLoadDto } from '@/domain/entity/dataDictionaryDto/dataDictionaryDto';
 @injectable()
 export default class DataDictionaryService implements IDataDictionaryService{
     getDataDictionaryTree():Promise<IServerPageReturn<ITreeDto>>{
@@ -31,5 +31,11 @@ export default class DataDictionaryService implements IDataDictionaryService{
 
     deleteDataDictionary(_Id:string):Promise<IAjaxResult>{
         return MainManager.dataRequest.postRequest(DataDictionaryApi.deleteDataDictionaryAsync,_Id)
+    }
+    
+    getLoadDictionnnary(_Id:string):Promise<IAjaxResult>{
+        return MainManager.dataRequest.getRequest(DataDictionaryApi.getLoadDictionnnary,{
+            id: _Id,
+        })
     }
 }
