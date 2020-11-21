@@ -1,22 +1,37 @@
 #main-app-layout {
-    height: 100%;
-    .main-app-layout--right {
-      overflow: hidden;
+  height: 100%;
+  .main-app-layout--right {
+    overflow: hidden;
+  }
+  .main-app-layout__header {
+    color: rgba($color: #ffffff, $alpha: 1);
+  }
+  .main-app-layout__content {
+    padding: 10px 10px 0 10px;
+    background: #eee;
+    color: rgba($color: #000000, $alpha: 1);
+    position: relative;
+    overflow: auto;
+    .admin-layout_content {
+      height: calc(100% - 22px);
     }
-    .main-app-layout__header {
-      color: rgba($color: #ffffff, $alpha: 1);
-    }
-    .main-app-layout__content {
-      padding: 10px;
-      color: rgba($color: #000000, $alpha: 1);
-      position: relative;
-      overflow: auto;
-    }
-    .main-app-layout__sider {
-      color: rgba($color: #ffffff, $alpha: 1);
-    }
-    .child-demo {
-      height: 100%;
+    footer {
+      box-sizing: border-box;
+      height: 22px;
+      min-height: 22px;
+      padding-top: 3px;
+      text-align: center;
+      display: block;
+      width: 100%;
+      a {
+        color: #000;
+      }
     }
   }
-  
+  .main-app-layout__sider {
+    color: rgba($color: #ffffff, $alpha: 1);
+  }
+  .child-demo {
+    height: 100%;
+  }
+}

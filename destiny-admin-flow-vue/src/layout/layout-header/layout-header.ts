@@ -4,10 +4,14 @@ import { GetUserInfo, UserInfoModule } from '@/store/modules/userinfomodule';
 
 import ApplicationUserManager from "@/shared/config/IdentityServerLogin";
 import DestinyCoreModule from "@/shared/core/DestinyCoreModule";
-import { IChangePassInputDto } from "@/domain/entity/core/ChangePassInputDto";
 import { MainManager } from "@/domain/services/main/main-manager";
 import { MenuModule } from "@/store/modules/menumodule";
 import { TokenModule } from "@/store/modules/tokenmodule";
+
+// import { IChangePassInputDto } from "@/domain/entity/core/ChangePassInputDto";
+
+
+
 
 @Component({
   name: "LayoutHeader",
@@ -70,30 +74,30 @@ export default class LayoutHeader extends Vue {
     (this.$refs["formCustom"] as any).resetFields();
   }
 
-  handleSubmit(name: string) {
-    (this.$refs[name] as any).validate((valid: any) => {
-      if (valid) {
-        let dto: IChangePassInputDto = {
-          newPassword: this.formCustom.newPassword,
-          oldPassword: this.formCustom.oldPassword,
-        };
-        MainManager.Instance()
-          .SystemService.changePassword(dto)
-          .then((result: IAjaxResult) => {
-            DestinyCoreModule.ToAjaxResult(
-              result,
-              () => {
-                this.isOpen = false;
-                this.LogOut();
-              },
-              () => {
-                this.isOpen = true;
-              }
-            );
-          })
-      }
-    });
-  }
+  // handleSubmit(name: string) {
+  //   (this.$refs[name] as any).validate((valid: any) => {
+  //     if (valid) {
+  //       let dto: IChangePassInputDto = {
+  //         newPassword: this.formCustom.newPassword,
+  //         oldPassword: this.formCustom.oldPassword,
+  //       };
+  //       MainManager.Instance()
+  //         .SystemService.changePassword(dto)
+  //         .then((result: IAjaxResult) => {
+  //           DestinyCoreModule.ToAjaxResult(
+  //             result,
+  //             () => {
+  //               this.isOpen = false;
+  //               this.LogOut();
+  //             },
+  //             () => {
+  //               this.isOpen = true;
+  //             }
+  //           );
+  //         })
+  //     }
+  //   });
+  // }
 
   handleReset() {
     this.isOpen = false;

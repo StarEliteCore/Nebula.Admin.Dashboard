@@ -2,7 +2,6 @@
   <Layout id="main-app-layout" class="layout">
     <!-- <router-view class="component child-demo" v-show="$route.name" /> -->
     <Sider hide-trigger class="main-app-layout__sider">
-      
       <system-title></system-title>
       <transition name="fade">
         <menu-tab
@@ -11,14 +10,19 @@
           :activeName="activeName"
           :openNames="openNames"
         ></menu-tab>
-        </transition>
-      </Sider>
+      </transition>
+    </Sider>
     <Layout class="main-app-layout--right">
       <layout-header class="main-app-layout__header"></layout-header>
       <Content class="main-app-layout__content">
-
         <router-view class="admin-layout_content"></router-view>
         <!-- <router-view class="component child-demo" v-show="$route.name" /> -->
+        <footer>
+          © Now
+          <a target="_blank" href="https://github.com/DestinyCore">
+            DestinyCore
+          </a>
+        </footer>
       </Content>
     </Layout>
   </Layout>
@@ -34,8 +38,5 @@
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
-}
-.admin-layout_content{
-  height: 100%;
 }
 </style>

@@ -1,0 +1,74 @@
+.home {
+    .icon_baseline {
+        i {
+            vertical-align: baseline;
+        }
+    }
+
+    header {
+        height: 155px;
+        min-height: 152px;
+        display: flex;
+        box-sizing: border-box;
+        .card_div {
+            box-sizing: border-box;
+            width: calc(100% / 4);
+            margin-right: 15px;
+            .card_title {
+                display: flex;
+                justify-content: space-between;
+                span {
+                    font-size: 15px;
+                    color: #1e9fff;
+                }
+            }
+            .card_content {
+                color: #009688;
+                font-size: 20px;
+            }
+            .card_footer {
+                color: #393d49;
+                margin-top: 12px;
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+        .card_div:last-child {
+            margin-right: 0;
+        }
+    }
+    section {
+        box-sizing: border-box;
+        height: calc(100% - 155px);
+        min-height: 497px;
+        padding-top: 20px;
+        .data_card {
+            height: 100%;
+            .chart {
+                height: 100%;
+                display: flex;
+                justify-content: space-between;
+                .bar_chart {
+                    min-width: 600px;
+                    min-height: 400px;
+                    width: 50%;
+                    height: 100%;
+                    .echarts {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+                .pie_chart {
+                    min-width: 400px;
+                    min-height: 400px;
+                    width: 600px;
+                    height: 100%;
+                    .echarts {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
