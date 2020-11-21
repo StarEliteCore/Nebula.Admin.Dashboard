@@ -146,7 +146,7 @@ export class ControlConfig {
   type: ControlTypeEnum=ControlTypeEnum.select;
 
   //控件数据
-  data?: ISelectListItem[] | string | undefined;
+  data?: ISelectListItem[] | string | undefined | number;
 
   //控件URL，某些控件需要请求提交数据的
   url?: string | undefined;
