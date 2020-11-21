@@ -3,6 +3,7 @@ import { Component, Mixins } from 'vue-property-decorator';
 import { DataDictionaryInputDto } from '@/domain/entity/dataDictionaryDto/dataDictionaryDto';
 import { EOperate } from '../../../../shared/eoperate/index';
 import { MainManager } from '../../../../domain/services/main/main-manager';
+import { Guid } from 'guid-typescript';
 
 @Component({
     name:"DataDictionaryOperate",
@@ -30,8 +31,9 @@ export default class DataDictionaryOperate extends Mixins(OperateMixins){
         switch(_type){
             case EOperate.add:
                 this.title="添加";
-                this.dataDictionaryDto = new DataDictionaryInputDto();
-                this.dataDictionaryDto.parentId = parentId;
+                this.dataDictionInputDto = new DataDictionaryInputDto();
+                this.dataDictionInputDto.parentId = parentId;
+                this.dataDictionInputDto.id = Guid.EMPTY;
                 this.treeData = _treeData;
                 break;
         }
@@ -60,7 +62,7 @@ export default class DataDictionaryOperate extends Mixins(OperateMixins){
     private async addOrganization() {
         debugger
         let res = await MainManager.Instance().DataDictionarySrevice.createDataDictionary(
-            this.dataDictionaryDto
+            this.dataDictionInputDto
         );
         this.ajaxcallback(res, true);
     }
