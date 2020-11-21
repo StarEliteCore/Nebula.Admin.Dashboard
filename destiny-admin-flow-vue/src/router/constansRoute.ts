@@ -41,6 +41,7 @@ export const constansRoute = [
         path: '/home',
         name: '首页',
         component: () => import("@/layout/layout.vue"),
+        redirect: "/home-page",
         children: [
             {
                 path: '/home-page',
