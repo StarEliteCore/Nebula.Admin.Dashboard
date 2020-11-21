@@ -1,24 +1,27 @@
 import * as PageQuery from "@/shared/request";
 
 import { Component, Emit, Mixins, Ref } from "vue-property-decorator";
+import {
+  ControlTypeEnum,
+  IFilterCondition,
+  IQueryFilter,
+  ISearchFilter,
+} from "@/shared/request";
 import { EFilterConnect, EFilterOprator } from "@/shared/request/query.enum";
 import {
   IAuditLogOutputPageDto,
   IAuditLogTableDto,
 } from "@/domain/entity/auditdto/auditDto";
-import {
-  IFilterCondition,
-  IQueryFilter,
-  ISearchFilter,
-} from "@/shared/request";
 
-import { AjaxResultType } from '@/shared/response';
+import { AjaxResultType } from "@/shared/response";
 import { AuditApi } from "@/domain/config/api";
 import { ComponentMixins } from "@/shared/mixins/component.mixns";
 import DeleteMixins from "@/shared/mixins/delete-dialog.mixins";
+import { ISelectListItem } from "@/shared/response/selectDto";
 import { ITableColumn } from "@/shared/table/ITable";
 import { MainManager } from "@/domain/services/main/main-manager";
 import TableExpandOperate from "./log-operate/audit-entry-table-expand.vue";
+import { UserOutputListDto } from "@/domain/entity/userdto/userDto";
 
 @Component({
   name: "AuditLogManagerment",
@@ -26,12 +29,34 @@ import TableExpandOperate from "./log-operate/audit-entry-table-expand.vue";
     TableExpandOperate,
   },
 })
-export default class AuditLogManagerment extends Mixins(
-  ComponentMixins
-) {
+export default class AuditLogManagerment extends Mixins(ComponentMixins) {
   pageUrl: string = AuditApi.getAuditLogPage;
   likeValueFormat: string = "{0}";
   private operationType = AjaxResultType;
+  private userArray: ISelectListItem[] = [];
+  Init() {
+    this.request = new PageQuery.PageRequest();
+    this.columns = this.GetColumn();
+    this.fields = this.GetFields();
+    this.mainManager = MainManager.Instance();
+    this.destinyCoreServeice = this.mainManager.DestinyCoreServeice;
+    this.GetPage();
+    this.editModel = this.$refs.editModel as Vue;
+    MainManager.Instance()
+      .UserService.getSelectAllUser()
+      .then((x) => {
+        if (x.success)
+          (x.data as Array<UserOutputListDto>).forEach(
+            (e: UserOutputListDto, i: number) => {
+              let item: ISelectListItem = {
+                value: e.id,
+                label: e.nickName,
+              };
+              this.userArray.push(item);
+            }
+          );
+      });
+  }
 
   GetColumn() {
     return [
@@ -92,9 +117,10 @@ export default class AuditLogManagerment extends Mixins(
         key: "operationType",
         align: "center",
         slot: "operationType",
-      },{
-        title:"消息",
-        key:"message",
+      },
+      {
+        title: "消息",
+        key: "message",
         align: "center",
       },
       {
@@ -104,7 +130,6 @@ export default class AuditLogManagerment extends Mixins(
       },
     ];
   }
-
 
   GetFields(): ISearchFilter[] {
     return [
@@ -120,7 +145,39 @@ export default class AuditLogManagerment extends Mixins(
         operator: EFilterOprator.Like,
         title: "审计URL：",
       },
+      {
+        field: "operationType",
+        title: "类型",
+        operator: EFilterOprator.Equal,
+        config: {
+          type: ControlTypeEnum.select,
+
+          data: [
+            {
+              value: AjaxResultType.Info,
+              label: "无",
+            },
+            {
+              value: AjaxResultType.Success,
+              label: "成功",
+            },
+            {
+              value: AjaxResultType.Error,
+              label: "失败",
+            },
+          ],
+        },
+      },
+      {
+        field: "userId",
+        title: "操作用户",
+        operator: EFilterOprator.Equal,
+        config: {
+          type: ControlTypeEnum.select,
+
+          data: this.userArray
+        },
+      },
     ];
   }
-
 }
