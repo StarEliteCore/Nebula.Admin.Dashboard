@@ -7,8 +7,8 @@
                 <Form  inline  :label-width="120" v-model="fields">
                     <FormItem v-for="(item,index) in fields"  :key="index" :label="item.title">
                        <template v-if="item.config!=undefined && item.config.type==0">
-                           <Select v-model="item.value" style="width:200px" >
-                              <Option value="" key="">{{"--请选择---"}}</Option>
+                           <Select v-model="item.value" style="width:200px"  :clearable="true" :filterable="true">
+                              <!-- <Option value="" key="">{{"--请选择---"}}</Option> -->
                               <Option v-for="op in item.config.data" :value="op.value" :key="op.value">{{ op.label }}</Option>
                           </Select>
                        </template>

@@ -47,7 +47,7 @@
               <Icon type="ios-create" />编辑
             </Button>
             <Button @click="deleteItem" v-hasPermission="'handleDeleteMenuFunction'"> <Icon type="ios-trash" />删除</Button>
-            <Button @click="showAddMenuFunction" v-hasPermission="'showAddMenuFunction'">分配菜单功能</Button>
+            <Button @click="showAddMenuFunction"  v-hasPermission="'showAddMenuFunction'">分配菜单功能</Button>
           </ButtonGroup>
         </div>
         <div class="searchdiv">

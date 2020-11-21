@@ -5,7 +5,7 @@ export interface ISelectListItem {
     /**
      * 值
      */
-    value: string;
+    value: string|number;
     /**
      * 显示名
      */
