@@ -16,7 +16,7 @@ export default class DataDictionaryOperate extends Mixins(OperateMixins){
     private dataDictionInputDto:DataDictionaryInputDto = new DataDictionaryInputDto();
     private ruleValidate:any = {
         title: [
-            { required: true, message: "标题不可为空", trigger: "OnHandleCommit" },
+            { required: false, message: "标题不可为空", trigger: "OnHandleCommit" },
         ],
     }
 
@@ -58,6 +58,7 @@ export default class DataDictionaryOperate extends Mixins(OperateMixins){
     }
 
     private async addOrganization() {
+        debugger
         let res = await MainManager.Instance().DataDictionarySrevice.createDataDictionary(
             this.dataDictionaryDto
         );

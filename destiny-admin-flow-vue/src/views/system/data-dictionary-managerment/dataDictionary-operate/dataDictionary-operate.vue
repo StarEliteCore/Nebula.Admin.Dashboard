@@ -26,7 +26,7 @@
                             value: 'id',
                         }"
                         allow-clear
-                        :max-tag-count = 5
+                        :max-tag-count = "5"
                     >
                     </a-tree-select>
                 </FormItem> 
