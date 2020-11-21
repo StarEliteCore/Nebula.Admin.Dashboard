@@ -1,6 +1,7 @@
+import router from "@/router";
 import { DirectiveOptions } from 'vue/types/options';
 import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
-import router from "@/router";
+import { GetUserInfo } from '@/store/modules/userinfomodule';
 
 /**
  * 获取权限
@@ -15,7 +16,8 @@ function GetFunctions(): IMenuRouter[] {
  * 获取是否管理员
  */
 function GetIsAdmin(): boolean {
-    return false;
+    const isAdmin = JSON.parse(GetUserInfo()).isAdmin === "1";
+    return isAdmin;
 }
 
 /**
@@ -23,8 +25,6 @@ function GetIsAdmin(): boolean {
  */
 export const hasPermission: DirectiveOptions = {
     bind(el, binding) {
-        debugger;
-        console.log("d");
         const attributeValue = binding.value;
         if (!attributeValue) return;
         if (GetIsAdmin()) return;
