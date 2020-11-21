@@ -33,6 +33,15 @@ router.beforeEach(async (to: any, from, next) => {
         return;
     }
 
+    if (to.path === '/login') {
+        if (token) {
+            next({ path: '/home' });
+            return;
+        }
+        ApplicationUserManager.Login();
+        return;
+    }
+
     /* 有菜单就存 */
     const menus = GetMenus();
     if (!getRouter && menus && isAddRouter) {
