@@ -74,18 +74,4 @@ export default class TableExpand extends Mixins(ComponentMixins) {
     return newFilters;
   }
 
-  // private mounted() {
-  //   let newFilters: IFilterCondition[] = [{
-  //     field:"AuditLogId",
-  //     operator:EFilterOprator.Equal,
-  //     value:this.row.id
-  //   }];}
-  //   let filter: IQueryFilter = {
-  //     filterConnect: EFilterConnect.And,
-
-  //   this.getAuditEntryPageAsync();      conditions: newFilters,
-  //   };
-  //   this.queryfileter.filter = filter;
-
-  // }
 }

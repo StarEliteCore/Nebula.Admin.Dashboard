@@ -76,13 +76,13 @@ export default class AuditEntryManagerment extends Mixins(ComponentMixins) {
       {
         field: "entityAllName",
         value: "",
-        title: "类型",
+        title: "实体类型",
         operator: EFilterOprator.Like,
       },
       {
         field: "entityDisplayName",
         value: "",
-        title: "实体名",
+        title: "实体名称",
         operator: EFilterOprator.Like,
       },
     ];

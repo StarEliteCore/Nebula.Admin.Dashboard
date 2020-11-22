@@ -4,7 +4,7 @@ import defaultConsts from "@/shared/config/appconst"
 export class ApplicationUserManager extends UserManager {
     constructor() {
         super({
-            authority: "https://auth.destinycore.club",
+            authority: "http://localhost:50001",
             client_id: "DestinyCoreFlowReactClient",
             redirect_uri: window.location.origin + "/callback",
             response_type: "id_token token",
@@ -12,7 +12,7 @@ export class ApplicationUserManager extends UserManager {
             post_logout_redirect_uri: window.location.origin,
         })
         console.log({
-            authority: "https://auth.destinycore.club",
+            authority: "http://localhost:50001",
             client_id: process.env.VUE_APP_CLIENT_ID,
             redirect_uri: window.location.origin + "/callback",
             response_type: "id_token token",

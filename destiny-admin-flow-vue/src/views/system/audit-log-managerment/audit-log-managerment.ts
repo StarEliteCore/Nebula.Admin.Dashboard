@@ -137,14 +137,15 @@ export default class AuditLogManagerment extends Mixins(ComponentMixins) {
         field: "functionName",
         value: "",
         operator: EFilterOprator.Like,
-        title: "功能名：",
+        title: "功能名",
       },
       {
         field: "action",
         value: "",
         operator: EFilterOprator.Like,
-        title: "审计URL：",
+        title: "审计URL",
       },
+
       {
         field: "operationType",
         title: "类型",
@@ -154,7 +155,7 @@ export default class AuditLogManagerment extends Mixins(ComponentMixins) {
 
           data: [
             {
-              value: AjaxResultType.Info,
+              value: 0,
               label: "无",
             },
             {
@@ -178,6 +179,12 @@ export default class AuditLogManagerment extends Mixins(ComponentMixins) {
           data: this.userArray
         },
       },
+      {
+        field: "ip",
+        value: "",
+        operator: EFilterOprator.Equal,
+        title: "IP地址",
+      }
     ];
   }
 }

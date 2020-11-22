@@ -135,9 +135,10 @@ export interface ISearchFilter extends IFilterCondition {
   dataType?: string;
 
   /**
-   * 控件配置,如何空就默认text
+   * 控件配置,如果空就默认text
    */
   config?: ControlConfig;
+
 }
 
 //控件配置，一般用来select,tre等格外配置

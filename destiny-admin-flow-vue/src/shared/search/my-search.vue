@@ -13,7 +13,7 @@
                           </Select>
                        </template>
                        <template v-else>
-                           <Input type="text" v-model="item.value" ></Input>
+                           <Input type="text" v-model="item.value" style="width:200px" ></Input>
                        </template>
                     </FormItem>
                      <FormItem>

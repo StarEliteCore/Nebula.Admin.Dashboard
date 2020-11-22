@@ -12,16 +12,17 @@ export default class MySearch extends Vue {
 
   @Prop({ default: "%{0}%" })
   likeValueFormat!: string;
-  
+
   private searchForm: any;
   public filters!: IQueryFilter;
   public onSearch = (): void => {
     let newFilters: IFilterCondition[] = [];
     let $this = this;
-
     this.fields.forEach((f, index) => {
       let value = f.value;
-      if (value != undefined && value != "") {
+
+      //value != undefined && value != "" 就是这个坑。。。。。
+      if (value !== undefined && value !== "") {
         let operator =
           f.operator == undefined ? EFilterOprator.Like : f.operator;
         let filter: IFilterCondition = {
