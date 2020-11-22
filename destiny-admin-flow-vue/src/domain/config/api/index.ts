@@ -166,7 +166,27 @@ export const DataDictionaryApi = {
   /**
    * 数据字典树
    */
-  getDataDictionaryTreeData:"api/DataDictionary/GetTableAsync"
+  getDataDictionaryTreeData:"api/DataDictionary/GetTableAsync",
+  /**
+   * 数据字典分页数据
+   */
+  getDataDictionaryPageListAsync:"api/DataDictionary/GetPageListAsync",
+  /**
+   * 修改数据字典
+   */
+  updateDataDictionaryAsync:"api/DataDictionary/UpdateAsync",
+  /**
+   * 添加数据字典
+   */
+  createDataDictionaryAsync:"api/DataDictionary/CreateAsync",
+  /**
+   * 删除数据字典
+   */
+  deleteDataDictionaryAsync:"api/DataDictionary/DeleteAsyc",
+  /**
+   * 根据ID获取数据字典
+   */
+  getLoadDictionnnary:"api/DataDictionary/GetDataDictionnnaryListAsync"
 }
 ///组织架构API
 export const OrganizationApi = {
