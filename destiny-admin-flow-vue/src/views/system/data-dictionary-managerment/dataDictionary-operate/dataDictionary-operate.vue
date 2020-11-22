@@ -45,7 +45,7 @@
             </Form>
             <template v-slot:footer>
                 <div>
-                    <Button v-if="canEdit" class="dialog-btn">
+                    <Button v-if="canEdit" class="dialog-btn" @click="OnHandleCancel">
                         取消
                     </Button>
                     <Button

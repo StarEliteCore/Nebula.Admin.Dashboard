@@ -12,8 +12,8 @@
                     <Button>
                         <Icon type="ios-create" @click="operateItem(operate.update)"/>
                     </Button>
-                    <Button>
-                        <Icon type="ios-trash"/>
+                    <Button >
+                        <Icon type="ios-trash" @click="deleteItemTree()"/>
                     </Button>
                 </ButtonGroup>
             </div>
@@ -37,10 +37,10 @@
                             <Icon type="md-add" @click="operateItem(operate.update)"/>添加
                         </Button>
                         <Button >
-                            <Icon type="ios-create" />编辑
+                            <Icon type="ios-create" @click="operateItem(operate.update)"/>编辑
                         </Button>
                         <Button> 
-                            <Icon type="ios-trash" />删除 
+                            <Icon type="ios-trash" @click="deleteItem()"/>删除 
                         </Button>
                     </ButtonGroup>
                 </div>
@@ -76,6 +76,7 @@
             </article>
         </div>
         <data-dictionary-operate ref="DataDictionaryInfo"></data-dictionary-operate>
+        <delete-dialog ref="DeleteInfo"></delete-dialog>
     </section>
 </template>
 <script lang="ts" src="./data-dictionary-managerment.ts"/>

@@ -30,7 +30,9 @@ export default class DataDictionaryService implements IDataDictionaryService{
     }
 
     deleteDataDictionary(_Id:string):Promise<IAjaxResult>{
-        return MainManager.dataRequest.postRequest(DataDictionaryApi.deleteDataDictionaryAsync,_Id)
+        return MainManager.dataRequest.deleteRequest(DataDictionaryApi.deleteDataDictionaryAsync,{
+            id: _Id,
+        })
     }
     
     getLoadDictionnnary(_Id:string):Promise<IAjaxResult>{

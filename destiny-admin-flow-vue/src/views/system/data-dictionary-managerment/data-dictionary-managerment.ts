@@ -28,9 +28,10 @@ export default class DataDictionaryManagerment extends Mixins(PageMixins,DeleteM
     private CurrentRow: any = {};
     private treeData:Array<ITreeDto> = [];
     private treeSelectedId:string = "";
-    private treeSelectedMenu:any = {};
+    private treeSelectedMenu:ITreeDto | undefined;
     private dymaicQuery:any = {};
     private currentArray:Array<any> = [];
+    
 
     private tableData:Array<DataDictionaryPageListDto> = [];
 
@@ -90,7 +91,7 @@ export default class DataDictionaryManagerment extends Mixins(PageMixins,DeleteM
             this.treeSelectedMenu = e.selectedNodes[0].data.props;
         }else{
             this.treeSelectedId = "";
-            this.treeSelectedMenu = {};
+            this.treeSelectedMenu = undefined;
         }
         this.dymaicQuery.parentId = this.treeSelectedId;
         this.loadData(MenuEnum.Function);
@@ -174,7 +175,6 @@ export default class DataDictionaryManagerment extends Mixins(PageMixins,DeleteM
                     this.$Message.error("请选择一项修改");
                     return;
                 }
-                debugger
                 this.DataDictionaryInfo.Show(
                     _type,
                     this.treeData,
@@ -197,5 +197,43 @@ export default class DataDictionaryManagerment extends Mixins(PageMixins,DeleteM
     private loadData(type?:MenuEnum){
         this.getTableData();
         if (type !== MenuEnum.Function) this.loadTreeData();
+    }
+
+    /**
+     * 删除数据字典
+     */
+    private deleteItemTree(){
+        if(typeof this.treeSelectedMenu === "undefined"){
+            this.$Message.warning("请选择要删除的行！");
+            return;
+        }
+        this.DeleteInfo.Show(
+            "删除",
+            this.treeSelectedMenu.title,
+            async () => {
+                await this.deleteItemById(this.treeSelectedId);
+                this.loadData();
+            });
+    }
+
+    private deleteItem(_row:DataDictionaryPageListDto){
+        if( typeof this.CurrentRow === "undefined")
+        {
+            this.$Message.warning("请选择要删除的行！");
+            return;
+        }
+        this.DeleteInfo.Show("删除", this.CurrentRow.title, () => {
+            this.deleteItemById(this.CurrentRow.id);
+        });
+    }
+
+    private async deleteItemById(_id:string){
+        let res = await MainManager.Instance().DataDictionarySrevice.deleteDataDictionary(
+            _id
+        );
+        res.success
+            ? this.$Message.success(res.message)
+            : this.$Message.error(res.message);
+        this.loadData();
     }
 }
