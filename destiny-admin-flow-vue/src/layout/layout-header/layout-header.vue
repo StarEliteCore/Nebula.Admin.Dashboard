@@ -1,6 +1,14 @@
 <template>
   <Header class="main-app-layout__header">
-    <div>欢迎您 {{ GetUserName() }}</div>
+    <div>
+      欢迎您 {{ GetUserName() }}
+      <Tooltip content="点击后跳到git上" placement="top-end">
+        <span style="margin-left: 21px;" @click="openGit()"
+          ><Icon type="logo-github" size="30"
+        /></span>
+      </Tooltip>
+    </div>
+
     <Dropdown>
       <a href="javascript:void(0)">
         <img

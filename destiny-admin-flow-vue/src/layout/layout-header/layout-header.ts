@@ -1,6 +1,6 @@
 import { AjaxResult, IAjaxResult } from "@/shared/response";
 import { Component, Emit, Vue } from "vue-property-decorator";
-import { GetUserInfo, UserInfoModule } from '@/store/modules/userinfomodule';
+import { GetUserInfo, UserInfoModule } from "@/store/modules/userinfomodule";
 
 import ApplicationUserManager from "@/shared/config/IdentityServerLogin";
 import DestinyCoreModule from "@/shared/core/DestinyCoreModule";
@@ -9,9 +9,6 @@ import { MenuModule } from "@/store/modules/menumodule";
 import { TokenModule } from "@/store/modules/tokenmodule";
 
 // import { IChangePassInputDto } from "@/domain/entity/core/ChangePassInputDto";
-
-
-
 
 @Component({
   name: "LayoutHeader",
@@ -102,5 +99,9 @@ export default class LayoutHeader extends Vue {
   handleReset() {
     this.isOpen = false;
     (this.$refs["formCustom"] as any).resetFields();
+  }
+
+  openGit() {
+    window.open("https://github.com/DestinyCore/Destiny.Core.Flow");
   }
 }
