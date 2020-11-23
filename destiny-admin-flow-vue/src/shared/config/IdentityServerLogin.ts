@@ -4,19 +4,19 @@ import defaultConsts from "@/shared/config/appconst"
 export class ApplicationUserManager extends UserManager {
     constructor() {
         super({
-            authority: "http://localhost:50001",
-            client_id: "DestinyCoreFlowReactClient",
+            authority: process.env.VUE_APP_AUTHORITY_SERVER,
+            client_id: process.env.VUE_APP_CLIENT_ID,
             redirect_uri: window.location.origin + "/callback",
-            response_type: "id_token token",
-            scope: "openid profile roles Destiny.Core.Flow.API",
+            response_type: process.env.VUE_APP_RESPONSE_TYPE,
+            scope: process.env.VUE_APP_SCOPE,
             post_logout_redirect_uri: window.location.origin,
         })
         console.log({
-            authority: "http://localhost:50001",
+            authority: process.env.VUE_APP_AUTHORITY_SERVER,
             client_id: process.env.VUE_APP_CLIENT_ID,
             redirect_uri: window.location.origin + "/callback",
-            response_type: "id_token token",
-            scope: "openid profile roles Destiny.Core.Flow.API",
+            response_type: process.env.VUE_APP_RESPONSE_TYPE,
+            scope: process.env.VUE_APP_SCOPE,
             post_logout_redirect_uri: window.location.origin,
         })
     }
