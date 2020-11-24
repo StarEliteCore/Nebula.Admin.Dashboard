@@ -24,24 +24,24 @@ export default class Login extends Vue {
     //   path: "/home-page",
     // });
   }
-  async loginCallbackFn() {
+  // async loginCallbackFn() {
 
-    await ApplicationUserManager.signinRedirectCallback();
+  //   await ApplicationUserManager.signinRedirectCallback();
 
-    // debugger;
-    let user = await ApplicationUserManager.getUser();
-    console.log(user)
-    // console.log(user);
-    if (user !== null) {
-      TokenModule.SetToken(user.access_token);
-      const menuList = await GetMenuList();
-      MenuModule.SetMenus(menuList);
-      (router as any).$addRoutes(menuList);
-    }
-  }
-  async getVueDynamicRouterTreeAsync() {
-    let res = await MainManager.Instance().MenuService.getVueDynamicRouterTreeAsync();
-    console.log(res)
-  }
+  //   // debugger;
+  //   let user = await ApplicationUserManager.getUser();
+  //   console.log(user)
+  //   // console.log(user);
+  //   if (user !== null) {
+  //     TokenModule.SetToken(user.access_token);
+  //     const menuList = await GetMenuList();
+  //     MenuModule.SetMenus(menuList);
+  //     (router as any).$addRoutes(menuList);
+  //   }
+  // }
+  // async getVueDynamicRouterTreeAsync() {
+  //   let res = await MainManager.Instance().MenuService.getVueDynamicRouterTreeAsync();
+  //   console.log(res)
+  // }
 
 }
