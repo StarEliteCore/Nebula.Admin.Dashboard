@@ -37,6 +37,7 @@ export default class Callback extends Vue {
         UserInfoModule.SetUserInfo(user.profile)
       }
       // console.log(user.profile)//用户信息
+      console.log("ssssssssss",GetMenus())
       if(!GetMenus())
       {
         console.log(11111111111)
