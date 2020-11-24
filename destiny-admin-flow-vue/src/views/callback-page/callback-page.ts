@@ -4,8 +4,8 @@ import ApplicationUserManager from "@/shared/config/IdentityServerLogin";
 // import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
 // import { MainManager } from "@/domain/services/main/main-manager";
 import { GetMenuList } from "@/modules/static/menuindex";
-import { MenuModule } from "@/store/modules/menumodule";
-import { TokenModule } from "@/store/modules/tokenmodule";
+import { GetMenus, MenuModule } from "@/store/modules/menumodule";
+import { GetToken, TokenModule } from "@/store/modules/tokenmodule";
 import { UserInfoModule } from '@/store/modules/userinfomodule';
 
 @Component({
@@ -31,16 +31,19 @@ export default class Callback extends Vue {
     await ApplicationUserManager.signinRedirectCallback();
     let user = await ApplicationUserManager.getUser();
     if (user !== null) {
-      console.log(user)
-      if(typeof user.access_token!=="undefined")
+      if(typeof user.access_token!=="undefined"&& !GetToken())
       {
         TokenModule.SetToken(user.access_token);
         UserInfoModule.SetUserInfo(user.profile)
       }
       // console.log(user.profile)//用户信息
-      const menuList = await GetMenuList();
-      MenuModule.SetMenus(menuList);
-      (this.$router as any).$addRoutes(menuList);
+      if(!GetMenus())
+      {
+        console.log(11111111111)
+        const menuList = await GetMenuList();
+        MenuModule.SetMenus(menuList);
+        (this.$router as any).$addRoutes(menuList);
+      }
     }
   }
   // async getVueDynamicRouterTreeAsync() {
