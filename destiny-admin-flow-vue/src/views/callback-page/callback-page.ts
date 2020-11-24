@@ -1,12 +1,17 @@
 import { Component, Vue, Watch } from "vue-property-decorator";
-
-import ApplicationUserManager from "@/shared/config/IdentityServerLogin";
-// import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
-// import { MainManager } from "@/domain/services/main/main-manager";
-import { GetMenuList } from "@/modules/static/menuindex";
 import { GetMenus, MenuModule } from "@/store/modules/menumodule";
 import { GetToken, TokenModule } from "@/store/modules/tokenmodule";
+
+import ApplicationUserManager from "@/shared/config/IdentityServerLogin";
+import { GetMenuList } from "@/modules/static/menuindex";
 import { UserInfoModule } from '@/store/modules/userinfomodule';
+
+// import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
+// import { MainManager } from "@/domain/services/main/main-manager";
+
+
+
+
 
 @Component({
   name: "Callback",
@@ -17,6 +22,7 @@ export default class Callback extends Vue {
   //   this.init(_name);
   // }
   private created() {
+    console.log(555555555555555555555555555555555555555)
     this.loginCallbackFn().then(() => {
       this.$router.push({
         path: "/home-page",
