@@ -32,10 +32,10 @@ service.interceptors.response.use(
     const response = error.response;
     switch (response.status) {
       case 500:
-        NoticeUtils.Inst().Error("服务器异常",response.data.msg)
+        NoticeUtils.Inst().Error("服务器异常","");
         break;
       case 401:
-        NoticeUtils.Inst().Warning("未登录，即将自动跳转登录页面",response.data.msg)
+        NoticeUtils.Inst().Warning("未登录，即将自动跳转登录页面",response.data.message);
         setTimeout(() => {
           TokenModule.ResetToken();
           window.location.reload();
@@ -43,7 +43,7 @@ service.interceptors.response.use(
         ApplicationUserManager.Login();
         break;
       case 403:
-        NoticeUtils.Inst().Error("权限不足，请联系管理人员", response.data.msg);
+        NoticeUtils.Inst().Error("权限不足，请联系管理人员", response.data.message);
         break;
     }
     return Promise.reject(error);
