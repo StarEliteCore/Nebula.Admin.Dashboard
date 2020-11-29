@@ -1,6 +1,7 @@
 // import { Login } from '@/oidc-login/IdentityServerLogin';
 
 import { GetToken, TokenModule } from "@/store/modules/tokenmodule";
+
 import ApplicationUserManager from "@/shared/config/IdentityServerLogin";
 import NoticeUtils from "@/shared/Noticemessage/NoticeUtils";
 import axios from "axios";
@@ -34,8 +35,6 @@ service.interceptors.response.use(
         NoticeUtils.Inst().Error("服务器异常",response.data.msg)
         break;
       case 401:
-        console.log(response)
-        debugger
         NoticeUtils.Inst().Warning("未登录，即将自动跳转登录页面",response.data.msg)
         setTimeout(() => {
           TokenModule.ResetToken();
