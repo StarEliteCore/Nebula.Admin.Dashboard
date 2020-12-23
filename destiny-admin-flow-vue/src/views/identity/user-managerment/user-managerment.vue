@@ -4,10 +4,13 @@
       <Row>
         <Collapse v-model="CollapseDefault">
           <Panel name="1">
-            查询面板
+             查询面板
            <p slot="content" >
-                <Form  inline  :label-width="120" :model="dynamicQuery" ref="formInline">
-                  <Row> 
+           
+                   <Form  inline  :label-width="120" :model="dynamicQuery" ref="formInline">
+                      <Row> 
+                  <template v-if="isShow">
+                   
                       <Col span="6">
                       <FormItem label="用户名：">
                        <Input  v-model="dynamicQuery.userName"   />
@@ -20,7 +23,21 @@
         
                         </FormItem>
                       </Col>
-                       <Col span="6">
+                  </template>
+                  <template v-else>
+                    <Col span="6">
+                      <FormItem label="用户名：">
+                       <Input  v-model="dynamicQuery.userName"   />
+        
+                        </FormItem>
+                      </Col>
+                         <Col span="6">
+                      <FormItem label="用户昵称：">
+                       <Input  v-model="dynamicQuery.nickName"   />
+        
+                        </FormItem>
+                      </Col>
+                       <Col span="6" >
                       <FormItem label="是否系统用户：" >
                      <Select  style="width:200px" v-model="dynamicQuery.isSystem" >
                        <Option value="true">是</Option>
@@ -28,18 +45,25 @@
                       </Select>
                         </FormItem>
                       </Col>
-                      <Col span="3">
-                          <FormItem>
-                            <p>展开</p>
-                          </FormItem>   
-                      </Col>
-               
-                  </Row>
+
+                  </template>
+                       </Row>
                     <FormItem >
                           <Button type="primary" @click="search()">查询</Button>
+                          <template v-if="isShow">
+                          
+                            <a  @click="isShowClick" style="color:#1890FF"><Icon type="ios-arrow-down" />展开</a>
+                         
+                          </template>
+                          <template v-else> 
+                            
+                            <a  @click="isShowClick" style="color:#1890FF"><Icon type="ios-arrow-up" />收起</a>
+                         
+                          </template>
                     </FormItem>
                 </Form>
-            </p>
+         </p>
+      
           </Panel>
         </Collapse>
       </Row>

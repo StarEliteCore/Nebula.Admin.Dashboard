@@ -26,6 +26,7 @@ export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
   private queryfileter: PageQuery.IPageRequest = new PageQuery.PageRequest();
   private CurrentRow!: IUserTableDto;
   private CurrentArray: Array<IUserTableDto> = [];
+  private isShow:boolean = true
   private columns: ITableColumn[] = [
     {
       type: 'selection',
@@ -226,5 +227,9 @@ export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
       };
       this.queryfileter.filter = filter;
       this.getTableData();
+    }
+
+    private isShowClick(){
+      this.isShow = !this.isShow;
     }
 }
