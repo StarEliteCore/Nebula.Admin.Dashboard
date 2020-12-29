@@ -46,7 +46,6 @@ export class ComponentMixins extends Vue {
   currentSelectionArray: any = [];
   currentRow: any = [];
 
-
   destinyCoreServeice!: IDestinyCoreServeice;
 
   protected Init() {
@@ -57,8 +56,6 @@ export class ComponentMixins extends Vue {
     this.destinyCoreServeice = this.mainManager.DestinyCoreServeice;
     this.GetPage();
     this.editModel = this.$refs.editModel as Vue;
-
-
   }
 
   public mounted() {
@@ -110,11 +107,9 @@ export class ComponentMixins extends Vue {
   protected GetReq(_pageRequest: IPageRequest) {
     let conditions = this.GetFilterCondition();
     if (conditions.length > 0) {
-      conditions.forEach((e:IFilterCondition,i:number)=>{
-           _pageRequest.filter.conditions.push(e);
-
-      })
-
+      conditions.forEach((e: IFilterCondition, i: number) => {
+        _pageRequest.filter.conditions.push(e);
+      });
     }
     let filter: IPageRequest = JSON.parse(JSON.stringify(_pageRequest));
     // filter.queryFilter.filters = filters;
@@ -138,33 +133,41 @@ export class ComponentMixins extends Vue {
   }
 
   //删除回调
-  deleteCallback(res: IAjaxResult) {}
+  deleteCallback(res: IAjaxResult) {
+    if (res.success) {
+      this.$Message.success(res.message);
+      this.delectLoading = false;
+    } else {
+      this.$Message.error(res.message);
+      this.delectLoading = false;
+    }
+  }
 
   handleDelete() {
     if (this.deleteUrl) {
       this.delectLoading = true;
       let selecteds: any = this.currentSelectionArray;
-      this.getSingleSeletedRow(selecteds, (id: string, row: any) => {
-        this.mainManager.DestinyCoreServeice.delete(this.deleteUrl, id)
-          .then(
-            (res: IAjaxResult) => {
+      this.getSingleSeletedRow(
+        selecteds,
+        (id: string, row: any) => {
+          this.mainManager.DestinyCoreServeice.delete(this.deleteUrl, id)
+            .then((res: IAjaxResult) => {
               if (res.success) {
                 this.GetPage();
                 this.deleteCallback(res);
-                this.$Message.success(res.message);
+           
               } else {
                 this.deleteCallback(res);
-                this.$Message.error(res.message);
               }
-            },
-            () => {
+            })
+            .finally(() => {
               this.delectLoading = false;
-            }
-          )
-          .finally(() => {
-            this.delectLoading = false;
-          });
-      });
+            });
+        },
+        () => {
+          this.delectLoading = false;
+        }
+      );
     }
   }
 
