@@ -74,7 +74,7 @@ export default class AuditEntryManagerment extends Mixins(ComponentMixins) {
       {
         title: "操作",
         slot: "handle",
-        width: 150,
+        width: 100,
         align: "center",
       },
     ];

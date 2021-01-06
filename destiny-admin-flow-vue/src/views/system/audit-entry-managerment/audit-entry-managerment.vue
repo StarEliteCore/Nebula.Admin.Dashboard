@@ -7,7 +7,7 @@
         :likeValueFormat="likeValueFormat"
       ></my-search>
       <div>
-        <Card :dis-hover="true">
+        <Card :dis-hover="true" >
           <Table :columns="columns" :data="tableData" border stripe>
             <template v-slot:operationType="{ row }">
               <Tag v-if="row.operationType === 0" color="blue">
@@ -24,8 +24,9 @@
               {{ row.keyValues.id }}
             </template>
 
+        
             <template v-slot:handle="{ row }">
-              <Button type="primary" @click="handleView(row)">查看</Button>
+              <Button size="small" type="primary" @click="handleView(row)">查看</Button>
             </template>
           </Table>
         </Card>
