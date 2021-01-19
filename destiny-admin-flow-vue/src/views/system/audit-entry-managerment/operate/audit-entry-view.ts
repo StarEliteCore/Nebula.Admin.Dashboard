@@ -57,7 +57,15 @@ export default class AuditEntryView extends Mixins(EditModalMixins) {
   
   ];
 
+  mounted()
+  {
+    const containerHtml = document.getElementById("ddd");
+        const height: number =
+          containerHtml !== null ? containerHtml.clientHeight : 750;
+    console.log(height);
+  }
   protected InIt() {
+
     let id=this.editData.id as string;
     MainManager.Instance().SystemService.getAuditPropertyList(id)
     .then((res: IAjaxResult) => {

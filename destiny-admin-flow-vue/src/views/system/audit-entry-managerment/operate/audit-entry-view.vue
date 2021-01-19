@@ -7,6 +7,7 @@
       :lock-scroll="true"
       :fullscreen="true"
       :scrollable="true"
+      :footer-hide="true"
     >
       <Tabs value="name1">
         <TabPane name="name1" label="基本信息">
@@ -28,23 +29,43 @@
             </FormItem>
           </Form>
         </TabPane>
-        <TabPane  name="name2" label="属性变更明细">
-           <Table 
+        <TabPane  id="aa" name="name2" label="属性变更明细">
+         <Table border 
+              :columns="propertyTableColumn"
+              :data="auditPropertyList"
+             
+            
+            >
+            </Table>
+          <!--        
+         <Table 
               :columns="propertyTableColumn"
               :data="auditPropertyList"
               border
               stripe
+            
+            >
+            </Table> -->
+          <!-- <div id="ddd">
+           <Table
+              :columns="propertyTableColumn"
+              :data="auditPropertyList"
+              border
+              stripe
+            
             >
             </Table>
+        </div> -->
+
           <!-- <Card style="height: 100%;" :dis-hover="true">
            
           </Card> -->
         </TabPane>
       </Tabs>
 
-      <div slot="footer">
+      <!-- <div slot="footer">
         <Button class="dialog-btn" @click="close()">关闭</Button>
-      </div>
+      </div> -->
     </Modal>
   </div>
 </template>
