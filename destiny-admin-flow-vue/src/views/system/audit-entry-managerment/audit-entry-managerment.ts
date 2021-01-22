@@ -1,6 +1,7 @@
 import { Component, Mixins } from "vue-property-decorator";
 
 import { AuditApi } from "@/domain/config/api";
+import AuditEntryView from "./operate/audit-entry-view.vue";
 import { ComponentMixins } from "@/shared/mixins/component.mixns";
 import { EFilterOprator } from "@/shared/request/query.enum";
 import EntryPropertOperate from "./operate/audit-entry-property-managerment.vue";
@@ -11,10 +12,12 @@ import { ITableColumn } from "@/shared/table/ITable";
   name: "AuditEntryManagerment",
   components: {
     EntryPropertOperate,
+    AuditEntryView,
   },
 })
 export default class AuditEntryManagerment extends Mixins(ComponentMixins) {
   pageUrl: string = AuditApi.getAuditEntryPage;
+  loadAuditEntry:string=AuditApi.loadAuditEntryById;
   likeValueFormat: string = "{0}";
   GetColumn(): ITableColumn[] {
     return [
@@ -68,6 +71,12 @@ export default class AuditEntryManagerment extends Mixins(ComponentMixins) {
         key: "createdTime",
         align: "center",
       },
+      {
+        title: "操作",
+        slot: "handle",
+        width: 100,
+        align: "center",
+      },
     ];
   }
 
@@ -86,5 +95,14 @@ export default class AuditEntryManagerment extends Mixins(ComponentMixins) {
         operator: EFilterOprator.Like,
       },
     ];
+  }
+
+  handleView(row:any) {
+    if (this.editModel) {
+      this.editTitle = "查看审计实体";
+      this.editData = row;
+
+      this.$nextTick(() => this.editModel.$emit("open"));
+    }
   }
 }

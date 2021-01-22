@@ -25,4 +25,10 @@ export interface ISystemService {
      * @param _page 
      */
     getAuditEntryPropertyPage(_page:IPageRequest):Promise<IServerPageReturn<IAuditEntryPropertyOutputPageDto[]>>;
+
+       /**
+     * 得到审计属性集合
+     * @param id 
+     */
+    getAuditPropertyList(_id:string): Promise<IAjaxResult>;
 }

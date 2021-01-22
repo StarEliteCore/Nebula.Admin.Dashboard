@@ -9,6 +9,9 @@ import { injectable } from 'inversify';
 
 @injectable()
 export default class SystemService implements ISystemService {
+    getAuditPropertyList(_id: string): Promise<IAjaxResult> {
+        return MainManager.dataRequest.getRequest(AuditApi.getAuditPropertyList,{ id: _id });
+    }
     getAuditLogPage(_page: IPageRequest): Promise<IServerPageReturn<IAuditLogOutputPageDto[]>> {
         return MainManager.dataRequest.postRequest(AuditApi.getAuditLogPage,_page);
     }

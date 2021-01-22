@@ -157,6 +157,12 @@ export const AuditApi = {
 
    // 得到数据属性分页
   getAuditEntryPropertyPage: "api/AuditEntry/GetAuditEntryPropertyPageAsync",
+
+  //加载审计实体
+  loadAuditEntryById: "api/AuditEntry/LoadAuditEntryByIdAsync",
+
+  //得到审计属性集合
+  getAuditPropertyList: "api/AuditEntry/GetAuditPropertyListAsnyc"
 };
 
 /**
