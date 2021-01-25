@@ -254,9 +254,7 @@ export class ComponentMixins extends Vue {
             this.$Message.error(res.message);
           }
         })
-        .catch((res: any) => {
-          this.$Message.error(res);
-        });
+       ;
     }
   }
 

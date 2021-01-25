@@ -1,3 +1,5 @@
+import "reflect-metadata";
+
 import { IAjaxResult, IServerPageReturn } from "@/shared/response";
 
 import { ApiResourceApi } from "@/domain/config/api";
@@ -7,8 +9,11 @@ import { IPageRequest } from "@/shared/request";
 import { MainManager } from "../../main/main-manager";
 import { injectable } from "inversify";
 
-// @injectable()
+@injectable()
 export default class  ApiResourceService implements IApiResourceService{
+    getJwtClaimTypeSelectItem(): Promise<IAjaxResult> {
+        return MainManager.dataRequest.getRequest(ApiResourceApi.getJwtClaimType);
+    }
     getApiResourceById(_id: string): Promise<IAjaxResult> {
         return MainManager.dataRequest.getRequest(ApiResourceApi.loadApiResource, { id: _id });
     }

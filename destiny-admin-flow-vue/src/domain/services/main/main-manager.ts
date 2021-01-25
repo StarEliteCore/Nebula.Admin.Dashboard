@@ -2,11 +2,11 @@ import DataRequest, { IDataRequest } from "@/shared/data-request";
 
 import { IApiResourceService } from "../IdentityServer4/apiresourceservice/IApiResourceService";
 import { ICodeGeneratorService } from "../codeGeneratorServeice/ICodeGeneratorService";
-import { IDataDictionaryService } from '../dataDictionaryServeice/IDataDictionaryService';
+import { IDataDictionaryService } from "../dataDictionaryServeice/IDataDictionaryService";
 import { IDestinyCoreServeice } from "../destinycoreserveice/IDestinyCoreServeice";
 import { IFunctionService } from "../functionservice/IFunctionService";
 import { IMenuService } from "../menuserveice/IMenuService";
-import { IOrganizationService } from '../organizationservice/IOrganizationService';
+import { IOrganizationService } from "../organizationservice/IOrganizationService";
 import { IRoleService } from "../roleservice/IRoleService";
 import { ISystemService } from "../systemservice/ISystemService";
 import { IUserService } from "../userservice/IUserService";
@@ -60,14 +60,14 @@ export class MainManager {
     return this.services.DestinyCoreServeice;
   }
 
-  public get DataDictionarySrevice():IDataDictionaryService{
+  public get DataDictionarySrevice(): IDataDictionaryService {
     return this.services.DataDictionaryService;
   }
 
-
-  // public get ApiResourceService():IApiResourceService{
-  //   return this.services.ApiResourceService;
-  // }
+  public get ApiResourceService(): IApiResourceService {
+    return this.services.ApiResourceService;
+  }
+  
   constructor() {
     this.services = container.get<MainService>(IocTypes.MainService);
   }

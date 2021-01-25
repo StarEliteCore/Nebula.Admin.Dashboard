@@ -29,7 +29,17 @@
         />
       </FormItem>
       <FormItem label="用户声明：">
-      
+        <Select v-model="editData.userClaims" filterable multiple allow-create>
+          <Option
+            v-for="item in userClaims"
+            :value="item.value"
+            :key="item.value"
+            >{{ item.text }}</Option
+          >
+        </Select>
+      </FormItem>
+      <FormItem label="Api秘钥：">
+        <Input v-model="editData.apiSecretValue" />
       </FormItem>
     </Form>
     <div slot="footer">
