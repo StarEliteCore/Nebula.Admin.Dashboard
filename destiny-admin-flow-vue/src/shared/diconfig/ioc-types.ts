@@ -9,4 +9,5 @@ export const IocTypes = {
   DataDictionaryService: Symbol("DataDictionaryService"),
   OrganizationService: Symbol("OrganizationService"),
   DestinyCoreServeice: Symbol("DestinyCoreServeice"),
+  // ApiResourceService: Symbol("ApiResourceService"),
 };

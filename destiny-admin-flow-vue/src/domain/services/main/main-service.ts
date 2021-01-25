@@ -5,11 +5,12 @@ import { injectable, inject } from "inversify";
 import "reflect-metadata";
 
 import { ICodeGeneratorService } from "../codeGeneratorServeice/ICodeGeneratorService";
-import { IDataDictionaryService } from '../dataDictionaryServeice/IDataDictionaryService';
-import { IDestinyCoreServeice } from '../destinycoreserveice/IDestinyCoreServeice';
+import { IDataDictionaryService } from "../dataDictionaryServeice/IDataDictionaryService";
+import { IDestinyCoreServeice } from "../destinycoreserveice/IDestinyCoreServeice";
 import { IFunctionService } from "../functionservice/IFunctionService";
+import { IApiResourceService } from "../IdentityServer4/apiresourceservice/IApiResourceService";
 import { IMenuService } from "../menuserveice/IMenuService";
-import { IOrganizationService } from '../organizationservice/IOrganizationService';
+import { IOrganizationService } from "../organizationservice/IOrganizationService";
 import { IRoleService } from "../roleservice/IRoleService";
 import { ISystemService } from "../systemservice/ISystemService";
 import { IUserService } from "../userservice/IUserService";
@@ -20,10 +21,11 @@ export class MainService {
   private _codeGeneratorService: ICodeGeneratorService;
   private _roleService: IRoleService;
   private _functionService: IFunctionService;
-  private  _systemService:ISystemService;
-  private _dataDictionaryService:IDataDictionaryService;
-  private  _organizationService:IOrganizationService;
+  private _systemService: ISystemService;
+  private _dataDictionaryService: IDataDictionaryService;
+  private _organizationService: IOrganizationService;
   private _destinyCoreServeice: IDestinyCoreServeice;
+  // private _apiResourceService: IApiResourceService;
 
   public get MenuServiceApi(): IMenuService {
     return this._menuserverceApi;
@@ -48,17 +50,20 @@ export class MainService {
     return this._systemService;
   }
 
-  public get DataDictionaryService():IDataDictionaryService{
+  public get DataDictionaryService(): IDataDictionaryService {
     return this._dataDictionaryService;
   }
-  
 
   public get DestinyCoreServeice(): IDestinyCoreServeice {
     return this._destinyCoreServeice;
   }
-  public get OrganizationService():IOrganizationService{
+  public get OrganizationService(): IOrganizationService {
     return this._organizationService;
   }
+
+  // public get ApiResourceService(): IApiResourceService {
+  //   return this._apiResourceService;
+  // }
   /**
    *
    * @param _menu
@@ -72,10 +77,15 @@ export class MainService {
     _codeGenerator: ICodeGeneratorService,
     @inject(IocTypes.RoleService) _roleService: IRoleService,
     @inject(IocTypes.FunctionService) _functionService: IFunctionService,
-    @inject(IocTypes.SystemService) _systemService:ISystemService,
-    @inject(IocTypes.DataDictionaryService) _dataDictionaryService:IDataDictionaryService,
-    @inject(IocTypes.OrganizationService) _organizationService:IOrganizationService,
-    @inject(IocTypes.DestinyCoreServeice)   _destinyCoreServeice: IDestinyCoreServeice
+    @inject(IocTypes.SystemService) _systemService: ISystemService,
+    @inject(IocTypes.DataDictionaryService)
+    _dataDictionaryService: IDataDictionaryService,
+    @inject(IocTypes.OrganizationService)
+    _organizationService: IOrganizationService,
+    @inject(IocTypes.DestinyCoreServeice)
+    _destinyCoreServeice: IDestinyCoreServeice,
+    // @inject(IocTypes.ApiResourceService)
+    // _apiResourceService: IApiResourceService
   ) {
     this._menuserverceApi = _menu;
     this._userserverceApi = _user;
@@ -83,8 +93,9 @@ export class MainService {
     this._roleService = _roleService;
     this._functionService = _functionService;
     this._dataDictionaryService = _dataDictionaryService;
-    this._organizationService=_organizationService;
+    this._organizationService = _organizationService;
     this._systemService = _systemService;
     this._destinyCoreServeice = _destinyCoreServeice;
+    // this._apiResourceService = _apiResourceService;
   }
 }
