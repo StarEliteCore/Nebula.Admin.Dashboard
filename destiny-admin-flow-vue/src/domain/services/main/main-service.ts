@@ -9,6 +9,7 @@ import { IDataDictionaryService } from "../dataDictionaryServeice/IDataDictionar
 import { IDestinyCoreServeice } from "../destinycoreserveice/IDestinyCoreServeice";
 import { IFunctionService } from "../functionservice/IFunctionService";
 import { IApiResourceService } from "../IdentityServer4/apiresourceservice/IApiResourceService";
+import { IClientApplicationService } from "../IdentityServer4/clientapplicationsevice/IClientapplicationsevice";
 import { IMenuService } from "../menuserveice/IMenuService";
 import { IOrganizationService } from "../organizationservice/IOrganizationService";
 import { IRoleService } from "../roleservice/IRoleService";
@@ -26,6 +27,7 @@ export class MainService {
   private _organizationService: IOrganizationService;
   private _destinyCoreServeice: IDestinyCoreServeice;
   private _apiResourceService: IApiResourceService;
+  private _clientApplicationService: IClientApplicationService;
 
   public get MenuServiceApi(): IMenuService {
     return this._menuserverceApi;
@@ -64,6 +66,9 @@ export class MainService {
   public get ApiResourceService(): IApiResourceService {
     return this._apiResourceService;
   }
+  public get ClientApplicationService(): IClientApplicationService {
+    return this._clientApplicationService;
+  }
   /**
    *
    * @param _menu
@@ -85,7 +90,9 @@ export class MainService {
     @inject(IocTypes.DestinyCoreServeice)
     _destinyCoreServeice: IDestinyCoreServeice,
     @inject(IocTypes.ApiResourceService)
-    _apiResourceService: IApiResourceService
+    _apiResourceService: IApiResourceService,
+    @inject(IocTypes.ClientApplicationService)
+    _clientApplicationService: IClientApplicationService
   ) {
     this._menuserverceApi = _menu;
     this._userserverceApi = _user;
@@ -97,5 +104,6 @@ export class MainService {
     this._systemService = _systemService;
     this._destinyCoreServeice = _destinyCoreServeice;
     this._apiResourceService = _apiResourceService;
+    this._clientApplicationService=_clientApplicationService;
   }
 }

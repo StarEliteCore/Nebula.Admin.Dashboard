@@ -1,6 +1,7 @@
 import DataRequest, { IDataRequest } from "@/shared/data-request";
 
 import { IApiResourceService } from "../IdentityServer4/apiresourceservice/IApiResourceService";
+import { IClientApplicationService } from "../IdentityServer4/clientapplicationsevice/IClientapplicationsevice";
 import { ICodeGeneratorService } from "../codeGeneratorServeice/ICodeGeneratorService";
 import { IDataDictionaryService } from "../dataDictionaryServeice/IDataDictionaryService";
 import { IDestinyCoreServeice } from "../destinycoreserveice/IDestinyCoreServeice";
@@ -67,7 +68,9 @@ export class MainManager {
   public get ApiResourceService(): IApiResourceService {
     return this.services.ApiResourceService;
   }
-  
+  public get ClientApplicationService(): IClientApplicationService {
+    return this.services.ClientApplicationService;
+  }
   constructor() {
     this.services = container.get<MainService>(IocTypes.MainService);
   }

@@ -237,3 +237,10 @@ export const ApiResourceApi={
   getJwtClaimType: "api/ApiResource/GetJwtClaimTypeSelectItem",
   delete: "api/ApiResource/DeleteAsync",
 }
+export const ClientApi={
+  createApiResource: "api/ApiResource/CreateApiResourceAsync",
+  loadApiResource: "api/ApiResource/LoadAsync",
+  getPage: "api/ClientApplication/GetPageAsync",
+  getJwtClaimType: "api/ApiResource/GetJwtClaimTypeSelectItem",
+  delete: "api/ApiResource/DeleteAsync",
+}

@@ -1,6 +1,8 @@
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+
 import { IMenuInstance } from '@/domain/entity/ConfigureInfo/menuConfigure/MenuInstance';
-import { Component, Vue, Prop, Watch } from "vue-property-decorator";
 import MenuItemChild from "./menu-item-child/menu-item-child.vue"
+
 @Component({
   name: "MenuTab",
   components: {

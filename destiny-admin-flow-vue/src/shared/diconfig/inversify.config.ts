@@ -21,6 +21,8 @@ import OrganizationService from '@/domain/services/organizationservice/Organizat
 import RoleService from '@/domain/services/roleservice/RoleService';
 import SystemService from '@/domain/services/systemservice/SystemService';
 import UserService from '@/domain/services/userservice/UserService';
+import ClientApplicationService from '@/domain/services/IdentityServer4/clientapplicationsevice/Clientapplicationsevice';
+import { IClientApplicationService } from '@/domain/services/IdentityServer4/clientapplicationsevice/IClientapplicationsevice';
 
 const container = new Container();
 container.bind<MainService>(IocTypes.MainService).to(MainService)
@@ -34,5 +36,6 @@ container.bind<IDataDictionaryService>(IocTypes.DataDictionaryService).to(DataDi
 container.bind<IOrganizationService>(IocTypes.OrganizationService).to(OrganizationService);
 container.bind<IDestinyCoreServeice>(IocTypes.DestinyCoreServeice).to(DestinyCoreServeice);
 container.bind<IApiResourceService>(IocTypes.ApiResourceService).to(ApiResourceService);
+container.bind<IClientApplicationService>(IocTypes.ClientApplicationService).to(ClientApplicationService);
 
 export default container;

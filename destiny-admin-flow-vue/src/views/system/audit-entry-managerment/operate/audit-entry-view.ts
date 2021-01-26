@@ -62,7 +62,6 @@ export default class AuditEntryView extends Mixins(EditModalMixins) {
     const containerHtml = document.getElementById("ddd");
         const height: number =
           containerHtml !== null ? containerHtml.clientHeight : 750;
-    console.log(height);
   }
   protected InIt() {
 

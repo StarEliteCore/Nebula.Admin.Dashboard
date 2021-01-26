@@ -75,7 +75,7 @@ export class ComponentMixins extends Vue {
           }
         })
         .catch((re) => {
-          console.log(re);
+          console.error(re);
         });
     }
   }

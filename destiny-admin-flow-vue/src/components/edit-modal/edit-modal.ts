@@ -25,6 +25,6 @@ export default class EditModal extends Vue {
   public save() {
 
     this.$emit("save1");
-    console.log("");
+    // console.log("");
   }
 }

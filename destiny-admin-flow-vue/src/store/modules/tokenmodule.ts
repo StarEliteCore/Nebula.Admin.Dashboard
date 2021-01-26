@@ -11,7 +11,6 @@ import {
 import defaultConsts from '@/shared/config/appconst';
 import store from "@/store"
 
-
 /**
  * 菜单模块
  */
@@ -23,7 +22,7 @@ class TokenRouerStore extends VuexModule {
      */
     @Mutation
     private SET_TOKEN(_token: string) {
-        console.log(defaultConsts.cookiename);
+        // console.log(defaultConsts.cookiename);
         CookieInfo.setcookie(defaultConsts.cookiename, _token);
     }
     /**
