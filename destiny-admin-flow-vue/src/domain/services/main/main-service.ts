@@ -25,7 +25,7 @@ export class MainService {
   private _dataDictionaryService: IDataDictionaryService;
   private _organizationService: IOrganizationService;
   private _destinyCoreServeice: IDestinyCoreServeice;
-  // private _apiResourceService: IApiResourceService;
+  private _apiResourceService: IApiResourceService;
 
   public get MenuServiceApi(): IMenuService {
     return this._menuserverceApi;
@@ -61,9 +61,9 @@ export class MainService {
     return this._organizationService;
   }
 
-  // public get ApiResourceService(): IApiResourceService {
-  //   return this._apiResourceService;
-  // }
+  public get ApiResourceService(): IApiResourceService {
+    return this._apiResourceService;
+  }
   /**
    *
    * @param _menu
@@ -84,8 +84,8 @@ export class MainService {
     _organizationService: IOrganizationService,
     @inject(IocTypes.DestinyCoreServeice)
     _destinyCoreServeice: IDestinyCoreServeice,
-    // @inject(IocTypes.ApiResourceService)
-    // _apiResourceService: IApiResourceService
+    @inject(IocTypes.ApiResourceService)
+    _apiResourceService: IApiResourceService
   ) {
     this._menuserverceApi = _menu;
     this._userserverceApi = _user;
@@ -96,6 +96,6 @@ export class MainService {
     this._organizationService = _organizationService;
     this._systemService = _systemService;
     this._destinyCoreServeice = _destinyCoreServeice;
-    // this._apiResourceService = _apiResourceService;
+    this._apiResourceService = _apiResourceService;
   }
 }

@@ -30,6 +30,8 @@ service.interceptors.response.use(
   },
   (error) => {
     const response = error.response;
+    console.log(response);
+    debugger;
     switch (response.status) {
       case 500:
         NoticeUtils.Inst().Error("服务器异常","");

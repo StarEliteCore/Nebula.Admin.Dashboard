@@ -11,11 +11,12 @@ export interface IApiResourceDtoBase extends IEntity<string>,IDescription{
  apiSecrets:Array<IApiResourceSecretDto>;
  scopes:Array<string>;
 
+
 }
 
 
 export interface IApiResourceInputDto extends IApiResourceDtoBase{
-
+    apiSecretValue:string
 
 }
 

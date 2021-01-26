@@ -33,5 +33,6 @@ container.bind<ISystemService>(IocTypes.SystemService).to(SystemService);
 container.bind<IDataDictionaryService>(IocTypes.DataDictionaryService).to(DataDictionaryService)
 container.bind<IOrganizationService>(IocTypes.OrganizationService).to(OrganizationService);
 container.bind<IDestinyCoreServeice>(IocTypes.DestinyCoreServeice).to(DestinyCoreServeice);
+container.bind<IApiResourceService>(IocTypes.ApiResourceService).to(ApiResourceService);
 
 export default container;

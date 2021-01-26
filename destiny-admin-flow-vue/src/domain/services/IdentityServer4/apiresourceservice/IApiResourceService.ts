@@ -27,4 +27,10 @@ export interface IApiResourceService {
      * @param _id 
      */
     getApiResourceById(_id: string): Promise<IAjaxResult>;
+
+    /**
+     * 得到JWTClaim类型下拉项
+     *
+     */
+    getJwtClaimTypeSelectItem(): Promise<IAjaxResult>;
 }
