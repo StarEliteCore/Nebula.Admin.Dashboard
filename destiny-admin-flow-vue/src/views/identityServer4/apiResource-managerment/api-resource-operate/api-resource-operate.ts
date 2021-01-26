@@ -11,21 +11,51 @@ import { MainManager } from "@/domain/services/main/main-manager";
 })
 export default class ApiResource extends Mixins(EditModalMixins) {
 
-    private editData1:IApiResourceDtoBase | undefined;
-    private userClaims:Array<any> =[];
+
+    private userClaimItemList:Array<any> =[];
     protected InIt() {
       this.MapTo(this.editData.id as string);
       this.GetFormRef();
     }
   
+    private userClaimsValidator = (rule: any, value: any, callback: Function) => {
+      debugger;
+      if (typeof value === "undefined" || value === "") {
+        callback(new Error("用户声明不可为空"));
+      } else {
+        callback();
+      }
+    };
+
+    private ruleValidate = {
+      /**
+       *
+       */
+      name: [
+        { required: true, message: "资源名不可为空", trigger: "onHandleCommit" },
+        
+      ],
+      userClaims: [
+        { required: true, validator:this.userClaimsValidator, trigger: "onHandleCommit" },
+        
+      ],
+      apiSecretValue: [
+        { required: true, message: "秘钥不可为空", trigger: "onHandleCommit" },
+        
+      ],
+    };
+
+
+ 
     protected MapTo(_rowId: string) {
-      this.editData1= this.editData as IApiResourceDtoBase;
+
       const apiService=  MainManager.Instance().ApiResourceService;
 
       apiService.getJwtClaimTypeSelectItem().then((result: IAjaxResult)=>{
 
+        // todo提示待优化
         DestinyCoreModule.ToAjaxResult(result,()=>{
-         this.userClaims=result.data.itemList;
+         this.userClaimItemList=result.data.itemList;
 
         });
 
