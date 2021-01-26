@@ -30,7 +30,7 @@ service.interceptors.response.use(
   },
   (error) => {
     const response = error.response;
-    console.log(response);
+    console.error(response);
     debugger;
     switch (response.status) {
       case 500:

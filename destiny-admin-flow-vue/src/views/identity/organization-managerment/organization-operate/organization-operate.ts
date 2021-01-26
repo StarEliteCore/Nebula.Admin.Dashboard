@@ -32,7 +32,7 @@ export default class Organization extends Mixins(OperateMixins) {
     MainManager.Instance().UserService.getSelectAllUser().then(x=>{
       if(x.success)
       this.userArray=x.data
-      console.log(this.userArray)
+      // console.log(this.userArray)
     })
     switch (_type) {
       case EOperate.add:

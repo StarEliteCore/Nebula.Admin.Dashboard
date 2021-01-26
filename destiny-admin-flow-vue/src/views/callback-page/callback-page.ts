@@ -22,7 +22,7 @@ export default class Callback extends Vue {
   //   this.init(_name);
   // }
   private created() {
-    console.log(555555555555555555555555555555555555555)
+    // console.log(555555555555555555555555555555555555555)
     this.loginCallbackFn().then(() => {
       this.$router.push({
         path: "/home-page",
@@ -43,10 +43,10 @@ export default class Callback extends Vue {
         UserInfoModule.SetUserInfo(user.profile)
       }
       // console.log(user.profile)//用户信息
-      console.log("ssssssssss",GetMenus())
+      // console.log("ssssssssss",GetMenus())
       if(!GetMenus())
       {
-        console.log(11111111111)
+        // console.log(11111111111)
         const menuList = await GetMenuList();
         MenuModule.SetMenus(menuList);
         (this.$router as any).$addRoutes(menuList);

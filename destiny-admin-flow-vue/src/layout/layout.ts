@@ -1,12 +1,14 @@
-import { Component, Vue, Emit } from "vue-property-decorator";
-import LayoutHeader from "./layout-header/layout-header.vue"
-import MenuTab from "@/components/menu-tab/menu-tab.vue"
-import { GetMenus } from "@/store/modules/menumodule";
+import { Component, Emit, Vue } from "vue-property-decorator";
 import { IMenuInstance, MenuInstance } from '@/domain/entity/ConfigureInfo/menuConfigure/MenuInstance';
-import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
+
+import { GetMenus } from "@/store/modules/menumodule";
 import { Guid } from 'guid-typescript';
-import SystemTitle from "./layout-left-title/layout-left-title.vue"
+import { IMenuRouter } from '@/domain/entity/menudto/menuRouterDto';
+import LayoutHeader from "./layout-header/layout-header.vue"
 import { MenuEnum } from '@/domain/entity/menudto/menuDto';
+import MenuTab from "@/components/menu-tab/menu-tab.vue"
+import SystemTitle from "./layout-left-title/layout-left-title.vue"
+
 @Component({
     name: "LayoutComponent",
     components: {

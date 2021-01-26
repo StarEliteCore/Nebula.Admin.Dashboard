@@ -2,7 +2,7 @@
     <div  class="menu-item-child">
          <Submenu
       :key="menuItemmessage.id"
-      :name="menuItemmessage.path"
+      :name="menuItemmessage.id"
       v-if="menuItemmessage.children && menuItemmessage.children.length > 0"
     >
       <template slot="title">
@@ -18,7 +18,7 @@
           v-else-if="!children.children.length"
           :to="children.path"
           :key="children.id"
-          :name="children.path"
+          :name="children.id"
         >
           <span>{{ getName(children) }}</span>
         </MenuItem>
