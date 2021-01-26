@@ -1,6 +1,7 @@
 import DataRequest, { IDataRequest } from "@/shared/data-request";
 
 import { IApiResourceService } from "../IdentityServer4/apiresourceservice/IApiResourceService";
+import { IClientApplicationService } from "../IdentityServer4/clientapplicationsevice/IClientapplicationsevice";
 import { ICodeGeneratorService } from "../codeGeneratorServeice/ICodeGeneratorService";
 import { IDataDictionaryService } from "../dataDictionaryServeice/IDataDictionaryService";
 import { IDestinyCoreServeice } from "../destinycoreserveice/IDestinyCoreServeice";
@@ -14,7 +15,6 @@ import { IocTypes } from "@/shared/diconfig/ioc-types";
 import { MainService } from "./main-service";
 import container from "@/shared/diconfig/inversify.config";
 import request from "@/utils/request";
-import { IClientApplicationService } from "../IdentityServer4/clientapplicationsevice/IClientapplicationsevice";
 
 export class MainManager {
   //#region  单例
@@ -69,7 +69,7 @@ export class MainManager {
     return this.services.ApiResourceService;
   }
   public get ClientApplicationService(): IClientApplicationService {
-    return this.services.ApiResourceService;
+    return this.services.ClientApplicationService;
   }
   constructor() {
     this.services = container.get<MainService>(IocTypes.MainService);
