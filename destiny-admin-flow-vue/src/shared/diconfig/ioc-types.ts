@@ -10,4 +10,5 @@ export const IocTypes = {
   OrganizationService: Symbol("OrganizationService"),
   DestinyCoreServeice: Symbol("DestinyCoreServeice"),
   ApiResourceService: Symbol("ApiResourceService"),
+  ClientApplicationService: Symbol("ClientApplicationService"),
 };

@@ -14,6 +14,7 @@ import { IocTypes } from "@/shared/diconfig/ioc-types";
 import { MainService } from "./main-service";
 import container from "@/shared/diconfig/inversify.config";
 import request from "@/utils/request";
+import { IClientApplicationService } from "../IdentityServer4/clientapplicationsevice/IClientapplicationsevice";
 
 export class MainManager {
   //#region  单例
@@ -67,7 +68,9 @@ export class MainManager {
   public get ApiResourceService(): IApiResourceService {
     return this.services.ApiResourceService;
   }
-  
+  public get ClientApplicationService(): IClientApplicationService {
+    return this.services.ApiResourceService;
+  }
   constructor() {
     this.services = container.get<MainService>(IocTypes.MainService);
   }
