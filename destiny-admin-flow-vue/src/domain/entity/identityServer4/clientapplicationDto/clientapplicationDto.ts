@@ -1,15 +1,18 @@
 import { IDescription, IEntity } from '@/shared/baseentity/IEntity';
 
-export interface IClientDtoBase extends IEntity<string>,IDescription{
-    clientId:string;
-    enabled:boolean;
-    clientName:string;
-    allowedGrantTypes:Array<string>;
-    allowAccessTokensViaBrowser:boolean;
-    redirectUris:Array<string>;
-    postLogoutRedirectUris:Array<string>;
-    allowedCorsOrigins:Array<string>;
-    allowedScopes:Array<string>;
-    protocolType:Array<string>;
-    allowedIdentityTokenSigningAlgorithms:Array<string>;
+import { Guid } from 'guid-typescript';
+
+export class ClientDtoBase  implements IEntity<string>{
+    id:string=Guid.EMPTY;
+    clientId:string="";
+    enabled:boolean=true;
+    clientName:string="";
+    allowedGrantTypes:Array<string>=[];
+    allowAccessTokensViaBrowser:boolean=true;
+    redirectUris:Array<string>=[];
+    postLogoutRedirectUris:Array<string>=[];
+    allowedCorsOrigins:Array<string>=[];
+    allowedScopes:Array<string>=[];
+    protocolType:Array<string>=[];
+    allowedIdentityTokenSigningAlgorithms:Array<string>=[];
    }

@@ -1,16 +1,23 @@
-import { Component, Mixins } from "vue-property-decorator";
+import { Component, Mixins, Ref } from "vue-property-decorator";
 
 import { ClientApi } from "@/domain/config/api";
+import ClientOperate from "./client-operate/client-operate.vue"
+import ClientOperateInfo from "./client-operate/client-operate"
 import { ComponentMixins } from "@/shared/mixins/component.mixns";
 import DeleteMixins from "@/shared/mixins/delete-dialog.mixins";
+import { EOperate } from "@/shared/eoperate";
 import { ISearchFilter } from "@/shared/request";
+import PageMixins from "@/shared/mixins/page.mixins";
 
 @Component({
   name: "ClientManagerment",
   components: {
+    ClientOperate
   },
 })
-export default class ClientManagerment extends Mixins(DeleteMixins,ComponentMixins) {
+export default class ClientManagerment extends Mixins(PageMixins,DeleteMixins,ComponentMixins) {
+  @Ref("ClientOperateInfo")
+  private ClientOperateInfo!: ClientOperateInfo;
   GetColumn() {
     return [
       {
@@ -69,10 +76,31 @@ export default class ClientManagerment extends Mixins(DeleteMixins,ComponentMixi
     ];
   }
   pageUrl: string = ClientApi.getPage;
+  // protected Ma
   // deleteUrl: string = ApiResourceApi.delete;
   // saveEditUrl: string = ApiResourceApi.createApiResource;
-  // created()
-  // {
-    
-  // }
+  created()
+  {
+   
+  }
+  mounted(){
+    console.log(this.ClientOperateInfo) 
+  }
+  private operateItem(_type: EOperate, _rowId?: string) {
+    // if (typeof this.CurrentRow === "undefined" && (_type === EOperate.update || _type === EOperate.view)) {
+    //   this.$Message.error("请选择要修改的用户");
+    //   return "";
+    // }
+    if (_type === EOperate.update || _type === EOperate.view) {
+      this.ClientOperateInfo.Show(_type, (res: boolean) => {
+        console.log("asdasdas");
+      })
+    }
+    else {
+      this.ClientOperateInfo.Show(_type, (res: boolean) => {
+        console.log("asdasdas");
+      })
+    }
+
+  }
 }
