@@ -4,7 +4,13 @@
    <div>
         <Card :dis-hover="true">
           <Row style="margin: 0px 0px 16px 0px; float: right">
-           <Button class="operatebutton"    v-hasPermission="'handleAdd'" type="success" @click="handleAdd()">添加</Button>
+           <Button
+              class="operatebutton"
+              type="success"
+               v-hasPermission="'handleAdd'"
+              @click="operateItem(operate.add)"
+              >添加</Button
+            >
           <Button
               class="operatebutton"
               type="error"
@@ -22,23 +28,20 @@
             @on-select="currentRowEventArray"
           >
            <template  v-slot:enabled="{ row }">
-              <Tag v-if="row.enabled" color="red">是</Tag>
-              <Tag v-else color="blue">否</Tag>
+              <Tag v-if="row.enabled"  color="blue">是</Tag>
+              <Tag v-else color="red">否</Tag>
             </template>
           </Table>
         </Card>
       </div>
-      <api-resource        
-        ref="editModel"
-        :editTitle="editTitle"
-        :editData="editData"
-        @saveEdit="saveEdit"></api-resource>
       <page-component
         ref="PageInfo"
         :total="total"
         @PageChange="pageChange"
       ></page-component>
     </div>
+          <client-operate     
+        ref="ClientOperateInfo"></client-operate>
   </section>
 </template>
 <script lang="ts" src="./client-managerment.ts"></script>

@@ -1,8 +1,3 @@
-<style scoped>
-.expand-row {
-  margin-bottom: 16px;
-}
-</style>
 <template>
   <div>
     <Row class="expand-row">
@@ -11,7 +6,8 @@
         <Table :columns="columns" :data="tableData" border stripe>
           
               <template  v-slot:propertiesType="{row}">
-                  {{row.propertiesType.indexOf("System.Nullable`1") >= 0 ? (/(?<=(\[){2}).*?(?=(,\s))/g).exec(row.propertiesType)[0]+"?":row.propertiesType}}
+                  {{row.propertiesType}}
+                  <!-- {{row.propertiesType.indexOf("System.Nullable`1") >= 0 ? (/(?<=(\[){2}).*?(?=(,\s))/g).exec(row.propertiesType)[0]+"?":row.propertiesType}} -->
               </template>    
        </Table>
         <page-component
@@ -25,3 +21,8 @@
 </template>
 
 <script lang="ts" src="./audit-entry-property-managerment.ts"></script>
+<style scoped>
+.expand-row {
+  margin-bottom: 16px;
+}
+</style>

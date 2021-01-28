@@ -241,6 +241,6 @@ export const ClientApi={
   createApiResource: "api/ApiResource/CreateApiResourceAsync",
   loadApiResource: "api/ApiResource/LoadAsync",
   getPage: "api/ClientApplication/GetPageAsync",
-  getJwtClaimType: "api/ApiResource/GetJwtClaimTypeSelectItem",
+  getGrantType: "api/ClientApplication/GetGrantTypeSelectItemAsync",
   delete: "api/ApiResource/DeleteAsync",
 }
