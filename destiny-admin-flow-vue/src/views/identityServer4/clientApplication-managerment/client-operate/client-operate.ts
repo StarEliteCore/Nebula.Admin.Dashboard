@@ -26,6 +26,7 @@ export default class ClientOperate extends Mixins(OperateMixins) {
      * 客户端名称
      */
     clientName: [{ required: true, message: "客户端名称不可为空", trigger: "OnHandleCommit" },],
+    allowedGrantTypes: [{ required: true, message: "授权类型不可为空", trigger: "OnHandleCommit" },],
   };
   created()
   {
@@ -57,7 +58,7 @@ export default class ClientOperate extends Mixins(OperateMixins) {
           case EOperate.add:
             debugger
             console.log(this.client)
-            // this.CreateUser();
+            this.IsShow = false;
             break;
           case EOperate.update:
             // this.UpdateUser();

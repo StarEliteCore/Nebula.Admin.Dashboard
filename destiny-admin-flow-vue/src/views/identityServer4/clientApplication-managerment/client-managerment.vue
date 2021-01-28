@@ -28,8 +28,8 @@
             @on-select="currentRowEventArray"
           >
            <template  v-slot:enabled="{ row }">
-              <Tag v-if="row.enabled" color="red">是</Tag>
-              <Tag v-else color="blue">否</Tag>
+              <Tag v-if="row.enabled"  color="blue">是</Tag>
+              <Tag v-else color="red">否</Tag>
             </template>
           </Table>
         </Card>
