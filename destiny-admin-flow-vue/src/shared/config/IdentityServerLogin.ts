@@ -10,6 +10,11 @@ export class ApplicationUserManager extends UserManager {
             response_type: process.env.VUE_APP_RESPONSE_TYPE,
             scope: process.env.VUE_APP_SCOPE,
             post_logout_redirect_uri: window.location.origin,
+            loadUserInfo:true,
+            revokeAccessTokenOnSignout:true,
+            automaticSilentRenew:true,//自动续签
+            // silen
+            // monito
         })
         // console.log({
         //     authority: process.env.VUE_APP_AUTHORITY_SERVER,

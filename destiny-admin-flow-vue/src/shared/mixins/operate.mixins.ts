@@ -37,6 +37,9 @@ export default class OperateMixins extends Vue {
    * 某些字段是否显示
    */
   protected IsShowColumn: boolean = true;
+  // created(){
+  //   console.log(this.IsShow);
+  // }
   protected OnHandleCancel() {
     /**
      * 取消顯示
