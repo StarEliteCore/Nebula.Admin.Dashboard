@@ -1,7 +1,7 @@
 import { AjaxResultType, IAjaxResult } from "../response";
 
 import { Message as $Message } from "view-design";
-import { ApplicationUserManager } from '../config/IdentityServerLogin';
+import { ApplicationUserManager } from "../config/IdentityServerLogin";
 
 export default class DestinyCoreModule {
   public static ToAjaxResult(
@@ -14,7 +14,10 @@ export default class DestinyCoreModule {
     let $msg = $Message as any;
     switch (type) {
       case AjaxResultType.Success:
-        $msg.success(message);
+        if (message !== "") {
+          $msg.success(message);
+        }
+
         if (successCllback) {
           successCllback();
         }
@@ -29,7 +32,6 @@ export default class DestinyCoreModule {
         $msg.error("权限不足");
         break;
       case AjaxResultType.Unauthorized:
-       
         $msg.error("未经授权");
         break;
     }
