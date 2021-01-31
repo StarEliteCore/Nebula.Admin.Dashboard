@@ -33,4 +33,6 @@ export interface IApiResourceService {
      *
      */
     getJwtClaimTypeSelectItem(): Promise<IAjaxResult>;
+
+    getApiResourceScopeList(): Promise<IAjaxResult>;
 }

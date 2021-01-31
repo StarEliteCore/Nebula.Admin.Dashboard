@@ -1,8 +1,8 @@
 import "reflect-metadata";
 
+import { ApiResourceApi, ApiResourceScopeApi } from "@/domain/config/api";
 import { IAjaxResult, IServerPageReturn } from "@/shared/response";
 
-import { ApiResourceApi } from "@/domain/config/api";
 import { IApiResourceInputDto } from "@/domain/entity/identityServer4/apiResourceDto/apiResourceDto";
 import { IApiResourceService } from "./IApiResourceService";
 import { IPageRequest } from "@/shared/request";
@@ -11,6 +11,9 @@ import { injectable } from "inversify";
 
 @injectable()
 export default class  ApiResourceService implements IApiResourceService{
+    getApiResourceScopeList(): Promise<IAjaxResult> {
+        return MainManager.dataRequest.getRequest(ApiResourceScopeApi.getApiResourceScopes);
+    }
     getJwtClaimTypeSelectItem(): Promise<IAjaxResult> {
         return MainManager.dataRequest.getRequest(ApiResourceApi.getJwtClaimType);
     }

@@ -64,10 +64,10 @@
           </Col>
           <Col span="4" offset="1">
             <template v-if="index >= 1">
-              <Button type="error" @click="handleRemove(index)" icon="md-remove">删除资源API项</Button>
+              <Button type="error" @click="handleRemove(index)" icon="md-remove">删除资源资源范围API项</Button>
             </template>
             <template v-else>
-              <Button  type="dashed" @click="handleAdd" icon="md-add">添加资源API项</Button>
+              <Button  type="dashed" @click="handleAdd" icon="md-add">添加资源资源范围API项</Button>
             </template>
           </Col>
         </Row>

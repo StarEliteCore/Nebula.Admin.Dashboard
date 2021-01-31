@@ -16,7 +16,7 @@ export class EditModalMixins extends Vue {
   editData!: any;
 
   isOpen: boolean = false;
-  private form!: any;
+  public form!: any;
   protected InIt() {
     this.GetFormRef();
   }

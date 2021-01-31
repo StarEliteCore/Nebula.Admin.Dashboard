@@ -14,7 +14,7 @@
             >
 
           
-            <Button
+        <Button
               class="operatebutton"
               type="error"
               :loading="delectLoading"
@@ -38,13 +38,13 @@
           </Table>
         </Card>
       </div>
-      <api-resource
+     
+      <api-scope
         ref="editModel"
         :editTitle="editTitle"
         :editData="editData"
         @saveEdit="saveEdit"
-      ></api-resource>
-
+      ></api-scope>
       <page-component
         ref="PageInfo"
         :total="total"
@@ -53,7 +53,7 @@
     </div>
   </section>
 </template>
-<script lang="ts" src="./api-resource-managerment.ts"></script>
+<script lang="ts" src="./api-scope-managerment.ts"></script>
 <style scoped>
 .operatebutton {
   margin-left: 10px;

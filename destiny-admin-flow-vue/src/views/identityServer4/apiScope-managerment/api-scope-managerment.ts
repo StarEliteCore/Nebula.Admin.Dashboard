@@ -1,26 +1,26 @@
-import { ApiResourceApi, ApiScopeApi } from "@/domain/config/api";
 import { Component, Emit, Mixins } from "vue-property-decorator";
 
-import ApiResource from "./api-resource-operate/api-resource-operate.vue";
+import ApiScope from "./apiScope-operate/api-scope-operate.vue";
+import {ApiScopeApi} from "@/domain/config/api";
 import { ComponentMixins } from "@/shared/mixins/component.mixns";
 import DeleteMixins from "@/shared/mixins/delete-dialog.mixins";
 import { IAjaxResult } from "@/shared/response";
 import { ISearchFilter } from "@/shared/request";
 
 @Component({
-  name: "ApiResourceManagerment",
+  name: "ApiScopeManagerment",
   components: {
-    ApiResource
+    ApiScope
   },
 })
-export default class ApiResourceManagerment extends Mixins(
+export default class ApiScopeManagerment extends Mixins(
   DeleteMixins,
   ComponentMixins
 ) {
-  pageUrl: string = ApiResourceApi.getPage;
-  deleteUrl: string = ApiResourceApi.delete;
-  saveEditUrl: string = ApiResourceApi.createApiResource;
+  pageUrl: string = ApiScopeApi.getPage;
 
+  saveEditUrl: string = ApiScopeApi.createApiScope;
+  deleteUrl: string =ApiScopeApi.delete;
   GetColumn() {
     return [
       {
@@ -29,13 +29,13 @@ export default class ApiResourceManagerment extends Mixins(
         align: "center",
       },
       {
-        title: "资源名称",
+        title: "范围名字",
         key: "name",
         align: "center",
         maxWidth: 150,
       },
       {
-        title: "显示名",
+        title: "范围显示名",
         key: "displayName",
         align: "center",
         maxWidth: 150,
@@ -46,18 +46,6 @@ export default class ApiResourceManagerment extends Mixins(
         align: "center",
         maxWidth: 150,
         slot: "enabled",
-      },
-      {
-        title: "范围",
-        key: "scope",
-        align: "center",
-        maxWidth: 150,
-      },
-      {
-        title: "用户声明",
-        key: "userClaim",
-        align: "center",
-        maxWidth: 150,
       },
       {
         title: "描述",
@@ -72,14 +60,15 @@ export default class ApiResourceManagerment extends Mixins(
       {
         field: "name",
         value: "",
-        title: "资源名称",
+        title: "范围名字",
       },
       {
         field: "displayName",
         value: "",
-        title: "显示名",
+        title: "范围显示名",
       },
     ];
   }
+
 
 }

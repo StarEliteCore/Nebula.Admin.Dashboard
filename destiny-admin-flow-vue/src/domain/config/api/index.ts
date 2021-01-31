@@ -21,7 +21,7 @@ export const UserApi = {
    * 用戶分配角色
    */
   userAllocationRole: "api/User/AllocationRoleAsync",
-    /**
+  /**
    * 用戶分配角色
    */
   userAll: "api/User/GetUsersAsync",
@@ -108,23 +108,24 @@ export const MenuApi = {
   /**
    * 异步得到菜单分页数据（不是树，只是普通表格）
    */
-  getMenuPage:"/api/Menu/GetMenuPageAsync",
+  getMenuPage: "/api/Menu/GetMenuPageAsync",
   /**
    * 获取所有菜单
    */
-  GetAllMenuTree:"/api/Menu/GetAllMenuTreeAsync",
+  GetAllMenuTree: "/api/Menu/GetAllMenuTreeAsync",
   /**
    * 批量添加功能菜单
    */
-  BatchAddMenuFunction:"/api/MenuFunction/BatchAddMenuFunctionAsync",
+  BatchAddMenuFunction: "/api/MenuFunction/BatchAddMenuFunctionAsync",
   /**
    * 批量删除功能菜单
    */
-  BatchDeleteMenuFunction:"/api/MenuFunction/BatchDeleteMenuFunctionAsync",
+  BatchDeleteMenuFunction: "/api/MenuFunction/BatchDeleteMenuFunctionAsync",
   /**
    * 根据菜单ID得到菜单功能分页
    */
-  GetMenuFunctionByMenuIdPage:"/api/MenuFunction/GetMenuFunctionByMenuIdPageAsync",
+  GetMenuFunctionByMenuIdPage:
+    "/api/MenuFunction/GetMenuFunctionByMenuIdPageAsync",
 };
 
 ///功能API
@@ -141,12 +142,11 @@ export const FunctionApi = {
    */
   deleteFunction: "api/Function/DeleteAsync",
 
-    /**
+  /**
    * 获取一个功能
    */
   loadFunction: "api/Function/LoadAsync",
 };
-
 
 ///审计API
 export const AuditApi = {
@@ -155,14 +155,14 @@ export const AuditApi = {
   // 得到数据审计分页
   getAuditEntryPage: "api/AuditEntry/GetAuditEntryPageAsync",
 
-   // 得到数据属性分页
+  // 得到数据属性分页
   getAuditEntryPropertyPage: "api/AuditEntry/GetAuditEntryPropertyPageAsync",
 
   //加载审计实体
   loadAuditEntryById: "api/AuditEntry/LoadAuditEntryByIdAsync",
 
   //得到审计属性集合
-  getAuditPropertyList: "api/AuditEntry/GetAuditPropertyListAsnyc"
+  getAuditPropertyList: "api/AuditEntry/GetAuditPropertyListAsnyc",
 };
 
 /**
@@ -172,28 +172,28 @@ export const DataDictionaryApi = {
   /**
    * 数据字典树
    */
-  getDataDictionaryTreeData:"api/DataDictionary/GetTableAsync",
+  getDataDictionaryTreeData: "api/DataDictionary/GetTableAsync",
   /**
    * 数据字典分页数据
    */
-  getDataDictionaryPageListAsync:"api/DataDictionary/GetPageListAsync",
+  getDataDictionaryPageListAsync: "api/DataDictionary/GetPageListAsync",
   /**
    * 修改数据字典
    */
-  updateDataDictionaryAsync:"api/DataDictionary/UpdateAsync",
+  updateDataDictionaryAsync: "api/DataDictionary/UpdateAsync",
   /**
    * 添加数据字典
    */
-  createDataDictionaryAsync:"api/DataDictionary/CreateAsync",
+  createDataDictionaryAsync: "api/DataDictionary/CreateAsync",
   /**
    * 删除数据字典
    */
-  deleteDataDictionaryAsync:"api/DataDictionary/DeleteAsyc",
+  deleteDataDictionaryAsync: "api/DataDictionary/DeleteAsyc",
   /**
    * 根据ID获取数据字典
    */
-  getLoadDictionnnary:"api/DataDictionary/GetDataDictionnnaryListAsync"
-}
+  getLoadDictionnnary: "api/DataDictionary/GetDataDictionnnaryListAsync",
+};
 ///组织架构API
 export const OrganizationApi = {
   /**
@@ -216,31 +216,39 @@ export const OrganizationApi = {
   /**
    * 修改组织架构
    */
-  updateOrganization:"api/Organization/UpdateAsync",
-    /**
+  updateOrganization: "api/Organization/UpdateAsync",
+  /**
    * 加载组织架构
    */
-  loadOrganization:"api/Organization/LoadFormOrganizationAsync",
+  loadOrganization: "api/Organization/LoadFormOrganizationAsync",
 };
 
-
-export const  SystemApi={
-
-
+export const SystemApi = {
   changePassword: "api/Identity/ChangePassword",
-}
+};
 
-export const ApiResourceApi={
+export const ApiResourceApi = {
   createApiResource: "api/ApiResource/CreateApiResourceAsync",
   loadApiResource: "api/ApiResource/LoadAsync",
   getPage: "api/ApiResource/GetApiResourcePageAsync",
   getJwtClaimType: "api/ApiResource/GetJwtClaimTypeSelectItem",
   delete: "api/ApiResource/DeleteAsync",
-}
-export const ClientApi={
+  addOrUpdate: "api/ApiResource/AddOrUpdateApiResourceAsync",
+};
+export const ClientApi = {
   createApiResource: "api/ApiResource/CreateApiResourceAsync",
   loadApiResource: "api/ApiResource/LoadAsync",
   getPage: "api/ClientApplication/GetPageAsync",
   getGrantType: "api/ClientApplication/GetGrantTypeSelectItemAsync",
   delete: "api/ApiResource/DeleteAsync",
-}
+};
+
+export const ApiResourceScopeApi = {
+  getApiResourceScopes: "api/ApiResourceScope/GetApiResourceScopeListAsync",
+};
+
+export const ApiScopeApi = {
+  createApiScope: "api/ApiScope/CreateApiScopeAsync",
+  getPage: "api/ApiScope/GetApiScopePageAsync",
+  delete:"api/ApiScope/DeleteAsync",
+};
