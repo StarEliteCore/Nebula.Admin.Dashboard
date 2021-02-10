@@ -48,6 +48,12 @@ export default class ApiScopeManagerment extends Mixins(
         slot: "enabled",
       },
       {
+        title: "创建时间",
+        key: "createdTime",
+        align: "center",
+        maxWidth: 150,
+      },
+      {
         title: "描述",
         key: "description",
         align: "center",

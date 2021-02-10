@@ -14,7 +14,7 @@ export default class DestinyCoreModule {
     let $msg = $Message as any;
     switch (type) {
       case AjaxResultType.Success:
-        if (message !== "") {
+        if (message !== ""&&res.isShowMes==true) {
           $msg.success(message);
         }
 

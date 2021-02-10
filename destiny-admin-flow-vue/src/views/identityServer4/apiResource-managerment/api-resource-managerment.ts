@@ -60,6 +60,12 @@ export default class ApiResourceManagerment extends Mixins(
         maxWidth: 150,
       },
       {
+        title: "创建时间",
+        key: "createdTime",
+        align: "center",
+        maxWidth: 150,
+      },
+      {
         title: "描述",
         key: "description",
         align: "center",
