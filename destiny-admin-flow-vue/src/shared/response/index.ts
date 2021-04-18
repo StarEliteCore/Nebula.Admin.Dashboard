@@ -12,7 +12,7 @@ export interface IAjaxResult {
   data: any;
   success: boolean | true;
   message: string | "";
-  type:AjaxResultType
+  type:AjaxResultType,
 }
 
 ///类型枚举

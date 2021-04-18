@@ -89,7 +89,6 @@ export default class ApiResource extends Mixins(EditModalMixins) {
   }
 
   protected OnBeforeCommit() {
-
     ///有没有办法简单点(用拷贝吗？？？？)
     this.editData.name = this.editData1.name;
     this.editData.enabled = this.editData1.enabled;
@@ -110,6 +109,7 @@ export default class ApiResource extends Mixins(EditModalMixins) {
     apiService.getJwtClaimTypeSelectItem().then((result: IAjaxResult) => {
       // todo提示待优化
       DestinyCoreModule.ToAjaxResult(result, () => {
+  
         this.userClaimItemList = result.data.itemList;
       });
     });
