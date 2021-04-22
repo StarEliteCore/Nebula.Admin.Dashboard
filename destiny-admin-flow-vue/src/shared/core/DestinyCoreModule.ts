@@ -1,7 +1,7 @@
 import { AjaxResultType, IAjaxResult } from "../response";
 
 import { Message as $Message } from "view-design";
-import { ApplicationUserManager } from "../config/IdentityServerLogin";
+
 
 export default class DestinyCoreModule {
   public static ToAjaxResult(
@@ -14,7 +14,7 @@ export default class DestinyCoreModule {
     let $msg = $Message as any;
     switch (type) {
       case AjaxResultType.Success:
-        if (message !== ""&&res.isShowMes==true) {
+        if (message !== "") {
           $msg.success(message);
         }
 

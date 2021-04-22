@@ -252,3 +252,11 @@ export const ApiScopeApi = {
   getPage: "api/ApiScope/GetApiScopePageAsync",
   delete:"api/ApiScope/DeleteAsync",
 };
+
+export const DocumentTypeApi={
+
+  createOrUpdate: "api/DocumentType/CreateOrUpdateAsync",
+  getPage: "api/DocumentType/GetPageAsync",
+  delete:"api/DocumentType/DeleteAsync",
+  loadForm:"api/DocumentType/LoadFormAsync",
+};

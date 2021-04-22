@@ -201,7 +201,7 @@
                </i-switch>
        </FormItem>
        <FormItem label="C#类型:" prop="cSharpType">
-          <Select filterable   v-model="formItem.cSharpType" >
+          <Select filterable v-model="formItem.cSharpType" >
           <Option v-for="item in cSharpTypeList" :value="item.value" :key="item.value" >{{ item.label }}</Option>
           </Select>
        </FormItem>
