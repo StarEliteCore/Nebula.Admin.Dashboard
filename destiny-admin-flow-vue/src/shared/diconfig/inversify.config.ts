@@ -23,7 +23,8 @@ import SystemService from '@/domain/services/systemservice/SystemService';
 import UserService from '@/domain/services/userservice/UserService';
 import ClientApplicationService from '@/domain/services/IdentityServer4/clientapplicationsevice/Clientapplicationsevice';
 import { IClientApplicationService } from '@/domain/services/IdentityServer4/clientapplicationsevice/IClientapplicationsevice';
-
+import {IDocumentTypeServeice} from "@/domain/services/documentTypeServeice/IDocumentTypeServeice";
+import DocumentTypeServeice from '@/domain/services/documentTypeServeice/DocumentTypeServeice';
 const container = new Container();
 container.bind<MainService>(IocTypes.MainService).to(MainService)
 container.bind<IMenuService>(IocTypes.MenuService).to(MenuService)
@@ -37,5 +38,6 @@ container.bind<IOrganizationService>(IocTypes.OrganizationService).to(Organizati
 container.bind<IDestinyCoreServeice>(IocTypes.DestinyCoreServeice).to(DestinyCoreServeice);
 container.bind<IApiResourceService>(IocTypes.ApiResourceService).to(ApiResourceService);
 container.bind<IClientApplicationService>(IocTypes.ClientApplicationService).to(ClientApplicationService);
+container.bind<IDocumentTypeServeice>(IocTypes.DocumentTypeServeice).to(DocumentTypeServeice);
 
 export default container;

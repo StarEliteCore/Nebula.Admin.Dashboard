@@ -1,6 +1,6 @@
 // IoC
 import { IocTypes } from "@/shared/diconfig/ioc-types";
-import { Icon } from "ant-design-vue";
+import { Form, Icon } from "ant-design-vue";
 import { injectable, inject } from "inversify";
 import "reflect-metadata";
 
@@ -15,6 +15,7 @@ import { IOrganizationService } from "../organizationservice/IOrganizationServic
 import { IRoleService } from "../roleservice/IRoleService";
 import { ISystemService } from "../systemservice/ISystemService";
 import { IUserService } from "../userservice/IUserService";
+import {IDocumentTypeServeice} from "../documentTypeServeice/IDocumentTypeServeice";
 @injectable()
 export class MainService {
   private _menuserverceApi: IMenuService;
@@ -28,6 +29,7 @@ export class MainService {
   private _destinyCoreServeice: IDestinyCoreServeice;
   private _apiResourceService: IApiResourceService;
   private _clientApplicationService: IClientApplicationService;
+  private _documentTypeServeice:IDocumentTypeServeice;
 
   public get MenuServiceApi(): IMenuService {
     return this._menuserverceApi;
@@ -69,6 +71,13 @@ export class MainService {
   public get ClientApplicationService(): IClientApplicationService {
     return this._clientApplicationService;
   }
+
+  public get DocumentTypeServeice():IDocumentTypeServeice
+  {
+ 
+     return this._documentTypeServeice;
+
+  }
   /**
    *
    * @param _menu
@@ -92,7 +101,10 @@ export class MainService {
     @inject(IocTypes.ApiResourceService)
     _apiResourceService: IApiResourceService,
     @inject(IocTypes.ClientApplicationService)
-    _clientApplicationService: IClientApplicationService
+    _clientApplicationService: IClientApplicationService,
+    @inject(IocTypes.DocumentTypeServeice)
+    _documentTypeServeice:IDocumentTypeServeice
+
   ) {
     this._menuserverceApi = _menu;
     this._userserverceApi = _user;
@@ -105,5 +117,6 @@ export class MainService {
     this._destinyCoreServeice = _destinyCoreServeice;
     this._apiResourceService = _apiResourceService;
     this._clientApplicationService=_clientApplicationService;
+    this._documentTypeServeice=_documentTypeServeice;
   }
 }

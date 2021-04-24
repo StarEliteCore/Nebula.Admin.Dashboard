@@ -259,4 +259,5 @@ export const DocumentTypeApi={
   getPage: "api/DocumentType/GetPageAsync",
   delete:"api/DocumentType/DeleteAsync",
   loadForm:"api/DocumentType/LoadFormAsync",
+  getTreeData:"api/DocumentType/GetDocumentTreeTreeDataAsync",
 };

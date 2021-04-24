@@ -26,7 +26,16 @@
         </div>
       </div>
       <div>
-          树内容
+          <a-tree
+         
+          :checkable="false"
+
+      
+          :autoExpandParent="true"
+          :defaultExpandAll="true"
+          :defaultExpandParent="true"
+   
+        />
       </div>
     </nav>
   </section>

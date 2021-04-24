@@ -13,6 +13,7 @@ import { ISystemService } from "../systemservice/ISystemService";
 import { IUserService } from "../userservice/IUserService";
 import { IocTypes } from "@/shared/diconfig/ioc-types";
 import { MainService } from "./main-service";
+import {IDocumentTypeServeice} from "../documentTypeServeice/IDocumentTypeServeice";
 import container from "@/shared/diconfig/inversify.config";
 import request from "@/utils/request";
 
@@ -70,6 +71,11 @@ export class MainManager {
   }
   public get ClientApplicationService(): IClientApplicationService {
     return this.services.ClientApplicationService;
+  }
+
+  public get DocumentTypeServeice():IDocumentTypeServeice{
+
+     return this.services.DocumentTypeServeice;
   }
   constructor() {
     this.services = container.get<MainService>(IocTypes.MainService);
