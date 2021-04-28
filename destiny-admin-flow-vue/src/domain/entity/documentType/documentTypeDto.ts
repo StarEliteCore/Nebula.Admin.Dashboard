@@ -15,11 +15,14 @@ export interface IDocumentTypeBaseDto extends IEntity<string>, IDescription {
    * 父级菜单ID
    */
   parentId: string;
+
+  sort: number;
 }
 
 export interface IDocumentTypeInputDto extends IDocumentTypeBaseDto {}
 
 export class DocumentTypeInputDto implements IDocumentTypeInputDto {
+  sort = 0;
   parentId = "";
   description = "";
 

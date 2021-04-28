@@ -1,19 +1,25 @@
 import { Component, Mixins } from "vue-property-decorator";
-import { ComponentMixins } from "@/shared/mixins/component.mixns";
-import { DocumentTypeApi } from "@/domain/config/api";
+
 import { IDocumentTreeOutDto } from "@/domain/entity/documentType/documentTypeDto";
 import { MainManager } from "@/domain/services/main/main-manager";
+import PageMixins from "@/shared/mixins/page.mixins";
+import DeleteMixins from "@/shared/mixins/delete-dialog.mixins";
+import DocumentTypeOperate from "./document-type-operate/document-type-operate.vue";
 @Component({
   name: "DocumentTypeManagerment",
-  components: {},
+  components: {
+    DocumentTypeOperate,
+  },
 })
-export default class DocumentTypeManagerment extends Mixins() {
+export default class DocumentTypeManagerment extends Mixins(
+  PageMixins,
+  DeleteMixins
+) {
   private treeData: Array<IDocumentTreeOutDto> = [];
 
   private mainManager: MainManager = MainManager.Instance();
 
   private mounted() {
-
     this.loadTreeData();
   }
 
@@ -25,5 +31,17 @@ export default class DocumentTypeManagerment extends Mixins() {
         }
       }
     );
+  }
+
+  private documentType:any;
+
+  private handleAdd() {
+
+    this.documentType = this.$refs.documentType as Vue;
+    if (!this.documentType) {
+      return;
+    }
+   
+    this.documentType.$emit("open");
   }
 }

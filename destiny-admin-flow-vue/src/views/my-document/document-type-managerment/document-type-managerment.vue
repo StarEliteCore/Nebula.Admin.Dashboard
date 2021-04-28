@@ -8,7 +8,7 @@
 
         <ButtonGroup class="btngroup" shape="circle">
           <Button>
-            <Icon type="md-add" />
+            <Icon type="md-add" @click="handleAdd()" />
           </Button>
           <Button>
             <Icon type="ios-create" />
@@ -27,20 +27,21 @@
       </div>
       <div>
           <a-tree
-         
+            class="menuTree"
           :checkable="false"
-
-      
+          :tree-data="treeData"
           :autoExpandParent="true"
           :defaultExpandAll="true"
           :defaultExpandParent="true"
-   
+          :replaceFields="{children:'children', title:'name', key:'id' }"
         />
       </div>
     </nav>
+    <document-type-operate  ref="documentType" editTitle="新增" @refresh="loadTreeData"></document-type-operate>
   </section>
+  
 </template>
-
+<script lang="ts" src="./document-type-managerment.ts"></script>
 <style lang="scss" scoped>
 .box {
   display: flex;
