@@ -52,8 +52,11 @@ export default class DocumentTypeOperate extends Mixins() {
       this.editModel
     ).then((res) => {
       DestinyCoreModule.ToAjaxResult(res, () => {
+        this.$emit('refresh');
         this.colse();
+
       });
     });
   }
+  
 }

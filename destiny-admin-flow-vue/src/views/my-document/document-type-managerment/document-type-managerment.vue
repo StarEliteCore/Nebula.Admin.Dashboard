@@ -7,13 +7,13 @@
         </div>
 
         <ButtonGroup class="btngroup" shape="circle">
-          <Button>
-            <Icon type="md-add" @click="handleAdd()" />
+          <Button @click="handleAdd()">
+            <Icon type="md-add" />
           </Button>
           <Button>
             <Icon type="ios-create" />
           </Button>
-          <Button>
+          <Button @click="handleDelete()">
             <Icon type="ios-trash" />
           </Button>
         </ButtonGroup>
@@ -26,20 +26,37 @@
         </div>
       </div>
       <div>
-          <a-tree
-            class="menuTree"
+        <a-tree
+          class="menuTree"
           :checkable="false"
           :tree-data="treeData"
           :autoExpandParent="true"
           :defaultExpandAll="true"
           :defaultExpandParent="true"
-          :replaceFields="{children:'children', title:'name', key:'id' }"
+          :replaceFields="{ children: 'children', title: 'name', key: 'id' }"
+          @select="onTreeSelect"
         />
       </div>
     </nav>
-    <document-type-operate  ref="documentType" editTitle="新增" @refresh="loadTreeData"></document-type-operate>
+    <div class="body">
+      <article>
+        <Table :columns="columns" border stripe class="table" :data="tableData">
+        </Table>
+        <page-component
+          ref="PageInfo"
+          :total="total"
+          @PageChange="pageChange"
+          class="paging"
+        ></page-component>
+      </article>
+    </div>
+
+    <document-type-operate
+      ref="documentType"
+      editTitle="新增"
+      @refresh="loadTreeData"
+    ></document-type-operate>
   </section>
-  
 </template>
 <script lang="ts" src="./document-type-managerment.ts"></script>
 <style lang="scss" scoped>
