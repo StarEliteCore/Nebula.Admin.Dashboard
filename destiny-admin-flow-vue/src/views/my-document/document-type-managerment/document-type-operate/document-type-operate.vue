@@ -6,7 +6,7 @@
       :mask-closable="false"
       :scrollable="true"
       :lock-scroll="true"
-       @on-ok="save"
+      @on-ok="save"
     >
       <Card title="基本信息" style="width: 100%;" :dis-hover="true">
         <Form ref="formInline" :label-width="80" :model="editModel">
@@ -14,7 +14,7 @@
             <a-tree-select
               style="z-index: 3000"
               v-model="editModel.parentId"
-              :tree-data="treeData"
+              :tree-data="treeData1"
               placeholder="请选择"
               tree-default-expand-all
               :replaceFields="{

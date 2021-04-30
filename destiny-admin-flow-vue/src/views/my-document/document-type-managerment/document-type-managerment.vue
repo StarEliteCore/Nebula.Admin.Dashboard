@@ -10,7 +10,7 @@
           <Button @click="handleAdd()">
             <Icon type="md-add" />
           </Button>
-          <Button>
+          <Button @click="handleUpdate()">
             <Icon type="ios-create" />
           </Button>
           <Button @click="handleDelete()">
@@ -53,8 +53,10 @@
 
     <document-type-operate
       ref="documentType"
-      editTitle="新增"
-      @refresh="loadTreeData"
+      :editTitle="editTitle"
+      :editData="editData"
+      @refresh="refresh"
+      :treeData="treeData"
     ></document-type-operate>
   </section>
 </template>

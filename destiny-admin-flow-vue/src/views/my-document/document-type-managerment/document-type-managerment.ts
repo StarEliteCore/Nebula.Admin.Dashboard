@@ -1,4 +1,4 @@
-import { Component, Mixins } from "vue-property-decorator";
+import { Component, Emit, Mixins } from "vue-property-decorator";
 import * as PageQuery from "@/shared/request";
 import {
   DocumentTypeOutputDto,
@@ -27,7 +27,8 @@ export default class DocumentTypeManagerment extends Mixins(
   private mainManager: MainManager = MainManager.Instance();
 
   private tableData: Array<IDocumentTypeOutputPageList> = [];
-
+  private editTitle: string = "新增！";
+  private editData: any = {};
   private mounted() {
     this.loadTreeData();
     this.loadTableData();
@@ -45,17 +46,43 @@ export default class DocumentTypeManagerment extends Mixins(
 
   private documentType: any;
 
+  refresh() {
+    this.loadTreeData();
+    this.loadTableData();
+  }
   private handleAdd() {
     this.documentType = this.$refs.documentType as Vue;
     if (!this.documentType) {
       return;
     }
+    this.treeSelectedId = "";
+    if (this.treeSelectedId === "") {
+      this.editTitle = "新增";
+    } else {
+      this.editTitle = "更新";
+    }
 
-    this.$nextTick(() => this.documentType.$emit("open"));
+    this.editData.Id = "";
+    this.documentType.$emit("open");
+  }
+
+  private handleUpdate() {
+    this.documentType = this.$refs.documentType as Vue;
+    if (!this.documentType) {
+      return;
+    }
+    if (this.treeSelectedId === "") {
+      this.$Message.info("请选择一条数据!!!");
+      return;
+    } else {
+      this.editTitle = "更新";
+    }
+
+    this.editData.Id = this.treeSelectedId;
+    this.documentType.$emit("open");
   }
 
   private handleDelete() {
-    console.log(this.treeSelectedId);
     if (this.treeSelectedId === "") {
       this.$Message.error("请选择要删除的数据!");
       return;
@@ -64,14 +91,12 @@ export default class DocumentTypeManagerment extends Mixins(
         this.treeSelectedId
       ).then((res) => {
         if (res.success) {
+          this.refresh();
           this.$Message.success("删除成功");
-          this.loadTreeData();
-          this.loadTableData();
         } else {
           this.$Message.error({
             duration: 5,
-            content:res.message
-
+            content: res.message,
           });
         }
       });
@@ -111,6 +136,11 @@ export default class DocumentTypeManagerment extends Mixins(
   private treeSelectedId: string = "";
   private treeSelectedNode: any;
 
+  @Emit()
+  pageChange() {
+    this.loadTableData();
+  }
+
   private onTreeSelect(expandedKeys: any, expanded: any) {
     if (expanded.selected === true) {
       this.treeSelectedId = expandedKeys[0];
@@ -133,3 +163,5 @@ export default class DocumentTypeManagerment extends Mixins(
     }
   }
 }
+
+
