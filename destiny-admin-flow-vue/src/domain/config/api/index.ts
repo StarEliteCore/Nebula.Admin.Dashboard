@@ -261,3 +261,12 @@ export const DocumentTypeApi={
   loadForm:"api/DocumentType/LoadFormAsync",
   getTreeData:"api/DocumentType/GetDocumentTreeTreeDataAsync",
 };
+
+
+export const DocumentApi={
+
+  createOrUpdate: "api/Document/CreateOrUpdateAsync",
+  getPage: "api/Document/GetPageAsync",
+  delete:"api/Document/DeleteAsync",
+  loadForm:"api/Document/LoadFormAsync"
+};
