@@ -13,7 +13,9 @@ export default class DestinyCoreModule {
     let type = res.type;
     let $msg = $Message as any;
     switch (type) {
+  
       case AjaxResultType.Success:
+        debugger;
         if (message !== "") {
           $msg.success(message);
         }
@@ -23,6 +25,7 @@ export default class DestinyCoreModule {
         }
         break;
       case AjaxResultType.Error:
+        debugger;
         $msg.error(message);
         if (errorCllback) {
           errorCllback();

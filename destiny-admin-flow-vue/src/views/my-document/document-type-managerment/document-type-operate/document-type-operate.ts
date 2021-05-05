@@ -12,32 +12,58 @@ import { Component, Mixins, Prop } from "vue-property-decorator";
   name: "DocumentTypeOperate",
 })
 export default class DocumentTypeOperate extends Mixins() {
-  @Prop(String)
-  private editTitle: string | undefined;
+  @Prop()
+  private editTitle!: string;
+
+  @Prop()
+  private editData!: any;
 
   public visible = false;
 
   private editModel: IDocumentTypeInputDto = new DocumentTypeInputDto();
-  private treeData: Array<IDocumentTreeOutDto> = [];
+  @Prop()
+  private treeData!: any;
+  private treeData1: any = [];
   private mainManager: MainManager = MainManager.Instance();
   //页面初始化
   private InIt() {}
 
-  private Load() {
-    this.mainManager.DocumentTypeServeice.getDocumentTypeTreeData().then(
-      (res) => {
-        if (res.success) {
-          this.treeData = res.itemList;
-        }
-      }
-    );
-  }
+  // private Load() {
+  //   this.mainManager.DocumentTypeServeice.getDocumentTypeTreeData().then(
+  //     (res) => {
+  //       if (res.success) {
+  //         this.treeData = res.itemList;
+  //       }
+  //     }
+  //   );
+  // }
 
   open() {
-    this.visible = true;
-    this.Load();
+    this.$nextTick(() => {
+      this.treeData1 = this.treeData;
+      this.editModel=new DocumentTypeInputDto();
+      this.visible = true;
+      this.LoadForm();
+    });
   }
 
+  LoadForm() {
+    if (this.editData === undefined) {
+      return;
+    }
+
+    if (this.editData.Id !== "") {
+      this.mainManager.DocumentTypeServeice.getDocumentTypeById(
+        this.editData.Id
+      ).then((res) => {
+        if (res.success) {
+          this.editModel = res.data;
+        } else {
+          this.$Message.error(res.message);
+        }
+      });
+    }
+  }
   colse() {
     this.visible = false;
   }
@@ -52,6 +78,7 @@ export default class DocumentTypeOperate extends Mixins() {
       this.editModel
     ).then((res) => {
       DestinyCoreModule.ToAjaxResult(res, () => {
+        this.$emit("refresh");
         this.colse();
       });
     });

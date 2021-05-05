@@ -5,7 +5,11 @@ import {
   IDocumentTreeOutDto,
 } from "@/domain/entity/documentType/documentTypeDto";
 import { IPageRequest } from "@/shared/request";
-import { IServerPageReturn, IAjaxResult, IServerReturn } from "@/shared/response";
+import {
+  IServerPageReturn,
+  IAjaxResult,
+  IServerReturn,
+} from "@/shared/response";
 import { injectable } from "inversify";
 import { MainManager } from "../main/main-manager";
 
@@ -27,15 +31,18 @@ export default class DocumentTypeServeice implements IDocumentTypeServeice {
     );
   }
   deleteDocumentTypeAsync(_id: string): Promise<IAjaxResult> {
-    return MainManager.dataRequest.deleteRequest(DocumentTypeApi.delete, _id);
+    return MainManager.dataRequest.deleteRequest(DocumentTypeApi.delete, {
+      id: _id,
+    });
   }
   getDocumentTypeById(_id: string): Promise<IAjaxResult> {
-    return MainManager.dataRequest.getRequest(DocumentTypeApi.loadForm, _id);
+    return MainManager.dataRequest.getRequest(DocumentTypeApi.loadForm, {id:_id});
   }
 
-  getDocumentTypeTreeData(
-  ): Promise<IServerReturn<IDocumentTreeOutDto[]>> {
+  getDocumentTypeTreeData(): Promise<IServerReturn<IDocumentTreeOutDto[]>> {
     return MainManager.dataRequest.postRequest(
-      DocumentTypeApi.getTreeData,null);
+      DocumentTypeApi.getTreeData,
+      null
+    );
   }
 }
