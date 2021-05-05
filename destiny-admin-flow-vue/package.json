@@ -24,6 +24,7 @@
     "sass-loader": "^10.0.3",
     "save": "^2.4.0",
     "scss-loader": "^0.0.1",
+    "tinymce": "^5.7.1",
     "view-design": "^4.4.0-rc.1",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
