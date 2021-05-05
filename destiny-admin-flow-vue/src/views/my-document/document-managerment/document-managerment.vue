@@ -29,7 +29,7 @@
               >删除</Button
             >
           </Row>
-       
+
           <Table
             :columns="columns"
             :data="tableData"
@@ -38,11 +38,15 @@
             @on-select-cancel="currentRowEventCancel"
             @on-select="currentRowEventArray"
           >
-           
           </Table>
         </Card>
       </div>
-   
+      <document-operate
+        ref="editModel"
+        :editTitle="editTitle"
+        :editData="editData"
+        @saveEdit="saveEdit"
+      ></document-operate>
       <page-component
         ref="PageInfo"
         :total="total"
