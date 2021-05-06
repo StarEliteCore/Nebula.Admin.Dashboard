@@ -3,6 +3,7 @@ import * as PageQuery from "@/shared/request";
 import { Component, Emit, Ref, Vue } from "vue-property-decorator";
 import {
   IFilterCondition,
+  IOrderCondition,
   IPageRequest,
   IQueryFilter,
   ISearchFilter,
@@ -20,6 +21,7 @@ import MySearch from "@/shared/search/my-search.vue";
 import PageComponent from "@/components/page-component/page-component.vue";
 import PageInfo from "@/components/page-component/page-component";
 import SearchInfo from "@/shared/search/my-search";
+import { ESort } from "../request/query.enum";
 
 @Component({
   name: "ComponentMixins",
@@ -111,11 +113,47 @@ export class ComponentMixins extends Vue {
         _pageRequest.filter.conditions.push(e);
       });
     }
+
+    let orders = this.GetOrderColumn();
+
+    if (orders.length > 0) {
+      _pageRequest.orderConditions = orders;
+    }
+
     let filter: IPageRequest = JSON.parse(JSON.stringify(_pageRequest));
+
     // filter.queryFilter.filters = filters;
     filter.pageIndex = this.PageInfo.PaginationHandle.Pagination.pageIndex;
     filter.pageSize = this.PageInfo.PaginationHandle.Pagination.pageSize;
     return filter;
+  }
+
+  //得到排序列
+  private GetOrderColumn(): IOrderCondition[] {
+    let orders: IOrderCondition[] =
+      this.GetOrders().length > 0 ? this.GetOrders() : [];
+    if (this.columns.length > 0) {
+      this.columns.forEach((e, i) => {
+        if (e.sort === ESort.Ascending || e.sort === ESort.Descending) {
+          let sort: IOrderCondition = {
+            sortDirection: e.sort,
+            sortField: e.key ?? "",
+          };
+          let isSort = orders.filter((o) => {
+            //判断是否存在
+            return o.sortField.toLowerCase() == e.key?.toLowerCase() ?? "";
+          });
+          if (isSort.length === 0) {
+            orders.push(sort);
+          }
+        }
+      });
+    }
+    return orders;
+  }
+  ///排序
+  protected GetOrders(): IOrderCondition[] {
+    return [];
   }
 
   protected GetFilterCondition(): IFilterCondition[] {
@@ -155,7 +193,6 @@ export class ComponentMixins extends Vue {
               if (res.success) {
                 this.GetPage();
                 this.deleteCallback(res);
-           
               } else {
                 this.deleteCallback(res);
               }
@@ -226,7 +263,7 @@ export class ComponentMixins extends Vue {
       return;
     }
     this.editTitle = "新增";
-
+    this.editData = {};
     this.editModel.$emit("open");
   }
 
@@ -244,8 +281,8 @@ export class ComponentMixins extends Vue {
   @Emit()
   saveEdit(_data: any) {
     if (this.saveEditUrl) {
-      this.mainManager.DestinyCoreServeice.save(this.saveEditUrl, _data)
-        .then((res: IAjaxResult) => {
+      this.mainManager.DestinyCoreServeice.save(this.saveEditUrl, _data).then(
+        (res: IAjaxResult) => {
           if (res.success) {
             this.$Message.success("保存成功");
             this.editModel.$emit("close");
@@ -253,8 +290,8 @@ export class ComponentMixins extends Vue {
           } else {
             this.$Message.error(res.message);
           }
-        })
-       ;
+        }
+      );
     }
   }
 
