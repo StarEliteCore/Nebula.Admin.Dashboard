@@ -36,7 +36,9 @@
         </FormItem>
 
         <FormItem label="内容：" prop="content">
-          <Input v-model="editData.content" />
+          <Editor  
+            :init="editConfig"
+           v-model="editData.content"></Editor>
         </FormItem>
       </Form>
       <div slot="footer">
