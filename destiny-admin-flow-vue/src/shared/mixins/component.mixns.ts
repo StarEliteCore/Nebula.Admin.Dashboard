@@ -109,7 +109,7 @@ export class ComponentMixins extends Vue {
   protected GetReq(_pageRequest: IPageRequest) {
     let conditions = this.GetFilterCondition();
     if (conditions.length > 0) {
-      conditions.forEach((e: IFilterCondition, i: number) => {
+      conditions.forEach((e: IFilterCondition) => {
         _pageRequest.filter.conditions.push(e);
       });
     }
@@ -133,10 +133,10 @@ export class ComponentMixins extends Vue {
     let orders: IOrderCondition[] =
       this.GetOrders().length > 0 ? this.GetOrders() : [];
     if (this.columns.length > 0) {
-      this.columns.forEach((e, i) => {
-        if (e.sort === ESort.Ascending || e.sort === ESort.Descending) {
-          let sort: IOrderCondition = {
-            sortDirection: e.sort,
+      this.columns.forEach((e) => {
+        if (e.sorted !== undefined && e.sorted?.sort === true) {
+          let mySort: IOrderCondition = {
+            sortDirection: e.sorted.direction,
             sortField: e.key ?? "",
           };
           let isSort = orders.filter((o) => {
@@ -144,7 +144,7 @@ export class ComponentMixins extends Vue {
             return o.sortField.toLowerCase() == e.key?.toLowerCase() ?? "";
           });
           if (isSort.length === 0) {
-            orders.push(sort);
+            orders.push(mySort);
           }
         }
       });

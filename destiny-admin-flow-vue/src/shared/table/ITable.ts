@@ -1,5 +1,6 @@
 import { IOrderCondition } from "../request";
 import { ESort } from "../request/query.enum";
+import { ISort } from "./ISort";
 
 export interface ITableBase {
   /**
@@ -87,7 +88,8 @@ export interface ITableColumn extends ITableBase, ITbaleStyle {
   filterMultiple?: boolean;
 
   /**
-   * 排序方式
+   * 自定义排序
    */
-  sort?: number;
+   sorted?:ISort;
+
 }

@@ -1,7 +1,8 @@
 <template>
   <section>
     <div class="body">
-      <my-search :fields="fields" @click="search"></my-search>
+
+      <!-- <my-search :fields="fields" @click="search"></my-search>
       <div>
         <Card :dis-hover="true">
           <Row style="margin: 0px 0px 16px 0px; float: right">
@@ -51,8 +52,9 @@
         ref="PageInfo"
         :total="total"
         @PageChange="pageChange"
-      ></page-component>
+      ></page-component> -->
     </div>
+  
   </section>
 </template>
 
@@ -60,5 +62,11 @@
 <style scoped>
 .operatebutton {
   margin-left: 10px;
+}
+.myForm {
+  margin-bottom: 16px;
+  background-color: #fff;
+  border-radius: 2px;
+  padding: 12px 10px 6px 10px;
 }
 </style>
