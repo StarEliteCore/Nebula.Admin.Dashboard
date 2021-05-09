@@ -4,13 +4,11 @@ import { ComponentMixins } from "@/shared/mixins/component.mixns";
 import { DocumentApi } from "@/domain/config/api";
 
 import {
-  IFilterCondition,
-  IOrderCondition,
   ISearchFilter,
 } from "@/shared/request";
 import DocumentOperate from "./document-operate/document-operate.vue";
 import { ESort } from "@/shared/request/query.enum";
-import TinymceEditor  from "./tinymce-editor.vue";
+
 
 
 @Component({

@@ -2,7 +2,7 @@
   <section>
     <div class="body">
 
-      <!-- <my-search :fields="fields" @click="search"></my-search>
+      <my-search :fields="fields" @click="search"></my-search>
       <div>
         <Card :dis-hover="true">
           <Row style="margin: 0px 0px 16px 0px; float: right">
@@ -52,7 +52,7 @@
         ref="PageInfo"
         :total="total"
         @PageChange="pageChange"
-      ></page-component> -->
+      ></page-component>
     </div>
   
   </section>
