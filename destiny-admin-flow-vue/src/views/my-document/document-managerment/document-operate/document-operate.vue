@@ -36,9 +36,11 @@
         </FormItem>
 
         <FormItem label="内容：" prop="content">
-          <Editor  
+          <editor
+            api-key="no-api-key"
             :init="editConfig"
-           v-model="editData.content"></Editor>
+            
+          />
         </FormItem>
       </Form>
       <div slot="footer">

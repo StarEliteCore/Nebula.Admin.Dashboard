@@ -3,17 +3,8 @@ import { Component, Mixins } from "vue-property-decorator";
 import { EditModalMixins } from "@/shared/mixins/edit-modal.mixins";
 import { MainManager } from "@/domain/services/main/main-manager";
 import { TreeChild } from "view-design";
-import tinymce from 'tinymce/tinymce' //tinymce默认hidden，不引入不显示
-import Editor from '@tinymce/tinymce-vue'
-import 'tinymce/icons/default/icons'
-import 'tinymce/themes/silver'
-// 编辑器插件plugins
-// 更多插件参考：https://www.tiny.cloud/docs/plugins/
-import 'tinymce/plugins/image' // 插入上传图片插件
-import 'tinymce/plugins/media' // 插入视频插件
-import 'tinymce/plugins/table' // 插入表格插件
-import 'tinymce/plugins/lists' // 列表插件
-import 'tinymce/plugins/wordcount' // 字数统计插件
+import Editor from "@tinymce/tinymce-vue";
+
 
 import {
   IDocumentTreeOutDto,
@@ -118,7 +109,6 @@ export default class DocumentOperate extends Mixins(EditModalMixins) {
     this.MapTo(this.editData.id as string);
     this.GetFormRef();
     this.LoadDocumentType();
-    tinymce.init({});
   }
   private mainManager: MainManager = MainManager.Instance();
 

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: destiny-core-flowadmin-webui-pod
+  namespace: destinycore-flow
+spec:
+  selector:
+    matchLabels:
+      app: destiny-core-flowadmin-webui-pod
+  template:
+    metadata:
+      labels:
+        app: destiny-core-flowadmin-webui-pod
+    spec:
+      nodeName: k8sworknode1
+      containers:
+        - name: destiny-core-flowadmin-webui-container
+          image: registry.cn-hangzhou.aliyuncs.com/destinycore/destinycoreadminweb:v1.0
+          resources:
+            limits:
+              memory: "200Mi"
+              cpu: "100m"
+          ports:
+          - containerPort: 80
+      imagePullSecrets:
+        - name: aliyun-iamge-secret
