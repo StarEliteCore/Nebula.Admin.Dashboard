@@ -4,12 +4,12 @@ import { ComponentMixins } from "@/shared/mixins/component.mixns";
 import { DocumentApi } from "@/domain/config/api";
 
 import {
-  IFilterCondition,
-  IOrderCondition,
   ISearchFilter,
 } from "@/shared/request";
 import DocumentOperate from "./document-operate/document-operate.vue";
 import { ESort } from "@/shared/request/query.enum";
+
+
 
 @Component({
   name: "DocumentManagerment",
@@ -21,6 +21,7 @@ export default class DocumentManagerment extends Mixins(ComponentMixins) {
   pageUrl: string = DocumentApi.getPage;
   deleteUrl: string = DocumentApi.delete;
   saveEditUrl: string = DocumentApi.createOrUpdate;
+  
   GetColumn() {
     return [
       {
@@ -57,7 +58,10 @@ export default class DocumentManagerment extends Mixins(ComponentMixins) {
         title: "创建时间",
         key: "createdTime",
         align: "center",
-        sort: ESort.Descending,
+        sorted: {
+          sort: true,
+          direction: ESort.Descending,
+        }
       },
       {
         title: "最后修改时间",

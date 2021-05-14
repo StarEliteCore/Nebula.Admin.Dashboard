@@ -51,7 +51,7 @@
   </div>
 </template>
 <script lang="ts" src="./document-type-operate.ts"></script>
-<style>
+<style scoped>
 .ivu-card-head {
   background-color: #2d8cf0;
   border: 1px solid #2d8cf0 !important;
