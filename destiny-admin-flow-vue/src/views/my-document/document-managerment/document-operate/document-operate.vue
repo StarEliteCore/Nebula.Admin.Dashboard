@@ -37,6 +37,7 @@
 
         <FormItem label="内容：" prop="content">
           <editor
+            v-model="editData.content"
             api-key="no-api-key"
             :init="editConfig"
             

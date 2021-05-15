@@ -2,13 +2,11 @@ import { Component, Mixins } from "vue-property-decorator";
 
 import { EditModalMixins } from "@/shared/mixins/edit-modal.mixins";
 import { MainManager } from "@/domain/services/main/main-manager";
-import { TreeChild } from "view-design";
 import Editor from "@tinymce/tinymce-vue";
 
 
 import {
   IDocumentTreeOutDto,
-  IDocumentTypeOutputPageList,
 } from "@/domain/entity/documentType/documentTypeDto";
 @Component({
   name: "DocumentOperate",
