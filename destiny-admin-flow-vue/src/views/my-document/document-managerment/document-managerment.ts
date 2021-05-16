@@ -41,6 +41,8 @@ export default class DocumentManagerment extends Mixins(ComponentMixins) {
         key: "content",
         align: "center",
         maxWidth: 300,
+        // tooltip: true,
+        ellipsis:true
       },
       {
         title: "文档类型",
