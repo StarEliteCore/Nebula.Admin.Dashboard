@@ -1,0 +1,24 @@
+{
+  "name": "destinywechatprogram",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Remax Project With TypeScript",
+  "main": "index.js",
+  "keywords": [],
+  "author": "wangzewei <1585955375@qq.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "remax build -t wechat -w",
+    "build": "cross-env NODE_ENV=production remax build -t wechat"
+  },
+  "dependencies": {
+    "annar": "^2.1.0",
+    "react": "^16.14.0",
+    "remax": "^2.9.1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.14.2",
+    "cross-env": "^7.0.2",
+    "typescript": "^4.1.2"
+  }
+}

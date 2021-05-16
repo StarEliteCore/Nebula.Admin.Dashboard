@@ -1,0 +1,11 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/documenttype/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "DestinyCore面试笔记",
+    "navigationBarBackgroundColor": "#282c34"
+  },
+  "sitemapLocation": "sitemap.json"
+}
