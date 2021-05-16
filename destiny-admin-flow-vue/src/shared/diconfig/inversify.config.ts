@@ -25,6 +25,8 @@ import ClientApplicationService from '@/domain/services/IdentityServer4/clientap
 import { IClientApplicationService } from '@/domain/services/IdentityServer4/clientapplicationsevice/IClientapplicationsevice';
 import {IDocumentTypeServeice} from "@/domain/services/documentTypeServeice/IDocumentTypeServeice";
 import DocumentTypeServeice from '@/domain/services/documentTypeServeice/DocumentTypeServeice';
+import DocumentServeice from "@/domain/services/documentServeice/DocumentServeice";
+import { IDocumentServeice } from '@/domain/services/documentServeice/IDocumentServeice';
 const container = new Container();
 container.bind<MainService>(IocTypes.MainService).to(MainService)
 container.bind<IMenuService>(IocTypes.MenuService).to(MenuService)
@@ -39,5 +41,5 @@ container.bind<IDestinyCoreServeice>(IocTypes.DestinyCoreServeice).to(DestinyCor
 container.bind<IApiResourceService>(IocTypes.ApiResourceService).to(ApiResourceService);
 container.bind<IClientApplicationService>(IocTypes.ClientApplicationService).to(ClientApplicationService);
 container.bind<IDocumentTypeServeice>(IocTypes.DocumentTypeServeice).to(DocumentTypeServeice);
-
+container.bind<IDocumentServeice>(IocTypes.DocumentServeice).to(DocumentServeice);
 export default container;

@@ -16,6 +16,7 @@ import { IRoleService } from "../roleservice/IRoleService";
 import { ISystemService } from "../systemservice/ISystemService";
 import { IUserService } from "../userservice/IUserService";
 import {IDocumentTypeServeice} from "../documentTypeServeice/IDocumentTypeServeice";
+import {IDocumentServeice} from "../documentServeice/IDocumentServeice";
 @injectable()
 export class MainService {
   private _menuserverceApi: IMenuService;
@@ -30,6 +31,7 @@ export class MainService {
   private _apiResourceService: IApiResourceService;
   private _clientApplicationService: IClientApplicationService;
   private _documentTypeServeice:IDocumentTypeServeice;
+  private _documentServeice:IDocumentServeice;
 
   public get MenuServiceApi(): IMenuService {
     return this._menuserverceApi;
@@ -78,6 +80,13 @@ export class MainService {
      return this._documentTypeServeice;
 
   }
+
+  public get DocumentServeice():IDocumentServeice
+  {
+
+    return this._documentServeice;
+
+  }
   /**
    *
    * @param _menu
@@ -103,7 +112,9 @@ export class MainService {
     @inject(IocTypes.ClientApplicationService)
     _clientApplicationService: IClientApplicationService,
     @inject(IocTypes.DocumentTypeServeice)
-    _documentTypeServeice:IDocumentTypeServeice
+    _documentTypeServeice:IDocumentTypeServeice,
+    @inject(IocTypes.DocumentServeice)
+    _documentServeice:IDocumentServeice
 
   ) {
     this._menuserverceApi = _menu;
@@ -118,5 +129,6 @@ export class MainService {
     this._apiResourceService = _apiResourceService;
     this._clientApplicationService=_clientApplicationService;
     this._documentTypeServeice=_documentTypeServeice;
+    this._documentServeice=_documentServeice
   }
 }
