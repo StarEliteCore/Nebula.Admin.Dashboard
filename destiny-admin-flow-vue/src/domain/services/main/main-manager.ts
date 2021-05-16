@@ -16,6 +16,7 @@ import { MainService } from "./main-service";
 import {IDocumentTypeServeice} from "../documentTypeServeice/IDocumentTypeServeice";
 import container from "@/shared/diconfig/inversify.config";
 import request from "@/utils/request";
+import {IDocumentServeice}  from "../documentServeice/IDocumentServeice";
 
 export class MainManager {
   //#region  单例
@@ -77,6 +78,14 @@ export class MainManager {
 
      return this.services.DocumentTypeServeice;
   }
+
+  public get DocumentServeice():IDocumentServeice
+  {
+
+    return this.services.DocumentServeice;
+
+  }
+
   constructor() {
     this.services = container.get<MainService>(IocTypes.MainService);
   }

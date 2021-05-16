@@ -101,6 +101,13 @@ export default class DocumentOperate extends Mixins(EditModalMixins) {
     if (_rowId === undefined) {
       return;
     }
+
+    this.mainManager.DocumentServeice.LoadForm(_rowId).then((res)=>{
+      if (res.success) {
+        this.editData = res.data;
+      }
+
+    });
   }
 
   protected InIt() {

@@ -12,4 +12,5 @@ export const IocTypes = {
   ApiResourceService: Symbol("ApiResourceService"),
   ClientApplicationService: Symbol("ClientApplicationService"),
   DocumentTypeServeice: Symbol("DocumentTypeServeice"),
+  DocumentServeice:Symbol("DocumentServeice")
 };
