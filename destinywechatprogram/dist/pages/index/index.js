@@ -64,20 +64,16 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var onLogin = function onLogin() {
-    Object(remax_wechat__WEBPACK_IMPORTED_MODULE_1__["login"])({
-      success: function success(loginRes) {
-        console.log(loginRes.code);
-        Object(remax_wechat__WEBPACK_IMPORTED_MODULE_1__["getUserInfo"])({
-          withCredentials: true,
-          success: function success(res) {
-            console.log(res);
-            Object(remax_wechat__WEBPACK_IMPORTED_MODULE_1__["redirectTo"])({
-              url: '../documenttype/index'
-            });
-          }
+    wx.getUserProfile({
+      desc: '笔记整理',
+      success: function success(res) {
+        console.log(res);
+        Object(remax_wechat__WEBPACK_IMPORTED_MODULE_1__["redirectTo"])({
+          url: '../documenttype/index'
         });
       }
-    });
+    }); // login({success:(loginRes:WechatMiniprogram.LoginSuccessCallbackResult)=>{
+    // }})
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](remax_wechat__WEBPACK_IMPORTED_MODULE_1__["View"], {
