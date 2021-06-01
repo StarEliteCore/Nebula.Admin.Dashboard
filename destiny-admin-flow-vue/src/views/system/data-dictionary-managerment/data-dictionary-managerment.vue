@@ -33,14 +33,14 @@
             <header>
                 <div>
                     <ButtonGroup>
-                        <Button >
-                            <Icon type="md-add" @click="operateItem(operate.update)"/>添加
+                        <Button @click="operateItem(operate.add)">
+                            <Icon type="md-add" />添加
                         </Button>
-                        <Button >
-                            <Icon type="ios-create" @click="operateItem(operate.update)"/>编辑
+                        <Button @click="operateItem(operate.update)">
+                            <Icon type="ios-create" />编辑
                         </Button>
-                        <Button> 
-                            <Icon type="ios-trash" @click="deleteItem()"/>删除 
+                        <Button @click="deleteItem()"> 
+                            <Icon type="ios-trash" />删除 
                         </Button>
                     </ButtonGroup>
                 </div>
