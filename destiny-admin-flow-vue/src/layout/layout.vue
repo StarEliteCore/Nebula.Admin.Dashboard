@@ -19,8 +19,8 @@
         <!-- <router-view class="component child-demo" v-show="$route.name" /> -->
         <footer>
           © Now
-          <a target="_blank" href="https://github.com/DestinyCore">
-            DestinyCore
+          <a target="_blank" href="https://github.com/StarEliteCore">
+            星睿开发团队
           </a>
         </footer>
       </Content>

@@ -85,12 +85,23 @@
               @click="allocationRole()"
               >分配角色</Button
             >
+           
+
             <Button
               class="operatebutton"
               type="warning"
               @click="operateItem(operate.update)"
                v-hasPermission="'handleUpdate'"
               >修改</Button
+            >
+
+            <Button
+              class="operatebutton"
+              type="success"
+              :loading="passwordLoading" 
+              @click="handleResetPassword()"
+               v-hasPermission="'handleResetPassword'"
+              >重置密码</Button
             >
             <Button class="operatebutton" type="error" @click="deleteItem()"  v-hasPermission="'handleDelete'"
               >删除</Button

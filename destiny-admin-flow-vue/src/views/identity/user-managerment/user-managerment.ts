@@ -26,7 +26,8 @@ export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
   private queryfileter: PageQuery.IPageRequest = new PageQuery.PageRequest();
   private CurrentRow!: IUserTableDto;
   private CurrentArray: Array<IUserTableDto> = [];
-  private isShow:boolean = true
+  private isShow:boolean = true;
+  private passwordLoading:boolean = false;
   private columns: ITableColumn[] = [
     {
       type: 'selection',
@@ -231,5 +232,36 @@ export default class UserManagerment extends Mixins(PageMixins, DeleteMixins) {
 
     private isShowClick(){
       this.isShow = !this.isShow;
+    }
+
+    private handleResetPassword()
+    {
+      if (typeof this.CurrentRow === "undefined") {
+        this.$Message.error("请选择要分配的用户");
+        return "";
+      }
+
+      if(this.CurrentRowEventArray.length  > 1)
+      {
+        this.$Message.error("已选择多条数据");
+        return "";
+      }
+  
+
+        this.passwordLoading=true;
+        MainManager.Instance().UserService.resetPassword(this.CurrentRow.id).then((res)=>{
+
+         if(res.success)
+         {
+          this.$Message.success(res.message);
+         }else{
+          this.$Message.error(res.message);
+         }
+      
+        }).finally(()=>{
+
+          this.passwordLoading=false;
+
+        });
     }
 }

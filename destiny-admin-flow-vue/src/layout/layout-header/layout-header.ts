@@ -71,30 +71,30 @@ export default class LayoutHeader extends Vue {
     (this.$refs["formCustom"] as any).resetFields();
   }
 
-  // handleSubmit(name: string) {
-  //   (this.$refs[name] as any).validate((valid: any) => {
-  //     if (valid) {
-  //       let dto: IChangePassInputDto = {
-  //         newPassword: this.formCustom.newPassword,
-  //         oldPassword: this.formCustom.oldPassword,
-  //       };
-  //       MainManager.Instance()
-  //         .SystemService.changePassword(dto)
-  //         .then((result: IAjaxResult) => {
-  //           DestinyCoreModule.ToAjaxResult(
-  //             result,
-  //             () => {
-  //               this.isOpen = false;
-  //               this.LogOut();
-  //             },
-  //             () => {
-  //               this.isOpen = true;
-  //             }
-  //           );
-  //         })
-  //     }
-  //   });
-  // }
+  handleSubmit(name: string) {
+    (this.$refs[name] as any).validate((valid: any) => {
+      if (valid) {
+        let dto: any = {
+          newPassword: this.formCustom.newPassword,
+          oldPassword: this.formCustom.oldPassword,
+        };
+        MainManager.Instance()
+          .SystemService.changePassword(dto)
+          .then((result: IAjaxResult) => {
+            DestinyCoreModule.ToAjaxResult(
+              result,
+              () => {
+                this.isOpen = false;
+                this.LogOut();
+              },
+              () => {
+                this.isOpen = true;
+              }
+            );
+          })
+      }
+    });
+  }
 
   handleReset() {
     this.isOpen = false;
@@ -102,6 +102,6 @@ export default class LayoutHeader extends Vue {
   }
 
   openGit() {
-    window.open("https://github.com/DestinyCore/Destiny.Core.Flow");
+    window.open("https://github.com/StarEliteCore/Destiny.Core.Flow");
   }
 }

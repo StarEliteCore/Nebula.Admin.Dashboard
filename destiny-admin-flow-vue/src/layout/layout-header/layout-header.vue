@@ -18,13 +18,13 @@
       </a>
       <template v-slot:list>
         <DropdownMenu>
-          <!-- <DropdownItem @click.native="OpenUpdatePaw">修改密码</DropdownItem> -->
+          <DropdownItem @click.native="OpenUpdatePaw">修改密码</DropdownItem>
           <DropdownItem @click.native="LogOut">安全退出</DropdownItem>
         </DropdownMenu>
       </template>
     </Dropdown>
 
-    <!-- <template>
+    <template>
       <Modal v-model="isOpen" :title="title">
         <Form
           ref="formCustom"
@@ -49,7 +49,7 @@
              <Button @click="handleReset()" style="margin-left: 8px">取消</Button>
         </div>
       </Modal>
-    </template> -->
+    </template>
   </Header>
 </template>
 <style lang="scss" src="./layout-header.scss" scoped></style>

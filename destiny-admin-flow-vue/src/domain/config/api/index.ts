@@ -25,6 +25,11 @@ export const UserApi = {
    * 用戶分配角色
    */
   userAll: "api/User/GetUsersAsync",
+
+  /**
+   * 更改密码
+   */
+   resetPassword: "api/User/ResetPasswordAsync",
 };
 
 //代码生成器API

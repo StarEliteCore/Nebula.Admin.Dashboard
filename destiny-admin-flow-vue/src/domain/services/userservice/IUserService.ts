@@ -40,4 +40,9 @@ export interface IUserService {
      * 获取所有用户下拉框
      */
     getSelectAllUser(): Promise<IAjaxResult>;
+
+    /**
+     *更新密码
+     */
+    resetPassword(_userId:string): Promise<IAjaxResult>;
 }

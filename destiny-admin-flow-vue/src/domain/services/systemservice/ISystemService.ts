@@ -31,4 +31,10 @@ export interface ISystemService {
      * @param id 
      */
     getAuditPropertyList(_id:string): Promise<IAjaxResult>;
+
+       /**
+     * 修改密码
+     * @param id 
+     */
+    changePassword(_data:any):Promise<IAjaxResult>;
 }

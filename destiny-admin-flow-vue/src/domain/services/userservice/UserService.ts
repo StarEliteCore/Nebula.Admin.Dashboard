@@ -8,6 +8,9 @@ import { UserAllocationRoleInputDto, UserInputDto, UserUpdateInputDto } from '@/
 
 @injectable()
 export default class UserService implements IUserService {
+    resetPassword(_userId:string): Promise<IAjaxResult> {
+        return MainManager.dataRequest.getRequest(UserApi.resetPassword, { userId: _userId });
+    }
     userAllocationRole(_user: UserAllocationRoleInputDto): Promise<IAjaxResult> {
         return MainManager.dataRequest.postRequest(UserApi.userAllocationRole,_user)
     }
