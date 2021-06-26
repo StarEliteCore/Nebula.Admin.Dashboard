@@ -1,5 +1,8 @@
 <template>
-    <div class="page-component">
+  <div class="page-component" style="
+    margin-top: 3px;
+    text-align: right;
+">
     <Button
       class="page--jump page--jump__left"
       size="small"
@@ -37,3 +40,24 @@
 </template>
 <script lang="ts" src="./page-component.ts"></script>
 <style lang="scss" src="./page-component.scss" scoped></style>
+<style>
+.ivu-page-item-active {
+  background-color: #0960bd !important;
+}
+.ivu-page-item-active a,
+.ivu-page-item-active:hover a {
+  color: white;
+}
+.ivu-page-next{
+
+  background-color:#f0f2f5!important;
+}
+.ivu-page-prev{
+ background-color:#f0f2f5!important;
+
+}
+.ivu-page-item{
+
+   background-color:#f0f2f5;
+}
+</style>

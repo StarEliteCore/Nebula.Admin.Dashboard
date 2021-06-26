@@ -25,7 +25,7 @@
     </Dropdown>
 
     <template>
-      <Modal v-model="isOpen" :title="title">
+      <Modal v-model="isOpen" :title="title" :mask-closable="false" :sticky="true" > 
         <Form
           ref="formCustom"
           :rules="ruleCustom"

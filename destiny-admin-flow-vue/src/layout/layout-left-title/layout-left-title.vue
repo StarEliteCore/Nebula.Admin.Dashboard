@@ -2,7 +2,6 @@
   <div class="system-title">
     <img
       src="@/assets/home-logo.png"
-      width="130"
       height="35"
       alt="Destiny.Core.Flow"
     />
