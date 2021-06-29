@@ -95,24 +95,18 @@ export default class RoleManagerment extends Mixins(
     ];
   }
 
-
-
   permissionTitle = "分配权限";
-  role?:any={};
+  role?: any = {};
   //分配权限
   public handleAuth() {
     let permissionModel = this.$refs["setPermissionModel"] as Vue;
     if (permissionModel) {
       this.getSeletedRow((id: string, row: any) => {
-     
-        this.role=row;
-       
-        this.$nextTick(() =>  permissionModel.$emit("open"));
+        this.role = row;
+
+        this.$nextTick(() => permissionModel.$emit("open"));
         // this.$nextTick(() => );
       });
-     
     }
   }
-
- 
 }

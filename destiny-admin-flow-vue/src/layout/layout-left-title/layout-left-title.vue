@@ -1,11 +1,7 @@
 <template>
   <div class="system-title">
-    <img
-      src="@/assets/home-logo.png"
-      height="35"
-      alt="Destiny.Core.Flow"
-    />
-  </div>
+      <img src="@/assets/home-logo.png" height="35" alt="Destiny.Core.Flow" />
+    </div>
 </template>
 <script lang="ts" src="./layout-left-title.ts"></script>
 <style lang="scss" src="./layout-left-title.scss" scoped></style>

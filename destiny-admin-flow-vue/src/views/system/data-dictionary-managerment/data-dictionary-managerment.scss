@@ -7,6 +7,8 @@
         border: 1px solid #ddd;
         height: 100%;
         flex: 0 0 300px;
+        overflow-y: hidden;
+        overflow-x: hidden;
         .searchTree,
         .btngroup {
             margin: 5px;
